@@ -1,0 +1,15 @@
+node_modules
+# Ignore Node.js modules
+/backend/node_modules
+
+# Ignore build artifacts, logs, and other generated files
+/backend/dist
+/frontend/build
+/frontend/node_modules
+
+# Ignore environment-specific files
+/backend/.env
+/frontend/.env
+
+# Ignore macOS system files
+.DS_Store

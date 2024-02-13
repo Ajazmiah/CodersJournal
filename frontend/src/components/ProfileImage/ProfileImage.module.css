@@ -1,0 +1,41 @@
+.defaultStyles {
+  outline: none;
+  border-radius: 100%;
+  position: relative;
+  display: inline;
+  cursor: pointer;
+}
+.defaultStyles:hover {
+  transform: scale(1.01);
+}
+
+.headerProfile:hover {
+  cursor: pointer;
+}
+
+.headerImage {
+  width: 40px;
+  height: 40px;
+  background: #1378dc70;
+  padding: 4px;
+}
+.cardImage {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+.profileImage {
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+  border: solid 5px black;
+}
+.ByLineImage {
+  width: 40px;
+  height: 40px;
+}
+.feauredArticlesImg {
+  width: 125px;
+  height: 120px;
+  border-radius: 10px;
+}

@@ -1,0 +1,20 @@
+
+.featuredTitle {
+  margin: 0;
+}
+.card {
+  /* line-height: 25px; */
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+.featuredTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.summary {
+  font-size: .8rem;
+  margin-bottom: 5px;
+}

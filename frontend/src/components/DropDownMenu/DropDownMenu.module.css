@@ -1,0 +1,11 @@
+.listItem{
+    margin: 10px;
+    text-align: left;
+}
+
+.listItem a {
+    color: #fff;
+    text-decoration: none;
+}
+
+

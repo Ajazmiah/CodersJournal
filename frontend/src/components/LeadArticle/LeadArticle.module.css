@@ -1,0 +1,15 @@
+.lead {
+  cursor: pointer;
+}
+.leadImage {
+  max-width: 100%;
+  height: 100%;
+}
+.metadataContainer {
+  padding: 10px;
+}
+.metadataContainer p {
+  text-decoration: underline;
+  font-size: 2rem;
+  font-weight: 400;
+}
