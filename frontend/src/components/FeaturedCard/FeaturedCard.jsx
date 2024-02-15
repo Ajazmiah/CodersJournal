@@ -1,7 +1,6 @@
 import React from "react";
 import Styles from "./FeaturedCard.module.css";
 import classNames from "classnames";
-import ProfileImage from "../ProfileImage/ProfileImage";
 import { Box, Grid } from "@mui/material";
 import { useLink } from "../../hooks/useLInk/useLink";
 import Image from "../Image/Image";
@@ -40,8 +39,8 @@ function FeaturedCard({ post }) {
         }}
       >
        <Image 
-        src={post.cover} 
-        alt={post?.alt || 'NOT'} 
+        // src={post.cover} 
+        alt={post?.alt || 'cover photo of the post'} 
         loading='eager'
       />
       </Grid>

@@ -4,7 +4,6 @@ import { Box, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 function AuthorBylineCard() {
   const { userInfo } = useSelector((state) => state.auth);
-  console.log("USER", userInfo)
   const userFullName = userInfo?.firstName + " " + userInfo?.lastName;
   return (
     <Box sx={{ display: "flex", marginTop: "20px" }}>

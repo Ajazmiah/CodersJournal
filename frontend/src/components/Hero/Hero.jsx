@@ -48,7 +48,7 @@ const Hero = () => {
             {/* <Paper elevation={8} sx={{ maxWidth: "450px" }}>
               {login ? <LoginForm /> : <RegisterForm />}
             </Paper> */}
-            <img src={heroImage} />
+            <Image src={heroImage} />
           </Container>
         </Grid>
       </Grid>

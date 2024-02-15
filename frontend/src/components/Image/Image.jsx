@@ -1,18 +1,43 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import Styles from "./Image.module.css";
-function Image({ src, alt, className , loading, width, height}) {
-  
+
+
+
+const removeExtension = (src) => {
+
+  let extensionType = src.slice(-4)
+
+  if (!src.slice(-4).includes('.')) {
+    extensionType = '.jpeg'
+  }
+
+  if (extensionType === '.png' || extensionType === '.jpg' || extensionType === '.jpeg') {
+
+    return src.split(extensionType)[0]
+  }
+
+  return src
+}
+
+
+function Image({ src, alt, className, loading, width, height }) {
+
   return (
     <picture>
+
+      <source
+        srcSet={`${removeExtension('https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF')}.webp`}
+        type="image/webp"
+      />
       <img
-      width={width}
-      height={height}
-      src={src}
-      alt={alt}
-      className={className}
-      loading={loading} // Use the loading attribute to enable lazy loading
-    />
+        width={width}
+        height={height}
+        src={src || 'https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg'}
+        alt={alt}
+        className={className}
+        loading={loading || 'lazy'} // Use the loading attribute to enable lazy loading
+      />
     </picture>
   );
 }

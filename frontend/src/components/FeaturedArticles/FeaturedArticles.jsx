@@ -2,11 +2,10 @@ import React, { useEffect , useState} from "react";
 import LeadArticle from "../LeadArticle/LeadArticle";
 import { Box, Grid } from "@mui/material";
 import FeaturedCard from "../FeaturedCard/FeaturedCard";
-import { useDispatch, useSelector } from "react-redux";
 import { useGetMorePostOnScrollMutation } from "../../slices/postsApiSlice";
 
 function FeaturedArticles() {
-  const dispatch = useDispatch();
+
 
   const [getPosts] = useGetMorePostOnScrollMutation();
 
