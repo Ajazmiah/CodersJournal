@@ -4,6 +4,10 @@ import Styles from "./Image.module.css";
 
 
 
+
+
+
+
 const removeExtension = (src) => {
 
   let extensionType = src.slice(-4)
@@ -23,19 +27,21 @@ const removeExtension = (src) => {
 
 function Image({ src, alt, className, loading, width, height }) {
 
+  console.log("SRC", src)
+
+
+  const imageSrc = src || 'https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF'
   return (
     <picture>
-
       <source
-        srcSet={`${removeExtension('https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF')}.webp`}
+        srcSet={`${removeExtension(imageSrc)}.webp`}
         type="image/webp"
       />
       <img
         width={width}
         height={height}
-        src={src || 'https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg'}
+        src={`${removeExtension(imageSrc)}.jpg`}
         alt={alt}
-        className={className}
         loading={loading || 'lazy'} // Use the loading attribute to enable lazy loading
       />
     </picture>
