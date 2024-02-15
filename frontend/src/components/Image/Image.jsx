@@ -2,12 +2,6 @@ import React from "react";
 import PropTypes from 'prop-types';
 import Styles from "./Image.module.css";
 
-
-
-
-
-
-
 const removeExtension = (src) => {
 
   let extensionType = src.slice(-4)
@@ -17,7 +11,6 @@ const removeExtension = (src) => {
   }
 
   if (extensionType === '.png' || extensionType === '.jpg' || extensionType === '.jpeg') {
-
     return src.split(extensionType)[0]
   }
 
