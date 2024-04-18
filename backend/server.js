@@ -2,8 +2,6 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectDb from "./config/db.js";
-import path from "path";
-import { fileURLToPath } from "url";
 import userRoutes from "./routes/userRoutes.js";
 import blogRoutes from "./routes/blogRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
