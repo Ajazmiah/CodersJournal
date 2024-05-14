@@ -22,7 +22,7 @@ const ProfileScreen = () => {
 
   console.log("POSTS PROFILE", posts)
 
-  const userFullName = userInfo.firstName + " " + userInfo.lastName;
+  const userFullName = userInfo?.firstName + " " + userInfo?.lastName;
 
   const [getPosts] = usePostsMutation();
 

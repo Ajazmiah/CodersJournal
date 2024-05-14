@@ -38,8 +38,8 @@ const router = createBrowserRouter(
             <BlogCreationScreen />
           </Suspense>
         } />
-        <Route path="/post/:id" element={<SingleBlogScreen />} />
       </Route>
+      <Route path="/post/:id" element={<SingleBlogScreen />} />
     </Route>
   )
 );

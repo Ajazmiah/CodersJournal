@@ -28,7 +28,7 @@ function SingleBlogScreen() {
   const [post, setPost] = useState(null);
   
 
-  const sanitizedHTML = DOMPurify.sanitize(post?.body);
+  const sanitizedHTML = DOMPurify.sanitize(post?._doc?.body);
   const POST = ReactHtmlParser(sanitizedHTML);
   React.useEffect(() => {
     const fetchPost = async () => {
@@ -36,6 +36,7 @@ function SingleBlogScreen() {
         const post = await getPost({ id }).unwrap();
         setPost(post);
         console.log("SINGLE POST", post)
+      
       } catch (err) {
         toast.error("Something went wrong please try again!");
       }
@@ -87,7 +88,7 @@ function SingleBlogScreen() {
               </Typography>
 
               <Typography>{formatDate(post?.createdAt)}</Typography>
-              {post.authorId === userInfo._id && <Button onClick={() => setOpenModal(true)}>Delete</Button>}
+               {post?._doc.authorId === userInfo?._id && <Button onClick={() => setOpenModal(true)}>Delete</Button>}
 
               <AuthorBylineCard author={post.author} />
             </Box>

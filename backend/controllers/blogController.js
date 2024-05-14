@@ -39,13 +39,7 @@ const createPost = asyncHandler(async (req, res, next) => {
   }
 });
 
-// ONLY THE USERS POST - USER THAT'S LOGGED IN 
-/* 
-======TO DO=====
-- User Profile for user themseleves and public user view 
-- both should see post that this user created but 
-- only user themselevs are allow to update it
-*/
+
 const getBlogs = asyncHandler(async (req, res, next) => {
   const decoded = verifytoken(req);
   const user = await User.findById(decoded.userId).select("-password");
@@ -56,6 +50,7 @@ const getBlogs = asyncHandler(async (req, res, next) => {
     path: "authorId",
     select: ["-password"],
   });
+
 
   res.status(200).json(blogs);
 });

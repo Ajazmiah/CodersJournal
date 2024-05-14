@@ -11,6 +11,8 @@ import AuthorBylineCard from "../AuthorBylineCard/AuthorBylineCard";
 
 function PostCard({ posts }) {
 
+  console.log("BYLINE POSTS", posts)
+
   const {handleNavigateToPost} = useLink()
   return (
     posts && (
@@ -23,17 +25,16 @@ function PostCard({ posts }) {
               <CardContent onClick={() => handleNavigateToPost(post)}>
                 <CardHeader
                   sx={{ padding: "0", paddingTop: "5px" }}
-                  title="Shrimp and Chorizo Paella"
+                  title={post?.title}
                   subheader={formatDate(post?.createdAt)}
                 />
-                <AuthorBylineCard />
+                <AuthorBylineCard author={post.authorId} />
                 <Typography
                   variant="body2"
                   marginTop={"5px"}
                   color="text.secondary"
                 >
-                  This impressive paella is a perfect party dish and a fun meal
-                  to cook
+                 {post.summary}
                 </Typography>
               </CardContent>
             </CardTheme>

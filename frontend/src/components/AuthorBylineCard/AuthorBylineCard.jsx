@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 function AuthorBylineCard({author}) {
   const { userInfo } = useSelector((state) => state.auth);
 
-  const authorName =`${author.firstName} ${author.lastName}`
+  const authorName =`${author?.firstName} ${author?.lastName}`
 
   return (
     <Box sx={{ display: "flex", marginTop: "20px" }}>
