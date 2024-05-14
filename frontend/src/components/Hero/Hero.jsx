@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import classNames from "classnames";
 import heroImage from "../../../public/heroImage.jpg";
 import { Link } from "react-router-dom";
+import Image from "../Image/Image";
 
 const Hero = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -41,15 +42,10 @@ const Hero = () => {
           </div>
         </Grid>
 
-       
-
-        <Grid item xs={5} sm={12} lg={5} className={Styles.item}>
+       <Grid item xs={5} sm={12} lg={5} className={Styles.item}>
           <Container>
-            {/* <Paper elevation={8} sx={{ maxWidth: "450px" }}>
-              {login ? <LoginForm /> : <RegisterForm />}
-            </Paper> */}
-            <Image src={heroImage} />
-          </Container>
+            <Image/>
+           </Container>
         </Grid>
       </Grid>
     </>

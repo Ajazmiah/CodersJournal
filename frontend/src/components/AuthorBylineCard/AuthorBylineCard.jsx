@@ -2,21 +2,23 @@ import React from "react";
 import ProfileImage from "../ProfileImage/ProfileImage";
 import { Box, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
-function AuthorBylineCard() {
+function AuthorBylineCard({author}) {
   const { userInfo } = useSelector((state) => state.auth);
-  const userFullName = userInfo?.firstName + " " + userInfo?.lastName;
+
+  const authorName =`${author.firstName} ${author.lastName}`
+
   return (
     <Box sx={{ display: "flex", marginTop: "20px" }}>
       <Box sx={{ marginRight: "10px" }}>
         <ProfileImage
           customClasses="ByLineImage"
-          imageURL={userInfo?.profilePicture}
+          imageURL={author?.profilePicture}
         />
       </Box>
       <Box>
-        {userFullName}
+        {authorName}
         <Typography variant="body2">
-          {userInfo?.bio ? userInfo.bio : "Writter"}
+          {author?.bio ? author.bio : "Writter"}
         </Typography>
       </Box>
     </Box>

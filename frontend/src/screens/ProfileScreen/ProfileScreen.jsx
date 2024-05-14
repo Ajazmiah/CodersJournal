@@ -20,6 +20,8 @@ const ProfileScreen = () => {
 
   const { posts } = useSelector((state) => state.posts);
 
+  console.log("POSTS PROFILE", posts)
+
   const userFullName = userInfo.firstName + " " + userInfo.lastName;
 
   const [getPosts] = usePostsMutation();

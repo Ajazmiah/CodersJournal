@@ -35,6 +35,7 @@ function SingleBlogScreen() {
       try {
         const post = await getPost({ id }).unwrap();
         setPost(post);
+        console.log("SINGLE POST", post)
       } catch (err) {
         toast.error("Something went wrong please try again!");
       }
@@ -42,8 +43,6 @@ function SingleBlogScreen() {
 
     fetchPost();
   }, []);
-  
-
 
 
   const handleApproveDeletion = async () => {
@@ -78,19 +77,19 @@ function SingleBlogScreen() {
       {post && (
         <>
           <Box>
-            <Typography variant="h2">{post.title}</Typography>
+            <Typography variant="h2">{post._doc.title}</Typography>
             <Box sx={{ marginLeft: "10px" }}>
               <Typography
                 variant="body1"
                 sx={{ marginTop: "10px", color: "#777575", fontSize: "20px" }}
               >
-                {post.summary}
+                {post._doc.summary}
               </Typography>
 
               <Typography>{formatDate(post?.createdAt)}</Typography>
               {post.authorId === userInfo._id && <Button onClick={() => setOpenModal(true)}>Delete</Button>}
 
-              <AuthorBylineCard />
+              <AuthorBylineCard author={post.author} />
             </Box>
             <Box className="space-top-7">{POST}</Box>;
           </Box>

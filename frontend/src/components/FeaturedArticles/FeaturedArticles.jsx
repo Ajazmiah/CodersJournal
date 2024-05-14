@@ -19,6 +19,7 @@ function FeaturedArticles() {
         const allPost = await getPosts().unwrap();
         
         setPosts(allPost)
+        console.log("HOME", allPost)
       } catch (error) {
         console.log("ERROR", error)
       }

@@ -50,7 +50,9 @@ const getBlogs = asyncHandler(async (req, res, next) => {
   const decoded = verifytoken(req);
   const user = await User.findById(decoded.userId).select("-password");
 
-  const blogs = await blogModel.find({ authorId: user._id }).populate({
+
+
+  const blogs = await blogModel.find({ authorId: user._id}).populate({
     path: "authorId",
     select: ["-password"],
   });
@@ -61,7 +63,13 @@ const getBlogs = asyncHandler(async (req, res, next) => {
 // SINGLE POST PAGE
 const getPost = asyncHandler(async (req, res, next) => {
   const post = await blogModel.findById(req.body.id);
-  res.status(200).json(post);
+  const user = await User.findById(post.authorId).select("-password");
+  
+  const POST = {
+    ...post,
+    author: user
+  }
+  res.status(200).json(POST);
 });
 
 const deletePost = asyncHandler(async (req, res, next) => {
