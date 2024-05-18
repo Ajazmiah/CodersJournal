@@ -5,7 +5,7 @@ import "react-quill/dist/quill.snow.css";
 function QuillRichText({ QuillValue, setQuillValue }) {
   const modules = {
     toolbar: [
-      [{ header: [1, 2, 3, 4, false] }],
+      [{ header: [1, 2, 3, 4, 5,6,false] }],
       ["bold", "italic", "underline", "strike", "blockquote", "code-block"],
       [
         { list: "ordered" },

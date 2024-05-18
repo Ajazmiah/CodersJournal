@@ -62,6 +62,10 @@ const loggedInDropDown = loggedInNav.filter((item) => {
 
 const loggedOutDropDown = [
   {
+    text: "Home",
+    to: "/",
+  },
+  {
     text: "Sign In",
     to: "/signin",
   },
@@ -151,7 +155,12 @@ function ResponsiveAppBar() {
               >
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page.text}</Typography>
+                     <Link
+                    to={page.to}
+                   className={Styles.navLink}
+                  >
+                    {page.text}
+                  </Link>
                   </MenuItem>
                 ))}
               </Menu>
@@ -194,7 +203,7 @@ function ResponsiveAppBar() {
               ))}
             </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
+            {userInfo ? <Box sx={{ flexGrow: 0, display: {md: 'none'} }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <ProfileImage
@@ -204,7 +213,7 @@ function ResponsiveAppBar() {
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: "45px" }}
+                sx={{ mt: "45px"}}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
@@ -220,7 +229,7 @@ function ResponsiveAppBar() {
                 onClose={handleCloseUserMenu}
               >
                 {!userInfo?._id && (
-                  <DropDownMenu dropDownItems={dropDownItems} />
+                  <DropDownMenu dropDownItems={dropDownItems.filter(item => item.text !== 'Home')} />
                 )}
                 {userInfo?._id && (
                   <DropDownMenu
@@ -230,6 +239,7 @@ function ResponsiveAppBar() {
                 )}
               </Menu>
             </Box>
+: null}
           </Toolbar>
         </Container>
       </AppBar>
