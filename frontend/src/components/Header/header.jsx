@@ -75,23 +75,61 @@ const loggedOutDropDown = [
   },
 ];
 
+
+const pageLoggedInNavMenu = [
+  {
+    text: "Home",
+    to: "/",
+  },
+  {
+    to: "/create",
+    text: "Create",
+  }
+]
+
+const pageLoggedOutNavMenu = [
+  {
+    text: "Home",
+    to: "/",
+  },
+  {
+    text: "Sign In",
+    to: "/signin",
+  },
+  {
+    text: "Sign Up",
+    to: "/signup",
+  },
+]
+
+const userSettingMenu = [
+  {
+    to: "/profile",
+    text: "Profile",
+  },
+  {
+    to: "profile/update",
+    text: "Edit Account",
+  },
+  {
+    text: "Logout",
+    Element: "Button",
+  },
+]
+
+
+
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-
-  const userInfo = useSelector((state) => state?.auth?.userInfo);
 
   const [logoutApiCall] = useLogoutMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const dropDownItems = userInfo?._id ? loggedInDropDown : loggedOutDropDown;
+  const userInfo = useSelector((state) => state?.auth?.userInfo);
+  const pagesNavigation = userInfo?._id ? pageLoggedInNavMenu : pageLoggedOutNavMenu
 
-  const loggedInNavigation = loggedInNav.filter(
-    (item) => (item.text === "Home" || item.text === "Create") && item
-  );
-
-  const pages = userInfo?._id ? loggedInNavigation : ["Home"];
 
   const logoutHandler = async () => {
     try {
@@ -124,6 +162,7 @@ function ResponsiveAppBar() {
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
+            {/* Only shows on and after Mobile size*/}
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -153,18 +192,20 @@ function ResponsiveAppBar() {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {pages.map((page) => (
+                {pagesNavigation.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                     <Link
-                    to={page.to}
-                   className={Styles.navLink}
-                  >
-                    {page.text}
-                  </Link>
+                    <Link
+                      to={page.to}
+                      className={Styles.navLink}
+                    >
+                      {page.text}
+                    </Link>
                   </MenuItem>
                 ))}
               </Menu>
             </Box>
+
+            {/*LOGO*/}
             <Box>
               <Typography
                 variant="h5"
@@ -174,6 +215,7 @@ function ResponsiveAppBar() {
                   mr: 2,
                   display: { xs: "flex" },
                   flexGrow: 1,
+                  margin: {xs: 'auto'},
                   fontFamily: "monospace",
                   fontWeight: 700,
                   letterSpacing: ".3rem",
@@ -186,24 +228,23 @@ function ResponsiveAppBar() {
                 </Link>
               </Typography>
             </Box>
+            {/*- Left Menu Medium to Large screen */}
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  sx={{ color: "#fff" }}
-                  onClick={handleCloseNavMenu}
-                >
+              {pagesNavigation.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Link
-                    to={page.to || "/"}
-                   className={Styles.navLink}
+                    to={page.to}
+                    className={Styles.navLink}
                   >
                     {page.text}
                   </Link>
-                </Button>
+                </MenuItem>
+
               ))}
             </Box>
 
-            {userInfo ? <Box sx={{ flexGrow: 0, display: {md: 'none'} }}>
+            {/*USER SETTING MENU*/}
+            {userInfo ? <Box sx={{ flexGrow: 0, }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <ProfileImage
@@ -213,7 +254,7 @@ function ResponsiveAppBar() {
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: "45px"}}
+                sx={{ mt: "45px" }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
@@ -226,20 +267,20 @@ function ResponsiveAppBar() {
                   horizontal: "right",
                 }}
                 open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+                onClick={handleCloseUserMenu}
               >
                 {!userInfo?._id && (
-                  <DropDownMenu dropDownItems={dropDownItems.filter(item => item.text !== 'Home')} />
+                  <DropDownMenu dropDownItems={userSettingMenu} />
                 )}
                 {userInfo?._id && (
                   <DropDownMenu
-                    dropDownItems={dropDownItems}
+                    dropDownItems={userSettingMenu}
                     handleClick={logoutHandler}
                   />
                 )}
               </Menu>
             </Box>
-: null}
+              : null}
           </Toolbar>
         </Container>
       </AppBar>
