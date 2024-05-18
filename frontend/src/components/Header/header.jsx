@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useLogoutMutation } from "../../slices/usersApiSlice";
 import { logout } from "../../slices/authSlice";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Styles from "./Header.module.css";
 import DropDownMenu from "../DropDownMenu/DropDownmenu.jsx";
 import ProfileImage from "../ProfileImage/ProfileImage.jsx";
@@ -18,64 +18,15 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 
-import Button from "@mui/material/Button";
+
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./HeaderMuiTheme.js";
+import Logo from "../Logo/Logo.jsx";
 
 /*==============================================================*/
-
-const loggedInNav = [
-  {
-    to: "/profile",
-    text: "Profile",
-  },
-  {
-    to: "profile/update",
-    text: "Edit Account",
-  },
-
-  {
-    text: "Home",
-    to: "/",
-  },
-  {
-    to: "/create",
-    text: "Create",
-  },
-  {
-    text: "Logout",
-    Element: "Button",
-  },
-];
-
-const loggedInDropDown = loggedInNav.filter((item) => {
-  if (
-    item.text === "Logout" ||
-    item.text === "Profile" ||
-    item.text === "Edit Account"
-  )
-    return item;
-});
-
-const loggedOutDropDown = [
-  {
-    text: "Home",
-    to: "/",
-  },
-  {
-    text: "Sign In",
-    to: "/signin",
-  },
-  {
-    text: "Sign Up",
-    to: "/signup",
-  },
-];
-
-
 const pageLoggedInNavMenu = [
   {
     text: "Home",
@@ -116,7 +67,6 @@ const userSettingMenu = [
     Element: "Button",
   },
 ]
-
 
 
 function ResponsiveAppBar() {
@@ -206,28 +156,7 @@ function ResponsiveAppBar() {
             </Box>
 
             {/*LOGO*/}
-            <Box>
-              <Typography
-                variant="h5"
-                noWrap
-                component="a"
-                sx={{
-                  mr: 2,
-                  display: { xs: "flex" },
-                  flexGrow: 1,
-                  margin: {xs: 'auto'},
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "#000",
-                  textDecoration: "none",
-                }}
-              >
-                <Link className={Styles.logo} to="/">
-                  INKSPIRE
-                </Link>
-              </Typography>
-            </Box>
+            <Logo/>
             {/*- Left Menu Medium to Large screen */}
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pagesNavigation.map((page) => (
