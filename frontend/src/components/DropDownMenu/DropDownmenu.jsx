@@ -7,7 +7,7 @@ function DropDownMenu({ dropDownItems, handleClick }) {
   return dropDownItems.map(({ Element, text, to }) =>
     Element ? (
       <li className={Styles.listItem}>
-        <Button sx={{ margin: 0, padding: 0, color: '#ff8c57' }} key={text} onClick={handleClick}>
+        <Button sx={{ margin: 0, padding: 0, color: '#ffff' }} key={text} onClick={handleClick}>
           {text}
         </Button>
       </li>

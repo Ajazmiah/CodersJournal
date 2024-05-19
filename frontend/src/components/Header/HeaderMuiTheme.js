@@ -15,10 +15,12 @@ export const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          color: "#fff",
+          color: "#000",
           boxShadow: "none",
           zIndex: "10",
           position: "relative",
+          backgroundColor: '#ffff',
+          padding: '15px'
         },
       },
     },

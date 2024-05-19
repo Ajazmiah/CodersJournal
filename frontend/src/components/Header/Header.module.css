@@ -1,7 +1,4 @@
 .navLink {
-  color: #fff;
+  color: #000;
   text-decoration: none;
-}
-.navLink:hover{
-  color: var(--secondary-color)
 }
