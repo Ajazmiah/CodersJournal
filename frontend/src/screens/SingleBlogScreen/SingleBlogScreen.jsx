@@ -29,7 +29,9 @@ function SingleBlogScreen() {
   
 
   const sanitizedHTML = DOMPurify.sanitize(post?._doc?.body);
+ 
   const POST = ReactHtmlParser(sanitizedHTML);
+  console.log("SANITIZED" , POST)
   React.useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -61,7 +63,16 @@ function SingleBlogScreen() {
   }
 
   return (
-    <div className="pageContainer space-top-5">
+    <div className="pageContainer space-top-5" sx={{
+      width: {
+        xs: 300, // Width for extra small screens and up
+        sm: 400, // Width for small screens and up
+        md: 500, // Width for medium screens and up
+        lg: 900, // Width for large screens and up
+        xl: 1200, // Width for extra large screens and up
+        // You can define more breakpoints and widths as needed
+      },
+    }}>
       {isModalOpen && 
         <Modal>
           <Typography sx={{ marginBottom: '5px' }}>Are you sure you want to delete this post</Typography>
