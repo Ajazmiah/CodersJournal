@@ -63,7 +63,7 @@ function SingleBlogScreen() {
   }
 
   return (
-    <div className="pageContainer space-top-5" sx={{
+    <Box className="pageContainer space-top-5" container sx={{
       width: {
         xs: 300, // Width for extra small screens and up
         sm: 400, // Width for small screens and up
@@ -107,7 +107,7 @@ function SingleBlogScreen() {
           </Box>
         </>
       )}
-    </div>
+    </Box>
   );
 }
 
