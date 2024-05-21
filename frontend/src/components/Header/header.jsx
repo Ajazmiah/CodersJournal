@@ -25,6 +25,8 @@ import MenuItem from "@mui/material/MenuItem";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./HeaderMuiTheme.js";
 import Logo from "../Logo/Logo.jsx";
+import FullScreenDialog from "../FullScreenModal/FullScreenModal.jsx";
+
 
 /*==============================================================*/
 const pageLoggedInNavMenu = [
@@ -213,6 +215,7 @@ function ResponsiveAppBar() {
           </Toolbar>
         </Container>
       </AppBar>
+      <FullScreenDialog/>
     </ThemeProvider>
   );
 }
