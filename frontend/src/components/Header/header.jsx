@@ -75,6 +75,7 @@ function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
+
   const [logoutApiCall] = useLogoutMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -93,9 +94,7 @@ function ResponsiveAppBar() {
     }
   };
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -112,49 +111,11 @@ function ResponsiveAppBar() {
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="static">
-        <Container maxWidth="xl">
+        <Container>
           <Toolbar disableGutters>
             {/* Only shows on and after Mobile size*/}
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-              >
-                {pagesNavigation.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Link
-                      to={page.to}
-                      className={Styles.navLink}
-                    >
-                      {page.text}
-                    </Link>
-                  </MenuItem>
-                ))}
-              </Menu>
+              <FullScreenDialog Styles={Styles} pagesNavigation={pagesNavigation} handleCloseNavMenu={handleCloseNavMenu} anchorElNav={anchorElNav}/>
             </Box>
 
             {/*LOGO*/}
@@ -215,7 +176,7 @@ function ResponsiveAppBar() {
           </Toolbar>
         </Container>
       </AppBar>
-      <FullScreenDialog/>
+
     </ThemeProvider>
   );
 }

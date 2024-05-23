@@ -3,17 +3,20 @@
 import React , {useContext}from "react";
 import styles from './Modal.module.css'
 import { modalContext } from "../../context/modalContext";
+import Backdrop from "../Backdrop/Backdrop";
 
 const Modal = ({ children }) => {
 
 
   const [isModalOpen, setOpenModal] = useContext(modalContext)
 
+  
+
 
   return (
-    <div
+    <Backdrop
       onClick={() => setOpenModal(false)}
-      className={styles.rectangularModalOverlay}
+      
     >
       <div
         className={styles.rectangularModal}
@@ -21,9 +24,11 @@ const Modal = ({ children }) => {
       >
         {children}
       </div>
-    </div>
+    </Backdrop>
   );
 };
+
+
 
 
 
