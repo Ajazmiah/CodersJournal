@@ -18,7 +18,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Stack } from "@mui/material";
 import Logo from "../Logo/Logo";
 import Backdrop from '../Backdrop/Backdrop.jsx'
-import { modalContext } from "../../context/modalContext.jsx";
+import { backdropContext } from "../../context/backdropContext.jsx";
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -33,12 +33,13 @@ export default function FullScreenDialog({
   pagesNavigation,
   Styles,
 }) {
-  const [open, setOpen] = React.useState(false);
-  const [isModalOpen, setOpenModal] = React.useContext(modalContext)
+
+  const [isBackdropOpen, setOpenBackdrop] = React.useContext(backdropContext)
+
+  
 
 
-
-  const handleClick = () => setOpenModal(prev => !prev)
+  const handleClick = () => setOpenBackdrop(prev => !prev)
   
   return (
     <React.Fragment>
@@ -55,7 +56,7 @@ export default function FullScreenDialog({
             </IconButton>
           </Toolbar>
 
-         {isModalOpen ?  <Backdrop>
+         {isBackdropOpen ?  <Backdrop>
           {pagesNavigation.map((page) => (
                 <MenuItem key={page}>
                   <Link

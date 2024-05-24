@@ -9,8 +9,8 @@ import { toast } from "react-toastify";
 import { formatDate } from "../../utils";
 import AuthorBylineCard from "../../components/AuthorBylineCard/AuthorBylineCard";
 import { useDeletePostMutation } from "../../slices/postsApiSlice";
-import Modal from "../../components/Modal/Modal";
-import { modalContext } from "../../context/modalContext";
+import ModalRectangular from "../../components/Modal/ModalRectangular";
+import { backdropContext } from "../../context/backdropContext";
 import { useSelector } from "react-redux";
 
 
@@ -18,7 +18,7 @@ function SingleBlogScreen() {
   const { id } = useParams();
   const [getPost] = useGetPostMutation();
 
-  const [isModalOpen, setOpenModal] = useContext(modalContext)
+  const [isBackdropOpen, setOpenBackdrop] = useContext(backdropContext)
   const { userInfo } = useSelector((state) => state.auth);
 
   const [openModal, setOpenModal2] = useState(false)
@@ -64,8 +64,12 @@ function SingleBlogScreen() {
 
   }
 
+  //setOpenModal
+
+
+
   React.useEffect(() => {
-    setOpenModal(openModal)
+    setOpenBackdrop(openModal)
   }, openModal)
   return (
     <Box className="pageContainer space-top-5" container sx={{
@@ -79,7 +83,7 @@ function SingleBlogScreen() {
       },
     }}>
       {openModal && 
-        <Modal>
+        <ModalRectangular>
           <Typography sx={{ marginBottom: '5px' }}>Are you sure you want to delete this post</Typography>
           <Grid container spacing={2}>
             <Grid item>
@@ -89,7 +93,7 @@ function SingleBlogScreen() {
               <Button variant="contained" onClick={() => setOpenModal2(false)} sx={{ backgroundColor: 'red' }}>Cancel</Button>
             </Grid>
           </Grid>
-        </Modal>
+        </ModalRectangular>
       }
       {post && (
         <>

@@ -1,15 +1,15 @@
 import React, {useContext} from 'react'
 import styles from './Backdrop.module.css'
 import ReactDom from 'react-dom'
-import { modalContext } from '../../context/modalContext'
+import { backdropContext } from '../../context/backdropContext'
 
 function Backdrop({children}) {
 
 
-    const [isModalOpen, setOpenModal] = React.useContext(modalContext)
+    const [isBackdropOpen, setOpenBackdrop] = React.useContext(backdropContext)
 
   return ReactDom.createPortal(
-    <div className={styles.backdrop} onClick={() => setOpenModal(false)}>{children}</div>,
+    <div className={styles.backdrop} onClick={() => setOpenBackdrop(false)}>{children}</div>,
     document.getElementById('portal')
   )
  

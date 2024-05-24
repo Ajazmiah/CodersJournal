@@ -18,7 +18,7 @@ import { Provider } from "react-redux";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import UpdateAccountScreen from "./screens/UpdateAccountScreen/UpdateAccountScreen.jsx";
 import SingleBlogScreen from "./screens/SingleBlogScreen/SingleBlogScreen.jsx";
-import ModalContext from './context/modalContext.jsx';
+import BackdropContext from './context/backdropContext.jsx';
 import NotFoundPage from './components/PageNotFound/PageNotFound.jsx';
 
 const BlogCreationScreen = lazy(() => import('./screens/BlogCreationScreen/BlogCreationScreen.jsx'));
@@ -47,9 +47,9 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <React.StrictMode>
-     <ModalContext>
+     <BackdropContext>
      <RouterProvider router={router} />
-     </ModalContext>
+     </BackdropContext>
     </React.StrictMode>
   </Provider>
 );

@@ -2,20 +2,20 @@
 
 import React , {useContext}from "react";
 import styles from './Modal.module.css'
-import { modalContext } from "../../context/modalContext";
+import { backdropContext } from "../../context/backdropContext";
 import Backdrop from "../Backdrop/Backdrop";
 
-const Modal = ({ children }) => {
+const ModalRectangular = ({ children }) => {
 
 
-  const [isModalOpen, setOpenModal] = useContext(modalContext)
+  const [isBackdropOpen, setOpenBackdrop] = useContext(backdropContext)
 
   
 
 
   return (
     <Backdrop
-      onClick={() => setOpenModal(false)}
+      onClick={() => setOpenBackdrop(false)}
       
     >
       <div
@@ -32,4 +32,4 @@ const Modal = ({ children }) => {
 
 
 
-export default Modal;
+export default ModalRectangular;
