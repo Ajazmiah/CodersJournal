@@ -14,17 +14,14 @@ const ModalRectangular = ({ children }) => {
 
 
   return (
-    <Backdrop
-      onClick={() => setOpenBackdrop(false)}
-      
-    >
+  
       <div
         className={styles.rectangularModal}
         onClick={(e) => e.stopPropagation()}
       >
         {children}
       </div>
-    </Backdrop>
+
   );
 };
 

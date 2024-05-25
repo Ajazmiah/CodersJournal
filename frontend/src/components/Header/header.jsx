@@ -29,6 +29,8 @@ import Logo from "../Logo/Logo.jsx";
 import { backdropContext } from "../../context/backdropContext.jsx";
 import useNavigationItem from "../../hooks/useNavigationItem.jsx";
 import VerticalModal from "../VerticalModal/verticalModal.jsx";
+import Backdrop from "../Backdrop/Backdrop.jsx";
+
 
 
 /*==============================================================*/
@@ -87,9 +89,12 @@ function ResponsiveAppBar() {
                <MenuIcon />
             </IconButton>
 
+
       
   
-              <VerticalModal classes={Styles} pagesNavigation={pagesNavigation}/>
+             {isBackdropOpen ? (<Backdrop>
+              <VerticalModal classes={Styles} pagesNavigation={pagesNavigation}/> 
+             </Backdrop>): null}
             </Box>
 
             {/*LOGO*/}

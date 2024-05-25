@@ -12,6 +12,7 @@ import { useDeletePostMutation } from "../../slices/postsApiSlice";
 import ModalRectangular from "../../components/Modal/ModalRectangular";
 import { backdropContext } from "../../context/backdropContext";
 import { useSelector } from "react-redux";
+import Backdrop from "../../components/Backdrop/Backdrop";
 
 
 function SingleBlogScreen() {
@@ -83,7 +84,8 @@ function SingleBlogScreen() {
       },
     }}>
       {openModal && 
-        <ModalRectangular>
+       <Backdrop>
+         <ModalRectangular>
           <Typography sx={{ marginBottom: '5px' }}>Are you sure you want to delete this post</Typography>
           <Grid container spacing={2}>
             <Grid item>
@@ -94,6 +96,7 @@ function SingleBlogScreen() {
             </Grid>
           </Grid>
         </ModalRectangular>
+       </Backdrop>
       }
       {post && (
         <>

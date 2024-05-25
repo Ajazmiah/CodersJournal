@@ -37,15 +37,10 @@ export default function VerticalModal({
 
   const [isBackdropOpen, setOpenBackdrop] = React.useContext(backdropContext)
 
-  
-
-
-
-  
   return (
     <React.Fragment>
 
-         {isBackdropOpen ?  <Backdrop>
+ 
           <div className={Styles.navModal} onClick={(e) => console.log("BACKSROP", isBackdropOpen)}>
             <ul>
             {pagesNavigation.map((page) => (
@@ -61,7 +56,7 @@ export default function VerticalModal({
               ))}
             </ul>
           </div>
-          </Backdrop> : null}
+       
     </React.Fragment>
   );
 }
