@@ -1,14 +1,14 @@
 // import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useLogoutMutation } from "../../slices/usersApiSlice";
-import { logout } from "../../slices/authSlice";
+import { useLogoutMutation } from "../../slices/usersApiSlice.js";
+import { logout } from "../../slices/authSlice.js";
 import { useNavigate } from "react-router-dom";
 import Styles from "./Header.module.css";
 import DropDownMenu from "../DropDownMenu/DropDownmenu.jsx";
 import ProfileImage from "../ProfileImage/ProfileImage.jsx";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -25,52 +25,13 @@ import MenuItem from "@mui/material/MenuItem";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./HeaderMuiTheme.js";
 import Logo from "../Logo/Logo.jsx";
-import FullScreenDialog from "../FullScreenModal/FullScreenModal.jsx";
+
+import { backdropContext } from "../../context/backdropContext.jsx";
+import useNavigationItem from "../../hooks/useNavigationItem.jsx";
+import VerticalModal from "../VerticalModal/verticalModal.jsx";
 
 
 /*==============================================================*/
-const pageLoggedInNavMenu = [
-  {
-    text: "Home",
-    to: "/",
-  },
-  {
-    to: "/create",
-    text: "Create",
-  }
-]
-
-const pageLoggedOutNavMenu = [
-  {
-    text: "Home",
-    to: "/",
-  },
-  {
-    text: "Sign In",
-    to: "/signin",
-  },
-  {
-    text: "Sign Up",
-    to: "/signup",
-  },
-]
-
-const userSettingMenu = [
-  {
-    to: "/profile",
-    text: "Profile",
-  },
-  {
-    to: "profile/update",
-    text: "Edit Account",
-  },
-  {
-    text: "Logout",
-    Element: "Button",
-  },
-]
-
-
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -80,8 +41,9 @@ function ResponsiveAppBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userInfo = useSelector((state) => state?.auth?.userInfo);
-  const pagesNavigation = userInfo?._id ? pageLoggedInNavMenu : pageLoggedOutNavMenu
+
+  const [userSettingMenu, pagesNavigation, userInfo]  = useNavigationItem()
+  const [isBackdropOpen, setOpenBackdrop] = useContext(backdropContext)
 
 
   const logoutHandler = async () => {
@@ -115,7 +77,19 @@ function ResponsiveAppBar() {
           <Toolbar disableGutters>
             {/* Only shows on and after Mobile size*/}
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <FullScreenDialog Styles={Styles} pagesNavigation={pagesNavigation} handleCloseNavMenu={handleCloseNavMenu} anchorElNav={anchorElNav}/>
+  
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={()=> setOpenBackdrop(prev => !prev)}
+              aria-label="close"
+            >
+               <MenuIcon />
+            </IconButton>
+
+      
+  
+              <VerticalModal classes={Styles} pagesNavigation={pagesNavigation}/>
             </Box>
 
             {/*LOGO*/}
@@ -161,9 +135,9 @@ function ResponsiveAppBar() {
                 open={Boolean(anchorElUser)}
                 onClick={handleCloseUserMenu}
               >
-                {!userInfo?._id && (
+                {/* {!userInfo?._id && (
                   <DropDownMenu dropDownItems={userSettingMenu} />
-                )}
+                )} */}
                 {userInfo?._id && (
                   <DropDownMenu
                     dropDownItems={userSettingMenu}

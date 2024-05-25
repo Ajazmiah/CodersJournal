@@ -17,7 +17,6 @@ export const theme = createTheme({
         root: {
           color: "#000",
           boxShadow: "none",
-          zIndex: 100,
           position: "absolute",
           top: 0,
           left: 0,

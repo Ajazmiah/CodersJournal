@@ -16,9 +16,10 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Stack } from "@mui/material";
-import Logo from "../Logo/Logo";
+import Logo from "../Logo/Logo.jsx";
 import Backdrop from '../Backdrop/Backdrop.jsx'
 import { backdropContext } from "../../context/backdropContext.jsx";
+import Styles from './VerticalModal.module.css'
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -29,9 +30,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 
 
-export default function FullScreenDialog({
+export default function VerticalModal({
   pagesNavigation,
-  Styles,
+  classes,
 }) {
 
   const [isBackdropOpen, setOpenBackdrop] = React.useContext(backdropContext)
@@ -39,35 +40,27 @@ export default function FullScreenDialog({
   
 
 
-  const handleClick = () => setOpenBackdrop(prev => !prev)
+
   
   return (
     <React.Fragment>
-     
-
-      <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClick}
-              aria-label="close"
-            >
-               <MenuIcon />
-            </IconButton>
-          </Toolbar>
 
          {isBackdropOpen ?  <Backdrop>
-          {pagesNavigation.map((page) => (
+          <div className={Styles.navModal} onClick={(e) => console.log("BACKSROP", isBackdropOpen)}>
+            <ul>
+            {pagesNavigation.map((page) => (
                 <MenuItem key={page}>
                   <Link
                     to={page.to}
-                    className={Styles.navLink}
+                    className={classes.navLink}
                   >
                     {page.text}
                   </Link>
                 </MenuItem>
 
               ))}
+            </ul>
+          </div>
           </Backdrop> : null}
     </React.Fragment>
   );
