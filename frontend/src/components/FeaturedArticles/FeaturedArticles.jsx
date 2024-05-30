@@ -59,7 +59,7 @@ const modifiedPosts = posts.map(post => {
           flexDirection: "column",
         }} 
       >
-        {modifiedPosts.slice(0,3).map((post) => (
+        {modifiedPosts.slice(-3).map((post) => (
            <FeaturedCard key={post._id} post={post} />
           
         ))}

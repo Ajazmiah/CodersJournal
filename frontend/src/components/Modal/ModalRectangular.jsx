@@ -8,17 +8,10 @@ import Backdrop from "../Backdrop/Backdrop";
 const ModalRectangular = ({ children }) => {
 
 
-  const [isBackdropOpen, setOpenBackdrop] = useContext(backdropContext)
-
-  
-
-
-  return (
+    return (
   
       <div
-        className={styles.rectangularModal}
-        onClick={(e) => e.stopPropagation()}
-      >
+        className={styles.rectangularModal}>
         {children}
       </div>
 

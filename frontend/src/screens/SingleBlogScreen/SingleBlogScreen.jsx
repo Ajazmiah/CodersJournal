@@ -1,4 +1,4 @@
-import React, { useState , useContext} from "react";
+import React, { useState , useContext, useEffect} from "react";
 import ReactHtmlParser from "html-react-parser";
 import DOMPurify from "dompurify";
 import { Box, Typography, Button, Grid } from "@mui/material";
@@ -22,7 +22,9 @@ function SingleBlogScreen() {
   const [isBackdropOpen, setOpenBackdrop] = useContext(backdropContext)
   const { userInfo } = useSelector((state) => state.auth);
 
-  const [openModal, setOpenModal2] = useState(false)
+
+  const [openModal, setOpenModal] = useState(false)
+
  
 
   const [deletePost] = useDeletePostMutation()
@@ -68,10 +70,15 @@ function SingleBlogScreen() {
   //setOpenModal
 
 
+  const handleCancel = (e) => {
 
-  React.useEffect(() => {
-    setOpenBackdrop(openModal)
-  }, openModal)
+  console.log(e.target.className)
+    setOpenModal(false)
+  }
+
+
+
+
   return (
     <Box className="pageContainer space-top-5" container sx={{
       width: {
@@ -83,21 +90,25 @@ function SingleBlogScreen() {
         // You can define more breakpoints and widths as needed
       },
     }}>
-      {openModal && 
-       <Backdrop>
-         <ModalRectangular>
+
+    
+    
+
+       {openModal ?  <Backdrop>
+        <ModalRectangular>
           <Typography sx={{ marginBottom: '5px' }}>Are you sure you want to delete this post</Typography>
           <Grid container spacing={2}>
             <Grid item>
               <Button variant="contained" onClick={handleApproveDeletion}>Confirm</Button>
             </Grid>
             <Grid item>
-              <Button variant="contained" onClick={() => setOpenModal2(false)} sx={{ backgroundColor: 'red' }}>Cancel</Button>
+              <Button variant="contained" onClick={handleCancel} sx={{ backgroundColor: 'red' }}>Cancel</Button>
             </Grid>
           </Grid>
         </ModalRectangular>
        </Backdrop>
-      }
+: null}
+      
       {post && (
         <>
           <Box>
@@ -111,7 +122,7 @@ function SingleBlogScreen() {
               </Typography>
 
               <Typography>{formatDate(post?.createdAt)}</Typography>
-               {post?._doc.authorId === userInfo?._id && <Button onClick={() => setOpenModal2(true)}>Delete</Button>}
+               {post?._doc.authorId === userInfo?._id && <Button onClick={() => setOpenModal(true)}>Delete</Button>}
 
               <AuthorBylineCard author={post.author} />
             </Box>
