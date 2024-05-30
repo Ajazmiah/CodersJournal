@@ -80,16 +80,7 @@ function SingleBlogScreen() {
 
 
   return (
-    <Box className="pageContainer space-top-5" container sx={{
-      width: {
-        xs: 400, // Width for extra small screens and up
-        sm: 500, // Width for small screens and up
-        md: 600, // Width for medium screens and up
-        lg: 900, // Width for large screens and up
-        xl: 1200, // Width for extra large screens and up
-        // You can define more breakpoints and widths as needed
-      },
-    }}>
+    <Box className="container space-top-5">
 
     
     
