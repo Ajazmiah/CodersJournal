@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Styles from "./BlogCreationScreen.module.css";
-import classNames from "classnames";
+import classnames from "classnames";
 import { useSubmitPostMutation } from "../../slices/postsApiSlice";
 import { toast } from "react-toastify";
 import "react-quill/dist/quill.snow.css";
@@ -39,42 +39,44 @@ function BlogCreationScreen() {
   };
 
   return (
-    <Paper className={classNames('container', Styles.richText)} elevation={4}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="title"
-            name="title"
-            label="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            fullWidth
-            variant="standard"
-          />
-        </Grid>
+    
+  
+<div className= {classnames("container pageContainer")}>
+  <div>
+    <label for="title">Title</label>
+    <input
+      required
+      id="title"
+      name="title"
+      type="text"
+      value={title}
+      onchange={()=> setTitle(this.value)}
+    />
+  </div>
 
-        <Grid item xs={12}>
-          <TextField
-            required
-            id="summary"
-            name="summary"
-            label="Summary"
-            value={summary}
-            onChange={(e) => setSummary(e.target.value)}
-            fullWidth
-            autoComplete="shipping address-line1"
-            variant="standard"
-          />
-        </Grid>
-      </Grid>
-
-      <QuillRichText setQuillValue={setQuillValue} QuillValue={QuillValue} />
-
-      <Button variant="contained" sx={{ marginTop: '50px' }} onClick={postSubmitHandler}>
+  <div>
+    <label for="summary">Summary</label>
+    <input
+      required
+      id="summary"
+      name="summary"
+      type="text"
+      value={summary}
+      onchange={() => setSummary(this.value)}
+      autocomplete="shipping address-line1"
+    />
+  </div>
+  <QuillRichText setQuillValue={setQuillValue} QuillValue={QuillValue} />
+  <Button variant="contained" sx={{ marginTop: '50px' }} onClick={postSubmitHandler}>
         Post
       </Button>
-    </Paper>
+
+</div>
+
+
+     
+      
+
   );
 }
 
