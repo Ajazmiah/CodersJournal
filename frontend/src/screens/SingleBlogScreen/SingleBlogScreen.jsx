@@ -1,7 +1,6 @@
-import React, { useState , useContext, useEffect} from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ReactHtmlParser from "html-react-parser";
 import DOMPurify from "dompurify";
-import { Box, Typography, Button, Grid } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { useGetPostMutation } from "../../slices/postsApiSlice";
@@ -14,114 +13,87 @@ import { backdropContext } from "../../context/backdropContext";
 import { useSelector } from "react-redux";
 import Backdrop from "../../components/Backdrop/Backdrop";
 
-
 function SingleBlogScreen() {
   const { id } = useParams();
   const [getPost] = useGetPostMutation();
 
-  const [isBackdropOpen, setOpenBackdrop] = useContext(backdropContext)
+  const [isBackdropOpen, setOpenBackdrop] = useContext(backdropContext);
   const { userInfo } = useSelector((state) => state.auth);
 
+  const [openModal, setOpenModal] = useState(false);
 
-  const [openModal, setOpenModal] = useState(false)
-
- 
-
-  const [deletePost] = useDeletePostMutation()
+  const [deletePost] = useDeletePostMutation();
   const navigate = useNavigate();
 
   const [post, setPost] = useState(null);
-  
 
   const sanitizedHTML = DOMPurify.sanitize(post?._doc?.body);
- 
+
   const POST = ReactHtmlParser(sanitizedHTML);
-  console.log("SANITIZED" , POST)
-  React.useEffect(() => {
+  console.log("SANITIZED", POST);
+
+  useEffect(() => {
     const fetchPost = async () => {
       try {
         const post = await getPost({ id }).unwrap();
         setPost(post);
-        console.log("SINGLE POST", post)
-      
+        console.log("SINGLE POST", post);
       } catch (err) {
-        toast.error("Something went wrong please try again!");
+        toast.error("Something went wrong, please try again!");
       }
     };
 
     fetchPost();
-  }, []);
-
+  }, [getPost, id]);
 
   const handleApproveDeletion = async () => {
-    setOpenModal2(false)
+    setOpenModal(false);
 
     try {
-      const deleted = await deletePost({ id }).unwrap()
-      toast.success("Post is deleted")
-      navigate('/')
-
+      await deletePost({ id }).unwrap();
+      toast.success("Post is deleted");
+      navigate('/');
     } catch (err) {
-      toast.error(err)
+      toast.error(err);
     }
-
-  }
-
-  //setOpenModal
-
+  };
 
   const handleCancel = (e) => {
-
-  console.log(e.target.className)
-    setOpenModal(false)
-  }
-
-
-
+    console.log(e.target.className);
+    setOpenModal(false);
+  };
 
   return (
-    <Box className="container space-top-5">
+    <div className="container space-top-5">
+      {openModal && (
+        <Backdrop>
+          <ModalRectangular>
+            <p>Are you sure you want to delete this post?</p>
+            <div>
+              <button onClick={handleApproveDeletion}>Confirm</button>
+              <button onClick={handleCancel}>Cancel</button>
+            </div>
+          </ModalRectangular>
+        </Backdrop>
+      )}
 
-    
-    
-
-       {openModal ?  <Backdrop>
-        <ModalRectangular>
-          <Typography sx={{ marginBottom: '5px' }}>Are you sure you want to delete this post</Typography>
-          <Grid container spacing={2}>
-            <Grid item>
-              <Button variant="contained" onClick={handleApproveDeletion}>Confirm</Button>
-            </Grid>
-            <Grid item>
-              <Button variant="contained" onClick={handleCancel} sx={{ backgroundColor: 'red' }}>Cancel</Button>
-            </Grid>
-          </Grid>
-        </ModalRectangular>
-       </Backdrop>
-: null}
-      
       {post && (
         <>
-          <Box>
-            <Typography variant="h2">{post._doc.title}</Typography>
-            <Box sx={{ marginLeft: "10px" }}>
-              <Typography
-                variant="body1"
-                sx={{ marginTop: "10px", color: "#777575", fontSize: "20px" }}
-              >
-                {post._doc.summary}
-              </Typography>
-
-              <Typography>{formatDate(post?.createdAt)}</Typography>
-               {post?._doc.authorId === userInfo?._id && <Button onClick={() => setOpenModal(true)}>Delete</Button>}
-
+          <div>
+            <h2>{post._doc.title}</h2>
+            <div>
+              <p>{post._doc.summary}</p>
+              <p>{formatDate(post?.createdAt)}</p>
+              {post?._doc.authorId === userInfo?._id && (
+                <button onClick={() => setOpenModal(true)}>Delete</button>
+              )}
               <AuthorBylineCard author={post.author} />
-            </Box>
-            <Box className="space-top-7">{POST}</Box>;
-          </Box>
+            </div>
+            <div>{POST}</div>
+          </div>
         </>
       )}
-    </Box>
+    </div>
   );
 }
 
