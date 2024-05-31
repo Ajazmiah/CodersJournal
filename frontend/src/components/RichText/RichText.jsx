@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import Styles from './RichText.module.css'
+import classnames from "classnames";
 
 function QuillRichText({ QuillValue, setQuillValue }) {
   const modules = {
@@ -25,15 +27,17 @@ function QuillRichText({ QuillValue, setQuillValue }) {
     'align', 'link', 'image', 'video',
   ];
 
+
   return (
     <>
       <ReactQuill
-        style={{height: '30vh'}}
+        className={classnames(Styles['ql-toolbar'], Styles['ql-editor'])}
         theme="snow"
         modules={modules}
         formats={formats}
         value={QuillValue}
         onChange={(QuillValue) => setQuillValue(QuillValue)}
+        placeholder="Start Writing.."
       ></ReactQuill>
     </>
   );

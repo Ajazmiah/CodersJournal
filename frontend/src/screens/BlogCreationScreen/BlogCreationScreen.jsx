@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useRef} from "react";
 import Styles from "./BlogCreationScreen.module.css";
 import classnames from "classnames";
 import { useSubmitPostMutation } from "../../slices/postsApiSlice";
@@ -17,6 +17,10 @@ function BlogCreationScreen() {
   const [submitPost] = useSubmitPostMutation();
 
 
+  const titleRef = useRef()
+
+
+  useEffect(() => titleRef.current.focus() ,[])
 
 
   const postSubmitHandler = async () => {
@@ -49,6 +53,7 @@ function BlogCreationScreen() {
     <input
       required
       placeholder="Title.."
+      ref={titleRef}
       id="title"
       className={Styles.input}
       name="title"
