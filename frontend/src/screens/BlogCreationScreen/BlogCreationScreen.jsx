@@ -5,7 +5,7 @@ import { useSubmitPostMutation } from "../../slices/postsApiSlice";
 import { toast } from "react-toastify";
 import "react-quill/dist/quill.snow.css";
 import QuillRichText from "../../components/RichText/RichText";
-import { Paper, Grid, Button, TextField } from "@mui/material";
+
 
 function BlogCreationScreen() {
 
@@ -78,9 +78,9 @@ function BlogCreationScreen() {
     />
   </div>
   <QuillRichText setQuillValue={setQuillValue} QuillValue={QuillValue} />
-  <Button variant="contained" sx={{ marginTop: '50px' }} onClick={postSubmitHandler}>
+  <button variant="contained" sx={{ marginTop: '50px' }} onClick={postSubmitHandler}>
         Post
-      </Button>
+  </button>
 
 </div>
 
