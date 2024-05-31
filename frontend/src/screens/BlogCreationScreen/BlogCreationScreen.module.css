@@ -1,11 +1,26 @@
+
+
+.richText {
+   
+}
+
 .input {
     width: 100%;
     margin-bottom: 10px;
-    padding: 5px;
-    border: 3px solid darkgray;
+    padding: 2rem;
+    border: none;
+    font-size: 2rem;
+    padding-left: 1rem;
+   
+}
+.input:focus {
+    border: none;
+    outline: none;
 }
 
-.richText {
-    background-color: #f9f9f9;
-    margin-top: var(--space-54);
+input::placeholder {
+    font-size: 2rem;
+    font-weight: 200;
+    letter-spacing: 5px;
+    padding-left: 10px;
 }

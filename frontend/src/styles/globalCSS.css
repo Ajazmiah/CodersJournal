@@ -2,6 +2,8 @@
   --primary-color: #000;
   --black-color: #000;
   --secondary-color: #ff8c57;
+
+  --color: #ffff4ade;
  
     --space-2: 2rem;
     --space-4: 4rem;
@@ -82,7 +84,7 @@
 }
 
 .pageContainer {
-  margin-top: var(--space-2) ;
+  margin-top: var(--space-10) ;
  }
 
 

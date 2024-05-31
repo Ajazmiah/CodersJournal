@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Styles from "./BlogCreationScreen.module.css";
 import classnames from "classnames";
 import { useSubmitPostMutation } from "../../slices/postsApiSlice";
@@ -15,6 +15,8 @@ function BlogCreationScreen() {
   const [QuillValue, setQuillValue] = React.useState("");
 
   const [submitPost] = useSubmitPostMutation();
+
+
 
 
   const postSubmitHandler = async () => {
@@ -41,28 +43,32 @@ function BlogCreationScreen() {
   return (
     
   
-<div className= {classnames("container pageContainer")}>
+<div className= {classnames("container pageContainer", Styles.richText)}>
   <div>
-    <label for="title">Title</label>
+   
     <input
       required
+      placeholder="Title.."
       id="title"
+      className={Styles.input}
       name="title"
       type="text"
       value={title}
-      onchange={()=> setTitle(this.value)}
+      onChange={(e)=> setTitle(e.target.value)}
     />
   </div>
 
   <div>
-    <label for="summary">Summary</label>
+   
     <input
       required
+      className={Styles.input}
       id="summary"
+      placeholder="Summary.."
       name="summary"
       type="text"
       value={summary}
-      onchange={() => setSummary(this.value)}
+      onChange={(e) => setSummary(e.target.value)}
       autocomplete="shipping address-line1"
     />
   </div>
