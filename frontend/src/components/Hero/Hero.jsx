@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import Grid from "@mui/material/Grid";
+
 import { Container } from "@mui/material";
 import Styles from "./Hero.module.css";
 import React, { useState } from "react";
@@ -16,19 +16,8 @@ const Hero = () => {
 
   const content = (
     <>
-      <Grid
-        container
-        spacing={3}
-        sx={{
-          maxWidth: "960px",
-          minWidth: "80%",
-          paddingTop: "100px",
-          margin: "0 auto",
-          alignItems: "baseline",
-          justifyContent: "space-between",
-        }}
-      >
-        <Grid item xs={7} sm={12} lg={5}>
+      <div>
+        <div>
           <div className={Styles.phraseContent}>
             <div className={classNames(Styles.phrase, "space-bottom-1")}>
               <p className={Styles.phrasePrimary}>Craft.Connect.Captivate</p>
@@ -40,14 +29,14 @@ const Hero = () => {
               Get Started
             </Link>
           </div>
-        </Grid>
+        </div>
 
-       <Grid item xs={5} sm={12} lg={5} className={Styles.item}>
+       <div  className={Styles.item}>
           <Container>
             <Image/>
            </Container>
-        </Grid>
-      </Grid>
+        </div>
+      </div>
     </>
   );
   return <div className={Styles.hero}>{content}</div>;
