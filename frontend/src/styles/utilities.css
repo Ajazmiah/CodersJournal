@@ -1,0 +1,27 @@
+/* Default container width for small screens (mobile-first) */
+.container {
+    width: 90%; /* Default width for very small screens */
+    padding-inline: 2em;
+    margin-inline: auto;
+  }
+  
+  /* Small Devices (Landscape Phones) */
+  @media (min-width: 481px) {
+    .container {
+        width: 90%;
+    }
+  }
+  
+  /* Medium Devices (Tablets) */
+  @media (min-width: 769px) {
+    .container {
+        width: 680px;
+    }
+  }
+  
+  /* Large Devices (Desktops) */
+  @media (min-width: 1025px) {
+    .container {
+        width: 960px;
+    }
+  }

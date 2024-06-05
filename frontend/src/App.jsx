@@ -13,7 +13,7 @@ function App() {
       <Header />
       <ToastContainer />
       <div>
-        <Outlet />
+        <Outlet/>
       </div>
     </>
   );
