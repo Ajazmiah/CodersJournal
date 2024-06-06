@@ -88,20 +88,26 @@
     font-style: italic;
   }
 
-  .h1 {
+  .heading-1 {
     font-size: 2em; /* Default font size */
+    font-family: "Merriweather", serif;
+    font-weight: 300;
+    font-style: normal;
   }
 
   @media (min-width: 460px) {
-    .h1 {
+    .heading-1{
       font-size: 3em;
     }
   }
   
   @media (min-width: 769px) {
-    .h1 {
+    .heading-1 {
       font-size: 5em; /* Font size for screens above 640px */
     }
   }
 
-  
+  .heading-4 {
+    
+      font-family: "Playfair Display", serif;
+  }

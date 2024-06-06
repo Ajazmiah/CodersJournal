@@ -28,6 +28,7 @@ picture {
 body {
     line-height: 1.5;
     min-height: 100vh;
+ font-family: "Playfair Display", serif;;
 }
 
 /* make images easier to work with */

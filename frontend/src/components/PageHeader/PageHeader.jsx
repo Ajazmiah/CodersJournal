@@ -4,6 +4,6 @@ import classnames from "classnames";
 
 export default function PageHeader({title}) {
   return (
-    <h1 className={classnames([Styles['header']], 'h1')}>{title}</h1>
+    <h1 className={'heading-1'}>{title}</h1>
   )
 }
