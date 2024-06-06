@@ -65,7 +65,7 @@ function SingleBlogScreen() {
   };
 
   return (
-    <div className="container space-top-5">
+    <div className="space-top-5">
       {openModal && (
         <Backdrop>
           <ModalRectangular>

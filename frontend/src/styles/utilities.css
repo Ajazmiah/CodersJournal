@@ -3,7 +3,6 @@
     width: 90%; /* Default width for very small screens */
     padding-inline: 3em;
     margin-inline: auto;
-    background-color: red;
 
   }
   
@@ -18,6 +17,7 @@
   @media (min-width: 769px) {
     .container {
         width: 680px;
+        background-color: red;
     }
   }
   
@@ -78,4 +78,14 @@
     font-family: "Merriweather", serif;
     font-weight: 900;
     font-style: italic;
+  }
+
+  .h1 {
+    font-size: 5em;
+  }
+
+  @media (min-width: 400px) {
+    .h1 {
+       font-size: 4em;
+    }
   }
