@@ -1,7 +1,15 @@
+/* Define reusable media queries as custom properties */
+:root {
+  --breakpoint-xsmall:  479px;
+  --breakpoint-small:  767px;
+  --breakpoint-medium: 1023px;
+  --breakpoint-large: 1024px;
+  --breakpoint-xlarge: 1280px;
+}
 /* Default container width for small screens (mobile-first) */
 .container {
     width: 90%; /* Default width for very small screens */
-    padding-inline: 3em;
+    padding-inline: 1em;
     margin-inline: auto;
 
   }
@@ -10,19 +18,19 @@
   @media (min-width: 480px) {
     .container {
         width: 90%;
+        padding-inline: 3em;
     }
   }
   
   /* Medium Devices (Tablets) */
-  @media (min-width: 769px) {
+  @media (min-width: 780px) {
     .container {
         width: 680px;
-        background-color: red;
     }
   }
   
   /* Large Devices (Desktops) */
-  @media (min-width: 1025px) {
+  @media (min-width: 1160px) {
     .container {
         width: 960px;
     }
@@ -81,11 +89,19 @@
   }
 
   .h1 {
-    font-size: 5em;
+    font-size: 2em; /* Default font size */
   }
 
-  @media (min-width: 400px) {
+  @media (min-width: 460px) {
     .h1 {
-       font-size: 4em;
+      font-size: 3em;
     }
   }
+  
+  @media (min-width: 769px) {
+    .h1 {
+      font-size: 5em; /* Font size for screens above 640px */
+    }
+  }
+
+  
