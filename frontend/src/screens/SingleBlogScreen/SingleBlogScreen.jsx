@@ -12,6 +12,7 @@ import ModalRectangular from "../../components/Modal/ModalRectangular";
 import { backdropContext } from "../../context/backdropContext";
 import { useSelector } from "react-redux";
 import Backdrop from "../../components/Backdrop/Backdrop";
+import PageHeader from "../../components/PageHeader/PageHeader";
 
 function SingleBlogScreen() {
   const { id } = useParams();
@@ -80,7 +81,7 @@ function SingleBlogScreen() {
       {post && (
         <>
           <div>
-            <h2>{post._doc.title}</h2>
+            <PageHeader title={post._doc.title}/>
             <div>
               <p>{post._doc.summary}</p>
               <p>{formatDate(post?.createdAt)}</p>

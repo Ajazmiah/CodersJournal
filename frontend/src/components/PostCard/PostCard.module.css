@@ -1,0 +1,13 @@
+.posts {
+    padding-top: 3.3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 5.3rem;
+}
+.post {
+    flex: 0 0 30%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    
+}
