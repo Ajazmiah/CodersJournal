@@ -1,6 +1,5 @@
 import React from "react";
 import ProfileImage from "../ProfileImage/ProfileImage";
-import { Box, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 function AuthorBylineCard({author}) {
   const { userInfo } = useSelector((state) => state.auth);
@@ -8,20 +7,20 @@ function AuthorBylineCard({author}) {
   const authorName =`${author?.firstName} ${author?.lastName}`
 
   return (
-    <Box sx={{ display: "flex", marginTop: "20px" }}>
-      <Box sx={{ marginRight: "10px" }}>
+    <div>
+      <div>
         <ProfileImage
           customClasses="ByLineImage"
           imageURL={author?.profilePicture}
         />
-      </Box>
-      <Box>
+      </div>
+      <div>
         {authorName}
-        <Typography variant="body2">
+        <p>
           {author?.bio ? author.bio : "Writter"}
-        </Typography>
-      </Box>
-    </Box>
+        </p>
+      </div>
+    </div>
   );
 }
 

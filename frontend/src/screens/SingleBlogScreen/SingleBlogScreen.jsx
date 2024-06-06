@@ -90,7 +90,7 @@ function SingleBlogScreen() {
               )}
               <AuthorBylineCard author={post.author} />
             </div>
-            <div>{POST}</div>
+            <div className="merriweather-light ">{POST}</div>
           </div>
         </>
       )}
