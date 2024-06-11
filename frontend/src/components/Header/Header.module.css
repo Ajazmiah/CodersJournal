@@ -10,6 +10,7 @@
   background: var(--color-dark);
   color: #fff;
   padding-inline: 3em;
+  padding-block: .7em;
 }
 .navLeft {
   gap: 2em;
@@ -35,13 +36,21 @@
   background: var(--color-dark);
   padding: 1em;
   position: absolute;
-  top: 50px;
+  top: 57px;
   padding-top: 10px;
   right: 0px;
   width: 200px;
 }
 .listItem {
   margin-top: 1em;
+  padding-inline: .5em;
+  justify-content: space-between;
+
+}
+.listItem:hover {
+  background-color: var(--secondary-color);
+  cursor: pointer;
+
 }
 .listItem button {
   outline: none;

@@ -13,6 +13,8 @@ import useNavigationItem from "../../hooks/useNavigationItem.jsx";
 import VerticalModal from "../VerticalModal/verticalModal.jsx";
 import Backdrop from "../Backdrop/Backdrop.jsx";
 import classNames from "classnames";
+import { FaSignOutAlt } from 'react-icons/fa';
+
 /*==============================================================*/
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -106,14 +108,17 @@ function ResponsiveAppBar() {
               <ul>
                 {userInfo?._id &&
                   userSettingMenu.map(({ Element, text, to }) => (
-                    <li className={Styles.listItem} key={text}>
+                    <li className={classNames(Styles.listItem, 'flex')} key={text}>
                       {Element ? (
-                        <button
+                        <>
+                                                <button
                           sx={{ margin: 0, padding: 0, color: "#ffff" }}
                           onClick={logoutHandler}
                         >
                           {text}
                         </button>
+                        <FaSignOutAlt/>
+                        </>
                       ) : (
                         <Link to={to}>{text}</Link>
                       )}
