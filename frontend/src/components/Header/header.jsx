@@ -69,7 +69,7 @@ function ResponsiveAppBar() {
           </div> */}
 
       {/* Left Menu Medium to Large screen */}
-      <nav className={classNames(Styles.nav, 'flex')}>
+      <nav className={classNames(Styles.nav, 'flex merriweather-regular')}>
         {/* LOGO */}
         <div className={classNames(Styles.navLeft, 'flex')}>
           <div className={Styles.logo}>

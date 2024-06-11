@@ -1,7 +1,6 @@
 .header {
   padding-inline: 3em;
   padding-block: 1em;
-  font-family: inherit;
 }
 .nav {
   justify-content: space-between;
@@ -11,6 +10,10 @@
 }
 .leftMenuList {
   gap: 1.3em;
+}
+.leftMenuList li {
+}
+.leftMenuList li a {
 }
 .userMenu {
 }
