@@ -13,7 +13,7 @@ import useNavigationItem from "../../hooks/useNavigationItem.jsx";
 import VerticalModal from "../VerticalModal/verticalModal.jsx";
 import Backdrop from "../Backdrop/Backdrop.jsx";
 import classNames from "classnames";
-import { FaSignOutAlt } from 'react-icons/fa';
+import { FaSignOutAlt } from "react-icons/fa";
 
 /*==============================================================*/
 function ResponsiveAppBar() {
@@ -71,13 +71,13 @@ function ResponsiveAppBar() {
           </div> */}
 
       {/* Left Menu Medium to Large screen */}
-      <nav className={classNames(Styles.nav, 'flex merriweather-regular')}>
+      <nav className={classNames(Styles.nav, "flex merriweather-regular")}>
         {/* LOGO */}
-        <div className={classNames(Styles.navLeft, 'flex')}>
+        <div className={classNames(Styles.navLeft, "flex")}>
           <div className={Styles.logo}>
             <Logo />
           </div>
-          <ul className={classNames(Styles.leftMenuList, 'flex')}>
+          <ul className={classNames(Styles.leftMenuList, "flex")}>
             {pagesNavigation.map((page) => (
               <li key={page.to}>
                 <Link
@@ -94,7 +94,7 @@ function ResponsiveAppBar() {
 
         {/* USER SETTING MENU */}
         {userInfo ? (
-          <div className={classNames(Styles.navRight, 'flex')}>
+          <div className={classNames(Styles.navRight, "flex")}>
             <button
               className={Styles.profileButton}
               onClick={handleOpenUserMenu}
@@ -108,16 +108,19 @@ function ResponsiveAppBar() {
               <ul>
                 {userInfo?._id &&
                   userSettingMenu.map(({ Element, text, to }) => (
-                    <li className={classNames(Styles.listItem, 'flex')} key={text}>
+                    <li
+                      className={classNames(Styles.listItem, "flex")}
+                      key={text}
+                    >
                       {Element ? (
                         <>
-                                                <button
-                          sx={{ margin: 0, padding: 0, color: "#ffff" }}
-                          onClick={logoutHandler}
-                        >
-                          {text}
-                        </button>
-                        <FaSignOutAlt/>
+                          <button
+                            sx={{ margin: 0, padding: 0, color: "#ffff" }}
+                            onClick={logoutHandler}
+                          >
+                            {text}
+                          </button>
+                          <FaSignOutAlt />
                         </>
                       ) : (
                         <Link to={to}>{text}</Link>

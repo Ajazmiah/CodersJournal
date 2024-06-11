@@ -10,7 +10,7 @@
   background: var(--color-dark);
   color: #fff;
   padding-inline: 3em;
-  padding-block: .7em;
+  padding-block: 0.7em;
 }
 .navLeft {
   gap: 2em;
@@ -43,14 +43,12 @@
 }
 .listItem {
   margin-top: 1em;
-  padding-inline: .5em;
+  padding-inline: 0.5em;
   justify-content: space-between;
-
 }
 .listItem:hover {
   background-color: var(--secondary-color);
   cursor: pointer;
-
 }
 .listItem button {
   outline: none;
@@ -63,9 +61,11 @@
   text-decoration: none;
   color: #fff;
   margin-block: 10px;
-
 }
 .profileButton {
+  background: transparent;
+  outline: none;
+  border: none;
 }
 .navLink {
   color: inherit;
