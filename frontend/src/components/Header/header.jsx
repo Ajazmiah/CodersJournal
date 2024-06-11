@@ -14,6 +14,7 @@ import VerticalModal from "../VerticalModal/verticalModal.jsx";
 import Backdrop from "../Backdrop/Backdrop.jsx";
 import classNames from "classnames";
 import { FaSignOutAlt } from "react-icons/fa";
+import { icons, getIcon } from "../Icon/index.jsx";
 
 /*==============================================================*/
 function ResponsiveAppBar() {
@@ -35,6 +36,8 @@ function ResponsiveAppBar() {
       alert("ERROR-Logging out");
     }
   };
+
+
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -123,7 +126,13 @@ function ResponsiveAppBar() {
                           <FaSignOutAlt />
                         </>
                       ) : (
-                        <Link to={to}>{text}</Link>
+                      
+                       
+                        <>
+                          <Link to={to}>{text}</Link>
+                          {getIcon(text.split(" ").join(""))}
+                        
+                        </>
                       )}
                     </li>
                   ))}
