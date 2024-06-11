@@ -102,7 +102,7 @@ function ResponsiveAppBar() {
                 imageURL={userInfo?.profilePicture || false}
               />
             </button>
-            <div className={Styles.userMenu} id="menu-appbar">
+            <div className={Styles.userMenu}>
               <ul>
                 {userInfo?._id &&
                   userSettingMenu.map(({ Element, text, to }) => (
