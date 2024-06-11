@@ -1,7 +1,29 @@
+header{
+padding-inline: 3em;
+padding-block: 1em;
+}
+.navLeft {
+
+}
+.userMenu {
+
+}
+.leftMenu {
+
+}
+.logo {
+
+}
+.navRight {
+
+}
+.userMenu{
+
+}
+.profileButton {
+
+}
 .navLink {
   color: #000;
   text-decoration: none;
-}
-.userMenu {
-  
 }

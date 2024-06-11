@@ -49,9 +49,9 @@ function ResponsiveAppBar() {
 
   return (
     <header className={Styles.header}>
-      <div className={Styles.container}>
+
           {/* Only shows on and after Mobile size */}
-          <div className={Styles.mobileMenu}>
+          {/* <div className={Styles.mobileMenu}>
             <button
               className={Styles.menuButton}
               onClick={() => setOpenNav((prev) => !prev)}
@@ -68,14 +68,14 @@ function ResponsiveAppBar() {
                 />
               </Backdrop>
             ) : null}
-          </div>
+          </div> */}
 
           {/* Left Menu Medium to Large screen */}
           <nav className={Styles.nav}>
                       {/* LOGO */}
           <div className={Styles.navLeft}>
-            <Logo />
-              <ul>
+             <div className={Styles.logo}><Logo /></div>
+              <ul className={Styles.leftMenu}>
                 {pagesNavigation.map((page) => (
                   <li key={page.to}>
                     <Link
@@ -92,7 +92,7 @@ function ResponsiveAppBar() {
 
             {/* USER SETTING MENU */}
             {userInfo ? (
-              <div className={Styles.userMenu}>
+              <div className={Styles.navRight}>
                 <button
                   className={Styles.profileButton}
                   onClick={handleOpenUserMenu}
@@ -102,7 +102,7 @@ function ResponsiveAppBar() {
                     imageURL={userInfo?.profilePicture || false}
                   />
                 </button>
-                <div className={Styles.menu} id="menu-appbar">
+                <div className={Styles.userMenu} id="menu-appbar">
                   <ul>
                     {userInfo?._id &&
                       userSettingMenu.map(({ Element, text, to }) => (
@@ -124,7 +124,6 @@ function ResponsiveAppBar() {
               </div>
             ) : null}
           </nav>
-      </div>
     </header>
   );
 }
