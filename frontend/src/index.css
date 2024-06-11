@@ -4,10 +4,12 @@
 
 :root {
   --primary-color: #000;
-  --black-color: #000;
-  --secondary-color: #ff8c57;
+  --color-blue: #1D3557;
+  --secondary-color: #30e2ffc7;
+  --color-dark: #212529;
+ 
 
-  --color: #ffff4ade;
+
  
     --space-2: 2rem;
     --space-4: 4rem;

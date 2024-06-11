@@ -1,9 +1,14 @@
 .header {
   padding-inline: 3em;
-  padding-block: 1em;
+  margin-top: 1em;
+  color: #fff;
 }
 .nav {
   justify-content: space-between;
+  border-radius: 70px;
+  background: var(--color-dark);
+  color: #fff;
+  padding-inline: 3em;
 }
 .navLeft {
   gap: 2em;
@@ -13,6 +18,13 @@
 }
 .leftMenuList li {
 }
+
+.leftMenuList li:hover {
+  border-bottom: 2px solid var(--secondary-color);
+  box-sizing: border-box;
+  padding-top: 2px;
+}
+
 .leftMenuList li a {
 }
 .userMenu {
@@ -22,12 +34,19 @@
 .logo {
 }
 .navRight {
+  position: relative;
 }
 .userMenu {
+  width: auto;
+  background: var(--secondary-color);
+  padding: 1em;
+  position: absolute;
+  top: 50px;
+  padding-top: 10px;
 }
 .profileButton {
 }
 .navLink {
-  color: #000;
+  color: inherit;
   text-decoration: none;
 }

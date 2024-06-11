@@ -23,7 +23,7 @@ function Logo() {
                 }}
             >
                 <Link className={Styles.logo} to="/">
-                    INKSPIRE
+                    INKS<span>PIRE</span>
                 </Link>
             </Typography>
         </Box>
