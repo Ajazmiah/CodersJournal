@@ -42,9 +42,6 @@ function ResponsiveAppBar() {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   useEffect(() => {
     setOpenBackdrop(openNav);
@@ -53,7 +50,6 @@ function ResponsiveAppBar() {
   return (
     <header className={Styles.header}>
       <div className={Styles.container}>
-        <div className={Styles.toolbar}>
           {/* Only shows on and after Mobile size */}
           <div className={Styles.mobileMenu}>
             <button
@@ -74,24 +70,25 @@ function ResponsiveAppBar() {
             ) : null}
           </div>
 
-          {/* LOGO */}
-          <Logo />
-
           {/* Left Menu Medium to Large screen */}
           <nav className={Styles.nav}>
-            <ul>
-              {pagesNavigation.map((page) => (
-                <li key={page.to}>
-                  <Link
-                    to={page.to}
-                    className={Styles.navLink}
-                    onClick={handleCloseNavMenu}
-                  >
-                    {page.text}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+                      {/* LOGO */}
+          <div className={Styles.navLeft}>
+            <Logo />
+              <ul>
+                {pagesNavigation.map((page) => (
+                  <li key={page.to}>
+                    <Link
+                      to={page.to}
+                      className={Styles.navLink}
+                      onClick={handleCloseNavMenu}
+                    >
+                      {page.text}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+          </div>
 
             {/* USER SETTING MENU */}
             {userInfo ? (
@@ -127,7 +124,6 @@ function ResponsiveAppBar() {
               </div>
             ) : null}
           </nav>
-        </div>
       </div>
     </header>
   );
