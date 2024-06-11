@@ -111,3 +111,13 @@
     
       font-family: "Playfair Display", serif;
   }
+
+
+
+  /* LAYOUT */
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+

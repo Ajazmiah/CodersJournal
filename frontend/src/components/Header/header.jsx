@@ -12,7 +12,7 @@ import { backdropContext } from "../../context/backdropContext.jsx";
 import useNavigationItem from "../../hooks/useNavigationItem.jsx";
 import VerticalModal from "../VerticalModal/verticalModal.jsx";
 import Backdrop from "../Backdrop/Backdrop.jsx";
-
+import classNames from "classnames";
 /*==============================================================*/
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -42,16 +42,14 @@ function ResponsiveAppBar() {
     setAnchorElNav(null);
   };
 
-
   useEffect(() => {
     setOpenBackdrop(openNav);
   }, [openNav]);
 
   return (
-    <header className={Styles.header}>
-
-          {/* Only shows on and after Mobile size */}
-          {/* <div className={Styles.mobileMenu}>
+    <header className={classNames(Styles.header)}>
+      {/* Only shows on and after Mobile size */}
+      {/* <div className={Styles.mobileMenu}>
             <button
               className={Styles.menuButton}
               onClick={() => setOpenNav((prev) => !prev)}
@@ -70,60 +68,62 @@ function ResponsiveAppBar() {
             ) : null}
           </div> */}
 
-          {/* Left Menu Medium to Large screen */}
-          <nav className={Styles.nav}>
-                      {/* LOGO */}
-          <div className={Styles.navLeft}>
-             <div className={Styles.logo}><Logo /></div>
-              <ul className={Styles.leftMenu}>
-                {pagesNavigation.map((page) => (
-                  <li key={page.to}>
-                    <Link
-                      to={page.to}
-                      className={Styles.navLink}
-                      onClick={handleCloseNavMenu}
-                    >
-                      {page.text}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+      {/* Left Menu Medium to Large screen */}
+      <nav className={classNames(Styles.nav, 'flex')}>
+        {/* LOGO */}
+        <div className={classNames(Styles.navLeft, 'flex')}>
+          <div className={Styles.logo}>
+            <Logo />
           </div>
-
-            {/* USER SETTING MENU */}
-            {userInfo ? (
-              <div className={Styles.navRight}>
-                <button
-                  className={Styles.profileButton}
-                  onClick={handleOpenUserMenu}
+          <ul className={classNames(Styles.leftMenuList, 'flex')}>
+            {pagesNavigation.map((page) => (
+              <li key={page.to}>
+                <Link
+                  to={page.to}
+                  className={Styles.navLink}
+                  onClick={handleCloseNavMenu}
                 >
-                  <ProfileImage
-                    customClasses="headerImage"
-                    imageURL={userInfo?.profilePicture || false}
-                  />
-                </button>
-                <div className={Styles.userMenu} id="menu-appbar">
-                  <ul>
-                    {userInfo?._id &&
-                      userSettingMenu.map(({ Element, text, to }) => (
-                        <li className={Styles.listItem} key={text}>
-                          {Element ? (
-                            <button
-                              sx={{ margin: 0, padding: 0, color: "#ffff" }}
-                              onClick={logoutHandler}
-                            >
-                              {text}
-                            </button>
-                          ) : (
-                            <Link to={to}>{text}</Link>
-                          )}
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              </div>
-            ) : null}
-          </nav>
+                  {page.text}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* USER SETTING MENU */}
+        {userInfo ? (
+          <div className={classNames(Styles.navRight, 'flex')}>
+            <button
+              className={Styles.profileButton}
+              onClick={handleOpenUserMenu}
+            >
+              <ProfileImage
+                customClasses="headerImage"
+                imageURL={userInfo?.profilePicture || false}
+              />
+            </button>
+            <div className={Styles.userMenu} id="menu-appbar">
+              <ul>
+                {userInfo?._id &&
+                  userSettingMenu.map(({ Element, text, to }) => (
+                    <li className={Styles.listItem} key={text}>
+                      {Element ? (
+                        <button
+                          sx={{ margin: 0, padding: 0, color: "#ffff" }}
+                          onClick={logoutHandler}
+                        >
+                          {text}
+                        </button>
+                      ) : (
+                        <Link to={to}>{text}</Link>
+                      )}
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+        ) : null}
+      </nav>
     </header>
   );
 }
