@@ -79,52 +79,54 @@ function ResponsiveAppBar() {
 
           {/* Left Menu Medium to Large screen */}
           <nav className={Styles.nav}>
-            {pagesNavigation.map((page) => (
-              <div key={page.to} className={Styles.navItem}>
-                <Link
+            <ul>
+              {pagesNavigation.map((page) => (
+               <li  key={page.to}>
+                 <Link
                   to={page.to}
                   className={Styles.navLink}
                   onClick={handleCloseNavMenu}
                 >
                   {page.text}
                 </Link>
-              </div>
-            ))}
-          </nav>
+               </li>
+              ))}
+            </ul>
 
-          {/* USER SETTING MENU */}
-          {userInfo ? (
-            <div className={Styles.userMenu}>
-              <button
-                className={Styles.profileButton}
-                onClick={handleOpenUserMenu}
-              >
-                <ProfileImage
-                  customClasses="headerImage"
-                  imageURL={userInfo?.profilePicture || false}
-                />
-              </button>
-              <div className={Styles.menu} id="menu-appbar">
-                <ul>
-                  {userInfo?._id &&
-                    userSettingMenu.map(({ Element, text, to }) => (
-                      <li className={Styles.listItem} key={text}>
-                        {Element ? (
-                          <button
-                            sx={{ margin: 0, padding: 0, color: "#ffff" }}
-                            onClick={logoutHandler}
-                          >
-                            {text}
-                          </button>
-                        ) : (
-                          <Link to={to}>{text}</Link>
-                        )}
-                      </li>
-                    ))}
-                </ul>
+            {/* USER SETTING MENU */}
+            {userInfo ? (
+              <div className={Styles.userMenu}>
+                <button
+                  className={Styles.profileButton}
+                  onClick={handleOpenUserMenu}
+                >
+                  <ProfileImage
+                    customClasses="headerImage"
+                    imageURL={userInfo?.profilePicture || false}
+                  />
+                </button>
+                <div className={Styles.menu} id="menu-appbar">
+                  <ul>
+                    {userInfo?._id &&
+                      userSettingMenu.map(({ Element, text, to }) => (
+                        <li className={Styles.listItem} key={text}>
+                          {Element ? (
+                            <button
+                              sx={{ margin: 0, padding: 0, color: "#ffff" }}
+                              onClick={logoutHandler}
+                            >
+                              {text}
+                            </button>
+                          ) : (
+                            <Link to={to}>{text}</Link>
+                          )}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
               </div>
-            </div>
-          ) : null}
+            ) : null}
+          </nav>
         </div>
       </div>
     </header>
