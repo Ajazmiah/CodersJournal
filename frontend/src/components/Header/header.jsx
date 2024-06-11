@@ -81,15 +81,15 @@ function ResponsiveAppBar() {
           <nav className={Styles.nav}>
             <ul>
               {pagesNavigation.map((page) => (
-               <li  key={page.to}>
-                 <Link
-                  to={page.to}
-                  className={Styles.navLink}
-                  onClick={handleCloseNavMenu}
-                >
-                  {page.text}
-                </Link>
-               </li>
+                <li key={page.to}>
+                  <Link
+                    to={page.to}
+                    className={Styles.navLink}
+                    onClick={handleCloseNavMenu}
+                  >
+                    {page.text}
+                  </Link>
+                </li>
               ))}
             </ul>
 
