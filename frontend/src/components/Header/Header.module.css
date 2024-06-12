@@ -1,7 +1,9 @@
 .header {
-  padding-inline: 3em;
-  margin-top: 1em;
-  color: #fff;
+    color: #fff;
+    margin-inline: auto;
+    background:var(--color-dark);
+    color: #fff;
+
 }
 .header svg {
   font-size: 20px;
@@ -9,11 +11,11 @@
 
 .nav {
   justify-content: space-between;
-  border-radius: 70px;
-  background: var(--color-dark);
   color: #fff;
   padding-inline: 3em;
   padding-block: 0.7em;
+  max-width: 1260px;
+  margin: 0 auto;
 }
 .navLeft {
   gap: 2em;
