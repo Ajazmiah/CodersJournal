@@ -4,15 +4,18 @@ import Styles from "./DropDownMenu.module.css";
 import { FaSignOutAlt } from "react-icons/fa";
 import { icons, getIcon } from "../Icon/index.jsx";
 import { Button } from "@mui/material";
+import classNames from "classnames";
 
-function DropDownMenu({ dropDownItems, handleClick }) {
+function DropDownMenu({ Styles,dropDownItems, handleClick, showMenu}) {
+
+  if(!showMenu) return 
   return dropDownItems.map(({ Element, text, to }) => (
     <li className={classNames(Styles.listItem, "flex")} key={text}>
       {Element ? (
         <>
           <button
             sx={{ margin: 0, padding: 0, color: "#ffff" }}
-            onClick={logoutHandler}
+            onClick={handleClick}
           >
             {text}
           </button>

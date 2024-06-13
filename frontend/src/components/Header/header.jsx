@@ -20,6 +20,7 @@ import { icons, getIcon } from "../Icon/index.jsx";
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [showMenu, setShowMenu] = useState(false);
   const [logoutApiCall] = useLogoutMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,12 +36,6 @@ function ResponsiveAppBar() {
     } catch (error) {
       alert("ERROR-Logging out");
     }
-  };
-
-
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
@@ -100,44 +95,25 @@ function ResponsiveAppBar() {
           <div className={classNames(Styles.navRight, "flex")}>
             <button
               className={Styles.profileButton}
-              onClick={handleOpenUserMenu}
+              onClick={() => setShowMenu((prev) => !prev)}
             >
               <ProfileImage
                 customClasses="headerImage"
                 imageURL={userInfo?.profilePicture || false}
               />
             </button>
-            <div className={Styles.userMenu}>
-              <ul>
-                {userInfo?._id &&
-                  userSettingMenu.map(({ Element, text, to }) => (
-                    <li
-                      className={classNames(Styles.listItem, "flex")}
-                      key={text}
-                    >
-                      {Element ? (
-                        <>
-                          <button
-                            sx={{ margin: 0, padding: 0, color: "#ffff" }}
-                            onClick={logoutHandler}
-                          >
-                            {text}
-                          </button>
-                          <FaSignOutAlt />
-                        </>
-                      ) : (
-                      
-                       
-                        <>
-                          <Link to={to}>{text}</Link>
-                          {getIcon(text.split(" ").join(""))}
-                        
-                        </>
-                      )}
-                    </li>
-                  ))}
-              </ul>
-            </div>
+            {showMenu && (
+              <div className={Styles.userMenu}>
+                <ul  onClick={() => setShowMenu((prev) => !prev)}>
+                  <DropDownMenu
+                    dropDownItems={userSettingMenu}
+                    Styles={Styles}
+                    handleClick={logoutHandler}
+                    showMenu={showMenu}
+                  />
+                </ul>
+              </div>
+            )}
           </div>
         ) : null}
       </nav>
