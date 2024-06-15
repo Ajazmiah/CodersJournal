@@ -16,6 +16,8 @@ import classNames from "classnames";
 import { FaSignOutAlt } from "react-icons/fa";
 import { icons, getIcon } from "../Icon/index.jsx";
 import useScreenSize from "../../hooks/useScreenSize.jsx";
+import HeaderMobileNav from "./HeaderMobileNav.jsx";
+import ResponsiveComponent from "../ResponsiveComponent/ResponsiveComponent.jsx";
 
 /*==============================================================*/
 function ResponsiveAppBar() {
@@ -37,8 +39,8 @@ function ResponsiveAppBar() {
     }
   };
 
-  const device = useScreenSize()
-  console.log("DEVICE", device)
+  const device = useScreenSize();
+  console.log("DEVICE", device);
 
   useEffect(() => {
     setOpenBackdrop(openNav);
@@ -50,24 +52,21 @@ function ResponsiveAppBar() {
       <nav className={classNames(Styles.nav, "flex merriweather-regular")}>
         {/* LOGO */}
         <div className={classNames(Styles.navLeft, "flex")}>
-        <div className={Styles.logo}>
+          <div className={Styles.logo}>
             <Logo />
           </div>
-        {(device !== 'mobile' && device !== 'tablet') && (
-        
-          <ul className={classNames(Styles.leftMenuList, "flex")}>
-            {pagesNavigation.map((page) => (
-              <li key={page.to}>
-                <Link to={page.to} className={Styles.navLink}>
-                  {page.text}
-                </Link>
-              </li>
-            ))}
-          </ul>
-     
-     
-        )}
-           </div>
+          {device !== "mobile" && device !== "tablet" && (
+            <ul className={classNames(Styles.leftMenuList, "flex")}>
+              {pagesNavigation.map((page) => (
+                <li key={page.to}>
+                  <Link to={page.to} className={Styles.navLink}>
+                    {page.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
         {/* USER SETTING MENU */}
         {userInfo ? (
@@ -95,6 +94,10 @@ function ResponsiveAppBar() {
             )}
           </div>
         ) : null}
+
+       <ResponsiveComponent renderOn={['mobile']}>
+        <h1>ITS WORKING</h1>
+       </ResponsiveComponent>
       </nav>
     </header>
   );
