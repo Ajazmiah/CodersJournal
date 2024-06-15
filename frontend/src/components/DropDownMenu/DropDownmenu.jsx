@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Styles from "./DropDownMenu.module.css";
 import { FaSignOutAlt } from "react-icons/fa";
 import { icons, getIcon } from "../Icon/index.jsx";
-import { Button } from "@mui/material";
 import classNames from "classnames";
 
 function DropDownMenu({ Styles,dropDownItems, handleClick, showMenu}) {
@@ -14,7 +13,6 @@ function DropDownMenu({ Styles,dropDownItems, handleClick, showMenu}) {
       {Element ? (
         <>
           <button
-            sx={{ margin: 0, padding: 0, color: "#ffff" }}
             onClick={handleClick}
           >
             {text}

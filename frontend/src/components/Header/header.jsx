@@ -18,8 +18,6 @@ import { icons, getIcon } from "../Icon/index.jsx";
 
 /*==============================================================*/
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
   const [showMenu, setShowMenu] = useState(false);
   const [logoutApiCall] = useLogoutMutation();
   const dispatch = useDispatch();
@@ -38,36 +36,12 @@ function ResponsiveAppBar() {
     }
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
   useEffect(() => {
     setOpenBackdrop(openNav);
   }, [openNav]);
 
   return (
     <header className={classNames(Styles.header)}>
-      {/* Only shows on and after Mobile size */}
-      {/* <div className={Styles.mobileMenu}>
-            <button
-              className={Styles.menuButton}
-              onClick={() => setOpenNav((prev) => !prev)}
-              aria-label="menu"
-            >
-              <span className={Styles.menuIcon}>☰</span>
-            </button>
-
-            {openNav ? (
-              <Backdrop>
-                <VerticalModal
-                  classes={Styles}
-                  pagesNavigation={pagesNavigation}
-                />
-              </Backdrop>
-            ) : null}
-          </div> */}
-
       {/* Left Menu Medium to Large screen */}
       <nav className={classNames(Styles.nav, "flex merriweather-regular")}>
         {/* LOGO */}
@@ -78,11 +52,7 @@ function ResponsiveAppBar() {
           <ul className={classNames(Styles.leftMenuList, "flex")}>
             {pagesNavigation.map((page) => (
               <li key={page.to}>
-                <Link
-                  to={page.to}
-                  className={Styles.navLink}
-                  onClick={handleCloseNavMenu}
-                >
+                <Link to={page.to} className={Styles.navLink}>
                   {page.text}
                 </Link>
               </li>
@@ -104,7 +74,7 @@ function ResponsiveAppBar() {
             </button>
             {showMenu && (
               <div className={Styles.userMenu}>
-                <ul  onClick={() => setShowMenu((prev) => !prev)}>
+                <ul onClick={() => setShowMenu((prev) => !prev)}>
                   <DropDownMenu
                     dropDownItems={userSettingMenu}
                     Styles={Styles}
