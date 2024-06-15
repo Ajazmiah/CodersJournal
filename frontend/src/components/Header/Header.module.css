@@ -10,7 +10,6 @@
 }
 
 .nav {
-  justify-content: space-between;
   color: #fff;
   padding-inline: 3em;
   padding-block: 0.7em;
@@ -18,7 +17,7 @@
   margin: 0 auto;
 }
 .navLeft {
-  gap: 2em;
+  margin-left: 2em;
 }
 .leftMenuList {
   gap: 1.3em;
@@ -36,6 +35,7 @@
 }
 .navRight {
   position: relative;
+  margin-left: auto;
 }
 .userMenu {
   background: var(--color-dark);

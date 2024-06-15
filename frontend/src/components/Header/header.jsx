@@ -13,11 +13,12 @@ import useNavigationItem from "../../hooks/useNavigationItem.jsx";
 import VerticalModal from "../VerticalModal/verticalModal.jsx";
 import Backdrop from "../Backdrop/Backdrop.jsx";
 import classNames from "classnames";
-import { FaSignOutAlt } from "react-icons/fa";
+import { FaHamburger, FaSignOutAlt, FaBars } from "react-icons/fa";
 import { icons, getIcon } from "../Icon/index.jsx";
 import useScreenSize from "../../hooks/useScreenSize.jsx";
 import HeaderMobileNav from "./HeaderMobileNav.jsx";
 import ResponsiveComponent from "../ResponsiveComponent/ResponsiveComponent.jsx";
+import { styled } from "@mui/material";
 
 /*==============================================================*/
 function ResponsiveAppBar() {
@@ -50,54 +51,60 @@ function ResponsiveAppBar() {
     <header className={classNames(Styles.header)}>
       {/* Left Menu Medium to Large screen */}
       <nav className={classNames(Styles.nav, "flex merriweather-regular")}>
-        {/* LOGO */}
-        <div className={classNames(Styles.navLeft, "flex")}>
-          <div className={Styles.logo}>
-            <Logo />
-          </div>
-          {device !== "mobile" && device !== "tablet" && (
-            <ul className={classNames(Styles.leftMenuList, "flex")}>
-              {pagesNavigation.map((page) => (
-                <li key={page.to}>
-                  <Link to={page.to} className={Styles.navLink}>
-                    {page.text}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
+        <div className={Styles.logo}>
+          <Logo />
         </div>
-
-        {/* USER SETTING MENU */}
-        {userInfo ? (
-          <div className={classNames(Styles.navRight, "flex")}>
-            <button
-              className={Styles.profileButton}
-              onClick={() => setShowMenu((prev) => !prev)}
-            >
-              <ProfileImage
-                customClasses="headerImage"
-                imageURL={userInfo?.profilePicture || false}
-              />
-            </button>
-            {showMenu && (
-              <div className={Styles.userMenu}>
-                <ul onClick={() => setShowMenu((prev) => !prev)}>
-                  <DropDownMenu
-                    dropDownItems={userSettingMenu}
-                    Styles={Styles}
-                    handleClick={logoutHandler}
-                    showMenu={showMenu}
-                  />
+        <ResponsiveComponent renderOn={["tablet", "desktop", "large"]}>
+          <>
+            {/* LOGO */}
+            <div className={classNames(Styles.navLeft, "flex")}>
+              {device !== "mobile" && device !== "tablet" && (
+                <ul className={classNames(Styles.leftMenuList, "flex")}>
+                  {pagesNavigation.map((page) => (
+                    <li key={page.to}>
+                      <Link to={page.to} className={Styles.navLink}>
+                        {page.text}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
-              </div>
-            )}
-          </div>
-        ) : null}
+              )}
+            </div>
 
-       <ResponsiveComponent renderOn={['mobile']}>
-        <h1>ITS WORKING</h1>
-       </ResponsiveComponent>
+            {/* USER SETTING MENU */}
+            {userInfo ? (
+              <div className={classNames(Styles.navRight, "flex")}>
+                <button
+                  className={Styles.profileButton}
+                  onClick={() => setShowMenu((prev) => !prev)}
+                >
+                  <ProfileImage
+                    customClasses="headerImage"
+                    imageURL={userInfo?.profilePicture || false}
+                  />
+                </button>
+                {showMenu && (
+                  <div className={Styles.userMenu}>
+                    <ul onClick={() => setShowMenu((prev) => !prev)}>
+                      <DropDownMenu
+                        dropDownItems={userSettingMenu}
+                        Styles={Styles}
+                        handleClick={logoutHandler}
+                        showMenu={showMenu}
+                      />
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ) : null}
+          </>
+        </ResponsiveComponent>
+        
+        <ResponsiveComponent renderOn={["mobile"]}>
+          <div className={Styles.navRight}>
+            <FaBars/>
+          </div>
+        </ResponsiveComponent>
       </nav>
     </header>
   );
