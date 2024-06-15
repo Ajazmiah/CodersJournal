@@ -15,6 +15,7 @@ import Backdrop from "../Backdrop/Backdrop.jsx";
 import classNames from "classnames";
 import { FaSignOutAlt } from "react-icons/fa";
 import { icons, getIcon } from "../Icon/index.jsx";
+import useScreenSize from "../../hooks/useScreenSize.jsx";
 
 /*==============================================================*/
 function ResponsiveAppBar() {
@@ -35,6 +36,9 @@ function ResponsiveAppBar() {
       alert("ERROR-Logging out");
     }
   };
+
+  const device = useScreenSize()
+  console.log("DEVICE", device)
 
   useEffect(() => {
     setOpenBackdrop(openNav);

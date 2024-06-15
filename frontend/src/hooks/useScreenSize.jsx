@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 function useScreenSize() {
-  let DEVICE = "mobile";
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
   });
+
+  const [device, setDevice] = useState();
 
   useEffect(() => {
     const handleResize = () => {
@@ -21,22 +22,26 @@ function useScreenSize() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (windowSize <= 600) {
-    DEVICE = "mobile";
-  }
-  if (windowSize > 600 && windowSize < 800) {
-    DEVICE = "tablet";
-  }
+ 
 
-  if (windowSize > 800 && windowSize < 1200) {
-    DEVICE = "desktop";
-  }
+  useEffect(() => {
+    if (windowSize.width <= 600) {
+      setDevice("mobile");
+    }
+    if (windowSize.width > 600 && windowSize.width < 959) {
+      setDevice("tablet");
+    }
 
-  if (windowSize > 1200) {
-    DEVICE = "large";
-  }
+    if (windowSize.width > 960 && windowSize.width < 1260) {
+      setDevice("desktop");
+    }
 
-  return DEVICE;
+    if (windowSize.width > 1270) {
+      setDevice("large");
+    }
+  }, [windowSize]);
+
+  return device;
 }
 
 export default useScreenSize;
