@@ -50,9 +50,11 @@ function ResponsiveAppBar() {
       <nav className={classNames(Styles.nav, "flex merriweather-regular")}>
         {/* LOGO */}
         <div className={classNames(Styles.navLeft, "flex")}>
-          <div className={Styles.logo}>
+        <div className={Styles.logo}>
             <Logo />
           </div>
+        {(device !== 'mobile' && device !== 'tablet') && (
+        
           <ul className={classNames(Styles.leftMenuList, "flex")}>
             {pagesNavigation.map((page) => (
               <li key={page.to}>
@@ -62,7 +64,10 @@ function ResponsiveAppBar() {
               </li>
             ))}
           </ul>
-        </div>
+     
+     
+        )}
+           </div>
 
         {/* USER SETTING MENU */}
         {userInfo ? (
