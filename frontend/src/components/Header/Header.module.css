@@ -3,8 +3,6 @@
   margin-inline: auto;
   background: var(--color-dark);
   color: #fff;
-  position: relative;
-  z-index: 200;
 }
 .header svg {
   font-size: 20px;
@@ -23,9 +21,6 @@
 .leftMenuList {
   gap: 1.3em;
 }
-.leftMenuList li {
-}
-
 .leftMenuList li:hover {
   border-bottom: 2px solid var(--secondary-color);
   box-sizing: border-box;
@@ -38,6 +33,8 @@
 }
 .navRight svg {
   cursor: pointer;
+  position: relative;
+  z-index: 200;
 }
 .userMenu {
   background: var(--color-dark);

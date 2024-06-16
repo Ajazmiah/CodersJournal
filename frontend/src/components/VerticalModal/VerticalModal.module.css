@@ -4,7 +4,13 @@
     background: #fff;
     position: absolute;
     top: 0;
-    left: 0;
+    left: -100%;
     z-index: 100;
+    transition: 1s;
+
+
    
+}
+.active {
+    left: 0;
 }

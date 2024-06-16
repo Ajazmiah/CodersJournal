@@ -40,6 +40,11 @@ picutre {
     display: block;
 }
 
+a {
+    text-decoration: none;
+    
+}
+
 /* make form elements easier to work with - font property is not inherited for form elements  */
 input,
 button,

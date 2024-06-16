@@ -5,23 +5,28 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { icons, getIcon } from "../Icon/index.jsx";
 import classNames from "classnames";
 
-function DropDownMenu({ Styles,dropDownItems, handleClick, showMenu}) {
+function DropDownMenu({
+  Styles,
+  dropDownItems,
+  handleClick,
+  showMenu,
+  handleShow = null,
+}) {
+  console.log("DROP", dropDownItems);
 
-  if(!showMenu) return 
+  if (!showMenu) return;
   return dropDownItems.map(({ Element, text, to }) => (
-    <li className={classNames(Styles.listItem, "flex")} key={text}>
+    <li className={classNames(Styles?.listItem, "flex")} key={text}>
       {Element ? (
         <>
-          <button
-            onClick={handleClick}
-          >
-            {text}
-          </button>
+          <button onClick={handleClick}>{text}</button>
           <FaSignOutAlt />
         </>
       ) : (
         <>
-          <Link to={to}>{text}</Link>
+          <Link onClick={handleShow} to={to}>
+            {text}
+          </Link>
           {getIcon(text.split(" ").join(""))}
         </>
       )}

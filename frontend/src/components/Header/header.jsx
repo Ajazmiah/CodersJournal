@@ -26,7 +26,8 @@ function ResponsiveAppBar() {
   const [logoutApiCall] = useLogoutMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [userSettingMenu, pagesNavigation, userInfo] = useNavigationItem();
+  const [userSettingMenu, pagesNavigation, userInfo, loggedInMobileMenu] =
+    useNavigationItem();
   const [isBackdropOpen, setOpenBackdrop] = useContext(backdropContext);
   const [openNav, setOpenNav] = useState(false);
 
@@ -57,7 +58,6 @@ function ResponsiveAppBar() {
         </div>
         <ResponsiveComponent renderOn={["tablet", "desktop", "large"]}>
           <>
-    
             <div className={classNames(Styles.navLeft, "flex")}>
               {device !== "mobile" && device !== "tablet" && (
                 <ul className={classNames(Styles.leftMenuList, "flex")}>
@@ -74,46 +74,49 @@ function ResponsiveAppBar() {
           </>
         </ResponsiveComponent>
 
-        <ResponsiveComponent renderOn={['desktop','large']}>
-           {/* USER SETTING MENU */}
-           {userInfo ? (
-              <div className={classNames(Styles.navRight, "flex")}>
-                <button
-                  className={Styles.profileButton}
-                  onClick={() => setShowMenu((prev) => !prev)}
-                >
-                  <ProfileImage
-                    customClasses="headerImage"
-                    imageURL={userInfo?.profilePicture || false}
-                  />
-                </button>
-                {showMenu && (
-                  <div className={Styles.userMenu}>
-                    <ul onClick={() => setShowMenu((prev) => !prev)}>
-                      <DropDownMenu
-                        dropDownItems={userSettingMenu}
-                        Styles={Styles}
-                        handleClick={logoutHandler}
-                        showMenu={showMenu}
-                      />
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ) : null}
+        <ResponsiveComponent renderOn={["desktop", "large"]}>
+          {/* USER SETTING MENU */}
+          {userInfo ? (
+            <div className={classNames(Styles.navRight, "flex")}>
+              <button
+                className={Styles.profileButton}
+                onClick={() => setShowMenu((prev) => !prev)}
+              >
+                <ProfileImage
+                  customClasses="headerImage"
+                  imageURL={userInfo?.profilePicture || false}
+                />
+              </button>
+              {showMenu && (
+                <div className={Styles.userMenu}>
+                  <ul onClick={() => setShowMenu((prev) => !prev)}>
+                    <DropDownMenu
+                      dropDownItems={userSettingMenu}
+                      Styles={Styles}
+                      handleClick={logoutHandler}
+                      showMenu={showMenu}
+                    />
+                  </ul>
+                </div>
+              )}
+            </div>
+          ) : null}
         </ResponsiveComponent>
-        
+
         <ResponsiveComponent renderOn={["tablet", "mobile"]}>
           <div className={Styles.navRight}>
-            <FaBars/>
+            <FaBars onClick={() => setShowMenu((prev) => !prev)} />
           </div>
-          <Backdrop>
+          {showMenu ? <Backdrop>
             <VerticalModal>
-              <h1>
-                HIIII
-              </h1>
+              <DropDownMenu
+                dropDownItems={[...pagesNavigation , ...userSettingMenu ]}
+                showMenu={showMenu}
+                handleClick={logoutHandler}
+                handleShow={() => setShowMenu(false)}
+              />
             </VerticalModal>
-          </Backdrop>
+          </Backdrop> : null}
         </ResponsiveComponent>
       </nav>
     </header>
