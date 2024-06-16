@@ -1,10 +1,10 @@
 .navModal {
     width: 300px;
     height: 100vh;
-    background: var(--black-color);
+    background: #fff;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 200;
+    z-index: 100;
    
 }

@@ -71,9 +71,12 @@ function ResponsiveAppBar() {
                 </ul>
               )}
             </div>
+          </>
+        </ResponsiveComponent>
 
-            {/* USER SETTING MENU */}
-            {userInfo ? (
+        <ResponsiveComponent renderOn={['desktop','large']}>
+           {/* USER SETTING MENU */}
+           {userInfo ? (
               <div className={classNames(Styles.navRight, "flex")}>
                 <button
                   className={Styles.profileButton}
@@ -98,13 +101,17 @@ function ResponsiveAppBar() {
                 )}
               </div>
             ) : null}
-          </>
         </ResponsiveComponent>
         
-        <ResponsiveComponent renderOn={["tablet"]}>
+        <ResponsiveComponent renderOn={["tablet", "mobile"]}>
           <div className={Styles.navRight}>
             <FaBars/>
           </div>
+          <Backdrop>
+            <VerticalModal>
+              h
+            </VerticalModal>
+          </Backdrop>
         </ResponsiveComponent>
       </nav>
     </header>

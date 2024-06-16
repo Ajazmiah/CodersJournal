@@ -3,6 +3,8 @@
     margin-inline: auto;
     background:var(--color-dark);
     color: #fff;
+    position: relative;
+    z-index: 200;
 
 }
 .header svg {
@@ -36,6 +38,9 @@
 .navRight {
   position: relative;
   margin-left: auto;
+}
+.navRight svg {
+  cursor: pointer;
 }
 .userMenu {
   background: var(--color-dark);

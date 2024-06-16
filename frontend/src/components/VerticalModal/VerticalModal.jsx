@@ -43,7 +43,7 @@ export default function VerticalModal({
  
           <div className={Styles.navModal} onClick={(e) => console.log("BACKSROP", isBackdropOpen)}>
             <ul>
-            {pagesNavigation.map((page) => (
+            {pagesNavigation?.map((page) => (
                 <MenuItem key={page}>
                   <Link
                     to={page.to}
