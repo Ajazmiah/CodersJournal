@@ -109,7 +109,9 @@ function ResponsiveAppBar() {
           </div>
           <Backdrop>
             <VerticalModal>
-              h
+              <h1>
+                HIIII
+              </h1>
             </VerticalModal>
           </Backdrop>
         </ResponsiveComponent>
