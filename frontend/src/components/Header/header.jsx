@@ -51,12 +51,13 @@ function ResponsiveAppBar() {
     <header className={classNames(Styles.header)}>
       {/* Left Menu Medium to Large screen */}
       <nav className={classNames(Styles.nav, "flex merriweather-regular")}>
+        {/* LOGO */}
         <div className={Styles.logo}>
           <Logo />
         </div>
         <ResponsiveComponent renderOn={["tablet", "desktop", "large"]}>
           <>
-            {/* LOGO */}
+    
             <div className={classNames(Styles.navLeft, "flex")}>
               {device !== "mobile" && device !== "tablet" && (
                 <ul className={classNames(Styles.leftMenuList, "flex")}>
@@ -100,7 +101,7 @@ function ResponsiveAppBar() {
           </>
         </ResponsiveComponent>
         
-        <ResponsiveComponent renderOn={["mobile"]}>
+        <ResponsiveComponent renderOn={["tablet"]}>
           <div className={Styles.navRight}>
             <FaBars/>
           </div>
