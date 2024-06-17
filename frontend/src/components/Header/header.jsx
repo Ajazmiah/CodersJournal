@@ -28,7 +28,7 @@ function ResponsiveAppBar() {
   const navigate = useNavigate();
   const [userSettingMenu, pagesNavigation, userInfo, loggedInMobileMenu] =
     useNavigationItem();
-  const [isBackdropOpen, setOpenBackdrop] = useContext(backdropContext);
+  // const [isBackdropOpen, setOpenBackdrop] = useContext(backdropContext);
   const [openNav, setOpenNav] = useState(false);
 
   const logoutHandler = async () => {
@@ -46,9 +46,9 @@ function ResponsiveAppBar() {
   const handleShowMenu = () => {
     setShowMenu((prev) => !prev);
   };
-  useEffect(() => {
-    setOpenBackdrop(openNav);
-  }, [openNav]);
+  // useEffect(() => {
+  //   setOpenBackdrop(openNav);
+  // }, [openNav]);
 
   return (
     <header className={classNames(Styles.header)}>
