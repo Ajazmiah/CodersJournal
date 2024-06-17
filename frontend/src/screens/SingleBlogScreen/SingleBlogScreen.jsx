@@ -31,7 +31,7 @@ function SingleBlogScreen() {
   const sanitizedHTML = DOMPurify.sanitize(post?._doc?.body);
 
   const POST = ReactHtmlParser(sanitizedHTML);
-  console.log("SANITIZED", POST);
+
 
   useEffect(() => {
     const fetchPost = async () => {

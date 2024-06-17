@@ -19,10 +19,11 @@ import useScreenSize from "../../hooks/useScreenSize.jsx";
 import HeaderMobileNav from "./HeaderMobileNav.jsx";
 import ResponsiveComponent from "../ResponsiveComponent/ResponsiveComponent.jsx";
 import { styled } from "@mui/material";
+import useBackdrop from "../../hooks/useBackdrop.jsx";
 
 /*==============================================================*/
 function ResponsiveAppBar() {
-  const [showMenu, setShowMenu] = useState(false);
+ const [showMenu, setShowMenu] = useState(false);
   const [logoutApiCall] = useLogoutMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,6 +31,8 @@ function ResponsiveAppBar() {
     useNavigationItem();
   // const [isBackdropOpen, setOpenBackdrop] = useContext(backdropContext);
   const [openNav, setOpenNav] = useState(false);
+
+  //const [showMenu] = useBackdrop()
 
   const logoutHandler = async () => {
     try {
