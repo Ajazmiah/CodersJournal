@@ -42,8 +42,10 @@ function ResponsiveAppBar() {
   };
 
   const device = useScreenSize();
-  console.log("DEVICE", device);
 
+  const handleShowMenu = () => {
+    setShowMenu((prev) => !prev);
+  };
   useEffect(() => {
     setOpenBackdrop(openNav);
   }, [openNav]);
@@ -89,7 +91,7 @@ function ResponsiveAppBar() {
               </button>
               {showMenu && (
                 <div className={Styles.userMenu}>
-                  <ul onClick={() => setShowMenu((prev) => !prev)}>
+                  <ul>
                     <DropDownMenu
                       dropDownItems={userSettingMenu}
                       Styles={Styles}
@@ -107,16 +109,18 @@ function ResponsiveAppBar() {
           <div className={Styles.navRight}>
             <FaBars onClick={() => setShowMenu((prev) => !prev)} />
           </div>
-          {showMenu ? <Backdrop>
-            <VerticalModal>
-              <DropDownMenu
-                dropDownItems={[...pagesNavigation , ...userSettingMenu ]}
-                showMenu={showMenu}
-                handleClick={logoutHandler}
-                handleShow={() => setShowMenu(false)}
-              />
-            </VerticalModal>
-          </Backdrop> : null}
+          {showMenu ? (
+            <Backdrop handleShow={handleShowMenu}>
+              <VerticalModal>
+                <DropDownMenu
+                  dropDownItems={[...pagesNavigation, ...userSettingMenu]}
+                  showMenu={showMenu}
+                  handleClick={logoutHandler}
+                  handleShow={handleShowMenu}
+                />
+              </VerticalModal>
+            </Backdrop>
+          ) : null}
         </ResponsiveComponent>
       </nav>
     </header>

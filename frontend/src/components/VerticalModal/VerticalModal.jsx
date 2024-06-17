@@ -17,34 +17,22 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Stack } from "@mui/material";
 import Logo from "../Logo/Logo.jsx";
-import Backdrop from '../Backdrop/Backdrop.jsx'
+import Backdrop from "../Backdrop/Backdrop.jsx";
 import { backdropContext } from "../../context/backdropContext.jsx";
-import Styles from './VerticalModal.module.css'
+import Styles from "./VerticalModal.module.css";
 import classNames from "classnames";
 
-
-
-
-
-
-
-export default function VerticalModal({
-  pagesNavigation,
-  classes,
-  children
-}) {
-
-  const [isBackdropOpen, setOpenBackdrop] = React.useContext(backdropContext)
+export default function VerticalModal({ pagesNavigation, classes, children }) {
+  
 
   return (
     <React.Fragment>
-
- 
-          <div className={classNames(Styles.navModal, Styles.active)}>
-            {children}
-          
-          </div>
-       
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className={classNames(Styles.navModal, Styles.active)}
+      >
+        {children}
+      </div>
     </React.Fragment>
   );
 }
