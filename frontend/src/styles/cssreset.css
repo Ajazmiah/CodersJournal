@@ -42,7 +42,7 @@ picutre {
 
 a {
     text-decoration: none;
-    
+    cursor: pointer;
 }
 
 /* make form elements easier to work with - font property is not inherited for form elements  */
