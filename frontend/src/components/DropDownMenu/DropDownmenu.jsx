@@ -12,7 +12,7 @@ function DropDownMenu({
   showMenu,
   handleShow = null,
 }) {
-  console.log("DROP", dropDownItems);
+  
 
   if (!showMenu) return;
   return dropDownItems.map(({ Element, text, to }) => (

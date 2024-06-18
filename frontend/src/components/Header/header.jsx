@@ -23,7 +23,7 @@ import useBackdrop from "../../hooks/useBackdrop.jsx";
 
 /*==============================================================*/
 function ResponsiveAppBar() {
- const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const [logoutApiCall] = useLogoutMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -115,11 +115,9 @@ function ResponsiveAppBar() {
           {showMenu ? (
             <Backdrop handleShow={handleShowMenu}>
               <VerticalModal>
-                <DropDownMenu
+                <HeaderMobileNav
                   dropDownItems={[...pagesNavigation, ...userSettingMenu]}
-                  showMenu={showMenu}
                   handleClick={logoutHandler}
-                  handleShow={handleShowMenu}
                 />
               </VerticalModal>
             </Backdrop>

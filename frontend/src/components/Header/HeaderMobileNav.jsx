@@ -1,57 +1,28 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
+import Styles from './HeaderMobileNav.module.css'
+import classNames from "classnames";
 
-function HeaderMobileNav({pagesNavigation}) {
+function HeaderMobileNav({
+  dropDownItems,
+  handleClick,
+  handleShow = null,
+}) {
   return (
-    <>
-     {/* LOGO */}
-     <div className={classNames(Styles.navLeft, "flex")}>
-        <div className={Styles.logo}>
-            <Logo />
-          </div>
-        {(device !== 'mobile' && device !== 'tablet') && (
-        
-          <ul className={classNames(Styles.leftMenuList, "flex")}>
-            {pagesNavigation.map((page) => (
-              <li key={page.to}>
-                <Link to={page.to} className={Styles.navLink}>
-                  {page.text}
-                </Link>
-              </li>
-            ))}
-          </ul>
-     
-     
-        )}
-           </div>
-
-        {/* USER SETTING MENU */}
-        {userInfo ? (
-          <div className={classNames(Styles.navRight, "flex")}>
-            <button
-              className={Styles.profileButton}
-              onClick={() => setShowMenu((prev) => !prev)}
-            >
-              <ProfileImage
-                customClasses="headerImage"
-                imageURL={userInfo?.profilePicture || false}
-              />
-            </button>
-            {showMenu && (
-              <div className={Styles.userMenu}>
-                <ul onClick={() => setShowMenu((prev) => !prev)}>
-                  <DropDownMenu
-                    dropDownItems={userSettingMenu}
-                    Styles={Styles}
-                    handleClick={logoutHandler}
-                    showMenu={showMenu}
-                  />
-                </ul>
-              </div>
-            )}
-          </div>
-        ) : null}
-    </>
-  )
+    <ul className={Styles.mobileList}>
+      {dropDownItems.map(({ Element, text, to }) => (
+        <li className={classNames(Styles.listItem, "flex merriweather-regular")} key={text}>
+          {Element ? (
+            <button onClick={handleClick}>{text}</button>
+          ) : (
+            <Link onClick={handleShow} to={to}>
+              {text}
+            </Link>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
 }
 
-export default HeaderMobileNav
+export default HeaderMobileNav;
