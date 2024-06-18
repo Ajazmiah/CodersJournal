@@ -100,6 +100,7 @@ function ResponsiveAppBar() {
                       Styles={Styles}
                       handleClick={logoutHandler}
                       showMenu={showMenu}
+                      handleShow={handleShowMenu}
                     />
                   </ul>
                 </div>
