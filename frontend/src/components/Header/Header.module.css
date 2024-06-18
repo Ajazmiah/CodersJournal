@@ -37,33 +37,40 @@
   z-index: 200;
 }
 .userMenu {
-  background: var(--color-dark);
+
   padding: 1em;
   position: absolute;
   top: 57px;
   padding-top: 10px;
   right: 0px;
   width: 200px;
+  box-shadow: 0px -1px 15px 0px #0000001a;
 }
 .listItem {
   margin-top: 1em;
   padding-inline: 0.5em;
   justify-content: space-between;
-}
-.listItem:hover {
-  background-color: var(--secondary-color);
   cursor: pointer;
 }
+.listItem:hover a {
+  color: var(--light-gray);
+}
+
 .listItem button {
   outline: none;
   border: none;
   background: transparent;
   padding: 0;
-  color: #fff;
+  color: var(--secondary-color);
 }
+.listItem svg {
+  fill: var(--color-dark);
+}
+
+
 .userMenu a {
   text-decoration: none;
-  color: #fff;
+  color: #000;
   margin-block: 10px;
 }
 .profileButton {
@@ -77,9 +84,3 @@
 }
 
 
-/*
-MOBILE 
-*/
-.mobileNavList {
-  
-}

@@ -4,6 +4,7 @@ import Styles from "./DropDownMenu.module.css";
 import { FaSignOutAlt } from "react-icons/fa";
 import { icons, getIcon } from "../Icon/index.jsx";
 import classNames from "classnames";
+import Border from "../Atoms/Border/Border.jsx";
 
 function DropDownMenu({
   Styles,
@@ -16,6 +17,7 @@ function DropDownMenu({
 
   if (!showMenu) return;
   return dropDownItems.map(({ Element, text, to }) => (
+    <>
     <li className={classNames(Styles?.listItem, "flex")} key={text}>
       {Element ? (
         <>
@@ -31,6 +33,7 @@ function DropDownMenu({
         </>
       )}
     </li>
+    </>
   ));
 }
 
