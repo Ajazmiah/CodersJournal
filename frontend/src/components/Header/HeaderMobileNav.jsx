@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Styles from './HeaderMobileNav.module.css'
 import classNames from "classnames";
+import Border from "../Atoms/Border/Border";
 
 function HeaderMobileNav({
   dropDownItems,
@@ -11,6 +12,7 @@ function HeaderMobileNav({
   return (
     <ul className={Styles.mobileList}>
       {dropDownItems.map(({ Element, text, to }) => (
+        <>
         <li className={classNames(Styles.listItem, "flex merriweather-regular")} key={text}>
           {Element ? (
             <button onClick={handleClick}>{text}</button>
@@ -20,6 +22,8 @@ function HeaderMobileNav({
             </Link>
           )}
         </li>
+        <Border/>
+        </>
       ))}
     </ul>
   );
