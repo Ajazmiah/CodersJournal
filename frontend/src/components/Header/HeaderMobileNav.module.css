@@ -7,9 +7,11 @@
 }
 .listItem {
     justify-content: space-between;
+    cursor: pointer;
 }
 .listItem a {
     color: #000;
+    gap: .7em;
 }
 
 .listItem a:hover {

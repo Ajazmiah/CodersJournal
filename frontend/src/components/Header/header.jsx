@@ -118,6 +118,7 @@ function ResponsiveAppBar() {
                 <HeaderMobileNav
                   dropDownItems={[...pagesNavigation, ...userSettingMenu]}
                   handleClick={logoutHandler}
+                  handleShow={handleShowMenu}
                 />
               </VerticalModal>
             </Backdrop>
