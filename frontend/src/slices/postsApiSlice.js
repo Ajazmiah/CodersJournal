@@ -24,6 +24,12 @@ const postsApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    editPost: builder.mutation({
+      query: () => ({
+        url: `${POSTS_URL}/edit`,
+        method: 'POST'
+      })
+    }),
     getMorePostOnScroll: builder.mutation({
       query: () => ({
         url:`${POSTS_URL}/allPost`,
@@ -40,5 +46,5 @@ const postsApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { usePostsMutation, useSubmitPostMutation, useGetPostMutation, useGetMorePostOnScrollMutation , useDeletePostMutation} =
+export const { usePostsMutation, useSubmitPostMutation, useGetPostMutation, useGetMorePostOnScrollMutation , useDeletePostMutation, useEditPostMutation} =
   postsApi;

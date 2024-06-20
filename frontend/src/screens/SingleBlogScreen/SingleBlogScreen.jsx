@@ -7,7 +7,7 @@ import { useGetPostMutation } from "../../slices/postsApiSlice";
 import { toast } from "react-toastify";
 import { formatDate } from "../../utils";
 import AuthorBylineCard from "../../components/AuthorBylineCard/AuthorBylineCard";
-import { useDeletePostMutation } from "../../slices/postsApiSlice";
+import { useDeletePostMutation, useEditPostMutation } from "../../slices/postsApiSlice";
 import ModalRectangular from "../../components/Modal/ModalRectangular";
 import { backdropContext } from "../../context/backdropContext";
 import { useSelector } from "react-redux";
@@ -24,6 +24,7 @@ function SingleBlogScreen() {
   const [openModal, setOpenModal] = useState(false);
 
   const [deletePost] = useDeletePostMutation();
+  const [editPost] = useEditPostMutation();
   const navigate = useNavigate();
 
   const [post, setPost] = useState(null);
@@ -59,6 +60,10 @@ function SingleBlogScreen() {
     }
   };
 
+  const handleEditPost = () => {
+    navigate('/create')
+  }
+
   const handleCancel = (e) => {
     console.log(e.target.className);
     setOpenModal(false);
@@ -86,7 +91,10 @@ function SingleBlogScreen() {
               <p>{post._doc.summary}</p>
               <p>{formatDate(post?.createdAt)}</p>
               {post?._doc.authorId === userInfo?._id && (
-                <button onClick={() => setOpenModal(true)}>Delete</button>
+                <div>
+                  <button onClick={() => setOpenModal(true)}>Delete</button>
+                  <button onClick={() => setOpenModal(true)}>Edit Post</button>
+                </div>
               )}
               <AuthorBylineCard author={post.author} />
             </div>
