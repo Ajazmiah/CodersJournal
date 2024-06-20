@@ -51,12 +51,12 @@ const useNavigationItem = () => {
         },
       ]
 
-      const loggedInMobileMenu = {
-        Account: [...userSettingMenu],
-        menu: [...pageLoggedInNavMenu]
-      }
+    
+      
+    
 
       const pagesNavigation = userInfo?._id ? pageLoggedInNavMenu : pageLoggedOutNavMenu
+      const loggedInMobileMenu = userInfo?._id ? [...pageLoggedInNavMenu, ...userSettingMenu] : pagesNavigation
 
       return [userSettingMenu, pagesNavigation, userInfo, loggedInMobileMenu]
 

@@ -32,6 +32,8 @@ function ResponsiveAppBar() {
   // const [isBackdropOpen, setOpenBackdrop] = useContext(backdropContext);
   const [openNav, setOpenNav] = useState(false);
 
+
+
   //const [showMenu] = useBackdrop()
 
   const logoutHandler = async () => {
@@ -49,9 +51,7 @@ function ResponsiveAppBar() {
   const handleShowMenu = () => {
     setShowMenu((prev) => !prev);
   };
-  // useEffect(() => {
-  //   setOpenBackdrop(openNav);
-  // }, [openNav]);
+
 
   return (
     <header className={classNames(Styles.header)}>
@@ -117,7 +117,7 @@ function ResponsiveAppBar() {
             <Backdrop handleShow={handleShowMenu}>
               <VerticalModal>
                 <HeaderMobileNav
-                  dropDownItems={[...pagesNavigation, ...userSettingMenu]}
+                  dropDownItems={loggedInMobileMenu}
                   handleClick={logoutHandler}
                   handleShow={handleShowMenu}
                 />
