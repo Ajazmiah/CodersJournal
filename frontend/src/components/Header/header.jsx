@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../slices/usersApiSlice.js";
@@ -8,18 +8,14 @@ import Styles from "./Header.module.css";
 import DropDownMenu from "../DropDownMenu/DropDownmenu.jsx";
 import ProfileImage from "../ProfileImage/ProfileImage.jsx";
 import Logo from "../Logo/Logo.jsx";
-import { backdropContext } from "../../context/backdropContext.jsx";
 import useNavigationItem from "../../hooks/useNavigationItem.jsx";
 import VerticalModal from "../VerticalModal/verticalModal.jsx";
 import Backdrop from "../Backdrop/Backdrop.jsx";
 import classNames from "classnames";
-import { FaHamburger, FaSignOutAlt, FaBars } from "react-icons/fa";
-import { icons, getIcon } from "../Icon/index.jsx";
+import { FaBars } from "react-icons/fa";
 import useScreenSize from "../../hooks/useScreenSize.jsx";
 import HeaderMobileNav from "./HeaderMobileNav.jsx";
 import ResponsiveComponent from "../ResponsiveComponent/ResponsiveComponent.jsx";
-import { styled } from "@mui/material";
-import useBackdrop from "../../hooks/useBackdrop.jsx";
 
 /*==============================================================*/
 function ResponsiveAppBar() {
@@ -29,12 +25,7 @@ function ResponsiveAppBar() {
   const navigate = useNavigate();
   const [userSettingMenu, pagesNavigation, userInfo, loggedInMobileMenu] =
     useNavigationItem();
-  // const [isBackdropOpen, setOpenBackdrop] = useContext(backdropContext);
   const [openNav, setOpenNav] = useState(false);
-
-
-
-  //const [showMenu] = useBackdrop()
 
   const logoutHandler = async () => {
     try {
@@ -51,7 +42,6 @@ function ResponsiveAppBar() {
   const handleShowMenu = () => {
     setShowMenu((prev) => !prev);
   };
-
 
   return (
     <header className={classNames(Styles.header)}>
