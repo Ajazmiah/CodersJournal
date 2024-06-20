@@ -5,7 +5,8 @@ import {
   getBlogs,
   getPost,
   allPost,
-  deletePost
+  deletePost,
+  editPost
 } from "../controllers/blogController.js";
 import { protect } from "../middleware/authMIddleware.js";
 const router = express.Router();
@@ -17,6 +18,7 @@ router.route("/create").post(protect,[
   check('title', 'Title is required').notEmpty(),
   check('body', 'Body is required').notEmpty(),
 ],createPost).get(protect, getBlogs);
+router.post('/edit', editPost)
 router.post("/post" , getPost);
 router.post("/deletepost" , deletePost)
 

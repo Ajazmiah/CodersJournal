@@ -58,6 +58,7 @@ const getBlogs = asyncHandler(async (req, res, next) => {
 // SINGLE POST PAGE
 const getPost = asyncHandler(async (req, res, next) => {
   const post = await blogModel.findById(req.body.id);
+  console.log(post)
   const user = await User.findById(post.authorId).select("-password");
   
   const POST = {
@@ -73,4 +74,18 @@ const deletePost = asyncHandler(async (req, res, next) => {
   res.status(200).json(post);
 });
 
-export { createPost, getBlogs, getPost, allPost, deletePost };
+const editPost = asyncHandler(async (req, res, next) => {
+  const _id = req.body.id
+  console.log("HIIIII")
+
+  const post = await blogModel.findById("665936904d9a366b13e68ec1");
+
+  if(post)
+  res.status(200).json(post)
+
+  res.status(404).send("Page Doesnt exist")
+
+
+})
+
+export { createPost, getBlogs, getPost, allPost, deletePost, editPost };
