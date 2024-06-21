@@ -18,7 +18,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Stack } from "@mui/material";
 import Logo from "../Logo/Logo.jsx";
 import Backdrop from "../Backdrop/Backdrop.jsx";
-import { backdropContext } from "../../context/backdropContext.jsx";
 import Styles from "./VerticalModal.module.css";
 import classNames from "classnames";
 

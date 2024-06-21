@@ -18,7 +18,6 @@ import { Provider } from "react-redux";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import UpdateAccountScreen from "./screens/UpdateAccountScreen/UpdateAccountScreen.jsx";
 import SingleBlogScreen from "./screens/SingleBlogScreen/SingleBlogScreen.jsx";
-import BackdropContext from './context/backdropContext.jsx';
 import NotFoundPage from './components/PageNotFound/PageNotFound.jsx';
 
 
@@ -48,9 +47,9 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <React.StrictMode>
-     <BackdropContext>
+   
      <RouterProvider router={router} />
-     </BackdropContext>
+   
     </React.StrictMode>
   </Provider>
 );
