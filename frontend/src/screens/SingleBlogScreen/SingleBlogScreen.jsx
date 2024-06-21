@@ -80,25 +80,21 @@ function SingleBlogScreen() {
     setModalContentType(handleType);
   };
 
-  const modalContent = () => {
-    if (modalContentType === "delete")
-      return (
-        <>
-          <p>Are you sure you want to delete this post?</p>
-
-          <button onClick={handleApproveDeletion}>Confirm</button>
-        </>
-      );
-    return (
-      <BlogCreationScreen/>
-    )
-  };
+  const modalContent = modalContentType === "delete" ? (
+    <>
+      <p>Are you sure you want to delete this post?</p>
+      <button onClick={handleApproveDeletion}>Confirm</button>
+    </>
+  ) : (
+    <BlogCreationScreen />
+  );
+  
 
   return (
     <div className="space-top-5">
       {openModal && (
-        <ModalRectangular handleCancel={handleCancel}>
-         {modalContent()}
+        <ModalRectangular handleCancel={handleCancel} handleShow={() => setOpenModal(false)}>
+         {modalContent}
         </ModalRectangular>
       )}
 
