@@ -5,15 +5,18 @@ import styles from './Modal.module.css'
 import { backdropContext } from "../../context/backdropContext";
 import Backdrop from "../Backdrop/Backdrop";
 
-const ModalRectangular = ({ children }) => {
+const ModalRectangular = ({ children, handleCancel }) => {
 
 
     return (
   
-      <div
+      <Backdrop>
+        <div
         className={styles.rectangularModal}>
         {children}
+        <button onClick={handleCancel}>Cancel</button>
       </div>
+      </Backdrop>
 
   );
 };
