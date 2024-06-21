@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ReactHtmlParser from "html-react-parser";
 import DOMPurify from "dompurify";
 import { useParams, useNavigate } from "react-router-dom";
@@ -9,7 +9,6 @@ import { formatDate } from "../../utils";
 import AuthorBylineCard from "../../components/AuthorBylineCard/AuthorBylineCard";
 import { useDeletePostMutation } from "../../slices/postsApiSlice";
 import ModalRectangular from "../../components/Modal/ModalRectangular";
-import { backdropContext } from "../../context/backdropContext";
 import { useSelector } from "react-redux";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import BlogCreationScreen from "../BlogCreationScreen/BlogCreationScreen";
@@ -19,10 +18,7 @@ function SingleBlogScreen() {
   const { id } = useParams();
   const [getPost] = useGetPostMutation();
 
-  const [isBackdropOpen, setOpenBackdrop] = useContext(backdropContext);
   const { userInfo } = useSelector((state) => state.auth);
-
-  const [openModal, setOpenModal] = useState(false);
 
   const [modalContentType, setModalContentType] = useState("");
 
@@ -42,7 +38,6 @@ function SingleBlogScreen() {
       try {
         const post = await getPost({ id }).unwrap();
         setPost(post);
-        console.log("SINGLE POST", post);
       } catch (err) {
         toast.error("Something went wrong, please try again!");
       }
@@ -52,8 +47,6 @@ function SingleBlogScreen() {
   }, [getPost, id]);
 
   const handleApproveDeletion = async () => {
-    setOpenModal(false);
-
     try {
       await deletePost({ id }).unwrap();
       toast.success("Post is deleted");
@@ -61,10 +54,6 @@ function SingleBlogScreen() {
     } catch (err) {
       toast.error(err);
     }
-  };
-
-  const handleEditPost = () => {
-    navigate("/create");
   };
 
   const handleModal = (handleType) => {
