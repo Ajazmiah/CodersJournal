@@ -16,6 +16,7 @@ import { FaBars } from "react-icons/fa";
 import useScreenSize from "../../hooks/useScreenSize.jsx";
 import HeaderMobileNav from "./HeaderMobileNav.jsx";
 import ResponsiveComponent from "../ResponsiveComponent/ResponsiveComponent.jsx";
+import { useBackdrop } from "../Backdrop/Backdrop.jsx";
 
 /*==============================================================*/
 function ResponsiveAppBar() {
@@ -25,7 +26,8 @@ function ResponsiveAppBar() {
   const navigate = useNavigate();
   const [userSettingMenu, pagesNavigation, userInfo, loggedInMobileMenu] =
     useNavigationItem();
-  const [openNav, setOpenNav] = useState(false);
+
+  const { backdrop, setBackdrop } = useBackdrop();
 
   const logoutHandler = async () => {
     try {
@@ -101,15 +103,15 @@ function ResponsiveAppBar() {
 
         <ResponsiveComponent renderOn={["tablet", "mobile"]}>
           <div className={Styles.navRight}>
-            <FaBars onClick={() => setShowMenu((prev) => !prev)} />
+            <FaBars onClick={() => setBackdrop((prev) => !prev)} />
           </div>
-          {showMenu ? (
-            <Backdrop handleShow={handleShowMenu}>
+          {backdrop ? (
+            <Backdrop handleBackdrop={() => setBackdrop(false)}>
               <VerticalModal>
                 <HeaderMobileNav
                   dropDownItems={loggedInMobileMenu}
                   handleClick={logoutHandler}
-                  handleShow={handleShowMenu}
+                  handleShow={() => setBackdrop(false)}
                 />
               </VerticalModal>
             </Backdrop>
