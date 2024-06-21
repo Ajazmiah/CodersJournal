@@ -3,12 +3,12 @@ import styles from "./Modal.module.css";
 import { backdropContext } from "../../context/backdropContext";
 import Backdrop from "../Backdrop/Backdrop";
 
-const ModalRectangular = ({ children, handleCancel,handleShow }) => {
+const ModalRectangular = ({ children, handleCancel,handleBackdrop }) => {
   return (
-    <Backdrop handleShow={handleShow}>
+    <Backdrop handleBackdrop={handleBackdrop}>
       <div className={styles.rectangularModal}  onClick={(e) => e.stopPropagation()}>
         {children}
-        <button onClick={handleCancel}>Cancel</button>
+        <button onClick={handleBackdrop}>Cancel</button>
       </div>
     </Backdrop>
   );

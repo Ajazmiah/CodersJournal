@@ -7,16 +7,13 @@ import { useGetPostMutation } from "../../slices/postsApiSlice";
 import { toast } from "react-toastify";
 import { formatDate } from "../../utils";
 import AuthorBylineCard from "../../components/AuthorBylineCard/AuthorBylineCard";
-import {
-  useDeletePostMutation,
-  useEditPostMutation,
-} from "../../slices/postsApiSlice";
+import { useDeletePostMutation } from "../../slices/postsApiSlice";
 import ModalRectangular from "../../components/Modal/ModalRectangular";
 import { backdropContext } from "../../context/backdropContext";
 import { useSelector } from "react-redux";
-import Backdrop from "../../components/Backdrop/Backdrop";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import BlogCreationScreen from "../BlogCreationScreen/BlogCreationScreen";
+import { useBackdrop } from "../../components/Backdrop/Backdrop";
 
 function SingleBlogScreen() {
   const { id } = useParams();
@@ -30,7 +27,6 @@ function SingleBlogScreen() {
   const [modalContentType, setModalContentType] = useState("");
 
   const [deletePost] = useDeletePostMutation();
-  const [editPost] = useEditPostMutation();
   const navigate = useNavigate();
 
   const [post, setPost] = useState(null);
@@ -38,6 +34,8 @@ function SingleBlogScreen() {
   const sanitizedHTML = DOMPurify.sanitize(post?._doc?.body);
 
   const POST = ReactHtmlParser(sanitizedHTML);
+
+  const { backdrop, setBackdrop } = useBackdrop();
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -69,32 +67,28 @@ function SingleBlogScreen() {
     navigate("/create");
   };
 
-  const handleCancel = (e) => {
-    console.log(e.target.className);
-    setOpenModal(false);
-  };
-
   const handleModal = (handleType) => {
-    setOpenModal(true)
-
+    setBackdrop((prev) => !prev);
     setModalContentType(handleType);
   };
 
-  const modalContent = modalContentType === "delete" ? (
-    <>
-      <p>Are you sure you want to delete this post?</p>
-      <button onClick={handleApproveDeletion}>Confirm</button>
-    </>
-  ) : (
-    <BlogCreationScreen />
-  );
-  
+  const modalContent =
+    modalContentType === "delete" ? (
+      <>
+        <p>Are you sure you want to delete this post?</p>
+        <button onClick={handleApproveDeletion}>Confirm</button>
+      </>
+    ) : (
+      <>
+        <BlogCreationScreen edit />
+      </>
+    );
 
   return (
     <div className="space-top-5">
-      {openModal && (
-        <ModalRectangular handleCancel={handleCancel} handleShow={() => setOpenModal(false)}>
-         {modalContent}
+      {backdrop && (
+        <ModalRectangular handleBackdrop={() => setBackdrop((prev) => !prev)}>
+          {modalContent}
         </ModalRectangular>
       )}
 

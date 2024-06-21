@@ -6,9 +6,14 @@ import { toast } from "react-toastify";
 import "react-quill/dist/quill.snow.css";
 import QuillRichText from "../../components/RichText/RichText";
 
-function BlogCreationScreen(editTitle = "", editSummary = "", quillValue = "") {
-  const [title, setTitle] = useState(editTitle="");
-  const [summary, setSummary] = useState(editSummary="");
+function BlogCreationScreen(
+  editTitle = "",
+  editSummary = "",
+  quillValue = "",
+  edit
+) {
+  const [title, setTitle] = useState((editTitle = ""));
+  const [summary, setSummary] = useState((editSummary = ""));
   const [QuillValue, setQuillValue] = React.useState(quillValue);
 
   const [submitPost] = useSubmitPostMutation();
@@ -71,6 +76,7 @@ function BlogCreationScreen(editTitle = "", editSummary = "", quillValue = "") {
       >
         Post
       </button>
+      {edit && <button onClick={postSubmitHandler}>Cancel</button>}
     </div>
   );
 }
