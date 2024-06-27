@@ -73,7 +73,6 @@ function SingleBlogScreen() {
     />
   );
 
-  console.log("___POST___", post);
 
   return (
     <div className="space-top-5">

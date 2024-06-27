@@ -7,17 +7,9 @@ import "react-quill/dist/quill.snow.css";
 import QuillRichText from "../../components/RichText/RichText";
 
 function BlogCreationScreen({ editTitle, editSummary, quillValue, edit }) {
-  const [title, setTitle] = useState(editTitle || "");
-  const [summary, setSummary] = useState(editSummary || "");
-  const [QuillValue, setQuillValue] = React.useState(quillValue || null);
-
   const [submitPost] = useSubmitPostMutation();
 
-  const titleRef = useRef();
-
-  useEffect(() => titleRef.current.focus(), []);
-
-  const postSubmitHandler = async () => {
+  const postSubmitHandler = async (QuillValue) => {
     try {
       let data = {
         title,
@@ -28,53 +20,15 @@ function BlogCreationScreen({ editTitle, editSummary, quillValue, edit }) {
     } catch (err) {
       toast.error(err);
     }
-
-    setTitle("");
-    setSummary("");
-    setQuillValue("");
   };
 
   return (
-    <div className={classnames("container pageContainer", Styles.richText)}>
-      <div>
-        <input
-          required
-          placeholder="Title.."
-          ref={titleRef}
-          id="title"
-          className={Styles.input}
-          name="title"
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
-
-      <div>
-        <input
-          required
-          className={Styles.input}
-          id="summary"
-          placeholder="Summary.."
-          name="summary"
-          type="text"
-          value={summary}
-          onChange={(e) => setSummary(e.target.value)}
-          autocomplete="shipping address-line1"
-        />
-      </div>
-      <QuillRichText
-        setQuillValue={setQuillValue}
-        QuillValue={quillValue || QuillValue}
-      />
-      <button
-        variant="contained"
-        sx={{ marginTop: "50px" }}
-        onClick={postSubmitHandler}
-      >
-        Post
-      </button>
-    </div>
+    <QuillRichText
+      postSubmitHandler={postSubmitHandler}
+      editTitle={editTitle}
+      editSummary={editSummary}
+      editQuillValue={quillValue}
+    />
   );
 }
 
