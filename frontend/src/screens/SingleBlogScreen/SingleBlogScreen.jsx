@@ -67,7 +67,6 @@ function SingleBlogScreen() {
   const EDIT_BLOG = post && modalContentType !== "delete" && (
     <BlogCreationScreen
       edit
-      post={post}
       editTitle={post._doc.title}
       editSummary={post._doc.summary}
       quillValue={post?._doc?.body}

@@ -6,20 +6,12 @@ import { toast } from "react-toastify";
 import "react-quill/dist/quill.snow.css";
 import QuillRichText from "../../components/RichText/RichText";
 
-function BlogCreationScreen({
-  editTitle,
-  editSummary,
-  quillValue,
-  post,
-  edit,
-}) {
+function BlogCreationScreen({ editTitle, editSummary, quillValue, edit }) {
   const [title, setTitle] = useState(editTitle || "");
   const [summary, setSummary] = useState(editSummary || "");
   const [QuillValue, setQuillValue] = React.useState(quillValue || null);
 
   const [submitPost] = useSubmitPostMutation();
-
-  console.log("AAAA", post);
 
   const titleRef = useRef();
 
@@ -71,7 +63,10 @@ function BlogCreationScreen({
           autocomplete="shipping address-line1"
         />
       </div>
-      <QuillRichText setQuillValue={setQuillValue} QuillValue={quillValue || QuillValue} />
+      <QuillRichText
+        setQuillValue={setQuillValue}
+        QuillValue={quillValue || QuillValue}
+      />
       <button
         variant="contained"
         sx={{ marginTop: "50px" }}
@@ -79,7 +74,6 @@ function BlogCreationScreen({
       >
         Post
       </button>
-      {edit && <button onClick={postSubmitHandler}>Cancel</button>}
     </div>
   );
 }
