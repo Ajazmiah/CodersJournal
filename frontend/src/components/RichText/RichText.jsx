@@ -4,7 +4,7 @@ import "react-quill/dist/quill.snow.css";
 import Styles from './RichText.module.css'
 import classnames from "classnames";
 
-function QuillRichText({ QuillValue, setQuillValue }) {
+function QuillRichText({ QuillValue, setQuillValue, quilValue }) {
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5,6,false] }],
@@ -35,7 +35,7 @@ function QuillRichText({ QuillValue, setQuillValue }) {
         theme="snow"
         modules={modules}
         formats={formats}
-        value={QuillValue}
+        value={quilValue || QuillValue}
         onChange={(QuillValue) => setQuillValue(QuillValue)}
         placeholder="Start Writing.."
       ></ReactQuill>

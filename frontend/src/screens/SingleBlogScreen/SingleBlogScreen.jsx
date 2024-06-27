@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import ReactHtmlParser from "html-react-parser";
 import DOMPurify from "dompurify";
 import { useParams, useNavigate } from "react-router-dom";
-
-import { useGetPostMutation } from "../../slices/postsApiSlice";
+import {
+  useGetPostMutation,
+  useDeletePostMutation,
+} from "../../slices/postsApiSlice";
 import { toast } from "react-toastify";
 import { formatDate } from "../../utils";
 import AuthorBylineCard from "../../components/AuthorBylineCard/AuthorBylineCard";
-import { useDeletePostMutation } from "../../slices/postsApiSlice";
 import ModalRectangular from "../../components/Modal/ModalRectangular";
 import { useSelector } from "react-redux";
 import PageHeader from "../../components/PageHeader/PageHeader";
@@ -17,27 +18,22 @@ import { useBackdrop } from "../../components/Backdrop/Backdrop";
 function SingleBlogScreen() {
   const { id } = useParams();
   const [getPost] = useGetPostMutation();
-
   const { userInfo } = useSelector((state) => state.auth);
-
   const [modalContentType, setModalContentType] = useState("");
-
   const [deletePost] = useDeletePostMutation();
   const navigate = useNavigate();
-
   const [post, setPost] = useState(null);
+  const { backdrop, setBackdrop } = useBackdrop();
 
   const sanitizedHTML = DOMPurify.sanitize(post?._doc?.body);
-
   const POST = ReactHtmlParser(sanitizedHTML);
-
-  const { backdrop, setBackdrop } = useBackdrop();
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const post = await getPost({ id }).unwrap();
-        setPost(post);
+        const fetchedPost = await getPost({ id }).unwrap();
+        console.log("Fetched post:", fetchedPost); // Log the post data
+        setPost(fetchedPost);
       } catch (err) {
         toast.error("Something went wrong, please try again!");
       }
@@ -61,23 +57,31 @@ function SingleBlogScreen() {
     setModalContentType(handleType);
   };
 
-  const modalContent =
-    modalContentType === "delete" ? (
-      <>
-        <p>Are you sure you want to delete this post?</p>
-        <button onClick={handleApproveDeletion}>Confirm</button>
-      </>
-    ) : (
-      <>
-        <BlogCreationScreen edit />
-      </>
-    );
+  const modalContent = modalContentType === "delete" && (
+    <>
+      <p>Are you sure you want to delete this post?</p>
+      <button onClick={handleApproveDeletion}>Confirm</button>
+    </>
+  );
+
+  const EDIT_BLOG = post && modalContentType !== "delete" && (
+    <BlogCreationScreen
+      edit
+      post={post}
+      editTitle={post._doc.title}
+      editSummary={post._doc.summary}
+      quillValue={post?._doc?.body}
+    />
+  );
+
+  console.log("___POST___", post);
 
   return (
     <div className="space-top-5">
       {backdrop && (
         <ModalRectangular handleBackdrop={() => setBackdrop((prev) => !prev)}>
           {modalContent}
+          {EDIT_BLOG}
         </ModalRectangular>
       )}
 
