@@ -16,7 +16,6 @@ function BlogCreationScreen({ editTitle, editSummary, quillValue, edit }) {
         summary,
         body: QuillValue,
       };
-      console.log("_____DATA____", data)
       const res = await submitPost(data).unwrap();
     } catch (err) {
       toast.error(err);
