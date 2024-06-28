@@ -9,13 +9,14 @@ import QuillRichText from "../../components/RichText/RichText";
 function BlogCreationScreen({ editTitle, editSummary, quillValue, edit }) {
   const [submitPost] = useSubmitPostMutation();
 
-  const postSubmitHandler = async (QuillValue) => {
+  const postSubmitHandler = async (title, summary, QuillValue) => {
     try {
       let data = {
         title,
         summary,
         body: QuillValue,
       };
+      console.log("_____DATA____", data)
       const res = await submitPost(data).unwrap();
     } catch (err) {
       toast.error(err);
@@ -25,9 +26,6 @@ function BlogCreationScreen({ editTitle, editSummary, quillValue, edit }) {
   return (
     <QuillRichText
       postSubmitHandler={postSubmitHandler}
-      editTitle={editTitle}
-      editSummary={editSummary}
-      editQuillValue={quillValue}
     />
   );
 }

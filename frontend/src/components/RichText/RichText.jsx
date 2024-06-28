@@ -3,13 +3,14 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Styles from "./RichText.module.css";
 import classnames from "classnames";
+import { useBackdrop } from "../Backdrop/Backdrop";
+import { sanitizeContent } from "../../utils";
 
 function QuillRichText({
   editQuillValue,
   editTitle,
   editSummary,
   postSubmitHandler,
-  setBackdrop,
   ...rest
 }) {
   const modules = {
@@ -54,12 +55,13 @@ function QuillRichText({
   const [title, setTitle] = useState(editTitle || "");
   const [summary, setSummary] = useState(editSummary || "");
   const [QuillValue, setQuillValue] = React.useState(editQuillValue || null);
+  const { backdrop, setBackdrop } = useBackdrop();
 
   useEffect(() => titleRef.current.focus(), []);
 
   const handleClick = () => {
     postSubmitHandler(title, summary, QuillValue);
-    setBackdrop((prev) => !prev);
+    setBackdrop(false);
   };
 
   return (

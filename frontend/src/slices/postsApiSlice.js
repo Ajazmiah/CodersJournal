@@ -25,9 +25,10 @@ const postsApi = apiSlice.injectEndpoints({
       }),
     }),
     editPost: builder.mutation({
-      query: () => ({
+      query: (data) => ({
         url: `${POSTS_URL}/edit`,
-        method: 'POST'
+        method: 'POST',
+        body: data
       })
     }),
     getMorePostOnScroll: builder.mutation({

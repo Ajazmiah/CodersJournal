@@ -7,7 +7,7 @@ import {
   useDeletePostMutation,
 } from "../../slices/postsApiSlice";
 import { toast } from "react-toastify";
-import { formatDate } from "../../utils";
+import { formatDate, sanitizeContent } from "../../utils";
 import AuthorBylineCard from "../../components/AuthorBylineCard/AuthorBylineCard";
 import ModalRectangular from "../../components/Modal/ModalRectangular";
 import { useSelector } from "react-redux";
@@ -25,7 +25,7 @@ function SingleBlogScreen() {
   const [post, setPost] = useState(null);
   const { backdrop, setBackdrop } = useBackdrop();
 
-  const sanitizedHTML = DOMPurify.sanitize(post?._doc?.body);
+  const sanitizedHTML = sanitizeContent(post?._doc?.body)
   const POST = ReactHtmlParser(sanitizedHTML);
 
   useEffect(() => {

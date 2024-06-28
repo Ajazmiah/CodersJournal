@@ -19,7 +19,11 @@ const createPost = asyncHandler(async (req, res, next) => {
     
   }
 
+  
+  console.log("TITLE", req.body)
+
   const { title, body, summary } = req.body;
+
 
   const decoded = verifytoken(req);
   const user = await User.findById(decoded.userId).select("-password");
@@ -58,7 +62,6 @@ const getBlogs = asyncHandler(async (req, res, next) => {
 // SINGLE POST PAGE
 const getPost = asyncHandler(async (req, res, next) => {
   const post = await blogModel.findById(req.body.id);
-  console.log(post)
   const user = await User.findById(post.authorId).select("-password");
   
   const POST = {
@@ -75,12 +78,12 @@ const deletePost = asyncHandler(async (req, res, next) => {
 });
 
 const editPost = asyncHandler(async (req, res, next) => {
-console.log("___DATA___", req.body )
+
 
   const post = await blogModel.findById("665936904d9a366b13e68ec1");
 
-  if(post)
-  res.status(200).json(post)
+  // if(post)
+  res.status(200)
 
   res.status(404).send("Page Doesnt exist")
 
