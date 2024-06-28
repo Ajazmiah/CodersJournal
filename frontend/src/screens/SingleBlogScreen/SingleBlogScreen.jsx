@@ -32,7 +32,6 @@ function SingleBlogScreen() {
     const fetchPost = async () => {
       try {
         const fetchedPost = await getPost({ id }).unwrap();
-        console.log("Fetched post:", fetchedPost); // Log the post data
         setPost(fetchedPost);
       } catch (err) {
         toast.error("Something went wrong, please try again!");
@@ -68,7 +67,6 @@ function SingleBlogScreen() {
 
   const EDIT_BLOG = post && modalContentType !== "delete" && (
     <BlogEdit
-      edit
       editTitle={post._doc.title}
       editSummary={post._doc.summary}
       quillValue={post?._doc?.body}

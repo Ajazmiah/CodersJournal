@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { useEditPostMutation } from '../../slices/postsApiSlice';
 import QuillRichText from '../RichText/RichText';
+import { toast } from "react-toastify";
 
 function BlogEdit({ editTitle, editSummary, quillValue, id , ...rest}) {
 
@@ -21,7 +22,7 @@ function BlogEdit({ editTitle, editSummary, quillValue, id , ...rest}) {
         console.log("RESS", res)
         setEdit(true)
       } catch (err) {
-       // toast.error(err);
+        toast.error(err);
       }
     };
 
@@ -32,7 +33,8 @@ function BlogEdit({ editTitle, editSummary, quillValue, id , ...rest}) {
         editTitle={editTitle}
         editSummary={editSummary}
         editQuillValue={quillValue}
-        {...rest}
+        id={id}
+        edit
       />
     );
   }

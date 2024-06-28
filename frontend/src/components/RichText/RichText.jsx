@@ -50,7 +50,7 @@ function QuillRichText({
 
   const titleRef = useRef();
 
-  const { id = null, edit = null } = rest;
+
 
   const [title, setTitle] = useState(editTitle || "");
   const [summary, setSummary] = useState(editSummary || "");
