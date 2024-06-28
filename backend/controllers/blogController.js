@@ -14,16 +14,11 @@ const createPost = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-   // res.status(400).json({ errors: errors.array()});
-    throw new Error(errors.errors)
-    
+    // res.status(400).json({ errors: errors.array()});
+    throw new Error(errors.errors);
   }
 
-  
-  console.log("TITLE", req.body)
-
   const { title, body, summary } = req.body;
-
 
   const decoded = verifytoken(req);
   const user = await User.findById(decoded.userId).select("-password");
@@ -43,18 +38,14 @@ const createPost = asyncHandler(async (req, res, next) => {
   }
 });
 
-
 const getBlogs = asyncHandler(async (req, res, next) => {
   const decoded = verifytoken(req);
   const user = await User.findById(decoded.userId).select("-password");
 
-
-
-  const blogs = await blogModel.find({ authorId: user._id}).populate({
+  const blogs = await blogModel.find({ authorId: user._id }).populate({
     path: "authorId",
     select: ["-password"],
   });
-
 
   res.status(200).json(blogs);
 });
@@ -63,11 +54,11 @@ const getBlogs = asyncHandler(async (req, res, next) => {
 const getPost = asyncHandler(async (req, res, next) => {
   const post = await blogModel.findById(req.body.id);
   const user = await User.findById(post.authorId).select("-password");
-  
+
   const POST = {
     ...post,
-    author: user
-  }
+    author: user,
+  };
   res.status(200).json(POST);
 });
 
@@ -78,16 +69,22 @@ const deletePost = asyncHandler(async (req, res, next) => {
 });
 
 const editPost = asyncHandler(async (req, res, next) => {
+  const { id, title, summary, body } = req.body;
 
+  const post = await blogModel.findById(id);
 
-  const post = await blogModel.findById("665936904d9a366b13e68ec1");
+  if (post) {
+    post.title = title;
+    post.summary = summary;
+    post.body = body;
 
-  // if(post)
-  res.status(200)
+    const updatedPost = await post.save();
 
-  res.status(404).send("Page Doesnt exist")
-
-
-})
+    res.status(200).json(updatedPost);
+  } else {
+    res.status(404);
+    throw new Error("Something went wrong - Unable to edit post");
+  }
+});
 
 export { createPost, getBlogs, getPost, allPost, deletePost, editPost };

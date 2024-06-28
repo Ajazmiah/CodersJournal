@@ -63,7 +63,6 @@ function SingleBlogScreen() {
     </>
   );
 
-  console.log("SINGLE POST", post)
 
   const EDIT_BLOG = post && modalContentType !== "delete" && (
     <BlogEdit
@@ -71,17 +70,18 @@ function SingleBlogScreen() {
       editSummary={post._doc.summary}
       quillValue={post?._doc?.body}
       id={post._doc._id}
+      handleBackdrop={() => setBackdrop((prev) => !prev)} backdrop={backdrop}
     />
   );
 
   return (
     <div className="space-top-5">
-      {backdrop && (
-        <ModalRectangular handleBackdrop={() => setBackdrop((prev) => !prev)}>
+      {backdrop ? (
+        <ModalRectangular handleBackdrop={() => setBackdrop((prev) => !prev)} backdrop={backdrop}>
           {modalContent}
           {EDIT_BLOG}
         </ModalRectangular>
-      )}
+      ): null}
 
       {post && (
         <>

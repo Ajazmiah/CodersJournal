@@ -11,6 +11,7 @@ function QuillRichText({
   editTitle,
   editSummary,
   postSubmitHandler,
+  handleBackdrop,
   ...rest
 }) {
   const modules = {
@@ -55,13 +56,15 @@ function QuillRichText({
   const [title, setTitle] = useState(editTitle || "");
   const [summary, setSummary] = useState(editSummary || "");
   const [QuillValue, setQuillValue] = React.useState(editQuillValue || null);
-  const { backdrop, setBackdrop } = useBackdrop();
+  
 
   useEffect(() => titleRef.current.focus(), []);
 
   const handleClick = () => {
+    handleBackdrop();
     postSubmitHandler(title, summary, QuillValue);
-    setBackdrop(false);
+
+    
   };
 
   return (

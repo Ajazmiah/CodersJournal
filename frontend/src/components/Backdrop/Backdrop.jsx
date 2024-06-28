@@ -5,14 +5,15 @@ import ReactDom from "react-dom";
 export const useBackdrop = () => {
   const [backdrop, setBackdrop] = useState(false);
 
-  const handleBackdrop = () => {
-    setBackdrop((prev) => !prev);
-  };
+  // const handleBackdrop = () => {
+  //   alert("CALLED")
+  //   setBackdrop((prev) => !prev);
+  // };
 
-  return { backdrop, setBackdrop, handleBackdrop };
+  return { backdrop, setBackdrop };
 };
 
-function Backdrop({ children, handleBackdrop }) {
+function Backdrop({ children, handleBackdrop, backdrop }) {
   return ReactDom.createPortal(
     <div className={styles.backdrop} onClick={handleBackdrop}>
       {children}

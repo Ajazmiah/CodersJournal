@@ -1,42 +1,48 @@
-import React, {useState} from 'react'
-import { useEditPostMutation } from '../../slices/postsApiSlice';
-import QuillRichText from '../RichText/RichText';
+import React, { useState } from "react";
+import { useEditPostMutation } from "../../slices/postsApiSlice";
+import QuillRichText from "../RichText/RichText";
 import { toast } from "react-toastify";
 
-function BlogEdit({ editTitle, editSummary, quillValue, id , ...rest}) {
+function BlogEdit({
+  editTitle,
+  editSummary,
+  quillValue,
+  id,
+  handleBackdrop,
+  ...rest
+}) {
 
-  const [edit, setEdit] = useState(false)
 
-  
-    const postSubmitHandler = async (title, summary, QuillValue) => {
+  const [editPost] = useEditPostMutation()
 
-        console.log("NEW", newTitle)
-      try {
-        let data = {
-          title,
-          summary,
-          body: QuillValue,
-          id,
-        };
-        const res = await useEditPostMutation(data).unwrap();
-        console.log("RESS", res)
-        setEdit(true)
-      } catch (err) {
-        toast.error(err);
-      }
-    };
 
-  
-    return (
-      <QuillRichText
-        postSubmitHandler={postSubmitHandler}
-        editTitle={editTitle}
-        editSummary={editSummary}
-        editQuillValue={quillValue}
-        id={id}
-        edit
-      />
-    );
-  }
+  const postSubmitHandler = async (title, summary, QuillValue) => {
+    try {
+      let data = {
+        title,
+        summary,
+        body: QuillValue,
+        id,
+      };
+      
+      const res = await editPost(data).unwrap();
+      console.log('res',res)
+    } catch (err) {
+      toast.error(err);
+    }
+  };
 
-export default BlogEdit
+  return (
+    <QuillRichText
+      postSubmitHandler={postSubmitHandler}
+      editTitle={editTitle}
+      editSummary={editSummary}
+      editQuillValue={quillValue}
+      handleBackdrop={handleBackdrop}
+      id={id}
+      edit
+    />
+  );
+}
+
+export default BlogEdit;
