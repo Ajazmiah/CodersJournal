@@ -24,9 +24,12 @@ function BlogEdit({
         body: QuillValue,
         id,
       };
-      
+
       const res = await editPost(data).unwrap();
-      console.log('res',res)
+      if(res) {
+        toast.success("Post Updated")
+        
+      }
     } catch (err) {
       toast.error(err);
     }
