@@ -8,7 +8,9 @@ function QuillRichText({
   editQuillValue,
   editTitle,
   editSummary,
-  postSubmitHandler
+  postSubmitHandler,
+  setBackdrop,
+  ...rest
 }) {
   const modules = {
     toolbar: [
@@ -45,7 +47,9 @@ function QuillRichText({
     "video",
   ];
 
-  const titleRef = useRef()
+  const titleRef = useRef();
+
+  const { id = null, edit = null } = rest;
 
   const [title, setTitle] = useState(editTitle || "");
   const [summary, setSummary] = useState(editSummary || "");
@@ -53,14 +57,10 @@ function QuillRichText({
 
   useEffect(() => titleRef.current.focus(), []);
 
-
   const handleClick = () => {
-    postSubmitHandler(QuillValue)
-
-    setTitle("");
-    setSummary("");
-    setQuillValue("");
-  }
+    postSubmitHandler(title, summary, QuillValue);
+    setBackdrop((prev) => !prev);
+  };
 
   return (
     <>
@@ -97,7 +97,7 @@ function QuillRichText({
           theme="snow"
           modules={modules}
           formats={formats}
-          value={editQuillValue || QuillValue}
+          value={QuillValue}
           onChange={(QuillValue) => setQuillValue(QuillValue)}
           placeholder="Start Writing.."
         ></ReactQuill>

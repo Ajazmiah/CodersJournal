@@ -75,8 +75,7 @@ const deletePost = asyncHandler(async (req, res, next) => {
 });
 
 const editPost = asyncHandler(async (req, res, next) => {
-  const _id = req.body.id
-  console.log("HIIIII")
+console.log("___DATA___", req.body )
 
   const post = await blogModel.findById("665936904d9a366b13e68ec1");
 

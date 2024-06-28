@@ -12,8 +12,8 @@ import AuthorBylineCard from "../../components/AuthorBylineCard/AuthorBylineCard
 import ModalRectangular from "../../components/Modal/ModalRectangular";
 import { useSelector } from "react-redux";
 import PageHeader from "../../components/PageHeader/PageHeader";
-import BlogCreationScreen from "../BlogCreationScreen/BlogCreationScreen";
 import { useBackdrop } from "../../components/Backdrop/Backdrop";
+import BlogEdit from "../../components/BlogEdit/BlogEdit";
 
 function SingleBlogScreen() {
   const { id } = useParams();
@@ -64,15 +64,17 @@ function SingleBlogScreen() {
     </>
   );
 
+  console.log("SINGLE POST", post)
+
   const EDIT_BLOG = post && modalContentType !== "delete" && (
-    <BlogCreationScreen
+    <BlogEdit
       edit
       editTitle={post._doc.title}
       editSummary={post._doc.summary}
       quillValue={post?._doc?.body}
+      id={post._doc._id}
     />
   );
-
 
   return (
     <div className="space-top-5">
