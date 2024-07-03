@@ -9,6 +9,7 @@ function BlogEdit({
   quillValue,
   id,
   handleBackdrop,
+  handlePostUpdated,
   ...rest
 }) {
 
@@ -27,7 +28,9 @@ function BlogEdit({
 
       const res = await editPost(data).unwrap();
       if(res) {
+        handlePostUpdated()
         toast.success("Post Updated")
+       
         
       }
     } catch (err) {

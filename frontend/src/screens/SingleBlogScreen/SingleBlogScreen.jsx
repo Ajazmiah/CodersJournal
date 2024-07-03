@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ReactHtmlParser from "html-react-parser";
-import DOMPurify from "dompurify";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   useGetPostMutation,
@@ -24,8 +23,9 @@ function SingleBlogScreen() {
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
   const { backdrop, setBackdrop } = useBackdrop();
+  const [postUpdated, setPostUpdated] = useState(false);
 
-  const sanitizedHTML = sanitizeContent(post?._doc?.body)
+  const sanitizedHTML = sanitizeContent(post?._doc?.body);
   const POST = ReactHtmlParser(sanitizedHTML);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ function SingleBlogScreen() {
     };
 
     fetchPost();
-  }, [getPost, id]);
+  }, [getPost, id, postUpdated]);
 
   const handleApproveDeletion = async () => {
     try {
@@ -56,6 +56,8 @@ function SingleBlogScreen() {
     setModalContentType(handleType);
   };
 
+  const handlePostUpdated = () => setPostUpdated(true);
+
   const modalContent = modalContentType === "delete" && (
     <>
       <p>Are you sure you want to delete this post?</p>
@@ -63,25 +65,29 @@ function SingleBlogScreen() {
     </>
   );
 
-
   const EDIT_BLOG = post && modalContentType !== "delete" && (
     <BlogEdit
       editTitle={post._doc.title}
+      handlePostUpdated={handlePostUpdated}
       editSummary={post._doc.summary}
       quillValue={post?._doc?.body}
       id={post._doc._id}
-      handleBackdrop={() => setBackdrop((prev) => !prev)} backdrop={backdrop}
+      handleBackdrop={() => setBackdrop((prev) => !prev)}
+      backdrop={backdrop}
     />
   );
 
   return (
     <div className="space-top-5">
       {backdrop ? (
-        <ModalRectangular handleBackdrop={() => setBackdrop((prev) => !prev)} backdrop={backdrop}>
+        <ModalRectangular
+          handleBackdrop={() => setBackdrop((prev) => !prev)}
+          backdrop={backdrop}
+        >
           {modalContent}
           {EDIT_BLOG}
         </ModalRectangular>
-      ): null}
+      ) : null}
 
       {post && (
         <>
