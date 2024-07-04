@@ -5,16 +5,14 @@ import Image from "../Image/Image";
 function ProfileImage({ imageURL, customClasses }) {
   const classes = [Styles[customClasses], Styles.defaultStyles];
 
-
   return (
     <>
       <img
         className={classes.join(" ")}
-        loading={'eager'}
+        loading={"eager"}
         src={imageURL}
         alt="profilepicture"
       />
-      
     </>
   );
 }

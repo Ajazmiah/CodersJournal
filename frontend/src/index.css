@@ -136,6 +136,10 @@ p {
 }
 
 /* MARGIN-BOTTOM */
+.space-bottom {
+  margin-bottom: 1rem;
+  /* 10px to 2rem */
+}
 
 .space-bottom-1 {
   margin-bottom: 2rem;

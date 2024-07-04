@@ -17,17 +17,23 @@ function PostCard({ posts }) {
             key={post._id}
             className={Styles.post}
             onClick={() => handleNavigateToPost(post)}
+
+            
           >
-            <ul>
-              <li>{post?.title}</li>
-              <li>{formatDate(post?.createdAt)}</li>
-            </ul>
+            <div className='space-bottom'>
+            <img width={'100%'} src='https://images.pexels.com/photos/159618/still-life-school-retro-ink-159618.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' />
+            </div>
+            
             <AuthorBylineCard author={post.authorId} />
             <p>{post.summary}</p>
 
             <div style={{ marginTop: "20px" }}>
+            <ul>
+              <li>{post?.title}</li>
+              <li>{formatDate(post?.createdAt)}</li>
+            </ul>
               <LikeCommentComponent />
-              {/* {post.authorId && <Button onClick={() => alert(post._id)}>Delete</Button>} */}
+              
             </div>
           </div>
         ))}

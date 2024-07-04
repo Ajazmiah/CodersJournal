@@ -6,8 +6,11 @@
     padding-bottom: 5.3rem;
 }
 .post {
-    flex: 0 0 30%;
+    flex: 0 0 33%;
     padding: 1rem;
     margin-bottom: 1rem;
+    
+}
+.postCoverImage {
     
 }
