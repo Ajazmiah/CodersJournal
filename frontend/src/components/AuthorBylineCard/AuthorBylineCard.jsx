@@ -7,7 +7,7 @@ function AuthorBylineCard({author}) {
   const authorName =`${author?.firstName} ${author?.lastName}`
 
   return (
-    <div>
+    <div className="flex">
       <div>
         <ProfileImage
           customClasses="ByLineImage"
