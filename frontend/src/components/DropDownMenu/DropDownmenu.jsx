@@ -13,26 +13,26 @@ function DropDownMenu({
   showMenu,
   handleShow = null,
 }) {
-  
-
   if (!showMenu) return;
   return dropDownItems.map(({ Element, text, to }) => (
     <>
-    <li className={classNames(Styles?.listItem, "flex")} key={text}>
-      {Element ? (
-        <>
-          <button onClick={handleClick}>{text}</button>
-          <FaSignOutAlt />
-        </>
-      ) : (
-        <>
+      <li className={classNames(Styles?.listItem, "flex")} key={text}>
+        {Element ? (
+          <button onClick={handleClick}>
+            <span className={Styles.listItemContent}>
+              {text}
+              <FaSignOutAlt />
+            </span>
+          </button>
+        ) : (
           <Link onClick={handleShow} to={to}>
-            {text}
+            <span className={Styles.listItemContent}>
+              {text}
+              {getIcon(text.split(" ").join(""))}
+            </span>
           </Link>
-          {getIcon(text.split(" ").join(""))}
-        </>
-      )}
-    </li>
+        )}
+      </li>
     </>
   ));
 }
