@@ -68,12 +68,8 @@ function QuillRichText({
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
    
-      const img = await handleImageUpload(file)
-      if(img) {
-        setBase64Img(img)
-      }
+await handleImageUpload(file)
 
-      //console.log("Uploaded Base64 Image:",  base64Img?.name);
     
   };
 
@@ -84,7 +80,7 @@ function QuillRichText({
   return (
     <>
       <div className={classnames("container pageContainer", Styles.richText)}>
-        {base64Img && <img src={base64Img} />}
+        {image && <img src={image?.myFile} />}
         <div>
           <input
             required
