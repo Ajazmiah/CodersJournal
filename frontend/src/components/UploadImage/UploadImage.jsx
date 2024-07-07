@@ -9,12 +9,6 @@ function useUploadImage() {
 
   const [profilePicture, setProfilePicture] = useState({ myFile: null });
   const [image, setImage] = useState("");
-  const clearFileName = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-      setProfilePicture({ myFile: "" });
-    }
-  };
 
   function convertToBase64(file) {
     return new Promise((resolve, reject) => {

@@ -9,10 +9,9 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import useUploadImage from "../../hooks/useUploadImage";
 import { toast } from "react-toastify";
-import { Typography } from "@mui/material";
 import ProfileImage from "../../components/ProfileImage/ProfileImage";
 
-import Input from '@mui/material/Input';
+import Input from "@mui/material/Input";
 function UpdateAccountScreen() {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -27,7 +26,7 @@ function UpdateAccountScreen() {
 
   const [updateProfile, { isLoading }] = useUpdateProfileMutation();
 
-  const [profilePicture , setProfilePicture] = useState(null)
+  const [profilePicture, setProfilePicture] = useState(null);
 
   // CUSTOM USEHOOK
   const [handleImageUpload, image] = useUploadImage();
@@ -37,10 +36,9 @@ function UpdateAccountScreen() {
     const file = event.target.files[0];
 
     const img = await handleImageUpload(file);
-    if(img ) {
-      setProfilePicture(img)
+    if (img) {
+      setProfilePicture(img);
     }
-
   };
 
   useEffect(() => {
@@ -70,21 +68,13 @@ function UpdateAccountScreen() {
       }
     }
   };
-//   let PROFILE_PICTURE = userInfo?.profilePicture
-
-// useEffect(() => {
-//   if(image) {
-//     PROFILE_PICTURE = image
-//   }
-
-// }, image)
-
   return (
     <div>
       <Container>
-      <ProfileImage
+        <ProfileImage
           imageURL={profilePicture || userInfo?.profilePicture}
           customClasses="profileImage"
+          htmlFor="contained-button-file"
         />
         <form onSubmit={submitHandler}>
           <div>
@@ -97,7 +87,7 @@ function UpdateAccountScreen() {
             />
             <label htmlFor="contained-button-file">
               <Button variant="contained" component="span">
-                Upload File
+                Update Profile Image
               </Button>
             </label>
           </div>
