@@ -149,7 +149,7 @@ const RegisterForm = () => {
               type="file"
               accept="image/*"
               onChange={handleProfilePic}
-              ref={fileInputRef}
+              
             />
           </Grid>
         </Grid>

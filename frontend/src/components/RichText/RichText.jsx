@@ -5,6 +5,7 @@ import Styles from "./RichText.module.css";
 import classnames from "classnames";
 import { useBackdrop } from "../Backdrop/Backdrop";
 import { sanitizeContent } from "../../utils";
+import useUploadImage from "../../hooks/useUploadImage";
 
 function QuillRichText({
   editQuillValue,
@@ -14,6 +15,8 @@ function QuillRichText({
   handleBackdrop,
   ...rest
 }) {
+  const [handleImageUpload, image] = useUploadImage();
+
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -51,25 +54,37 @@ function QuillRichText({
 
   const titleRef = useRef();
 
-
-
   const [title, setTitle] = useState(editTitle || "");
   const [summary, setSummary] = useState(editSummary || "");
   const [QuillValue, setQuillValue] = React.useState(editQuillValue || null);
-  
+  const [base64Img, setBase64Img] = useState(null);
 
   useEffect(() => titleRef.current.focus(), []);
 
   const handleClick = () => {
     handleBackdrop();
     postSubmitHandler(title, summary, QuillValue);
+  };
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+   
+      const img = await handleImageUpload(file)
+      if(img) {
+        setBase64Img(img)
+      }
 
+      //console.log("Uploaded Base64 Image:",  base64Img?.name);
     
   };
+
+  useEffect(() => {
+    console.log("IMG", base64Img)
+  },[base64Img])
 
   return (
     <>
       <div className={classnames("container pageContainer", Styles.richText)}>
+        {base64Img && <img src={base64Img} />}
         <div>
           <input
             required
@@ -95,6 +110,14 @@ function QuillRichText({
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
             autocomplete="shipping address-line1"
+          />
+        </div>
+        <div>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            placeholder="Cover Image"
           />
         </div>
         <ReactQuill

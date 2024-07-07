@@ -29,6 +29,8 @@ const ProfileScreen = () => {
       }
     };
 
+    console.log("USERR INFOR", userInfo)
+
     getAllPosts();
   }, []);
 
