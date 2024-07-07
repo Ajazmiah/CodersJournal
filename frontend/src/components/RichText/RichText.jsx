@@ -57,7 +57,7 @@ function QuillRichText({
   const [title, setTitle] = useState(editTitle || "");
   const [summary, setSummary] = useState(editSummary || "");
   const [QuillValue, setQuillValue] = React.useState(editQuillValue || null);
-  const [base64Img, setBase64Img] = useState(null);
+  
 
   useEffect(() => titleRef.current.focus(), []);
 
@@ -66,16 +66,13 @@ function QuillRichText({
     postSubmitHandler(title, summary, QuillValue);
   };
   const handleFileChange = async (event) => {
+    event.preventDefault();
     const file = event.target.files[0];
-   
-await handleImageUpload(file)
 
-    
+    await handleImageUpload(file);
   };
 
-  useEffect(() => {
-    console.log("IMG", base64Img)
-  },[base64Img])
+
 
   return (
     <>
