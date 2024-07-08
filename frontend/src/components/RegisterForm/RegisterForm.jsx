@@ -25,7 +25,7 @@ const RegisterForm = () => {
   const fileInputRef = useRef(null);
 
 
-  const [handleImageUpload, image, clearFileName] = useUploadImage();
+  const [handleImageUpload, image,handleImage, INPUT] = useUploadImage();
 
   const [signup, { isLoading }] = useSignupMutation();
   const { userInfo } = useSelector((state) => state.auth);
@@ -63,13 +63,10 @@ const RegisterForm = () => {
     }
   }, [navigate, userInfo]);
 
-  const handleProfilePic = async (e) => {
-    const file = e.target.files[0];
-
-    // const base64Img = await convertToBase64(file);
-    await handleImageUpload(file);
-    // setProfilePicture(() => ({ myFile: base64Img }));
-  };
+  // const handleProfilePic = async (e) => {
+  //   const file = e.target.files[0];
+  //   await handleImageUpload(file);
+  // };
 
   return (
     <Container
@@ -132,7 +129,7 @@ const RegisterForm = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <input type="file" accept="image/*" onChange={handleProfilePic} /> <span onClick={clearFileName}>X</span>
+            {INPUT}
           </Grid>
         </Grid>
         <Button
