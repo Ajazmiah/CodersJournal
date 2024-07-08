@@ -77,7 +77,9 @@ const RegisterForm = () => {
       <Typography component="h1" variant="h5">
         Register
       </Typography>
-      {image.myFile ? <ProfileImage imageURL={image?.myFile} customClasses='profileImage' /> : null}
+     <br/>
+     {image.myFile ? <ProfileImage imageURL={image?.myFile} customClasses='profileImage' /> : <ProfileImage empty customClasses='profileImage' />}
+     <br/>
       <form onSubmit={submitHandler}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
