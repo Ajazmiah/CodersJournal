@@ -24,8 +24,7 @@ const RegisterForm = () => {
   const [profilePicture, setProfilePicture] = useState({ myFile: "" });
   const fileInputRef = useRef(null);
 
-
-  const [handleImageUpload, image,handleImage, INPUT] = useUploadImage();
+  const [handleImageUpload, image, handleImage, INPUT] = useUploadImage();
 
   const [signup, { isLoading }] = useSignupMutation();
   const { userInfo } = useSelector((state) => state.auth);
@@ -63,10 +62,13 @@ const RegisterForm = () => {
     }
   }, [navigate, userInfo]);
 
-  // const handleProfilePic = async (e) => {
-  //   const file = e.target.files[0];
-  //   await handleImageUpload(file);
-  // };
+  const PROFILE_IMAGE = (
+    <ProfileImage
+      imageURL={image.myFile || null}
+      empty={!image.myFile}
+      customClasses="profileImage"
+    />
+  );
 
   return (
     <Container
@@ -77,9 +79,9 @@ const RegisterForm = () => {
       <Typography component="h1" variant="h5">
         Register
       </Typography>
-     <br/>
-     {image.myFile ? <ProfileImage imageURL={image?.myFile} customClasses='profileImage' /> : <ProfileImage empty customClasses='profileImage' />}
-     <br/>
+      <br />
+      {PROFILE_IMAGE}
+      <br />
       <form onSubmit={submitHandler}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
