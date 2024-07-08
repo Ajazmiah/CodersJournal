@@ -4,6 +4,8 @@ import { useSignupMutation } from "../../slices/usersApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../../slices/authSlice";
 import { toast } from "react-toastify";
+import useUploadImage from "../../hooks/useUploadImage";
+import ProfileImage from "../../components/ProfileImage/ProfileImage";
 import {
   TextField,
   Button,
@@ -22,12 +24,8 @@ const RegisterForm = () => {
   const [profilePicture, setProfilePicture] = useState({ myFile: "" });
   const fileInputRef = useRef(null);
 
-  const clearFileName = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-      setProfilePicture({ myFile: "" });
-    }
-  };
+
+  const [handleImageUpload, image, clearFileName] = useUploadImage();
 
   const [signup, { isLoading }] = useSignupMutation();
   const { userInfo } = useSelector((state) => state.auth);
@@ -47,7 +45,7 @@ const RegisterForm = () => {
           email,
           password,
           confirmPassword,
-          profilePicture: profilePicture.myFile,
+          profilePicture: image.myFile,
         }).unwrap();
         dispatch(setCredentials({ ...res }));
         // fileInputRef.current.value = "";
@@ -59,19 +57,6 @@ const RegisterForm = () => {
     }
   };
 
-  function convertToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  }
-
   useEffect(() => {
     if (userInfo) {
       navigate("/");
@@ -81,8 +66,9 @@ const RegisterForm = () => {
   const handleProfilePic = async (e) => {
     const file = e.target.files[0];
 
-    const base64Img = await convertToBase64(file);
-    setProfilePicture(() => ({ myFile: base64Img }));
+    // const base64Img = await convertToBase64(file);
+    await handleImageUpload(file);
+    // setProfilePicture(() => ({ myFile: base64Img }));
   };
 
   return (
@@ -94,6 +80,7 @@ const RegisterForm = () => {
       <Typography component="h1" variant="h5">
         Register
       </Typography>
+      {image.myFile ? <ProfileImage imageURL={image?.myFile} customClasses='profileImage' /> : null}
       <form onSubmit={submitHandler}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
@@ -145,12 +132,7 @@ const RegisterForm = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleProfilePic}
-              
-            />
+            <input type="file" accept="image/*" onChange={handleProfilePic} /> <span onClick={clearFileName}>X</span>
           </Grid>
         </Grid>
         <Button

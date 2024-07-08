@@ -3,6 +3,10 @@ import { useState } from "react";
 function useUploadImage() {
   const [image, setImage] = useState({ myFile: null });
 
+  const clearFileName = () => {
+    setImage({ myFile: null })
+  };
+
   function convertToBase64(file) {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
@@ -22,7 +26,7 @@ function useUploadImage() {
     return base64Img;
   };
 
-  return [handleImageUpload, image];
+  return [handleImageUpload, image, clearFileName];
 }
 
 export default useUploadImage;
