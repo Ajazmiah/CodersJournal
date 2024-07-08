@@ -12,7 +12,7 @@ function QuillRichText({
   editTitle,
   editSummary,
   postSubmitHandler,
-  handleBackdrop,
+  handleBackdrop = () => {},
   ...rest
 }) {
   const [handleImageUpload, image] = useUploadImage();
@@ -63,7 +63,7 @@ function QuillRichText({
 
   const handleClick = () => {
     handleBackdrop();
-    postSubmitHandler(title, summary, QuillValue);
+    postSubmitHandler(title, summary, QuillValue, image);
   };
   const handleFileChange = async (event) => {
     event.preventDefault();

@@ -9,14 +9,20 @@ import QuillRichText from "../../components/RichText/RichText";
 function BlogCreationScreen({ editTitle, editSummary, quillValue, edit }) {
   const [submitPost] = useSubmitPostMutation();
 
-  const postSubmitHandler = async (title, summary, QuillValue) => {
+  const postSubmitHandler = async (title, summary, QuillValue, coverImage) => {
+
     try {
       let data = {
         title,
         summary,
+        coverImage: coverImage.myFile,
         body: QuillValue,
       };
+
+      console.log("IMAGE____", data)
+
       const res = await submitPost(data).unwrap();
+      console.log("RES", res)
     } catch (err) {
       toast.error(err);
     }

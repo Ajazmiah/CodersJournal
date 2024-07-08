@@ -4,7 +4,6 @@ import { Container } from "@mui/material";
 import Styles from "./Hero.module.css";
 import React, { useState } from "react";
 import classNames from "classnames";
-import heroImage from "../../../public/heroImage.jpg";
 import { Link } from "react-router-dom";
 import Image from "../Image/Image";
 import RegisterForm from "../RegisterForm/RegisterForm";

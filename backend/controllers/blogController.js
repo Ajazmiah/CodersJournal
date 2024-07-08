@@ -14,29 +14,33 @@ const createPost = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    // res.status(400).json({ errors: errors.array()});
-    throw new Error(errors.errors);
+    return res.status(400).json({ errors: errors.array() });
   }
 
-  const { title, body, summary } = req.body;
+  console.log("REQ___", req.body);
+
+  const { title, body, summary, coverImage } = req.body;
+  console.log("__COVER_IMAGE", coverImage);
 
   const decoded = verifytoken(req);
   const user = await User.findById(decoded.userId).select("-password");
 
-  const blog = await blogModel.create({
-    title,
-    body,
-    summary,
-    authorId: user._id,
-  });
+  try {
+    const blog = await blogModel.create({
+      title,
+      body,
+      summary,
+      coverImage,
+      authorId: user._id,
+    });
 
-  if (blog) {
     res.status(200).json(blog);
-  } else {
-    res.status(400);
-    throw new Error("Failed to create the Blog");
+  } catch (error) {
+    console.error("Failed to create the Blog:", error);
+    res.status(500).json({ error: "Failed to create the Blog" });
   }
 });
+
 
 const getBlogs = asyncHandler(async (req, res, next) => {
   const decoded = verifytoken(req);
