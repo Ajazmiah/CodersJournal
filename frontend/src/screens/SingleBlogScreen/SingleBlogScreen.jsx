@@ -92,6 +92,7 @@ function SingleBlogScreen() {
       {post && (
         <>
           <div>
+            <img src = {post?._doc.coverImage} />
             <PageHeader title={post._doc.title} />
             <div>
               <p>{post._doc.summary}</p>
