@@ -9,12 +9,10 @@ const home = asyncHandler(async (req, res, next) => {
 });
 
 const signup = asyncHandler(async (req, res, next) => {
+  const errors = validationResult(req);
 
-  const errors = validationResult(req)
-
-
-  if(!errors.isEmpty()) {
-    res.status(422)
+  if (!errors.isEmpty()) {
+    res.status(422);
     throw new Error(errors.errors[0].msg);
   }
 
@@ -116,8 +114,6 @@ const getUserProfile = asyncHandler(async (req, res, next) => {
 const updateUser = asyncHandler(async (req, res, next) => {
   const userId = req.user._id;
   const user = await userModel.findById(userId);
-
-  
 
   if (user) {
     user.firstName = req.body.firstName || user.firstName;

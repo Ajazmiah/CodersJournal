@@ -15,7 +15,7 @@ const blogSchema = mongoose.Schema(
     },
     coverImage: {
       type: String,
-      required: true
+      required: true,
     },
     authorId: {
       type: "ObjectId",

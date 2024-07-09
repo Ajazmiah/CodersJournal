@@ -20,7 +20,6 @@ const createPost = asyncHandler(async (req, res, next) => {
   console.log("REQ___", req.body);
 
   const { title, body, summary, coverImage } = req.body;
-  console.log("__COVER_IMAGE", coverImage);
 
   const decoded = verifytoken(req);
   const user = await User.findById(decoded.userId).select("-password");
@@ -40,7 +39,6 @@ const createPost = asyncHandler(async (req, res, next) => {
     res.status(500).json({ error: "Failed to create the Blog" });
   }
 });
-
 
 const getBlogs = asyncHandler(async (req, res, next) => {
   const decoded = verifytoken(req);
