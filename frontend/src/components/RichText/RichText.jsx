@@ -6,6 +6,7 @@ import classnames from "classnames";
 import { useBackdrop } from "../Backdrop/Backdrop";
 import { sanitizeContent } from "../../utils";
 import useUploadImage from "../../hooks/useUploadImage";
+import { toast } from "react-toastify";
 
 function QuillRichText({
   editQuillValue,
@@ -16,6 +17,7 @@ function QuillRichText({
   ...rest
 }) {
   const [handleImageUpload, image] = useUploadImage();
+  console.log("IMAGE_______", image);
 
   const modules = {
     toolbar: [
@@ -57,13 +59,46 @@ function QuillRichText({
   const [title, setTitle] = useState(editTitle || "");
   const [summary, setSummary] = useState(editSummary || "");
   const [QuillValue, setQuillValue] = React.useState(editQuillValue || null);
-  
+  const [error, setError] = useState([]);
+
+  const validateInputs = (titleInput, summaryInput, quillInput, image) => {
+    let errors = [];
+
+    // Check if any of the inputs are empty
+    if (
+      [titleInput, summaryInput, quillInput].some(
+        (input) => input.trim() === ""
+      )
+    ) {
+      errors.push("You need to fill up all the fields");
+    }
+
+    // Check if the image is missing
+    if (!image.myFile) {
+      errors.push("You need to upload a cover image");
+    }
+
+    // Set error if there are any errors
+    if (errors.length > 0) {
+      setError(errors.join(". "));
+      return false;
+    }
+
+    return true;
+  };
+
+  useEffect(() => {
+   if(error.length> 0) toast.error(<div>{error}</div>);
+  }, [error]);
 
   useEffect(() => titleRef.current.focus(), []);
 
   const handleClick = () => {
-    handleBackdrop();
-    postSubmitHandler(title, summary, QuillValue, image);
+    if (validateInputs(title, summary, QuillValue, image)) {
+      console.log("ERR", error);
+      handleBackdrop();
+      postSubmitHandler(title, summary, QuillValue, image);
+    } else return;
   };
   const handleFileChange = async (event) => {
     event.preventDefault();
@@ -71,8 +106,6 @@ function QuillRichText({
 
     await handleImageUpload(file);
   };
-
-
 
   return (
     <>
