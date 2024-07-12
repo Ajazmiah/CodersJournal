@@ -80,7 +80,7 @@ function QuillRichText({
 
     // Set error if there are any errors
     if (errors.length > 0) {
-      setError(errors.join(". "));
+      setError(errors);
       return false;
     }
 
@@ -88,7 +88,15 @@ function QuillRichText({
   };
 
   useEffect(() => {
-   if(error.length> 0) toast.error(<div>{error}</div>);
+    console.log("ERROR", error)
+
+
+
+   let errorDiv = error.map(er => <div> *{er}</div>)
+
+      if(error.length> 0) toast.error(<div>{errorDiv}</div>);
+
+   console.log(errorDiv)
   }, [error]);
 
   useEffect(() => titleRef.current.focus(), []);
@@ -113,7 +121,7 @@ function QuillRichText({
         {image && <img src={image?.myFile} />}
         <div>
           <input
-            required
+            required={true}
             placeholder="Title.."
             ref={titleRef}
             id="title"
@@ -127,7 +135,7 @@ function QuillRichText({
 
         <div>
           <input
-            required
+            required={true}
             className={Styles.input}
             id="summary"
             placeholder="Summary.."
@@ -141,6 +149,7 @@ function QuillRichText({
         <div>
           <input
             type="file"
+            required={true}
             accept="image/*"
             onChange={handleFileChange}
             placeholder="Cover Image"
