@@ -88,15 +88,10 @@ function QuillRichText({
   };
 
   useEffect(() => {
-    console.log("ERROR", error)
-
-
-
-   let errorDiv = error.map(er => <div> *{er}</div>)
-
-      if(error.length> 0) toast.error(<div>{errorDiv}</div>);
-
-   console.log(errorDiv)
+    if (error.length > 0) {
+      let errorDiv = error.map((er) => <div> *{er}</div>);
+      toast.error(<div>{errorDiv}</div>);
+    }
   }, [error]);
 
   useEffect(() => titleRef.current.focus(), []);
