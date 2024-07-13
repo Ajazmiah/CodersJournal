@@ -5,23 +5,28 @@ const userSchema = mongoose.Schema(
   {
     firstName: {
       type: String,
+      trim: true,
       required: true,
     },
     lastName: {
       type: String,
+      trim: true,
       required: true,
     },
     email: {
       type: String,
+      trim: true,
       required: true,
       unique: true,
     },
     password: {
       type: String,
+      trim: true,
       required: true,
     },
     confirmPassword: {
       type: String,
+      trim: true,
       required: true,
     },
     description: {
@@ -44,6 +49,7 @@ userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
+  //genSalt is to ensure a unique salt for each password, providing better security.
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });

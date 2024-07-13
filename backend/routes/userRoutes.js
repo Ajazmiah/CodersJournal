@@ -13,7 +13,7 @@ import {
 
 const router = express.Router();
 
-router.get("/", home);
+// router.get("/", home);
 router.post("/signup",[check('email').
        isEmail().normalizeEmail(), 
        body('password', 'Please enter a valid password').
