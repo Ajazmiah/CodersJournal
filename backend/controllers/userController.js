@@ -2,11 +2,6 @@ import userModel from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 import asyncHandler from "express-async-handler"; // This eliminates the need to use try and catch in Controller function
 import { validationResult } from "express-validator";
-const home = asyncHandler(async (req, res, next) => {
-  // Render or send posts that are public ( all post as of right now)
-  res.send("Home Page!!");
-  console.log("hi-home");
-});
 
 const signup = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
@@ -138,4 +133,4 @@ const updateUser = asyncHandler(async (req, res, next) => {
   }
 });
 
-export { home, signup, singin, logout, getUserProfile, updateUser };
+export { signup, singin, logout, getUserProfile, updateUser };

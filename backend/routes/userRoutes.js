@@ -3,7 +3,6 @@ import { protect } from "../middleware/authMIddleware.js";
 import { check, body } from "express-validator";
 
 import {
-  home,
   singin,
   signup,
   logout,
