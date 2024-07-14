@@ -17,12 +17,13 @@ function BlogEdit({
   const [editPost] = useEditPostMutation()
 
 
-  const postSubmitHandler = async (title, summary, QuillValue) => {
+  const postSubmitHandler = async (title, summary, QuillValue, coverImage) => {
     try {
       let data = {
         title,
         summary,
         body: QuillValue,
+        coverImage: coverImage.myFile,
         id,
       };
 

@@ -76,7 +76,7 @@ const deletePost = asyncHandler(async (req, res, next) => {
 });
 
 const editPost = asyncHandler(async (req, res, next) => {
-  const { id, title, summary, body } = req.body;
+  const { id, title, summary, body, coverImage } = req.body;
 
   const post = await blogModel.findById(id);
 
@@ -84,7 +84,9 @@ const editPost = asyncHandler(async (req, res, next) => {
     post.title = title;
     post.summary = summary;
     post.body = body;
+    //  post?.coverImage = 'https://ajazmiah.netlify.app/img/me.webp'
 
+    console.log("POST", post);
     const updatedPost = await post.save();
 
     res.status(200).json(updatedPost);

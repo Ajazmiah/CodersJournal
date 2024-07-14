@@ -17,7 +17,6 @@ function QuillRichText({
   ...rest
 }) {
   const [handleImageUpload, image] = useUploadImage();
-  console.log("IMAGE_______", image);
 
   const modules = {
     toolbar: [
