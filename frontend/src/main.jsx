@@ -29,7 +29,6 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<HomeScreen />} />
       <Route path="/signin" element={<LoginScreen />} />
       <Route path="/signup" element={<RegisterScreen />} />
-      <Route path="*" element={<NotFoundPage/>} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/profile/update" element={<UpdateAccountScreen />} />
@@ -40,6 +39,7 @@ const router = createBrowserRouter(
         } />
       </Route>
       <Route path="/post/:id" element={<SingleBlogScreen />} />
+      <Route path="*" element={<NotFoundPage/>} />
     </Route>
   )
 );

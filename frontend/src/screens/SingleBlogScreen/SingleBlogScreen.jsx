@@ -34,7 +34,11 @@ function SingleBlogScreen() {
         const fetchedPost = await getPost({ id }).unwrap();
         setPost(fetchedPost);
       } catch (err) {
-        toast.error("Something went wrong, please try again!");
+        if(err.status === 404) {
+          navigate('/404')
+        }else {
+          toast.error(err.data.message);
+        }
       }
     };
 
@@ -79,6 +83,7 @@ function SingleBlogScreen() {
 
   return (
     <div className="space-top-5">
+       {/* {error && <div>PAGE IS NOT FOUND</div>} */}
       {backdrop ? (
         <ModalRectangular
           handleBackdrop={() => setBackdrop((prev) => !prev)}
@@ -91,6 +96,7 @@ function SingleBlogScreen() {
 
       {post && (
         <>
+       
           <div>
             <img src = {post?._doc.coverImage} />
             <PageHeader title={post._doc.title} />
