@@ -35,7 +35,6 @@ function SingleBlogScreen() {
         setPost(fetchedPost);
       } catch (err) {
         toast.error("Something went wrong, please try again!");
-        console.log("ERROR___", err)
       }
     };
 

@@ -19,7 +19,7 @@ const postsApi = apiSlice.injectEndpoints({
     }),
     getPost: builder.mutation({
       query: (data) => ({
-        url: `${POSTS_URL}/post`,
+        url: `${POSTS_URL}/post/${data.id}`,
         method: "POST",
         body: data,
       }),

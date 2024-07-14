@@ -54,8 +54,10 @@ const getBlogs = asyncHandler(async (req, res, next) => {
 
 // SINGLE POST PAGE
 const getPost = asyncHandler(async (req, res, next) => {
-  console.log("--------REQ------", req.params.id)
-  const post = await blogModel.findById(req.body.id);
+  const urlParts = req.url.split('/');
+  console.log("REQ------", req.params)
+
+  const post = await blogModel.findById(req.params.id);
 
   if(!post) {
     res.status(404)
