@@ -19,7 +19,7 @@ router.route("/create").post(protect,[
   check('body', 'Body is required').notEmpty(),
 ],createPost).get(protect, getBlogs);
 router.post('/edit', editPost)
-router.post("/post/:id" , getPost);
+router.get("/post/:id" , getPost);
 router.post("/deletepost" , deletePost)
 
 

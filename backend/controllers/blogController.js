@@ -54,17 +54,13 @@ const getBlogs = asyncHandler(async (req, res, next) => {
 
 // SINGLE POST PAGE
 const getPost = asyncHandler(async (req, res, next) => {
-  const urlParts = req.url.split('/');
-  console.log("REQ------", req.params)
-
   const post = await blogModel.findById(req.params.id);
 
-  if(!post) {
-    res.status(404)
-    throw new Error("No post was found!")
+  if (!post) {
+    res.status(404);
+    throw new Error("No post was found!");
   }
   const user = await User.findById(post.authorId).select("-password");
-
 
   const POST = {
     ...post,
@@ -83,8 +79,6 @@ const editPost = asyncHandler(async (req, res, next) => {
   const { id, title, summary, body } = req.body;
 
   const post = await blogModel.findById(id);
-
-
 
   if (post) {
     post.title = title;
