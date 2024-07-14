@@ -9,3 +9,20 @@
     color: rgb(45, 48, 51);
 
 }
+.goBack {
+    margin-left: 10px;
+    border: none;
+    outline: none;
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: .4em;
+    width: 130px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+}
+.goBack svg {
+    color: #fff;
+    fill: #fff;
+}
