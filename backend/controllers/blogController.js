@@ -17,8 +17,6 @@ const createPost = asyncHandler(async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  console.log("REQ___", req.body);
-
   const { title, body, summary, coverImage } = req.body;
 
   const decoded = verifytoken(req);
@@ -78,13 +76,16 @@ const deletePost = asyncHandler(async (req, res, next) => {
 const editPost = asyncHandler(async (req, res, next) => {
   const { id, title, summary, body, coverImage } = req.body;
 
+
   const post = await blogModel.findById(id);
 
   if (post) {
     post.title = title;
     post.summary = summary;
     post.body = body;
-    //  post?.coverImage = 'https://ajazmiah.netlify.app/img/me.webp'
+    // post?.coverImage = 'https://ajazmiah.netlify.app/img/me.webp'
+
+    post?.coverImage 
 
     console.log("POST", post);
     const updatedPost = await post.save();

@@ -37,7 +37,7 @@ function SingleBlogScreen() {
         if(err.status === 404) {
           navigate('/404')
         }else {
-          toast.error(err.data.message);
+          toast.error(err?.data?.message);
         }
       }
     };
@@ -60,7 +60,7 @@ function SingleBlogScreen() {
     setModalContentType(handleType);
   };
 
-  const handlePostUpdated = () => setPostUpdated(true);
+  const handlePostUpdated = () => setPostUpdated(prev => !prev);
 
   const modalContent = modalContentType === "delete" && (
     <>
