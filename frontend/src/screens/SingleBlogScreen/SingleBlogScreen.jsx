@@ -68,6 +68,7 @@ function SingleBlogScreen() {
       <button onClick={handleApproveDeletion}>Confirm</button>
     </>
   );
+  console.log("__POST__", post)
 
   const EDIT_BLOG = post && modalContentType !== "delete" && (
     <BlogEdit
@@ -75,6 +76,7 @@ function SingleBlogScreen() {
       handlePostUpdated={handlePostUpdated}
       editSummary={post._doc.summary}
       quillValue={post?._doc?.body}
+      coverImage={post?._doc?.coverImage}
       id={post._doc._id}
       handleBackdrop={() => setBackdrop((prev) => !prev)}
       backdrop={backdrop}

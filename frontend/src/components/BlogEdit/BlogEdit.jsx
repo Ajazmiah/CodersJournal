@@ -10,6 +10,7 @@ function BlogEdit({
   id,
   handleBackdrop,
   handlePostUpdated,
+  coverImage,
   ...rest
 }) {
 
@@ -23,7 +24,7 @@ function BlogEdit({
         title,
         summary,
         body: QuillValue,
-        coverImage: coverImage.myFile,
+        coverImage: coverImage?.myFile,
         id,
       };
 
@@ -46,6 +47,7 @@ function BlogEdit({
       editSummary={editSummary}
       editQuillValue={quillValue}
       handleBackdrop={handleBackdrop}
+      editCoverImage={coverImage}
       id={id}
       edit
     />

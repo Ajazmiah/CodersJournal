@@ -12,6 +12,7 @@ function QuillRichText({
   editQuillValue,
   editTitle,
   editSummary,
+  editCoverImage,
   postSubmitHandler,
   handleBackdrop = () => {},
   ...rest
@@ -58,6 +59,7 @@ function QuillRichText({
   const [title, setTitle] = useState(editTitle || "");
   const [summary, setSummary] = useState(editSummary || "");
   const [QuillValue, setQuillValue] = React.useState(editQuillValue || null);
+  const coverImage = image?.myFile || editCoverImage
   const [error, setError] = useState([]);
 
   const validateInputs = (titleInput, summaryInput, quillInput, image) => {
@@ -73,7 +75,7 @@ function QuillRichText({
     }
 
     // Check if the image is missing
-    if (!image.myFile) {
+    if (!coverImage) {
       errors.push("You need to upload a cover image");
     }
 
@@ -97,7 +99,6 @@ function QuillRichText({
 
   const handleClick = () => {
     if (validateInputs(title, summary, QuillValue, image)) {
-      console.log("ERR", error);
       handleBackdrop();
       postSubmitHandler(title, summary, QuillValue, image);
     } else return;
@@ -109,10 +110,14 @@ function QuillRichText({
     await handleImageUpload(file);
   };
 
+
+
+
+
   return (
     <>
       <div className={classnames("container pageContainer", Styles.richText)}>
-        {image && <img src={image?.myFile} />}
+        {<img src={coverImage} />}
         <div>
           <input
             required={true}
