@@ -34,9 +34,9 @@ function SingleBlogScreen() {
         const fetchedPost = await getPost({ id }).unwrap();
         setPost(fetchedPost);
       } catch (err) {
-        if(err.status === 404) {
-          navigate('/404')
-        }else {
+        if (err.status === 404) {
+          navigate("/404");
+        } else {
           toast.error(err?.data?.message);
         }
       }
@@ -60,7 +60,7 @@ function SingleBlogScreen() {
     setModalContentType(handleType);
   };
 
-  const handlePostUpdated = () => setPostUpdated(prev => !prev);
+  const handlePostUpdated = () => setPostUpdated((prev) => !prev);
 
   const modalContent = modalContentType === "delete" && (
     <>
@@ -68,7 +68,6 @@ function SingleBlogScreen() {
       <button onClick={handleApproveDeletion}>Confirm</button>
     </>
   );
-  console.log("__POST__", post)
 
   const EDIT_BLOG = post && modalContentType !== "delete" && (
     <BlogEdit
@@ -85,7 +84,7 @@ function SingleBlogScreen() {
 
   return (
     <div className="space-top-5">
-       {/* {error && <div>PAGE IS NOT FOUND</div>} */}
+      {/* {error && <div>PAGE IS NOT FOUND</div>} */}
       {backdrop ? (
         <ModalRectangular
           handleBackdrop={() => setBackdrop((prev) => !prev)}
@@ -98,9 +97,8 @@ function SingleBlogScreen() {
 
       {post && (
         <>
-       
           <div>
-            <img src = {post?._doc.coverImage} />
+            <img src={post?._doc.coverImage} />
             <PageHeader title={post._doc.title} />
             <div>
               <p>{post._doc.summary}</p>
