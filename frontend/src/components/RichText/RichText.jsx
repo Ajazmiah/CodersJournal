@@ -59,7 +59,7 @@ function QuillRichText({
   const [title, setTitle] = useState(editTitle || "");
   const [summary, setSummary] = useState(editSummary || "");
   const [QuillValue, setQuillValue] = React.useState(editQuillValue || null);
-  const coverImage = image?.myFile || editCoverImage
+  const coverImage = image?.myFile || editCoverImage;
   const [error, setError] = useState([]);
 
   const validateInputs = (titleInput, summaryInput, quillInput, image) => {
@@ -103,8 +103,8 @@ function QuillRichText({
 
       //const updatedImage = image?.myFile ? image : false
 
-      console.log("UPDATED IMAGE", coverImage)
-      console.log("UPDATED FILE", image?.myFile)
+      console.log("UPDATED IMAGE", coverImage);
+      console.log("UPDATED FILE", image?.myFile);
       postSubmitHandler(title, summary, QuillValue, coverImage);
     } else return;
   };
@@ -114,10 +114,6 @@ function QuillRichText({
 
     await handleImageUpload(file);
   };
-
-
-
-
 
   return (
     <>

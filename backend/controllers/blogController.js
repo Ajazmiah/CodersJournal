@@ -76,7 +76,6 @@ const deletePost = asyncHandler(async (req, res, next) => {
 const editPost = asyncHandler(async (req, res, next) => {
   const { id, title, summary, body, coverImage } = req.body;
 
-
   const post = await blogModel.findById(id);
 
   if (post) {
@@ -85,9 +84,6 @@ const editPost = asyncHandler(async (req, res, next) => {
     post.body = body;
     post.coverImage = coverImage || post?.coverImage;
 
-    // post?.coverImage
-
-    console.log("POST", post);
     const updatedPost = await post.save();
 
     res.status(200).json(updatedPost);

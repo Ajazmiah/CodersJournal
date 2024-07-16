@@ -10,7 +10,6 @@ function BlogCreationScreen({ editTitle, editSummary, quillValue, edit }) {
   const [submitPost] = useSubmitPostMutation();
 
   const postSubmitHandler = async (title, summary, QuillValue, coverImage) => {
-
     try {
       let data = {
         title,
@@ -19,20 +18,13 @@ function BlogCreationScreen({ editTitle, editSummary, quillValue, edit }) {
         body: QuillValue,
       };
 
-      console.log("IMAGE____", data)
-
       const res = await submitPost(data).unwrap();
-      console.log("RES", res)
     } catch (err) {
       toast.error(err);
     }
   };
 
-  return (
-    <QuillRichText
-      postSubmitHandler={postSubmitHandler}
-    />
-  );
+  return <QuillRichText postSubmitHandler={postSubmitHandler} />;
 }
 
 export default BlogCreationScreen;

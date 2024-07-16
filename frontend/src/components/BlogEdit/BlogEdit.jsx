@@ -16,7 +16,7 @@ function BlogEdit({
   const [editPost] = useEditPostMutation();
 
   const postSubmitHandler = async (title, summary, QuillValue, coverImage) => {
-    console.log("BLOG EDIT COVER PAGE", coverImage)
+    console.log("BLOG EDIT COVER PAGE", coverImage);
     try {
       let data = {
         title,
