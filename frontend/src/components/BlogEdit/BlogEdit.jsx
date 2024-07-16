@@ -13,27 +13,23 @@ function BlogEdit({
   coverImage,
   ...rest
 }) {
-
-
-  const [editPost] = useEditPostMutation()
-
+  const [editPost] = useEditPostMutation();
 
   const postSubmitHandler = async (title, summary, QuillValue, coverImage) => {
+    console.log("BLOG EDIT COVER PAGE", coverImage)
     try {
       let data = {
         title,
         summary,
         body: QuillValue,
-        coverImage: coverImage?.myFile,
+        coverImage,
         id,
       };
 
       const res = await editPost(data).unwrap();
-      if(res) {
-        handlePostUpdated()
-        toast.success("Post Updated")
-       
-        
+      if (res) {
+        handlePostUpdated();
+        toast.success("Post Updated");
       }
     } catch (err) {
       toast.error(err);

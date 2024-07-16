@@ -101,8 +101,11 @@ function QuillRichText({
     if (validateInputs(title, summary, QuillValue, image)) {
       handleBackdrop();
 
-      const updatedImage = image?.myFile ? image : false
-      postSubmitHandler(title, summary, QuillValue, updatedImage);
+      //const updatedImage = image?.myFile ? image : false
+
+      console.log("UPDATED IMAGE", coverImage)
+      console.log("UPDATED FILE", image?.myFile)
+      postSubmitHandler(title, summary, QuillValue, coverImage);
     } else return;
   };
   const handleFileChange = async (event) => {

@@ -83,11 +83,9 @@ const editPost = asyncHandler(async (req, res, next) => {
     post.title = title;
     post.summary = summary;
     post.body = body;
-    // post?.coverImage = 'https://ajazmiah.netlify.app/img/me.webp'
+    post.coverImage = coverImage || post?.coverImage;
 
-    // post?.coverImage = coverImage || post?.coverImage
-
-    // post?.coverImage 
+    // post?.coverImage
 
     console.log("POST", post);
     const updatedPost = await post.save();

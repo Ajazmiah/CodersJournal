@@ -15,7 +15,7 @@ function BlogCreationScreen({ editTitle, editSummary, quillValue, edit }) {
       let data = {
         title,
         summary,
-        coverImage: coverImage.myFile,
+        coverImage,
         body: QuillValue,
       };
 
