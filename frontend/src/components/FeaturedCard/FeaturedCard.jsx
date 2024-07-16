@@ -1,50 +1,37 @@
 import React from "react";
 import Styles from "./FeaturedCard.module.css";
 import classNames from "classnames";
-import { Box, Grid } from "@mui/material";
 import { useLink } from "../../hooks/useLInk/useLink";
 import Image from "../Image/Image";
+import { formatDate } from "../../utils";
 
 function FeaturedCard({ post }) {
 
-
-  const {handleNavigateToPost} = useLink()
+  const { handleNavigateToPost } = useLink();
 
   return (
-    <Grid
+    <div
       onClick={() => handleNavigateToPost(post)}
-      container
-      spacing={1}
       className={classNames(Styles.featuredCard, Styles.card)}
     >
-      <Grid
-        item
-        container
-        sx={{
-          flexBasis: "65%",
-        }}
-      >
-       <Box>
-        <h1 className={classNames(Styles.featuredTitle)}>{post.title}</h1>
-        <p className={Styles.summary}>{post.summary ? post.summary : 'Summary is not available'}</p>
-        <span>{"January , 2023"}</span>
-       </Box>
-      </Grid>
+      <div>
+        <div>
+          <h1 className={classNames(Styles.featuredTitle)}>{post.title}</h1>
+          <p className={Styles.summary}>
+            {post.summary ? post.summary : "Summary is not available"}
+          </p>
+          <span>{formatDate(post?.createdAt)}</span>
+        </div>
+      </div>
 
-      <Grid
-        item
-        className={Styles.FeaturedImage}
-        sx={{
-          flexBasis: "25%",
-        }}
-      >
-       <Image 
-        // src={post.cover} 
-        alt={post?.alt || 'cover photo of the post'} 
-        loading='eager'
-      />
-      </Grid>
-    </Grid>
+      <div className={Styles.FeaturedImage}>
+        <img
+          src={post?.coverImage}
+          alt={post?.alt || "cover photo of the post"}
+          loading="eager"
+        />
+      </div>
+    </div>
   );
 }
 

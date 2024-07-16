@@ -25,24 +25,13 @@ function FeaturedArticles() {
 
   if (!posts) return;
 
-  const modifiedPosts = posts.map((post) => {
-    if (!post.cover) {
-      return {
-        ...post,
-        cover:
-          "https://as1.ftcdn.net/v2/jpg/02/48/42/64/1000_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF",
-      };
-    }
-    return post;
-  });
-
   return (
     <div>
       <div>
-        <LeadArticle post={modifiedPosts[0]} />
+        <LeadArticle post={posts[posts.length - 1]} />
       </div>
       <div>
-        {modifiedPosts.slice(-3).map((post) => (
+        {posts.slice(-3).map((post) => (
           <FeaturedCard key={post._id} post={post} />
         ))}
       </div>

@@ -4,6 +4,7 @@ import Styles from "./LeadArticle.module.css";
 import Image from "../Image/Image";
 import classNames from "classnames";
 import { useLink } from "../../hooks/useLInk/useLink";
+import { formatDate } from "../../utils";
 
 
 
@@ -16,15 +17,15 @@ const LeadArticle = ({post}) => {
         <div
           className={Styles.lead}
         >
-          <Image
-            // src={post.cover}
+          <img
+            src={post.coverImage}
             loading="eager"
             className={classNames("imageRound", Styles.leadImage)}
           />
           <div className={Styles.metadataContainer}>
             <Typography>{post.title}</Typography>
             <Typography variant="subtitle2">{post.summary}</Typography>
-            <Typography variant="subtitle2">{"January , 2023"}</Typography>
+            <span>{formatDate(post?.createdAt)}</span>
           </div>
         </div>
     
