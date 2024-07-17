@@ -5,7 +5,11 @@ import { verifytoken } from "../utils/verifyToken.js";
 import { validationResult } from "express-validator";
 
 const allPost = asyncHandler(async (req, res, next) => {
-  const blogPosts = await blogModel.find();
+  const decoded = verifytoken(req);
+
+  const blogPosts = decoded
+    ? await blogModel.find({ authorId: { $ne: decoded.userId } })
+    : await blogModel.find();
   res.status(200).json(blogPosts);
 });
 
