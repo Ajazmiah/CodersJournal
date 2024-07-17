@@ -17,13 +17,12 @@ function Logo() {
                     margin: { xs: 'auto' },
                     fontFamily: "monospace",
                     fontWeight: 700,
-                    letterSpacing: ".3rem",
                     color: "#000",
                     textDecoration: "none",
                 }}
             >
                 <Link className={Styles.logo} to="/">
-                    INK<span>SPIRE</span>
+                    Coders<span>Journal</span>
                 </Link>
             </Typography>
         </Box>
