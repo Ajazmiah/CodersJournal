@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 import LeadArticle from "../LeadArticle/LeadArticle";
 import FeaturedCard from "../FeaturedCard/FeaturedCard";
-import { useGetMorePostOnScrollMutation } from "../../slices/postsApiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetMorePostOnScrollMutation , useGetUserPostsMutation } from "../../slices/postsApiSlice";
 import Border from "../Atoms/Border/Border";
 import Styles from './FeaturedArticles.module.css'
 function FeaturedArticles() {
+  
+  const { userInfo } = useSelector((state) => state.auth);
   const [getPosts] = useGetMorePostOnScrollMutation();
+  const [getUserPosts] = useGetUserPostsMutation();
 
   const [posts, setPosts] = useState(null);
+
+  console.log("INFOR", userInfo)
 
   useEffect(() => {
     const getAllPosts = async () => {
       try {
-        const allPost = await getPosts().unwrap();
+        const allPost = userInfo ? await getUserPosts().unwrap() : await getPosts().unwrap();
 
         setPosts(allPost);
         console.log("HOME", allPost);

@@ -16,6 +16,7 @@ function FeaturedCard({ post }) {
     >
       <div>
         <div>
+          <h1>{post.author}</h1>
           <h1 className={classNames(Styles.featuredTitle)}>{post.title}</h1>
           <p className={Styles.summary}>
             {post.summary ? post.summary : "Summary is not available"}

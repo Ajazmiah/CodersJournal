@@ -5,6 +5,7 @@ import Image from "../Image/Image";
 import classNames from "classnames";
 import { useLink } from "../../hooks/useLInk/useLink";
 import { formatDate } from "../../utils";
+import AuthorBylineCard from "../AuthorBylineCard/AuthorBylineCard";
 
 const LeadArticle = ({ post }) => {
   const { handleNavigateToPost } = useLink();
@@ -17,8 +18,10 @@ const LeadArticle = ({ post }) => {
         className={classNames("imageRound", Styles.leadImage)}
       />
       <div className={Styles.metadataContainer}>
-        <Typography>{post.title}</Typography>
-        <Typography variant="subtitle2">{post.summary}</Typography>
+        {/* <AuthorBylineCard author={post.author} /> */}
+        <h1>{post.author}</h1>
+        <span>{post.title}</span>
+        <span variant="subtitle2">{post.summary}</span>
         <span>{formatDate(post?.createdAt)}</span>
       </div>
     </div>

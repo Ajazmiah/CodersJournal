@@ -5,13 +5,28 @@ import { verifytoken } from "../utils/verifyToken.js";
 import { validationResult } from "express-validator";
 
 const allPost = asyncHandler(async (req, res, next) => {
-  const decoded = verifytoken(req);
+  try {
+    const blogPosts = await blogModel.find(); // Fetch all blog posts
+    const userIds = blogPosts.map(post => post.authorId); // Get all author IDs
 
-  const blogPosts = decoded
-    ? await blogModel.find({ authorId: { $ne: decoded.userId } })
-    : await blogModel.find();
-  res.status(200).json(blogPosts);
+    // Fetch user details for all author IDs
+    const users = await User.find({ _id: { $in: userIds } });
+
+    // Map the user details to the respective blog posts
+    const blogPostsWithAuthorNames = blogPosts.map(post => {
+      const author = users.find(user => user._id.toString() === post.authorId.toString());
+      return {
+        ...post.toObject(), // Convert the Mongoose document to a plain object
+        author: author ? `${author.firstName} ${author.lastName}`: 'Unknown'
+      };
+    });
+
+    res.status(200).json(blogPostsWithAuthorNames);
+  } catch (error) {
+    next(error);
+  }
 });
+
 
 const createPost = asyncHandler(async (req, res, next) => {
   // Check validation results
@@ -52,6 +67,20 @@ const getBlogs = asyncHandler(async (req, res, next) => {
   });
 
   res.status(200).json(blogs);
+});
+const getUserPosts = asyncHandler(async (req, res, next) => {
+  const decoded = verifytoken(req);
+  const user = await User.findById(decoded.userId).select("-password");
+
+  const blogPosts = await blogModel
+    .find({ authorId: { $ne: decoded.userId } })
+    .find({ authorId: user._id })
+    .populate({
+      path: "authorId",
+      select: ["-password"],
+    });
+
+  res.status(200).json(blogPosts);
 });
 
 // SINGLE POST PAGE
@@ -97,4 +126,12 @@ const editPost = asyncHandler(async (req, res, next) => {
   }
 });
 
-export { createPost, getBlogs, getPost, allPost, deletePost, editPost };
+export {
+  createPost,
+  getBlogs,
+  getPost,
+  allPost,
+  deletePost,
+  editPost,
+  getUserPosts,
+};

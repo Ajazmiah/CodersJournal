@@ -1,5 +1,6 @@
 .lead {
   cursor: pointer;
+  padding-bottom: var(--space-2);
 }
 .leadImage {
   max-width: 100%;
