@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import LeadArticle from "../LeadArticle/LeadArticle";
 import FeaturedCard from "../FeaturedCard/FeaturedCard";
 import { useGetMorePostOnScrollMutation } from "../../slices/postsApiSlice";
-
+import Border from "../Atoms/Border/Border";
+import Styles from './FeaturedArticles.module.css'
 function FeaturedArticles() {
   const [getPosts] = useGetMorePostOnScrollMutation();
 
@@ -26,11 +27,13 @@ function FeaturedArticles() {
   if (!posts) return;
 
   return (
-    <div>
-      <div>
+    <div className={Styles.FeaturedArticles}>
+      <div className={Styles.LeadArticle}>
         <LeadArticle post={posts[posts.length - 1]} />
+        <Border/>
       </div>
-      <div>
+ 
+      <div className={Styles.RecentArticles}>
         {posts.slice(-3).map((post) => (
           <FeaturedCard key={post._id} post={post} />
         ))}
