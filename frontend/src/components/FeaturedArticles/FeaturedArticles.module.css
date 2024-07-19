@@ -3,7 +3,7 @@
 }
 
 .LeadArticle {
-
+    margin-bottom: var(--space-6);
 }
 
 .RecentArticles {

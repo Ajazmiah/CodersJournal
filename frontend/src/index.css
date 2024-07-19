@@ -13,43 +13,27 @@
   --dark-gray: #59595e;
  
 
-  --space-2: 2px;
-  --space-4: 4px;
-  --space-6: 6px;
-  --space-8: 8px;
-  --space-10: 10px;
-  --space-12: 12px;
-  --space-14: 14px;
-  --space-16: 16px;
-  --space-18: 18px;
-  --space-20: 20px;
-  --space-22: 22px;
-  --space-24: 24px;
-  --space-26: 26px;
-  --space-28: 28px;
-  --space-30: 30px;
-  --space-32: 32px;
-  --space-34: 34px;
-  --space-36: 36px;
-  --space-38: 38px;
-  --space-40: 40px;
-  --space-42: 42px;
-  --space-44: 44px;
-  --space-46: 46px;
-  --space-48: 48px;
-  --space-50: 50px;
-  --space-52: 52px;
-  --space-54: 54px;
-  --space-56: 56px;
-  --space-58: 58px;
-  --space-60: 60px;
-  --space-62: 62px;
-  --space-64: 64px;
-  --space-66: 66px;
-  --space-68: 68px;
-  --space-70: 70px;
-  --space-72: 72px;
-  --space-74: 74px;
+  --space-2: 1em;
+  --space-4: 2em;
+  --space-6: 3em;
+  --space-8: 4em;
+  --space-10: 5em;
+  --space-12: 6em;
+  --space-14: 7em;
+  --space-16: 8em;
+  --space-18: 9em;
+  --space-20: 10em;
+  --space-22: 11em;
+  --space-24: 12em;
+  --space-26: 13em;
+  --space-28: 14em;
+  --space-30: 15em;
+  --space-32: 16em;
+  --space-34: 17em;
+  --space-36: 18em;
+  --space-38: 19em;
+  --space-40: 20em;
+}
 
   }
   
