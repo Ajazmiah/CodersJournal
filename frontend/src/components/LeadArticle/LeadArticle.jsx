@@ -10,6 +10,9 @@ import AuthorBylineCard from "../AuthorBylineCard/AuthorBylineCard";
 const LeadArticle = ({ post }) => {
   const { handleNavigateToPost } = useLink();
 
+  console.log("LEAD", post)
+
+
   return (
     <div onClick={() => handleNavigateToPost(post)} className={Styles.lead}>
       <img
@@ -18,7 +21,7 @@ const LeadArticle = ({ post }) => {
         className={classNames("imageRound", Styles.leadImage)}
       />
       <div className={Styles.metadataContainer}>
-        {/* <AuthorBylineCard author={post.author} /> */}
+        {<AuthorBylineCard author={{firstName:post.firstName, lastName: post.lastName}} /> }
         <h1>{post.author}</h1>
         <span>{post.title}</span>
         <span variant="subtitle2">{post.summary}</span>
