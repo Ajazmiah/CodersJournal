@@ -10,8 +10,6 @@ import { getIcon } from "../Icon";
 function PostCard({ posts }) {
   const { handleNavigateToPost } = useLink();
 
-  
-
   return (
     posts &&
     posts.length > 0 && (
@@ -33,24 +31,22 @@ function PostCard({ posts }) {
               />
             </div>
 
-            <AuthorBylineCard authorId={post.authorId} />
+            <AuthorBylineCard author={post.authorId} />
 
             <p className={classNames("heading-4", Styles.postTitle)}>
               {post?.title}
             </p>
 
-            <div className={Styles.postBottom}>
-              <p>{post.summary}</p>
-              <div className={Styles.border}>
-                <Border />
-              </div>
-              <div className={""}>
-                <span>{formatDate(post?.createdAt)}</span>
-                <ul>
-                  <li>{getIcon("Comment")}</li>
-                  <li>{getIcon("Heart")}</li>
-                </ul>
-              </div>
+            <p>{post.summary}</p>
+            <div className={Styles.border}>
+              <Border />
+            </div>
+            <div className={classNames(Styles.bottomPortion, "flex")}>
+              <span>{formatDate(post?.createdAt)}</span>
+              <ul className={Styles.Icons}>
+                <li>{getIcon("Comment")}</li>
+                <li>{getIcon("Heart")}</li>
+              </ul>
             </div>
           </div>
         ))}
