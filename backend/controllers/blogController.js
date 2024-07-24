@@ -17,8 +17,12 @@ const allPost = asyncHandler(async (req, res, next) => {
       const author = users.find(user => user._id.toString() === post.authorId.toString());
       return {
         ...post.toObject(), // Convert the Mongoose document to a plain object
-        firstName: author.firstName,
-        lastName: author.lastName
+        author: {
+          firstName: author.firstName,
+          lastName: author.lastName,
+          profilePicture: author.profilePicture,
+          authorId: author._id,
+        }
       };
     });
 

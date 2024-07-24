@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetMorePostOnScrollMutation , useGetUserPostsMutation } from "../../slices/postsApiSlice";
 import Border from "../Atoms/Border/Border";
 import Styles from './FeaturedArticles.module.css'
-function FeaturedArticles() {
+function  FeaturedArticles() {
   
   const { userInfo } = useSelector((state) => state.auth);
   const [getPosts] = useGetMorePostOnScrollMutation();
@@ -13,12 +13,12 @@ function FeaturedArticles() {
 
   const [posts, setPosts] = useState(null);
 
-  console.log("INFOR", userInfo)
+  console.log("INFOR", posts)
 
   useEffect(() => {
-    const getAllPosts = async () => {
+    const getAllPosts = async () => { getUserPosts
       try {
-        const allPost = userInfo ? await getUserPosts().unwrap() : await getPosts().unwrap();
+        const allPost = userInfo ? await getPosts().unwrap() : await getUserPosts().unwrap();
 
         setPosts(allPost);
         console.log("HOME", allPost);
