@@ -4,9 +4,9 @@ import classNames from "classnames";
 import { useLink } from "../../hooks/useLInk/useLink";
 import Image from "../Image/Image";
 import { formatDate } from "../../utils";
+import AuthorBylineCard from "../AuthorBylineCard/AuthorBylineCard";
 
 function FeaturedCard({ post }) {
-
   const { handleNavigateToPost } = useLink();
 
   return (
@@ -32,6 +32,8 @@ function FeaturedCard({ post }) {
           loading="eager"
         />
       </div>
+
+      <AuthorBylineCard authorId={post.authorId} />
     </div>
   );
 }

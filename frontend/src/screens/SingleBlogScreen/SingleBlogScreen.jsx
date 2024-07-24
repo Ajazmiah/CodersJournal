@@ -45,6 +45,8 @@ function SingleBlogScreen() {
     fetchPost();
   }, [getPost, id, postUpdated]);
 
+  console.log("___SINGLE__POST", post)
+
   const handleApproveDeletion = async () => {
     try {
       await deletePost({ id }).unwrap();
@@ -109,7 +111,7 @@ function SingleBlogScreen() {
                   <button onClick={() => handleModal("edit")}>Edit Post</button>
                 </div>
               )}
-              <AuthorBylineCard author={post.author} />
+              <AuthorBylineCard authorId={post?.author} />
             </div>
             <div className="merriweather-light ">{POST}</div>
           </div>
