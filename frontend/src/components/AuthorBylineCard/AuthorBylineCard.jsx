@@ -3,8 +3,11 @@ import ProfileImage from "../ProfileImage/ProfileImage";
 import { useSelector } from "react-redux";
 import Styles from "./AuthorBylineCard.module.css";
 import classNames from "classnames";
-function AuthorBylineCard({ authorName, profilePicture, bio = null }) {
+function AuthorBylineCard({ authorId }) {
   const { userInfo } = useSelector((state) => state.auth);
+
+  const authorName = `${authorId.firstName} ${authorId.lastName}`;
+  const { profilePicture } = authorId;
 
   return (
     <div className={classNames(Styles.AuthorByline, "flex")}>
@@ -13,7 +16,8 @@ function AuthorBylineCard({ authorName, profilePicture, bio = null }) {
       </div>
       <div>
         <p className={Styles.authorName}>
-          {authorName}, <span> {bio ? bio : "Writter"}</span>
+          {authorName},{" "}
+          <span> {authorId?.bio ? authorId?.bio : "Writter"}</span>
         </p>
       </div>
     </div>

@@ -10,6 +10,8 @@ import { getIcon } from "../Icon";
 function PostCard({ posts }) {
   const { handleNavigateToPost } = useLink();
 
+  
+
   return (
     posts &&
     posts.length > 0 && (
@@ -31,7 +33,7 @@ function PostCard({ posts }) {
               />
             </div>
 
-            <AuthorBylineCard author={post.authorId} />
+            <AuthorBylineCard authorId={post.authorId} />
 
             <p className={classNames("heading-4", Styles.postTitle)}>
               {post?.title}
