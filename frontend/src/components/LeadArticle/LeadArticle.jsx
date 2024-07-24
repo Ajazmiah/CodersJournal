@@ -12,6 +12,10 @@ const LeadArticle = ({ post }) => {
 
   console.log("LEAD", post)
 
+  const {authorId} = post;
+  const authorName = `${authorId.firstName} ${authorId.lastName}`
+const {profilePicture} = authorId
+
 
   return (
     <div onClick={() => handleNavigateToPost(post)} className={Styles.lead}>
@@ -21,7 +25,7 @@ const LeadArticle = ({ post }) => {
         className={classNames("imageRound", Styles.leadImage)}
       />
       <div className={Styles.metadataContainer}>
-        {<AuthorBylineCard author={{firstName:post.firstName, lastName: post.lastName}} /> }
+        {<AuthorBylineCard authorName={authorName} profilePicture={profilePicture}/> }
         <h1>{post.author}</h1>
         <span>{post.title}</span>
         <span variant="subtitle2">{post.summary}</span>
