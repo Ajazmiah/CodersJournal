@@ -111,7 +111,7 @@ function SingleBlogScreen() {
                   <button onClick={() => handleModal("edit")}>Edit Post</button>
                 </div>
               )}
-              <AuthorBylineCard authorId={post?.author} />
+              <AuthorBylineCard author={post.author} />
             </div>
             <div className="merriweather-light ">{POST}</div>
           </div>

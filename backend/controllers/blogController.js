@@ -62,13 +62,14 @@ const createPost = asyncHandler(async (req, res, next) => {
   }
 });
 
+//profile POSTS - 
 const getBlogs = asyncHandler(async (req, res, next) => {
   const decoded = verifytoken(req);
-  const user = await User.findById(decoded.userId).select("-password");
+  const user = await User.findById(decoded.userId).select("-password -confirmPassword");
 
   const blogs = await blogModel.find({ authorId: user._id }).populate({
     path: "authorId",
-    select: ["-password"],
+    select: "-password -confirmPassword",
   });
 
   res.status(200).json(blogs);
