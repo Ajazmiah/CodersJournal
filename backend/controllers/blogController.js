@@ -96,7 +96,7 @@ const getPost = asyncHandler(async (req, res, next) => {
     res.status(404);
     throw new Error("No post was found!");
   }
-  const user = await User.findById(post.authorId).select("-password");
+  const user = await User.findById(post.authorId).select("-password -confirmPassword");
 
   const POST = {
     ...post,
