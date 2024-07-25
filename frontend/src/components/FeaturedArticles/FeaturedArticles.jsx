@@ -35,6 +35,8 @@ function FeaturedArticles() {
     getAllPosts();
   }, []);
 
+  console.log("___POST___", posts)
+
   if (!posts) return;
 
   return (

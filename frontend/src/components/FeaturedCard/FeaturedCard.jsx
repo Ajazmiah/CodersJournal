@@ -32,7 +32,7 @@ function FeaturedCard({ post }) {
         />
       </div>
 
-      <AuthorBylineCard author={post?.author} />
+      <AuthorBylineCard author={post?.author ||  post?.authorId} />
     </div>
   );
 }

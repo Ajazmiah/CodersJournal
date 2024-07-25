@@ -18,7 +18,7 @@ const LeadArticle = ({ post }) => {
         className={classNames("imageRound", Styles.leadImage)}
       />
       <div>
-        <AuthorBylineCard author={post?.author} />
+        <AuthorBylineCard author={post?.author || post?.authorId} />
 
         <span>{post.title}</span>
         <span variant="subtitle2">{post.summary}</span>
