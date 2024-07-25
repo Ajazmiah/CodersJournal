@@ -33,11 +33,13 @@ function PostCard({ posts }) {
 
             <AuthorBylineCard author={post.authorId} />
 
-            <p className={classNames("heading-4", Styles.postTitle)}>
+            <p className={classNames("heading-4 truncate", Styles.postTitle)}>
               {post?.title}
             </p>
 
-            <p>{post.summary}</p>
+            <div className={Styles.summary}>
+             <p className="truncate">{post.summary}</p>
+            </div>
             <div className={Styles.border}>
               <Border />
             </div>
