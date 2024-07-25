@@ -4,17 +4,20 @@ import User from "../models/userModel.js";
 import { verifytoken } from "../utils/verifyToken.js";
 import { validationResult } from "express-validator";
 
+// Public - All Posts that shows up on HomeScreen
 const allPost = asyncHandler(async (req, res, next) => {
   try {
     const blogPosts = await blogModel.find(); // Fetch all blog posts
-    const userIds = blogPosts.map(post => post.authorId); // Get all author IDs
+    const userIds = blogPosts.map((post) => post.authorId); // Get all author IDs
 
     // Fetch user details for all author IDs
     const users = await User.find({ _id: { $in: userIds } });
 
     // Map the user details to the respective blog posts
-    const blogPostsWithAuthorNames = blogPosts.map(post => {
-      const author = users.find(user => user._id.toString() === post.authorId.toString());
+    const blogPostsWithAuthorNames = blogPosts.map((post) => {
+      const author = users.find(
+        (user) => user._id.toString() === post.authorId.toString()
+      );
       return {
         ...post.toObject(), // Convert the Mongoose document to a plain object
         author: {
@@ -22,7 +25,7 @@ const allPost = asyncHandler(async (req, res, next) => {
           lastName: author.lastName,
           profilePicture: author.profilePicture,
           authorId: author._id,
-        }
+        },
       };
     });
 
@@ -31,7 +34,6 @@ const allPost = asyncHandler(async (req, res, next) => {
     next(error);
   }
 });
-
 
 const createPost = asyncHandler(async (req, res, next) => {
   // Check validation results
@@ -62,10 +64,12 @@ const createPost = asyncHandler(async (req, res, next) => {
   }
 });
 
-//profile POSTS - 
+//profile POSTS -
 const getAllUserPosts = asyncHandler(async (req, res, next) => {
   const decoded = verifytoken(req);
-  const user = await User.findById(decoded.userId).select("-password -confirmPassword");
+  const user = await User.findById(decoded.userId).select(
+    "-password -confirmPassword"
+  );
 
   const blogs = await blogModel.find({ authorId: user._id }).populate({
     path: "authorId",
@@ -74,13 +78,14 @@ const getAllUserPosts = asyncHandler(async (req, res, next) => {
 
   res.status(200).json(blogs);
 });
+
+//
 const getUserPosts = asyncHandler(async (req, res, next) => {
   const decoded = verifytoken(req);
-  const user = await User.findById(decoded.userId).select("-password");
 
   const blogPosts = await blogModel
     .find({ authorId: { $ne: decoded.userId } })
-    .find({ authorId: user._id })
+    .find()
     .populate({
       path: "authorId",
       select: ["-password"],
@@ -97,7 +102,9 @@ const getPost = asyncHandler(async (req, res, next) => {
     res.status(404);
     throw new Error("No post was found!");
   }
-  const user = await User.findById(post.authorId).select("-password -confirmPassword");
+  const user = await User.findById(post.authorId).select(
+    "-password -confirmPassword"
+  );
 
   const POST = {
     ...post,
