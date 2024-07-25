@@ -63,7 +63,7 @@ const createPost = asyncHandler(async (req, res, next) => {
 });
 
 //profile POSTS - 
-const getBlogs = asyncHandler(async (req, res, next) => {
+const getAllUserPosts = asyncHandler(async (req, res, next) => {
   const decoded = verifytoken(req);
   const user = await User.findById(decoded.userId).select("-password -confirmPassword");
 
@@ -134,7 +134,7 @@ const editPost = asyncHandler(async (req, res, next) => {
 
 export {
   createPost,
-  getBlogs,
+  getAllUserPosts,
   getPost,
   allPost,
   deletePost,

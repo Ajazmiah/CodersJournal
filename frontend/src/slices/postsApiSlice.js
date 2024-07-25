@@ -4,7 +4,7 @@ const POSTS_URL = "/api/blog";
 
 const postsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    posts: builder.mutation({
+    allUserPosts: builder.mutation({
       query: () => ({
         url: `${POSTS_URL}/create`,
         method: "GET",
@@ -53,7 +53,7 @@ const postsApi = apiSlice.injectEndpoints({
 });
 
 export const {
-  usePostsMutation,
+  useAllUserPostsMutation,
   useSubmitPostMutation,
   useGetPostMutation,
   useGetMorePostOnScrollMutation,

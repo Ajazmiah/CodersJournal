@@ -19,7 +19,7 @@ function AuthorBylineCard({ author }) {
         <div>
           <p className={Styles.authorName}>
             {authorName}
-            <span> {author?.bio ? author?.bio : "Writter"}</span>
+            <span> {author?.bio ? author?.bio : " ,Writter"}</span>
           </p>
         </div>
       </div>

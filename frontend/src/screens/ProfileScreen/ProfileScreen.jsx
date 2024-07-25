@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "../../slices/postsSlice";
-import { usePostsMutation } from "../../slices/postsApiSlice";
+import { useAllUserPostsMutation } from "../../slices/postsApiSlice";
 import { Link } from "react-router-dom";
 import PostCard from "../../components/PostCard/PostCard";
 import ProfileImage from "../../components/ProfileImage/ProfileImage";
@@ -17,7 +17,7 @@ const ProfileScreen = () => {
 
   const userFullName = userInfo?.firstName + " " + userInfo?.lastName;
 
-  const [getPosts] = usePostsMutation();
+  const [getPosts] = useAllUserPostsMutation();
 
   useEffect(() => {
     const getAllPosts = async () => {
