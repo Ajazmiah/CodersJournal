@@ -9,6 +9,9 @@
 .postDetails {
   flex-grow: 1;
 }
+.postInfo {
+  margin-bottom: var(--space-2);
+}
 
 .card:hover {
   cursor: pointer;

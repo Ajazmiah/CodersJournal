@@ -128,3 +128,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/*post createdAt (date*/
+.createdAt {
+  font-size: .8em;
+}
