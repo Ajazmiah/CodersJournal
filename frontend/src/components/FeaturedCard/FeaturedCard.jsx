@@ -12,17 +12,14 @@ function FeaturedCard({ post }) {
   return (
     <div
       onClick={() => handleNavigateToPost(post)}
-      className={classNames(Styles.featuredCard, 'flex')}
-    >
- 
-        <div className={Styles.coverImage}>
-          <img
-            src={post?.coverImage}
-            alt={post?.alt || "cover photo of the post"}
-            loading="eager"
-          />
-        </div>
-  
+      className={classNames(Styles.featuredCard, "flex")}>
+      <div className={Styles.coverImage}>
+        <img
+          src={post?.coverImage}
+          alt={post?.alt || "cover photo of the post"}
+          loading="eager"
+        />
+      </div>
       <div className={Styles.postDetails}>
         <h1 className={classNames(Styles.featuredTitle)}>{post.title}</h1>
         <p className={Styles.summary}>

@@ -1,8 +1,14 @@
-
+.featuredCard {
+  gap: 1.5em;
+  margin-block: var(--space-6);
+  align-items: flex-start;
+}
 .featuredTitle {
   margin: 0;
 }
-
+.postDetails {
+  flex-grow: 1;
+}
 
 .card:hover {
   cursor: pointer;
@@ -13,6 +19,6 @@
   font-weight: 700;
 }
 .summary {
-  font-size: .8rem;
+  font-size: 0.8rem;
   margin-bottom: 5px;
 }
