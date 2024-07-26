@@ -2,9 +2,7 @@
 .featuredTitle {
   margin: 0;
 }
-.card {
-  /* line-height: 25px; */
-}
+
 
 .card:hover {
   cursor: pointer;

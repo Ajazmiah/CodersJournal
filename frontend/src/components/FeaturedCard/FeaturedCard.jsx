@@ -12,27 +12,25 @@ function FeaturedCard({ post }) {
   return (
     <div
       onClick={() => handleNavigateToPost(post)}
-      className={classNames(Styles.featuredCard, Styles.card)}
+      className={classNames(Styles.featuredCard, 'flex')}
     >
-      <div>
-        <div>
-          <h1 className={classNames(Styles.featuredTitle)}>{post.title}</h1>
-          <p className={Styles.summary}>
-            {post.summary ? post.summary : "Summary is not available"}
-          </p>
-          <span>{formatDate(post?.createdAt)}</span>
+ 
+        <div className={Styles.coverImage}>
+          <img
+            src={post?.coverImage}
+            alt={post?.alt || "cover photo of the post"}
+            loading="eager"
+          />
         </div>
+  
+      <div className={Styles.postDetails}>
+        <h1 className={classNames(Styles.featuredTitle)}>{post.title}</h1>
+        <p className={Styles.summary}>
+          {post.summary ? post.summary : "Summary is not available"}
+        </p>
+        <span>{formatDate(post?.createdAt)}</span>
+        <AuthorBylineCard author={post?.author || post?.authorId} />
       </div>
-
-      <div className={Styles.FeaturedImage}>
-        <img
-          src={post?.coverImage}
-          alt={post?.alt || "cover photo of the post"}
-          loading="eager"
-        />
-      </div>
-
-      <AuthorBylineCard author={post?.author ||  post?.authorId} />
     </div>
   );
 }
