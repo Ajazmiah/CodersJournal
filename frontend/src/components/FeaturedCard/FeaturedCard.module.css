@@ -11,6 +11,11 @@
 }
 .postInfo {
   margin-bottom: var(--space-2);
+
+  align-items: center;
+}
+.createdAt {
+  margin-left: 3em;
 }
 
 .card:hover {
@@ -22,6 +27,5 @@
   font-weight: 700;
 }
 .summary {
-  font-size: 0.8rem;
-  margin-bottom: 5px;
+  margin-top: 10px;
 }

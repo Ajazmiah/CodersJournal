@@ -17,7 +17,7 @@ function AuthorBylineCard({ author }) {
           <ProfileImage customClasses="ByLineImage" imageURL={profilePicture} />
         </div>
         <div>
-          <p className={Styles.authorName}>
+          <p>
             {authorName}
             <span> {author?.bio ? author?.bio : " ,Writter"}</span>
           </p>
