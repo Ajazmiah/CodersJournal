@@ -14,6 +14,9 @@
   font-size: 2rem;
   font-weight: 400;
 }
+.details {
+  margin-block: 2em;
+}
 .postDetails {
   margin-block: 2em;
 }

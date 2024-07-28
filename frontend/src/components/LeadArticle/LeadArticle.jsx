@@ -17,12 +17,14 @@ const LeadArticle = ({ post }) => {
         loading="eager"
         className={classNames("imageRound", Styles.leadImage)}
       />
-      <div className={Styles.postDetails}>
+      <div className={Styles.details}>
         <AuthorBylineCard author={post?.author || post?.authorId} />
 
-        <h1 className={classNames("heading heading-2 ")}>{post.title}</h1>
-        <span variant="subtitle2">{post.summary}</span>
-        <span>{formatDate(post?.createdAt)}</span>
+        <div className={Styles.postDetails}>
+          <h1 className={classNames("heading heading-2 truncate")}>{post.title}</h1>
+          <span variant="subtitle2" className="truncate">{post.summary}</span>
+          <span>{formatDate(post?.createdAt)}</span>
+        </div>
       </div>
     </div>
   );
