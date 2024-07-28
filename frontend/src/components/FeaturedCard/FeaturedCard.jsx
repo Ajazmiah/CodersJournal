@@ -5,6 +5,7 @@ import { useLink } from "../../hooks/useLInk/useLink";
 import Image from "../Image/Image";
 import { formatDate } from "../../utils";
 import AuthorBylineCard from "../AuthorBylineCard/AuthorBylineCard";
+import Date from "../Date/Date";
 
 
 function FeaturedCard({ post }) {
@@ -25,7 +26,7 @@ function FeaturedCard({ post }) {
       <div className={Styles.postDetails}>
        <div className={classNames(Styles.postInfo, 'flex fontSize09em')}>
        <AuthorBylineCard author={post?.author || post?.authorId} />
-        <p className={classNames(Styles.createdAt, 'createdAt')}>{formatDate(post?.createdAt)}</p>
+       <Date date={post.createdAt}/>
        </div>
         <h1 className={classNames(Styles.featuredTitle)}>{post.title}</h1>
         <p className={ classNames(Styles.summary, 'truncate')}>
