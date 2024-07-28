@@ -43,6 +43,7 @@ const userSchema = mongoose.Schema(
   }
 );
 
+
 //hashing password
 userSchema.pre("save", async function (next) {
   //if password isn't changed
@@ -57,6 +58,16 @@ userSchema.pre("save", async function (next) {
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
+
+// userSchema.methods.toJSON = function () {
+//   const user = this;
+//    const userData = user.toObject();
+
+//   delete userData.confirmPassword
+
+//   return user
+
+// };
 
 const User = mongoose.model("User", userSchema);
 

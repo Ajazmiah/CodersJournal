@@ -7,29 +7,12 @@ import { validationResult } from "express-validator";
 // Public - All Posts that shows up on HomeScreen
 const allPost = asyncHandler(async (req, res, next) => {
   try {
-    const blogPosts = await blogModel.find(); // Fetch all blog posts
-    const userIds = blogPosts.map((post) => post.authorId); // Get all author IDs
-
-    // Fetch user details for all author IDs
-    const users = await User.find({ _id: { $in: userIds } });
-
-    // Map the user details to the respective blog posts
-    const blogPostsWithAuthorNames = blogPosts.map((post) => {
-      const author = users.find(
-        (user) => user._id.toString() === post.authorId.toString()
-      );
-      return {
-        ...post.toObject(), // Convert the Mongoose document to a plain object
-        author: {
-          firstName: author.firstName,
-          lastName: author.lastName,
-          profilePicture: author.profilePicture,
-          authorId: author._id,
-        },
-      };
+    const blogPosts = await blogModel.find().populate({
+      path: "authorId",
+      select: "-password -confirmPassword",
     });
 
-    res.status(200).json(blogPostsWithAuthorNames);
+    res.status(200).json(blogPosts);
   } catch (error) {
     next(error);
   }
@@ -67,11 +50,7 @@ const createPost = asyncHandler(async (req, res, next) => {
 //profile POSTS -
 const getAllUserPosts = asyncHandler(async (req, res, next) => {
   const decoded = verifytoken(req);
-  const user = await User.findById(decoded.userId).select(
-    "-password -confirmPassword"
-  );
-
-  const blogs = await blogModel.find({ authorId: user._id }).populate({
+  const blogs = await blogModel.find({ authorId: decoded.userId }).populate({
     path: "authorId",
     select: "-password -confirmPassword",
   });

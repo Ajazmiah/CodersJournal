@@ -29,5 +29,12 @@ const blogSchema = mongoose.Schema(
   { timestamps: true }
 );
 
+// blogSchema.virtual('author', {
+//   ref: 'User',
+//   localField: '_id',
+//   foreignField: 'authorId'
+// })
+
+
 const blog = mongoose.model("Blog", blogSchema);
 export default blog;
