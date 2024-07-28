@@ -6,6 +6,7 @@ import classNames from "classnames";
 import { useLink } from "../../hooks/useLInk/useLink";
 import { formatDate } from "../../utils";
 import AuthorBylineCard from "../AuthorBylineCard/AuthorBylineCard";
+import Date from "../Date/Date";
 
 const LeadArticle = ({ post }) => {
   const { handleNavigateToPost } = useLink();
@@ -23,7 +24,7 @@ const LeadArticle = ({ post }) => {
         <div className={Styles.postDetails}>
           <h1 className={classNames("heading heading-2 truncate")}>{post.title}</h1>
           <span variant="subtitle2" className="truncate">{post.summary}</span>
-          <span>{formatDate(post?.createdAt)}</span>
+          <Date date={post?.createdAt}/>
         </div>
       </div>
     </div>

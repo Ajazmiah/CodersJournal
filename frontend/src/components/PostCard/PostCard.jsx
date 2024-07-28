@@ -6,6 +6,7 @@ import Styles from "./PostCard.module.css";
 import classNames from "classnames";
 import Border from "../Atoms/Border/Border";
 import { getIcon } from "../Icon";
+import Date from "../Date/Date";
 
 function PostCard({ posts }) {
   const { handleNavigateToPost } = useLink();
@@ -44,7 +45,7 @@ function PostCard({ posts }) {
               <Border />
             </div>
             <div className={classNames(Styles.bottomPortion, "flex")}>
-              <span>{formatDate(post?.createdAt)}</span>
+             <Date date={post?.createdAt} />
               <ul className={Styles.Icons}>
                 <li>{getIcon("Comment")}</li>
                 <li>{getIcon("Heart")}</li>
