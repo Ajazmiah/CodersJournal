@@ -17,10 +17,10 @@ const LeadArticle = ({ post }) => {
         loading="eager"
         className={classNames("imageRound", Styles.leadImage)}
       />
-      <div>
+      <div className={Styles.postDetails}>
         <AuthorBylineCard author={post?.author || post?.authorId} />
 
-        <span>{post.title}</span>
+        <h1 className={classNames("heading heading-2 ")}>{post.title}</h1>
         <span variant="subtitle2">{post.summary}</span>
         <span>{formatDate(post?.createdAt)}</span>
       </div>

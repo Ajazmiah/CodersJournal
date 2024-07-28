@@ -9,7 +9,7 @@ const allPost = asyncHandler(async (req, res, next) => {
   try {
     const blogPosts = await blogModel.find().populate({
       path: "authorId",
-      select: "-password -confirmPassword",
+      select: "-password",
     });
 
     res.status(200).json(blogPosts);

@@ -61,9 +61,9 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 
 // userSchema.methods.toJSON = function () {
 //   const user = this;
-//    const userData = user.toObject();
+//   //  const userData = user.toObject();
 
-//   delete userData.confirmPassword
+//   delete user.confirmPassword
 
 //   return user
 

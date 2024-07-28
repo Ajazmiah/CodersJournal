@@ -30,3 +30,11 @@
 .summary {
   margin-top: 10px;
 }
+.coverImage {
+  width: 15em;
+  height: 10em;
+  flex-shrink: 0;
+}
+.coverImage img {
+  height: 100%;
+}
