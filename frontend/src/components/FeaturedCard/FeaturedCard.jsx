@@ -26,7 +26,7 @@ function FeaturedCard({ post }) {
       <div className={Styles.postDetails}>
        <div className={classNames(Styles.postInfo, 'flex fontSize09em')}>
        <AuthorBylineCard author={post?.author || post?.authorId} />
-       <Date date={post.createdAt}/>
+       <Date date={post.createdAt} classes={Styles.createdAt}/>
        </div>
         <h1 className={classNames(Styles.featuredTitle)}>{post.title}</h1>
         <p className={ classNames(Styles.summary, 'truncate')}>

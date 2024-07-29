@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import { useBackdrop } from "../../components/Backdrop/Backdrop";
 import BlogEdit from "../../components/BlogEdit/BlogEdit";
+import Border from "../../components/Atoms/Border/Border";
 
 function SingleBlogScreen() {
   const { id } = useParams();
@@ -100,7 +101,6 @@ function SingleBlogScreen() {
       {post && (
         <>
           <div>
-            <img src={post?._doc.coverImage} />
             <PageHeader title={post._doc.title} />
             <div>
               <p>{post._doc.summary}</p>
@@ -112,6 +112,8 @@ function SingleBlogScreen() {
                 </div>
               )}
               <AuthorBylineCard author={post.author} />
+              <Border/>
+              <img src={post?._doc.coverImage} />
             </div>
             <div className="merriweather-light ">{POST}</div>
           </div>
