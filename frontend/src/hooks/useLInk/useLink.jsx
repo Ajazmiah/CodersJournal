@@ -6,8 +6,8 @@ export function useLink() {
     const navigate = useNavigate();
     const baseUrl = location.pathname;
 
-    const handleNavigateToPost = (post) => {
-        navigate(baseUrl.replace(baseUrl, `/post/${post._id}`));
+    const handleNavigateToPost = (post, path=null) => {
+        navigate(baseUrl.replace(baseUrl, path ? path : `/post/${post._id}`));
       };
   return {handleNavigateToPost}
 }

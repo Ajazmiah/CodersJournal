@@ -22,7 +22,7 @@ router.route("/create").post(protect,[
 router.route('/getUserPosts').get(getUserPosts)
 router.post('/edit', editPost)
 router.get("/post/:id" , getPost);
-router.post("/deletepost" , deletePost)
+router.get("/deletepost" , deletePost)
 
 
 export default router;

@@ -19,6 +19,7 @@ import PrivateRoute from "./components/PrivateRoute.jsx";
 import UpdateAccountScreen from "./screens/UpdateAccountScreen/UpdateAccountScreen.jsx";
 import SingleBlogScreen from "./screens/SingleBlogScreen/SingleBlogScreen.jsx";
 import NotFoundPage from './components/PageNotFound/PageNotFound.jsx';
+import UserPublicProfile from './components/UserPublicProfile/UserPublicProfile.jsx';
 
 
 const BlogCreationScreen = lazy(() => import('./screens/BlogCreationScreen/BlogCreationScreen.jsx'));
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
         } />
       </Route>
       <Route path="/post/:id" element={<SingleBlogScreen />} />
+      <Route path="/author/:name" element={<UserPublicProfile/>} />
       <Route path="*" element={<NotFoundPage/>} />
     </Route>
   )

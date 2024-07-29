@@ -8,6 +8,7 @@ import {
   logout,
   getUserProfile,
   updateUser,
+  userPublicProfile
 } from "../controllers/userController.js";
 
 const router = express.Router();
@@ -31,5 +32,7 @@ router.post("/logout", logout);
 router.route("/profile").get(protect, getUserProfile);
 
 router.route("/profile/update").put(protect, updateUser);
+
+router.get("/author/:name", userPublicProfile)
 
 export default router;
