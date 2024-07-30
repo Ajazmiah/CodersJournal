@@ -19,7 +19,7 @@ const LeadArticle = ({ post }) => {
         className={classNames("imageRound", Styles.leadImage)}
       />
       <div className={Styles.details}>
-        <AuthorBylineCard author={post?.author || post?.authorId} />
+        {/* <AuthorBylineCard author={post?.author || post?.authorId} /> */}
 
         <div className={Styles.postDetails}>
           <h1 className={classNames("heading heading-2 truncate")}>{post.title}</h1>

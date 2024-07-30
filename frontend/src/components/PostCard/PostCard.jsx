@@ -32,20 +32,18 @@ function PostCard({ posts }) {
               />
             </div>
 
-            <AuthorBylineCard author={post.authorId} />
-
             <p className={classNames("heading-4 truncate", Styles.postTitle)}>
               {post?.title}
             </p>
 
             <div className={Styles.summary}>
-             <p className="truncate">{post.summary}</p>
+              <p className="truncate">{post.summary}</p>
             </div>
             <div className={Styles.border}>
               <Border />
             </div>
             <div className={classNames(Styles.bottomPortion, "flex")}>
-             <Date date={post?.createdAt} />
+              <Date date={post?.createdAt} />
               <ul className={Styles.Icons}>
                 <li>{getIcon("Comment")}</li>
                 <li>{getIcon("Heart")}</li>

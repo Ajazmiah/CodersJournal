@@ -4,7 +4,6 @@ import classNames from 'classnames'
 
 function Date({date, ...rest}) {
     const styles = {
-        marginBlock: '.5em',
         display: 'block'
     }
     const {classes} = {...rest}

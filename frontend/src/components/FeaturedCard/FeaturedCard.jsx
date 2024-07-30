@@ -24,15 +24,14 @@ function FeaturedCard({ post }) {
         />
       </div>
       <div className={Styles.postDetails}>
-       <div className={classNames(Styles.postInfo, 'flex fontSize09em')}>
-       <AuthorBylineCard author={post?.author || post?.authorId} />
-       <Date date={post.createdAt} classes={Styles.createdAt}/>
-       </div>
-        <h1 className={classNames(Styles.featuredTitle)}>{post.title}</h1>
+       {/* <div className={classNames(Styles.postInfo, 'flex fontSize09em')}>
+       </div> */}
+        <h1 className={classNames(Styles.featuredTitle, 'truncate')}>{post.title}</h1>
         <p className={ classNames(Styles.summary, 'truncate')}>
           {post.summary ? post.summary : "Summary is not available"}
         </p>
       </div>
+      <Date date={post.createdAt}/>
       
     </div>
   );

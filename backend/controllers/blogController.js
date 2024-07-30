@@ -77,6 +77,7 @@ const getUserPosts = asyncHandler(async (req, res, next) => {
 const getPost = asyncHandler(async (req, res, next) => {
   const post = await blogModel.findById(req.params.id);
 
+
   if (!post) {
     res.status(404);
     throw new Error("No post was found!");

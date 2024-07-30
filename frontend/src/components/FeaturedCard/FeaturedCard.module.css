@@ -10,14 +10,6 @@
 .postDetails {
   flex-grow: 1;
 }
-.postInfo {
-  margin-bottom: var(--space-2);
-
-  align-items: center;
-}
-.createdAt {
-  margin-left: 3em;
-}
 
 .card:hover {
   cursor: pointer;
