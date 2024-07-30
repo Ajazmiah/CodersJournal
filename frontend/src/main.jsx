@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -18,11 +18,12 @@ import { Provider } from "react-redux";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import UpdateAccountScreen from "./screens/UpdateAccountScreen/UpdateAccountScreen.jsx";
 import SingleBlogScreen from "./screens/SingleBlogScreen/SingleBlogScreen.jsx";
-import NotFoundPage from './components/PageNotFound/PageNotFound.jsx';
-import UserPublicProfile from './components/UserPublicProfile/UserPublicProfile.jsx';
+import NotFoundPage from "./components/PageNotFound/PageNotFound.jsx";
+import UserPublicProfile from "./components/UserPublicProfile/UserPublicProfile.jsx";
 
-
-const BlogCreationScreen = lazy(() => import('./screens/BlogCreationScreen/BlogCreationScreen.jsx'));
+const BlogCreationScreen = lazy(() =>
+  import("./screens/BlogCreationScreen/BlogCreationScreen.jsx")
+);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,15 +34,18 @@ const router = createBrowserRouter(
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/profile/update" element={<UpdateAccountScreen />} />
-        <Route path="/create" element={
-          <Suspense fallback={<div>Loading...</div>}>
-            <BlogCreationScreen />
-          </Suspense>
-        } />
+        <Route
+          path="/create"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <BlogCreationScreen />
+            </Suspense>
+          }
+        />
       </Route>
       <Route path="/post/:id" element={<SingleBlogScreen />} />
-      <Route path="/author/:name" element={<UserPublicProfile/>} />
-      <Route path="*" element={<NotFoundPage/>} />
+      <Route path="/author/:name" element={<UserPublicProfile />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Route>
   )
 );
@@ -49,9 +53,7 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <React.StrictMode>
-   
-     <RouterProvider router={router} />
-   
+      <RouterProvider router={router} />
     </React.StrictMode>
   </Provider>
 );

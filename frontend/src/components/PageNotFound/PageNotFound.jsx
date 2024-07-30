@@ -9,7 +9,7 @@ function NotFoundPage() {
   return (
     <div className={Styles.pageNotFound}>
       <p>404-PAGE NOT FOUND</p>
-      <button className={Styles.goBack} onClick={() => navigate(-2)}> <FaArrowLeft/> Go Back</button>
+      <button className={Styles.goBack} onClick={() => navigate('/')}> <FaArrowLeft/> Go Back Home</button>
      </div>
   )
 }
