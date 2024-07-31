@@ -11,6 +11,8 @@
   width: 90%; /* Default width for very small screens */
   padding-inline: 1em;
   margin-inline: auto;
+  padding-bottom: 10em;
+  padding-top: 5em;
 }
 
 /* Small Devices (Landscape Phones) */

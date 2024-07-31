@@ -3,6 +3,7 @@ import generateToken from "../utils/generateToken.js";
 import asyncHandler from "express-async-handler"; // This eliminates the need to use try and catch in Controller function
 import { validationResult } from "express-validator";
 import blogModel from "../models/blogModels.js";
+import User from "../models/userModel.js";
 
 const signup = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
@@ -134,16 +135,17 @@ const updateUser = asyncHandler(async (req, res, next) => {
   }
 });
 
-// public profile - 
+// public profile -
 const userPublicProfile = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
 
-  const blogs = await blogModel.find({ authorId: id }).populate({
-    path: "authorId",
-    select: "-password -confirmPassword",
-  });
+  const blogs = await blogModel.find({ authorId: id });
 
-  res.status(200).json(blogs);
+  const authorInfo = await userModel
+    .findById(id)
+    .select("-password -confirmPassword");
+
+  res.status(200).json({blogs, authorInfo,});
 });
 
 export {
