@@ -1,9 +1,10 @@
 import React from 'react'
 import Styles from './Border.module.css'
+import classNames from 'classnames'
 
-function Border() {
+function Border({borderLocation='bottom'}) {
   return (
-    <div className={Styles.border}></div>
+    <div className={classNames(Styles.border, Styles[borderLocation])}></div>
   )
 }
 

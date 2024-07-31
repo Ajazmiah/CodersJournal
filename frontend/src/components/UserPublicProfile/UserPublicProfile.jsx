@@ -38,6 +38,7 @@ function UserPublicProfile() {
   return (
     <div>
       <AuthorBio authorInfo={author} />
+
       {posts.map((post) => (
         <>
           <FeaturedCard post={post} />
