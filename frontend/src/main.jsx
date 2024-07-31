@@ -44,7 +44,7 @@ const router = createBrowserRouter(
         />
       </Route>
       <Route path="/post/:id" element={<SingleBlogScreen />} />
-      <Route path="/author/:name" element={<UserPublicProfile />} />
+      <Route path="/author/:id" element={<UserPublicProfile />} />
       <Route path="*" element={<NotFoundPage />} />
     </Route>
   )

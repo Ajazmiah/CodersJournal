@@ -33,6 +33,6 @@ router.route("/profile").get(protect, getUserProfile);
 
 router.route("/profile/update").put(protect, updateUser);
 
-router.get("/author/:name", userPublicProfile)
+router.get("/author/:id", userPublicProfile)
 
 export default router;

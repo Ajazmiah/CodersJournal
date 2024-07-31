@@ -2,6 +2,7 @@ import userModel from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 import asyncHandler from "express-async-handler"; // This eliminates the need to use try and catch in Controller function
 import { validationResult } from "express-validator";
+import blogModel from "../models/blogModels.js";
 
 const signup = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
@@ -134,31 +135,17 @@ const updateUser = asyncHandler(async (req, res, next) => {
 });
 
 const userPublicProfile = asyncHandler(async (req,res,next) => {
-  const post = {
-    "userId": 12345,
-    "username": "john_doe",
-    "posts": [
-      {
-        "postId": 1,
-        "title": "My First Post",
-        "content": "This is the content of my first post.",
-        "createdAt": "2024-07-28T12:34:56Z"
-      },
-      {
-        "postId": 2,
-        "title": "Another Post",
-        "content": "This is some more content in another post.",
-        "createdAt": "2024-07-29T14:22:10Z"
-      }
-    ],
-    "profile": {
-      "bio": "Software developer and tech enthusiast.",
-      "website": "https://example.com",
-      "avatarUrl": "https://example.com/avatar.jpg"
-    }
-  }
-  
-  res.status(200).json(post)
+
+  const id = req.params.id
+
+
+
+  const blogs = await blogModel.find({ authorId: id }).populate({
+    path: "authorId",
+    select: "-password -confirmPassword",
+  });
+
+  res.status(200).json(blogs);
 });
 
 export { signup, singin, logout, getUserProfile, updateUser,userPublicProfile };

@@ -3,8 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useUserPublicProfileMutation } from '../../slices/usersApiSlice';
 
 function UserPublicProfile() {
-    const { name } = useParams();
-    const id = name.split('-')[1]
+    const { id } = useParams();
+    const userId = id.split('-')[1]
 
     const [gerUserProfile] = useUserPublicProfileMutation()
     const [posts, setPosts] = useState(null)
@@ -12,7 +12,7 @@ function UserPublicProfile() {
     useEffect(() => {
         const fetchPost = async () => {
           try {
-            const fetchedPost = await gerUserProfile({ id }).unwrap();
+            const fetchedPost = await gerUserProfile({ userId }).unwrap();
             console.log("FECTHED", fetchedPost)
             setPosts(fetchedPost);
           } catch (err) {
@@ -25,7 +25,7 @@ function UserPublicProfile() {
         };
     
         fetchPost();
-      }, [gerUserProfile, id]);
+      }, [gerUserProfile, userId]);
     
 
   return (
