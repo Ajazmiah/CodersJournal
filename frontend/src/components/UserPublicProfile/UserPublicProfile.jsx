@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useParams, useNavigate } from "react-router-dom";
 import { useUserPublicProfileMutation } from '../../slices/usersApiSlice';
+import FeaturedCard from '../FeaturedCard/FeaturedCard';
 
 function UserPublicProfile() {
     const { id } = useParams();
@@ -27,9 +28,12 @@ function UserPublicProfile() {
         fetchPost();
       }, [gerUserProfile, userId]);
     
+    if(!posts) return 
 
   return (
-    <div> NAME</div>
+    <div>
+     {posts.map(post => <FeaturedCard post ={post}/>)}
+    </div>
   )
 }
 

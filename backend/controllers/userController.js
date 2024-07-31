@@ -134,11 +134,9 @@ const updateUser = asyncHandler(async (req, res, next) => {
   }
 });
 
-const userPublicProfile = asyncHandler(async (req,res,next) => {
-
-  const id = req.params.id
-
-
+// public profile - 
+const userPublicProfile = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
 
   const blogs = await blogModel.find({ authorId: id }).populate({
     path: "authorId",
@@ -148,4 +146,11 @@ const userPublicProfile = asyncHandler(async (req,res,next) => {
   res.status(200).json(blogs);
 });
 
-export { signup, singin, logout, getUserProfile, updateUser,userPublicProfile };
+export {
+  signup,
+  singin,
+  logout,
+  getUserProfile,
+  updateUser,
+  userPublicProfile,
+};
