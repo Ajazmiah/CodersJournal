@@ -1,38 +1,39 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import Styles from "./Image.module.css";
 
 const removeExtension = (src) => {
+  // Match known file extensions at the end of the string
+  const match = src.match(/\.(png|jpg|jpeg|webp)$/i);
 
-  let extensionType = src.slice(-4)
-
-  if (!src.slice(-4).includes('.')) {
-    extensionType = '.jpeg'
+  if (!match) {
+    // Return the original string if no known extension is found
+    return src;
   }
 
-  if (extensionType === '.png' || extensionType === '.jpg' || extensionType === '.jpeg') {
-    return src.split(extensionType)[0]
-  }
+  const extensionType = match[0];
 
-  return src
-}
+  // Remove the extension from the URL and return
+  return src.slice(0, -extensionType.length);
+};
 
+const IMG_EXTENSIONS = ["webp", "jpeg", "png", "jpg"];
 
 function Image({ src, alt, className, loading, width, height }) {
-
-  const imageSrc = src || 'https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF'
   return (
     <picture>
-      <source
-        srcSet={`${removeExtension(imageSrc)}.webp`}
-        type="image/webp"
-      />
+      {IMG_EXTENSIONS.map((extn) => (
+        <source
+          srcSet={`${removeExtension(src)}.${extn}`}
+          type={`image/${extn}`}
+        />
+      ))}
       <img
         width={width}
         height={height}
-        src={`${removeExtension(imageSrc)}.jpg`}
+        src={src}
         alt={alt}
-        loading={loading || 'lazy'} // Use the loading attribute to enable lazy loading
+        loading={loading || "lazy"} // Use the loading attribute to enable lazy loading
       />
     </picture>
   );
@@ -41,14 +42,14 @@ Image.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   className: PropTypes.string,
-  loading: PropTypes.string
-}
+  loading: PropTypes.string,
+};
 
 Image.defaultProps = {
-  className: '',
-  loading: 'lazy',
-  width: '100%',
-  height: '100%'
-}
+  className: "",
+  loading: "lazy",
+  width: "100%",
+  height: "100%",
+};
 
 export default Image;
