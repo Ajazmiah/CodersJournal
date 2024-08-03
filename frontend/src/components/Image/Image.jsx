@@ -4,7 +4,7 @@ import Styles from "./Image.module.css";
 
 const removeExtension = (src) => {
   // Match known file extensions at the end of the string
-  const match = src.match(/\.(png|jpg|jpeg|webp)$/i);
+  const match = src?.match(/\.(png|jpg|jpeg|webp)$/i);
 
   if (!match) {
     // Return the original string if no known extension is found
@@ -24,6 +24,7 @@ function Image({ src, alt, className, loading, width, height }) {
     <picture>
       {IMG_EXTENSIONS.map((extn) => (
         <source
+          key={extn}
           srcSet={`${removeExtension(src)}.${extn}`}
           type={`image/${extn}`}
         />

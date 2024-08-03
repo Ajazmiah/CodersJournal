@@ -7,7 +7,6 @@ import { formatDate } from "../../utils";
 import AuthorBylineCard from "../AuthorBylineCard/AuthorBylineCard";
 import Date from "../Date/Date";
 
-
 function FeaturedCard({ post }) {
   const { handleNavigateToPost } = useLink();
 
@@ -24,12 +23,14 @@ function FeaturedCard({ post }) {
         />
       </div>
       <div className={Styles.postDetails}>
-        <h1 className={classNames(Styles.featuredTitle, 'truncate')}>{post.title}</h1>
-        <p className={ classNames(Styles.summary, 'truncate')}>
+        <h1 className={classNames(Styles.featuredTitle, "truncate")}>
+          {post.title}
+        </h1>
+        <p className={classNames(Styles.summary, "truncate")}>
           {post.summary ? post.summary : "Summary is not available"}
         </p>
       </div>
-      <Date date={post.createdAt}/>   
+      <Date date={post.createdAt} />
     </div>
   );
 }
