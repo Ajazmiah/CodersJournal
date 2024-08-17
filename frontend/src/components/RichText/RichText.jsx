@@ -8,6 +8,8 @@ import { sanitizeContent } from "../../utils";
 import useUploadImage from "../../hooks/useUploadImage";
 import { toast } from "react-toastify";
 
+const VALID_FILE_TYPES = ["image/jpg", "image/jpeg", "image/png", "image/webp"];
+
 function QuillRichText({
   editQuillValue,
   editTitle,
@@ -62,6 +64,9 @@ function QuillRichText({
   const coverImage = image?.myFile || editCoverImage;
   const [error, setError] = useState([]);
 
+
+  const [s3Image , setS3Image] = useState(null)
+
   const validateInputs = (titleInput, summaryInput, quillInput, image) => {
     let errors = [];
 
@@ -87,6 +92,27 @@ function QuillRichText({
 
     return true;
   };
+  //////////////
+
+  const handleFileChange2 = async (e) => {
+    const file = e.target.files[0];
+
+    if (!VALID_FILE_TYPES.includes(file.type)) {
+      toast.error("Please choose an image file");
+      return;
+    }
+    try {
+      const form = new FormData();
+      form.append("image", file);
+
+      // const res = await postImage(form).unwrap();
+      // console.log("RESS", res)
+      setS3Image(form)
+
+    } catch (err) {}
+  };
+
+  //////////
 
   useEffect(() => {
     if (error.length > 0) {
@@ -101,11 +127,7 @@ function QuillRichText({
     if (validateInputs(title, summary, QuillValue, image)) {
       handleBackdrop();
 
-      //const updatedImage = image?.myFile ? image : false
-
-      console.log("UPDATED IMAGE", coverImage);
-      console.log("UPDATED FILE", image?.myFile);
-      postSubmitHandler(title, summary, QuillValue, coverImage);
+      postSubmitHandler(title, summary, QuillValue, coverImage, s3Image);
     } else return;
   };
   const handleFileChange = async (event) => {
@@ -118,6 +140,11 @@ function QuillRichText({
   return (
     <>
       <div className={classnames("container pageContainer", Styles.richText)}>
+        <>
+          <label htmlFor="image">Upload</label>
+
+          <input type="file" id="image" hidden onChange={handleFileChange2} />
+        </>
         {<img src={coverImage} />}
         <div>
           <input
@@ -143,7 +170,7 @@ function QuillRichText({
             type="text"
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
-            autocomplete="shipping address-line1"
+            autoComplete="shipping address-line1"
           />
         </div>
         <div>

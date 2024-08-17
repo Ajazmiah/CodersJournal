@@ -27,6 +27,9 @@ const createPost = asyncHandler(async (req, res, next) => {
   }
 
   const { title, body, summary, coverImage } = req.body;
+  
+  console.log("___REQ___", req.file)
+
 
   const decoded = verifytoken(req);
   const user = await User.findById(decoded.userId).select("-password");
@@ -94,6 +97,7 @@ const getPost = asyncHandler(async (req, res, next) => {
 });
 
 const deletePost = asyncHandler(async (req, res, next) => {
+  console.log("HIIIIII FROM DELETE")
   const _id = req.body.id;
   const post = await blogModel.findByIdAndDelete(_id);
   res.status(200).json(post);

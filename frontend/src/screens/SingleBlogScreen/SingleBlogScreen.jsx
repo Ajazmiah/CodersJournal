@@ -31,6 +31,7 @@ function SingleBlogScreen() {
 
   useEffect(() => {
     const fetchPost = async () => {
+      console.log("ID", id)
       try {
         const fetchedPost = await getPost({ id }).unwrap();
         setPost(fetchedPost);
@@ -46,9 +47,9 @@ function SingleBlogScreen() {
     fetchPost();
   }, [getPost, id, postUpdated]);
 
-  console.log("___SINGLE__POST", post)
 
   const handleApproveDeletion = async () => {
+    console.log("HI Approved:", id)
     try {
       await deletePost({ id }).unwrap();
       toast.success("Post is deleted");
@@ -59,6 +60,7 @@ function SingleBlogScreen() {
   };
 
   const handleModal = (handleType) => {
+    console.log("CLICKE CLICKED CLIKED")
     setBackdrop((prev) => !prev);
     setModalContentType(handleType);
   };
