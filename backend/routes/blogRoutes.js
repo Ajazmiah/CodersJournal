@@ -10,11 +10,15 @@ import {
   getUserPosts
 } from "../controllers/blogController.js";
 import { protect } from "../middleware/authMIddleware.js";
+import multer from "multer";
 const router = express.Router();
+
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage })
 
 
 router.route("/allPost").get(allPost)
-router.route("/create").post(protect,[
+router.route("/create").post(protect, upload.single('coverImage'),[
   check('summary', 'Summary is required').notEmpty(),
   check('title', 'Title is required').notEmpty(),
   check('body', 'Body is required').notEmpty(),

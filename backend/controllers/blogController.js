@@ -27,26 +27,21 @@ const createPost = asyncHandler(async (req, res, next) => {
   }
 
   const { title, body, summary, coverImage } = req.body;
-  
-  console.log("___REQ___", req.file)
-
 
   const decoded = verifytoken(req);
   const user = await User.findById(decoded.userId).select("-password");
 
-  try {
-    const blog = await blogModel.create({
-      title,
-      body,
-      summary,
-      coverImage,
-      authorId: user._id,
-    });
-
+  const blog = await blogModel.create({
+    title,
+    body,
+    summary,
+    coverImage,
+    authorId: user._id,
+  });
+  if (blog) {
     res.status(200).json(blog);
-  } catch (error) {
-    console.error("Failed to create the Blog:", error);
-    res.status(500).json({ error: "Failed to create the Blog" });
+  } else {
+    res.status(401).json("Failed to create the Blog");
   }
 });
 
@@ -80,7 +75,6 @@ const getUserPosts = asyncHandler(async (req, res, next) => {
 const getPost = asyncHandler(async (req, res, next) => {
   const post = await blogModel.findById(req.params.id);
 
-
   if (!post) {
     res.status(404);
     throw new Error("No post was found!");
@@ -97,7 +91,7 @@ const getPost = asyncHandler(async (req, res, next) => {
 });
 
 const deletePost = asyncHandler(async (req, res, next) => {
-  console.log("HIIIIII FROM DELETE")
+  console.log("HIIIIII FROM DELETE");
   const _id = req.body.id;
   const post = await blogModel.findByIdAndDelete(_id);
   res.status(200).json(post);

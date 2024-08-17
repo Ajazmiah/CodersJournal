@@ -103,7 +103,7 @@ function QuillRichText({
     }
     try {
       const form = new FormData();
-      form.append("image", file);
+      form.append("coverImage", file);
 
       // const res = await postImage(form).unwrap();
       // console.log("RESS", res)
