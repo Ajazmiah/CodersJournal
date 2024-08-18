@@ -41,7 +41,8 @@ const createPost = asyncHandler(async (req, res, next) => {
   if (blog) {
     res.status(200).json(blog);
   } else {
-    res.status(401).json("Failed to create the Blog");
+    res.status(401);
+    throw new Error("Failed to create the Blog");
   }
 });
 
@@ -68,7 +69,12 @@ const getUserPosts = asyncHandler(async (req, res, next) => {
       select: ["-password"],
     });
 
-  res.status(200).json(blogPosts);
+  if(blogPosts) {
+    res.status(200).json(blogPosts);
+  }else {
+    res.status(400)
+    throw new Error("The post could not be fetched at this time")
+  }
 });
 
 // SINGLE POST PAGE
@@ -112,7 +118,7 @@ const editPost = asyncHandler(async (req, res, next) => {
 
     res.status(200).json(updatedPost);
   } else {
-    res.status(404);
+    res.status(500);
     throw new Error("Something went wrong - Unable to edit post");
   }
 });
