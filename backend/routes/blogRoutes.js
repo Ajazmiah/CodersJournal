@@ -21,7 +21,7 @@ router.route("/allPost").get(allPost)
 router.route("/create").post(protect, upload.single('coverImage'),[
   check('summary', 'Summary is required').notEmpty(),
   check('title', 'Title is required').notEmpty(),
-  check('body', 'Body is required').notEmpty(),
+  check('QuillValue', 'Body is required').notEmpty(),
 ],createPost).get(protect, getAllUserPosts);
 router.route('/getUserPosts').get(getUserPosts)
 router.post('/edit', editPost)

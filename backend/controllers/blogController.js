@@ -26,7 +26,16 @@ const createPost = asyncHandler(async (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { title, body, summary, coverImage } = req.body;
+  const richText = req.body;
+
+  console.log("RICHHHH", req.body)
+
+  const title = richText.title;
+  const body = richText.QuillValue;
+  const summary = richText.summary;
+  const coverImage = richText.image;
+
+  console.log("COVER", body)
 
   const decoded = verifytoken(req);
   const user = await User.findById(decoded.userId).select("-password");
@@ -69,11 +78,11 @@ const getUserPosts = asyncHandler(async (req, res, next) => {
       select: ["-password"],
     });
 
-  if(blogPosts) {
+  if (blogPosts) {
     res.status(200).json(blogPosts);
-  }else {
-    res.status(400)
-    throw new Error("The post could not be fetched at this time")
+  } else {
+    res.status(400);
+    throw new Error("The post could not be fetched at this time");
   }
 });
 

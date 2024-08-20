@@ -10,22 +10,11 @@ function BlogCreationScreen({ editTitle, editSummary, quillValue, edit }) {
   const [submitPost] = useSubmitPostMutation();
 
   const postSubmitHandler = async (
-    title,
-    summary,
-    QuillValue,
-    coverImage,
-    file
+formData
   ) => {
     try {
-      let data = {
-        title,
-        summary,
-        coverImage,
-        body: QuillValue,
-        file,
-      };
 
-      const res = await submitPost(data).unwrap();
+      const res = await submitPost(formData).unwrap();
     } catch (err) {
       toast.error(err);
     }

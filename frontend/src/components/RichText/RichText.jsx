@@ -64,8 +64,7 @@ function QuillRichText({
   const coverImage = image?.myFile || editCoverImage;
   const [error, setError] = useState([]);
 
-
-  const [s3Image , setS3Image] = useState(null)
+  const [s3Image, setS3Image] = useState(null);
 
   const validateInputs = (titleInput, summaryInput, quillInput, image) => {
     let errors = [];
@@ -107,8 +106,7 @@ function QuillRichText({
 
       // const res = await postImage(form).unwrap();
       // console.log("RESS", res)
-      setS3Image(form)
-
+      setS3Image(file);
     } catch (err) {}
   };
 
@@ -127,7 +125,19 @@ function QuillRichText({
     if (validateInputs(title, summary, QuillValue, image)) {
       handleBackdrop();
 
-      postSubmitHandler(title, summary, QuillValue, coverImage, s3Image);
+      const form = new FormData();
+
+
+
+      form.append("coverImage", s3Image); //muter file 
+      form.append("title", title);
+      form.append("summary", summary);
+      form.append("QuillValue", QuillValue);
+      form.append("image", coverImage);
+
+      console.log("IMAGE", image)
+
+      postSubmitHandler(form);
     } else return;
   };
   const handleFileChange = async (event) => {
