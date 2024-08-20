@@ -28,14 +28,10 @@ const createPost = asyncHandler(async (req, res, next) => {
 
   const richText = req.body;
 
-  console.log("RICHHHH", req.body)
-
   const title = richText.title;
   const body = richText.QuillValue;
   const summary = richText.summary;
   const coverImage = richText.image;
-
-  console.log("COVER", body)
 
   const decoded = verifytoken(req);
   const user = await User.findById(decoded.userId).select("-password");

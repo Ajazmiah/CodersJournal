@@ -7,6 +7,7 @@ import { useBackdrop } from "../Backdrop/Backdrop";
 import { sanitizeContent } from "../../utils";
 import useUploadImage from "../../hooks/useUploadImage";
 import { toast } from "react-toastify";
+import UploadFileButton from "../UploadButton/UploadFileButton";
 
 const VALID_FILE_TYPES = ["image/jpg", "image/jpeg", "image/png", "image/webp"];
 
@@ -151,9 +152,11 @@ function QuillRichText({
     <>
       <div className={classnames("container pageContainer", Styles.richText)}>
         <>
-          <label htmlFor="image">Upload</label>
+          {/* <label htmlFor="image">Upload</label>
 
-          <input type="file" id="image" hidden onChange={handleFileChange2} />
+          <input type="file" id="image" hidden onChange={handleFileChange2} /> */}
+
+          <UploadFileButton type='file' handleChange={handleFileChange2} />
         </>
         {<img src={coverImage} />}
         <div>
@@ -183,7 +186,7 @@ function QuillRichText({
             autoComplete="shipping address-line1"
           />
         </div>
-        <div>
+        {/* <div>
           <input
             type="file"
             required={true}
@@ -191,7 +194,7 @@ function QuillRichText({
             onChange={handleFileChange}
             placeholder="Cover Image"
           />
-        </div>
+        </div> */}
         <ReactQuill
           className={classnames(Styles["ql-toolbar"], Styles["ql-editor"])}
           theme="snow"
