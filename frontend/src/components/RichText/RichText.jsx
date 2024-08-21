@@ -104,9 +104,6 @@ function QuillRichText({
     try {
       const form = new FormData();
       form.append("coverImage", file);
-
-      // const res = await postImage(form).unwrap();
-      // console.log("RESS", res)
       setS3Image(file);
     } catch (err) {}
   };
@@ -125,16 +122,6 @@ function QuillRichText({
   const handleClick = () => {
     if (validateInputs(title, summary, QuillValue, coverImage)) {
       handleBackdrop();
-
-      // const form = new FormData();
-
-    //  form.append("coverImage", s3Image); //muter file
-      // form.append("title", title);
-      // form.append("summary", summary);
-      // form.append("QuillValue", QuillValue);
-      // form.append("image", coverImage);
-
-      // postSubmitHandler(form);
 
       handleSubmit(title, summary, QuillValue, coverImage, s3Image);
     } else return;
