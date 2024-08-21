@@ -16,7 +16,7 @@ function QuillRichText({
   editTitle,
   editSummary,
   editCoverImage,
-  postSubmitHandler,
+  handleSubmit,
   handleBackdrop = () => {},
   ...rest
 }) {
@@ -123,22 +123,20 @@ function QuillRichText({
   useEffect(() => titleRef.current.focus(), []);
 
   const handleClick = () => {
-    if (validateInputs(title, summary, QuillValue, image)) {
+    if (validateInputs(title, summary, QuillValue, coverImage)) {
       handleBackdrop();
 
-      const form = new FormData();
+      // const form = new FormData();
 
+    //  form.append("coverImage", s3Image); //muter file
+      // form.append("title", title);
+      // form.append("summary", summary);
+      // form.append("QuillValue", QuillValue);
+      // form.append("image", coverImage);
 
+      // postSubmitHandler(form);
 
-      form.append("coverImage", s3Image); //muter file 
-      form.append("title", title);
-      form.append("summary", summary);
-      form.append("QuillValue", QuillValue);
-      form.append("image", coverImage);
-
-      console.log("IMAGE", image)
-
-      postSubmitHandler(form);
+      handleSubmit(title, summary, QuillValue, coverImage, s3Image);
     } else return;
   };
   const handleFileChange = async (event) => {
@@ -156,7 +154,7 @@ function QuillRichText({
 
           <input type="file" id="image" hidden onChange={handleFileChange2} /> */}
 
-          <UploadFileButton type='file' handleChange={handleFileChange2} />
+          <UploadFileButton type="file" handleChange={handleFileChange2} />
         </>
         {<img src={coverImage} />}
         <div>
@@ -186,7 +184,7 @@ function QuillRichText({
             autoComplete="shipping address-line1"
           />
         </div>
-        {/* <div>
+        <div>
           <input
             type="file"
             required={true}
@@ -194,7 +192,7 @@ function QuillRichText({
             onChange={handleFileChange}
             placeholder="Cover Image"
           />
-        </div> */}
+        </div>
         <ReactQuill
           className={classnames(Styles["ql-toolbar"], Styles["ql-editor"])}
           theme="snow"

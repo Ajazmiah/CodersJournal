@@ -15,17 +15,8 @@ function BlogEdit({
 }) {
   const [editPost] = useEditPostMutation();
 
-  const postSubmitHandler = async (title, summary, QuillValue, coverImage) => {
-    console.log("BLOG EDIT COVER PAGE", coverImage);
+  const postSubmitHandler = async (data) => {
     try {
-      let data = {
-        title,
-        summary,
-        body: QuillValue,
-        coverImage,
-        id,
-      };
-
       const res = await editPost(data).unwrap();
       if (res) {
         handlePostUpdated();
@@ -36,9 +27,21 @@ function BlogEdit({
     }
   };
 
+  const handleSubmit = (title, summary, QuillValue, coverImage, s3Image=null) => {
+    let data = {
+      title,
+      summary,
+      body: QuillValue,
+      coverImage,
+      id,
+    };
+
+    postSubmitHandler(data);
+  };
+
   return (
     <QuillRichText
-      postSubmitHandler={postSubmitHandler}
+      handleSubmit={handleSubmit}
       editTitle={editTitle}
       editSummary={editSummary}
       editQuillValue={quillValue}
