@@ -23,8 +23,12 @@ const blogSchema = mongoose.Schema(
     },
     authorFirstName: {
       type: String,
-      ref: "User"
-    }
+      ref: "User",
+    },
+    coverImageName: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
@@ -34,7 +38,6 @@ const blogSchema = mongoose.Schema(
 //   localField: '_id',
 //   foreignField: 'authorId'
 // })
-
 
 const blog = mongoose.model("Blog", blogSchema);
 export default blog;

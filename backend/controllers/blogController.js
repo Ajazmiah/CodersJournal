@@ -3,6 +3,8 @@ import blogModel from "../models/blogModels.js";
 import User from "../models/userModel.js";
 import { verifytoken } from "../utils/verifyToken.js";
 import { validationResult } from "express-validator";
+import { getFileFromS3, uploadToS3 } from "../utils/s3.js";
+import { getRandomHex } from "../utils/randomHex.js";
 
 // Public - All Posts that shows up on HomeScreen
 const allPost = asyncHandler(async (req, res, next) => {
@@ -36,12 +38,17 @@ const createPost = asyncHandler(async (req, res, next) => {
   const decoded = verifytoken(req);
   const user = await User.findById(decoded.userId).select("-password");
 
+  const customFileName = getRandomHex();
+
+  await uploadToS3(req.file, customFileName);
+
   const blog = await blogModel.create({
     title,
     body,
     summary,
     coverImage,
     authorId: user._id,
+    coverImageName: customFileName,
   });
   if (blog) {
     res.status(200).json(blog);
@@ -58,6 +65,15 @@ const getAllUserPosts = asyncHandler(async (req, res, next) => {
     path: "authorId",
     select: "-password -confirmPassword",
   });
+
+  let presignedURL = null;
+
+  for (const blog of blogs) {
+    if (blog.coverImageName) {
+      presignedURL = await getFileFromS3(blog.coverImageName);
+      blog.coverImageName = presignedURL;
+    }
+  }
 
   res.status(200).json(blogs);
 });

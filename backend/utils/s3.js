@@ -1,5 +1,10 @@
 import dotenv from "dotenv";
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import {
+  PutObjectCommand,
+  S3Client,
+  GetObjectCommand,
+} from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 dotenv.config();
 
@@ -16,24 +21,30 @@ const s3 = new S3Client({
   region: bucketRegion,
 });
 
-export const uploadToS3 = async (file) => {
+export const uploadToS3 = async (file, customFileName = null) => {
   try {
     const params = {
       Bucket: bucketName,
-      Key: "postCoverImage-3/" + file?.originalname,
+      Key: "postCoverImage/" + customFileName,
       Body: file.buffer,
       ContentType: file.mimetype,
     };
 
     const command = new PutObjectCommand(params);
-    const response = await s3.send(command);
-
-    // Generate and return the URL or key of the uploaded file
-    const s3Url = `https://${bucketName}.s3.amazonaws.com/${params.Key}`;
-    return s3Url; // Return the URL or key as per your requirement
-
+    await s3.send(command);
   } catch (error) {
     console.error("Error uploading to S3:", error);
     throw new Error("Posting to S3 bucket failed at uploadToS3 function");
   }
+};
+
+export const getFileFromS3 = async (fileName) => {
+  const command = new GetObjectCommand({
+    Bucket: bucketName,
+    Key: "postCoverImage/" + fileName,
+  });
+
+  const presigned = getSignedUrl(s3, command, { expiresIn: 3600 });
+
+  return presigned;
 };
