@@ -10,6 +10,7 @@ node_modules
 # Ignore environment-specific files
 /backend/.env
 /frontend/.env
+.env
 
 # Ignore macOS system files
 .DS_Store
