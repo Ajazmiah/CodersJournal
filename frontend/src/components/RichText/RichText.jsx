@@ -57,15 +57,16 @@ function QuillRichText({
     "video",
   ];
 
+  const [previewCoverImage, setPreviewCoverImage] = useState(null);
+
   const titleRef = useRef();
 
+  const [s3Image, setS3Image] = useState(null);
   const [title, setTitle] = useState(editTitle || "");
   const [summary, setSummary] = useState(editSummary || "");
   const [QuillValue, setQuillValue] = React.useState(editQuillValue || null);
-  const coverImage = image?.myFile || editCoverImage;
+  const coverImage = previewCoverImage || editCoverImage;
   const [error, setError] = useState([]);
-
-  const [s3Image, setS3Image] = useState(null);
 
   const validateInputs = (titleInput, summaryInput, quillInput, image) => {
     let errors = [];
@@ -92,23 +93,20 @@ function QuillRichText({
 
     return true;
   };
-  //////////////
 
-  const handleFileChange2 = async (e) => {
+
+  const handleFileChange = async (e) => {
     const file = e.target.files[0];
 
     if (!VALID_FILE_TYPES.includes(file.type)) {
       toast.error("Please choose an image file");
       return;
     }
-    try {
-      const form = new FormData();
-      form.append("coverImage", file);
-      setS3Image(file);
-    } catch (err) {}
+
+    setPreviewCoverImage(URL.createObjectURL(file));
+    setS3Image(file);
   };
 
-  //////////
 
   useEffect(() => {
     if (error.length > 0) {
@@ -126,24 +124,11 @@ function QuillRichText({
       handleSubmit(title, summary, QuillValue, coverImage, s3Image);
     } else return;
   };
-  const handleFileChange = async (event) => {
-    event.preventDefault();
-    const file = event.target.files[0];
-
-    await handleImageUpload(file);
-  };
 
   return (
     <>
       <div className={classnames("container pageContainer", Styles.richText)}>
-        <>
-          {/* <label htmlFor="image">Upload</label>
-
-          <input type="file" id="image" hidden onChange={handleFileChange2} /> */}
-
-          <UploadFileButton type="file" handleChange={handleFileChange2} />
-        </>
-        {<img src={coverImage} />}
+        {<img src={previewCoverImage} />}
         <div>
           <input
             required={true}
@@ -172,13 +157,7 @@ function QuillRichText({
           />
         </div>
         <div>
-          <input
-            type="file"
-            required={true}
-            accept="image/*"
-            onChange={handleFileChange}
-            placeholder="Cover Image"
-          />
+          <UploadFileButton type="file" handleChange={handleFileChange} />
         </div>
         <ReactQuill
           className={classnames(Styles["ql-toolbar"], Styles["ql-editor"])}
