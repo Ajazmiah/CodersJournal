@@ -37,16 +37,17 @@ function UserPublicProfile() {
   if (!posts) return;
 
   return (
-    <div className="container">
-
+    <div>
       <UserProfileInfo userInfo={author} />
 
-      {posts.map((post) => (
-        <>
-          <FeaturedCard post={post} />
-          <Border />
-        </>
-      ))}
+      <div className="container">
+        {posts.map((post) => (
+          <>
+            <FeaturedCard post={post} />
+            <Border />
+          </>
+        ))}
+      </div>
     </div>
   );
 }
