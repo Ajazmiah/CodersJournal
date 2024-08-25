@@ -1,0 +1,14 @@
+.blogHeader {
+    
+}
+
+.blogDetails {
+    margin-block: 1em;
+    padding: 1em;
+    box-shadow: 1px 1px 13px 0px #00000040;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+

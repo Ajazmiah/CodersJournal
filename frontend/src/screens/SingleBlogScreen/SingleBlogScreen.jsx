@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactHtmlParser from "html-react-parser";
 import { useParams, useNavigate } from "react-router-dom";
+import Styles from "./SingleBlogScreen.module.css";
 import {
   useGetPostMutation,
   useDeletePostMutation,
@@ -14,6 +15,7 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import { useBackdrop } from "../../components/Backdrop/Backdrop";
 import BlogEdit from "../../components/BlogEdit/BlogEdit";
 import Border from "../../components/Atoms/Border/Border";
+import Button from "../../components/Atoms/Button/Button";
 
 function SingleBlogScreen() {
   const { id } = useParams();
@@ -31,9 +33,9 @@ function SingleBlogScreen() {
 
   useEffect(() => {
     const fetchPost = async () => {
-      console.log("ID", id)
       try {
         const fetchedPost = await getPost({ id }).unwrap();
+        console.log("___FETCHED___", fetchedPost)
         setPost(fetchedPost);
       } catch (err) {
         if (err.status === 404) {
@@ -44,12 +46,13 @@ function SingleBlogScreen() {
       }
     };
 
+    console.log("POST-SINGLE", post)
+
     fetchPost();
   }, [getPost, id, postUpdated]);
 
-
   const handleApproveDeletion = async () => {
-    console.log("HI Approved:", id)
+    console.log("HI Approved:", id);
     try {
       await deletePost({ id }).unwrap();
       toast.success("Post is deleted");
@@ -60,7 +63,7 @@ function SingleBlogScreen() {
   };
 
   const handleModal = (handleType) => {
-    console.log("CLICKE CLICKED CLIKED")
+    console.log("CLICKE CLICKED CLIKED");
     setBackdrop((prev) => !prev);
     setModalContentType(handleType);
   };
@@ -103,21 +106,26 @@ function SingleBlogScreen() {
       {post && (
         <>
           <div>
-            <PageHeader title={post._doc.title} />
+            <div className={'space-bottom-3 '}>
+              <PageHeader title={post._doc.title} summary={post._doc.summary} />
+            </div>
+
             <div>
-              <p>{post._doc.summary}</p>
-              <p>{formatDate(post?.createdAt)}</p>
+              <img src={post?._doc.coverImage} />
+              <div className={Styles.blogDetails}>
+                <AuthorBylineCard author={post.author} />
+                <p>{formatDate(post?.createdAt)}</p>
+              </div>
               {post?._doc.authorId === userInfo?._id && (
                 <div>
-                  <button onClick={() => handleModal("delete")}>Delete</button>
-                  <button onClick={() => handleModal("edit")}>Edit Post</button>
+                  <Button onClick={() => handleModal("delete")}>Delete</Button>
+                  <Button onClick={() => handleModal("edit")}>Edit Post</Button>
                 </div>
               )}
-              <AuthorBylineCard author={post.author}/>
-              <Border/>
-              <img src={post?._doc.coverImage} />
+
+              <Border />
             </div>
-            <div className="merriweather-light ">{POST}</div>
+            <div className="merriweather-light space-top-5">{POST}</div>
           </div>
         </>
       )}
