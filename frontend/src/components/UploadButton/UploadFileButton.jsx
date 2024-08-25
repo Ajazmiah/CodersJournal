@@ -1,11 +1,12 @@
 import React from "react";
 import { FaUpload } from "react-icons/fa";
-import Styles from './UploadFileButton.module.css'
+import Styles from "./UploadFileButton.module.css";
 function UploadFileButton({ type, name, handleChange }) {
   return (
     <>
       <label htmlFor="file" className={Styles.label}>
-        Upload Cover Image <FaUpload />
+        <FaUpload />
+        <span>Upload File </span>
       </label>
 
       <input type={type} id="file" hidden onChange={handleChange} />

@@ -14,6 +14,7 @@ import {
   Grid,
   Link,
 } from "@mui/material";
+import UploadFileButton from "../UploadButton/UploadFileButton";
 
 const RegisterForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -76,6 +77,7 @@ const RegisterForm = () => {
       maxWidth="xs"
       style={{ paddingTop: "var(--space-78)" }}
     >
+      <UploadFileButton />
       <Typography component="h1" variant="h5">
         Register
       </Typography>
