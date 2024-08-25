@@ -91,7 +91,7 @@ function SingleBlogScreen() {
   );
 
   return (
-    <div className="space-top-5">
+    <div className="space-top-5 container">
       {/* {error && <div>PAGE IS NOT FOUND</div>} */}
       {backdrop ? (
         <ModalRectangular
@@ -111,15 +111,15 @@ function SingleBlogScreen() {
             </div>
 
             <div>
-              <img src={post?._doc.coverImage} />
+              <img src={post?._doc.coverImageName || post?._doc.coverImage} />
               <div className={Styles.blogDetails}>
                 <AuthorBylineCard author={post.author} />
                 <p>{formatDate(post?.createdAt)}</p>
               </div>
               {post?._doc.authorId === userInfo?._id && (
-                <div>
-                  <Button onClick={() => handleModal("delete")}>Delete</Button>
-                  <Button onClick={() => handleModal("edit")}>Edit Post</Button>
+                <div className={Styles.btns}>
+                  <Button backgroundColor='#ff5252' onClick={() => handleModal("delete")}>Delete</Button>
+                  <Button backgroundColor='#286f6a' onClick={() => handleModal("edit")}>Edit Post</Button>
                 </div>
               )}
 

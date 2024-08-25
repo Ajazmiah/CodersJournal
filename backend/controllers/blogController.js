@@ -73,6 +73,7 @@ const getAllUserPosts = asyncHandler(async (req, res, next) => {
       presignedURL = await getFileFromS3(blog.coverImageName);
       blog.coverImageName = presignedURL;
     }
+    delete blog.coverImage;
   }
 
   res.status(200).json(blogs);
@@ -109,6 +110,16 @@ const getPost = asyncHandler(async (req, res, next) => {
   const user = await User.findById(post.authorId).select(
     "-password -confirmPassword"
   );
+
+  let presignedURL = null;
+
+  if (post.coverImageName) {
+    presignedURL = await getFileFromS3(post.coverImageName);
+  }
+  if (presignedURL) {
+    post.coverImageName = presignedURL;
+  }
+  delete post?.coverImage;
 
   const POST = {
     ...post,

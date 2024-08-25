@@ -1,18 +1,18 @@
 import React from "react";
 
-function Button({ children, color, onClick }) {
+function Button({ children, backgroundColor, onClick }) {
   const buttonStyle = {
     border: "none",
     width: "100px",
     marginBottom: "10px",
     fontSize: ".8em",
-    background: "#ff5252",
+    background: backgroundColor,
     color: "white",
     padding: ".5em",
   };
 
   return (
-    <button className={buttonStyle} onClick={onClick}>
+    <button style={buttonStyle} onClick={onClick}>
       {children}
     </button>
   );

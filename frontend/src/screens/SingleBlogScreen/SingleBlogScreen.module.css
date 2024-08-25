@@ -12,3 +12,7 @@
     justify-content: space-between;
 }
 
+.btns {
+    display: flex;
+    gap: 5px;
+}

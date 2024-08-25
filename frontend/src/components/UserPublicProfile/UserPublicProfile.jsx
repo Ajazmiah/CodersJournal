@@ -5,6 +5,7 @@ import FeaturedCard from "../FeaturedCard/FeaturedCard";
 import Border from "../Atoms/Border/Border";
 import AuthorBylineCard from "../AuthorBylineCard/AuthorBylineCard";
 import AuthorBio from "../AuthorBio/AuthorBio";
+import UserProfileInfo from "../UserProfileInfo/UserProfileInfo";
 
 function UserPublicProfile() {
   const { id } = useParams();
@@ -36,8 +37,9 @@ function UserPublicProfile() {
   if (!posts) return;
 
   return (
-    <div>
-      <AuthorBio authorInfo={author} />
+    <div className="container">
+
+      <UserProfileInfo userInfo={author} />
 
       {posts.map((post) => (
         <>

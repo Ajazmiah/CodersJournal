@@ -1,0 +1,10 @@
+.userProfileInfo {
+    background-color: red;
+}
+.socials {
+    display: flex;
+    gap: 2em;
+    justify-content: center;
+    margin-top: 1em;
+    font-size: 2em;
+}

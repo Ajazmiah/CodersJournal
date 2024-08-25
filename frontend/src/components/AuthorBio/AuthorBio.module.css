@@ -10,9 +10,9 @@
 }
 .authorBioText {
     position: relative;
-    margin-left: 2px;
     padding: 2px;
-    padding-left: 10px;
+    padding-left: 15px;
+    color: #fff;
 }
 .authorImage {
     flex-basis: 30%;

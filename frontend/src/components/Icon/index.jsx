@@ -4,8 +4,12 @@ import {
   FaHome,
   FaCog,
   FaPencilAlt,
-  FaComment, 
-  FaHeart
+  FaComment,
+  FaHeart,
+  FaFacebook,
+  FaYoutube,
+  FaTwitter,
+  FaGithub,
 } from "react-icons/fa";
 
 export const icons = {
@@ -14,8 +18,13 @@ export const icons = {
   Home: <FaHome />,
   Setting: <FaCog />,
   Create: <FaPencilAlt />,
-  Comment: <FaComment/>,
-  Heart: <FaHeart/>
+  Comment: <FaComment />,
+  Heart: <FaHeart />,
+  Fb: <FaFacebook />,
+  github: <FaGithub/>,
+  youtube: <FaYoutube/>,
+  twitter: <FaTwitter />
+
 };
 
 export const getIcon = (iconName) => {
