@@ -81,7 +81,7 @@ function ResponsiveAppBar() {
               >
                 <ProfileImage
                   customClasses="headerImage"
-                  imageURL={userInfo?.profilePicture || false}
+                  imageURL={userInfo?.profilePicture}
                 />
               </button>
               {showMenu && (

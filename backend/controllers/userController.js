@@ -50,13 +50,18 @@ const signup = asyncHandler(async (req, res, next) => {
   // });
 
   if (user) {
+    let presignedURL = null;
+
+    presignedURL = await getFileFromS3(user.profilePicture, 'profilePicutre');
+    user.profilePicture = presignedURL;
+
     generateToken(res, user._id);
     res.status(201).json({
       _id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      profilePicture: user.profilePicture,
+      profilePicture: presignedURL,
     });
   } else {
     res.status(400);
@@ -71,12 +76,19 @@ const singin = asyncHandler(async (req, res, next) => {
 
   if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id);
+
+    let presignedURL = null;
+
+    presignedURL = await getFileFromS3(user.profilePicture, 'profilePicutre');
+    user.profilePicture = presignedURL;
+
+
     res.status(201).json({
       _id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      profilePicture: user?.profilePicture,
+      profilePicture: presignedURL,
     });
   } else {
     res.status(401);

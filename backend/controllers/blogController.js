@@ -14,6 +14,16 @@ const allPost = asyncHandler(async (req, res, next) => {
       select: "-password",
     });
 
+    let presignedURL = null;
+
+    for (const blog of blogPosts) {
+      if (blog?.coverImageName) {
+        presignedURL = await getFileFromS3(blog.coverImageName);
+        blog.coverImageName = presignedURL;
+      }
+      delete blog.coverImage;
+    }
+
     res.status(200).json(blogPosts);
   } catch (error) {
     next(error);
@@ -92,6 +102,14 @@ const getUserPosts = asyncHandler(async (req, res, next) => {
     });
 
   if (blogPosts) {
+    let presignedURL = null;
+
+    for (const blog of blogPosts) {
+      if (blog.coverImageName) {
+        presignedURL = await getFileFromS3(blog.coverImageName);
+        blog.coverImageName = presignedURL;
+      }
+    }
     res.status(200).json(blogPosts);
   } else {
     res.status(400);

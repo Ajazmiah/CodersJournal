@@ -21,7 +21,11 @@ const s3 = new S3Client({
   region: bucketRegion,
 });
 
-export const uploadToS3 = async (file, customFileName = null, folderName='postCoverImage') => {
+export const uploadToS3 = async (
+  file,
+  customFileName = null,
+  folderName = "postCoverImage"
+) => {
   try {
     const params = {
       Bucket: bucketName,
@@ -38,10 +42,13 @@ export const uploadToS3 = async (file, customFileName = null, folderName='postCo
   }
 };
 
-export const getFileFromS3 = async (fileName) => {
+export const getFileFromS3 = async (
+  fileName,
+  folderName = "postCoverImage"
+) => {
   const command = new GetObjectCommand({
     Bucket: bucketName,
-    Key: "postCoverImage/" + fileName,
+    Key: `${folderName}/` + fileName,
   });
 
   const presigned = getSignedUrl(s3, command, { expiresIn: 3600 });

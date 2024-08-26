@@ -10,11 +10,12 @@ import Date from "../Date/Date";
 
 const LeadArticle = ({ post }) => {
   const { handleNavigateToPost } = useLink();
+  console.log("LEAD", post)
 
   return (
     <div onClick={() => handleNavigateToPost(post)} className={Styles.lead}>
       <img
-        src={post.coverImage}
+        src={post.coverImageName || post.coverImage}
         loading="eager"
         className={classNames("imageRound", Styles.leadImage)}
       />
