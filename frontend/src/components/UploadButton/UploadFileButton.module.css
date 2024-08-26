@@ -16,3 +16,9 @@
 .label:hover {
    background-color: #a7bed48f;;
 }
+.upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+}

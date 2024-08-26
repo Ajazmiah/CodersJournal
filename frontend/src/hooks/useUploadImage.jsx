@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import UploadFileButton from "../components/UploadButton/UploadFileButton";
+import { toast } from "react-toastify";
 
 function useUploadImage() {
   const VALID_FILE_TYPES = [
@@ -13,17 +14,17 @@ function useUploadImage() {
   const [previewImage, setPreviewCoverImage] = useState(null);
 
   const clearFileName = () => {
-    setImage(null);
+    console.log("CLICKED")
+    setImageFile(null)
     setPreviewCoverImage(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
   };
 
   const handleImage = async (e) => {
     event.preventDefault();
 
     const file = e.target.files[0];
+
+    console.log("FILE_______()", file)
 
     if (!VALID_FILE_TYPES.includes(file.type)) {
       toast.error("Please choose an image file");
@@ -36,10 +37,7 @@ function useUploadImage() {
 
   const INPUT = (
     <>
-      <UploadFileButton handleChange={handleImage} />
-      <span handleCh={clearFileName} style={{ cursor: "pointer" }}>
-        X
-      </span>
+      <UploadFileButton handleChange={handleImage} handleClear={clearFileName}  />
     </>
   );
 

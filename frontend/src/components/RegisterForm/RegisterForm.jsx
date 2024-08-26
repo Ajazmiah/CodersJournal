@@ -22,8 +22,6 @@ const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [profilePicture, setProfilePicture] = useState({ myFile: "" });
-  const fileInputRef = useRef(null);
 
   const [previewImage, image, INPUT] = useUploadImage();
 
@@ -48,8 +46,7 @@ const RegisterForm = () => {
           profilePicture: image,
         }).unwrap();
         dispatch(setCredentials({ ...res }));
-        // fileInputRef.current.value = "";
-        setProfilePicture("");
+
         navigate("/");
       } catch (err) {
         toast.error(err.data.message);
@@ -85,6 +82,9 @@ const RegisterForm = () => {
       <br />
       <form onSubmit={submitHandler}>
         <Grid container spacing={2}>
+          <Grid item xs={12} spacing={2}>
+            {INPUT}
+          </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -132,9 +132,6 @@ const RegisterForm = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-          </Grid>
-          <Grid item xs={12}>
-            {INPUT}
           </Grid>
         </Grid>
         <Button
