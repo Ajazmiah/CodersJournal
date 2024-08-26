@@ -21,11 +21,11 @@ const s3 = new S3Client({
   region: bucketRegion,
 });
 
-export const uploadToS3 = async (file, customFileName = null) => {
+export const uploadToS3 = async (file, customFileName = null, folderName='postCoverImage') => {
   try {
     const params = {
       Bucket: bucketName,
-      Key: "postCoverImage/" + customFileName,
+      Key: `${folderName}/` + customFileName,
       Body: file.buffer,
       ContentType: file.mimetype,
     };

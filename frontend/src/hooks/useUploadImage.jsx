@@ -14,8 +14,8 @@ function useUploadImage() {
   const [previewImage, setPreviewCoverImage] = useState(null);
 
   const clearFileName = () => {
-    console.log("CLICKED")
-    setImageFile(null)
+    console.log("CLICKED");
+    setImageFile(null);
     setPreviewCoverImage(null);
   };
 
@@ -23,8 +23,6 @@ function useUploadImage() {
     event.preventDefault();
 
     const file = e.target.files[0];
-
-    console.log("FILE_______()", file)
 
     if (!VALID_FILE_TYPES.includes(file.type)) {
       toast.error("Please choose an image file");
@@ -37,7 +35,10 @@ function useUploadImage() {
 
   const INPUT = (
     <>
-      <UploadFileButton handleChange={handleImage} handleClear={clearFileName}  />
+      <UploadFileButton
+        handleChange={handleImage}
+        handleClear={clearFileName}
+      />
     </>
   );
 

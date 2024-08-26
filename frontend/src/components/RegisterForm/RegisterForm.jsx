@@ -36,15 +36,17 @@ const RegisterForm = () => {
     if (password !== confirmPassword) {
       alert("Password don't match");
     } else {
+      const form = new FormData();
+
+      form.append("profilePicture", image);
+      form.append("firstName", firstName);
+      form.append("lastName", lastName);
+      form.append("email", email);
+      form.append("password", password);
+      form.append("confirmPassword", confirmPassword);
+
       try {
-        const res = await signup({
-          firstName,
-          lastName,
-          email,
-          password,
-          confirmPassword,
-          profilePicture: image,
-        }).unwrap();
+        const res = await signup(form).unwrap();
         dispatch(setCredentials({ ...res }));
 
         navigate("/");

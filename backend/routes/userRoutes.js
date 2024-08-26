@@ -10,11 +10,16 @@ import {
   updateUser,
   userPublicProfile
 } from "../controllers/userController.js";
+import multer from "multer";
 
 const router = express.Router();
 
+
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage })
+
 // router.get("/", home);
-router.post("/signup",[check('email').
+router.post("/signup",upload.single('profilePicture'),[check('email').
        isEmail().normalizeEmail(), 
        body('password', 'Make sure password is at least 8 character long and contains only letters , numbers and these special characters [!, &, @, _, ]').
        isLength({min:8}).matches(/^[A-Za-z0-9 .,'!&@_]+$/)], body('confirmPassword').custom((value, {req}) => {

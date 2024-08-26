@@ -4,6 +4,8 @@ import asyncHandler from "express-async-handler"; // This eliminates the need to
 import { validationResult } from "express-validator";
 import blogModel from "../models/blogModels.js";
 import User from "../models/userModel.js";
+import { getRandomHex } from "../utils/randomHex.js";
+import { getFileFromS3, uploadToS3 } from "../utils/s3.js";
 
 const signup = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
@@ -13,16 +15,13 @@ const signup = asyncHandler(async (req, res, next) => {
     throw new Error(errors.errors[0].msg);
   }
 
-  const {
-    firstName,
-    lastName,
-    profilePicture,
-    email,
-    password,
-    confirmPassword,
-    descption,
-    links,
-  } = req.body;
+  const registerForm = req.body;
+
+  const firstName = registerForm.firstName;
+  const lastName = registerForm.lastName;
+  const email = registerForm.email;
+  const password = registerForm.password;
+  const confirmPassword = registerForm.confirmPassword;
 
   const userExist = await userModel.findOne({ email });
 
@@ -31,13 +30,17 @@ const signup = asyncHandler(async (req, res, next) => {
     throw new Error("This user already Exists: Please use a different E-mail");
   }
 
+  const customFileName = getRandomHex();
+
+  await uploadToS3(req.file, customFileName, "profilePicutre");
+
   const user = await userModel.create({
     firstName,
     lastName,
     email,
     password,
     confirmPassword,
-    profilePicture,
+    profilePicture: customFileName,
   });
   // Create a new user instance
   // - Another way of creating it
@@ -145,7 +148,7 @@ const userPublicProfile = asyncHandler(async (req, res, next) => {
     .findById(id)
     .select("-password -confirmPassword");
 
-  res.status(200).json({blogs, authorInfo,});
+  res.status(200).json({ blogs, authorInfo });
 });
 
 export {
