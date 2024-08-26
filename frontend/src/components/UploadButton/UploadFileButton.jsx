@@ -9,7 +9,7 @@ function UploadFileButton({ type, name, handleChange }) {
         <span>Upload File </span>
       </label>
 
-      <input type={type} id="file" hidden onChange={handleChange} />
+      <input type="file" id="file" hidden onChange={handleChange} />
     </>
   );
 }

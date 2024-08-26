@@ -25,7 +25,7 @@ const RegisterForm = () => {
   const [profilePicture, setProfilePicture] = useState({ myFile: "" });
   const fileInputRef = useRef(null);
 
-  const [handleImageUpload, image, handleImage, INPUT] = useUploadImage();
+  const [previewImage, image, INPUT] = useUploadImage();
 
   const [signup, { isLoading }] = useSignupMutation();
   const { userInfo } = useSelector((state) => state.auth);
@@ -45,7 +45,7 @@ const RegisterForm = () => {
           email,
           password,
           confirmPassword,
-          profilePicture: image.myFile,
+          profilePicture: image,
         }).unwrap();
         dispatch(setCredentials({ ...res }));
         // fileInputRef.current.value = "";
@@ -65,8 +65,8 @@ const RegisterForm = () => {
 
   const PROFILE_IMAGE = (
     <ProfileImage
-      imageURL={image.myFile || null}
-      empty={!image.myFile}
+      imageURL={previewImage || image}
+      empty={!image && !previewImage}
       customClasses="profileImage"
     />
   );
@@ -77,7 +77,6 @@ const RegisterForm = () => {
       maxWidth="xs"
       style={{ paddingTop: "var(--space-78)" }}
     >
-      <UploadFileButton />
       <Typography component="h1" variant="h5">
         Register
       </Typography>
