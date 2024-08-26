@@ -69,7 +69,7 @@ const getAllUserPosts = asyncHandler(async (req, res, next) => {
     select: "-password -confirmPassword",
   });
 
-  const SignedPosts = await attachPresignedURLs(blogPosts);
+  const SignedPosts = await attachPresignedURLs(blogs);
 
   res.status(200).json(SignedPosts);
 });

@@ -1,7 +1,7 @@
 import { RDS } from "aws-sdk";
 import React from "react";
 
-function Button({ children, backgroundColor, onClick, ...rest }) {
+function Button({ children,  backgroundColor, onClick, classes, ...rest }) {
   const buttonStyle = {
     border: "none",
     marginBottom: "10px",
@@ -10,9 +10,10 @@ function Button({ children, backgroundColor, onClick, ...rest }) {
     color: "white",
     padding: ".5em",
   };
+  
 
   return (
-    <button style={buttonStyle} {...rest} onClick={onClick}>
+    <button style={buttonStyle} {...rest} className={classes}onClick={onClick}>
       {children}
     </button>
   );

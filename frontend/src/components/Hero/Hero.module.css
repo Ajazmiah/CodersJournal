@@ -1,4 +1,4 @@
-.hero {
+/* .hero {
   background-color: #fdfdff;
   padding-bottom: 5rem;
 }
@@ -12,21 +12,21 @@
   text-transform: uppercase;
   font-weight: 200;
   font-family: Arial, Helvetica, sans-serif;
-}
+} */
 
 /**FRAPHSE*/
 /* Styles.module.css */
 
-.phraseContent {
+/* .phraseContent {
   text-align: left;
 }
 
 .phrase {
   font-size: 4em;
   line-height: 40px;
-}
+} */
 
-.phrasePrimary {
+/* .phrasePrimary {
   font-size: 3.5rem;
   font-weight: 800;
   list-style: 50px;
@@ -49,4 +49,39 @@
 
 .getStarted:hover {
   background-color: var(--primary-color);
+} */
+
+.hero {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+}
+
+.btn {
+  font-size: 0.8em;
+  color: white;
+  padding: 0.5em;
+  width: 150px;
+  margin: 10px;
+}
+.btnTransparent {
+  background: transparent;
+  border: 1px solid #ffffff;
+}
+.btnNonTransparent {
+  background: var(--color-white);
+  color: var(--color-dark);
+}
+
+.tagLines {
+}
+.mainTagLine {
+  font-size: 5em;
+  font-family: "Playfair Display";
+  font-weight: 900;
+  line-height: 80px;
+}
+.subTagLine {
+  font-size: 2em;
+  letter-spacing: 2px;
+  display: block
 }
