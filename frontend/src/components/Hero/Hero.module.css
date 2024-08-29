@@ -56,12 +56,17 @@
   color: var(--color-white);
 }
 
+.btns {
+  margin-top: 1em;
+  display: flex;
+  gap: 10px;
+}
+
 .btn {
   font-size: 0.8em;
   color: white;
   padding: 0.5em;
   width: 150px;
-  margin: 10px;
 }
 .btnTransparent {
   background: transparent;
@@ -81,7 +86,7 @@
   line-height: 80px;
 }
 .subTagLine {
-  font-size: 2em;
+  font-size: 1.8em;
   letter-spacing: 2px;
   display: block
 }
