@@ -13,7 +13,7 @@ const LeadArticle = ({ post }) => {
   console.log("LEAD", post)
 
   return (
-    <div onClick={() => handleNavigateToPost(post)} className={Styles.lead}>
+    <div onClick={() => handleNavigateToPost(post)} className={Styles.lead} id="leadArticle">
       <img
         src={post.coverImageName || post.coverImage}
         loading="eager"

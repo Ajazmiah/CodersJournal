@@ -25,12 +25,12 @@ const Hero = () => {
         </p>
 
         <div className={Styles.btns}>
-          <button className={classNames(Styles.btn, Styles.btnNonTransparent)}>
+          <a href='#leadArticle'className={classNames(Styles.btn, Styles.btnNonTransparent)}>
             Read
-          </button>
-          <button className={classNames(Styles.btn, Styles.btnTransparent)}>
+          </a>
+          <Link to='/create' className={classNames(Styles.btn, Styles.btnTransparent)}>
             Start Writing
-          </button>
+          </Link>
         </div>
       </div>
 
