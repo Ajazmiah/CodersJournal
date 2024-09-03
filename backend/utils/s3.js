@@ -29,7 +29,7 @@ export const uploadToS3 = async (
   try {
     const params = {
       Bucket: bucketName,
-      Key: `${folderName}/` + customFileName,
+      key: `${folderName}/` + customFileName,
       Body: file.buffer,
       ContentType: file.mimetype,
     };
@@ -38,7 +38,7 @@ export const uploadToS3 = async (
     await s3.send(command);
   } catch (error) {
     console.error("Error uploading to S3:", error);
-    throw new Error("Posting to S3 bucket failed at uploadToS3 function");
+    throw new Error("Something went wrong - server error");
   }
 };
 

@@ -19,7 +19,7 @@ const allPost = asyncHandler(async (req, res, next) => {
 
     res.status(200).json(SignedPosts);
   } catch (error) {
-    next(error);
+    throw new Error("Posts could not be loaded")
   }
 });
 

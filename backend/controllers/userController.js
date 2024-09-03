@@ -27,7 +27,9 @@ const signup = asyncHandler(async (req, res, next) => {
 
   if (userExist) {
     res.status(400);
-    throw new Error("This user already Exists: Please use a different E-mail");
+    throw new Error(
+      `${email} is already in use, please use a different E-mail`
+    );
   }
 
   const customFileName = getRandomHex();
@@ -52,7 +54,8 @@ const signup = asyncHandler(async (req, res, next) => {
   if (user) {
     let presignedURL = null;
 
-    presignedURL = await getFileFromS3(user.profilePicture, 'profilePicutre');
+    presignedURL = await getFileFromS3(user.profilePicture, "profilePicutre");
+
     user.profilePicture = presignedURL;
 
     generateToken(res, user._id);
@@ -65,7 +68,7 @@ const signup = asyncHandler(async (req, res, next) => {
     });
   } else {
     res.status(400);
-    throw new Error("Invalid user data");
+    throw new Error("Could not create an account - please try again later..");
   }
 });
 
@@ -79,9 +82,8 @@ const singin = asyncHandler(async (req, res, next) => {
 
     let presignedURL = null;
 
-    presignedURL = await getFileFromS3(user.profilePicture, 'profilePicutre');
+    presignedURL = await getFileFromS3(user.profilePicture, "profilePicutre");
     user.profilePicture = presignedURL;
-
 
     res.status(201).json({
       _id: user._id,
@@ -159,6 +161,10 @@ const userPublicProfile = asyncHandler(async (req, res, next) => {
   const authorInfo = await userModel
     .findById(id)
     .select("-password -confirmPassword");
+
+  if (!authorInfo) {
+    throw new Error("This user profile is unavailable");
+  }
 
   res.status(200).json({ blogs, authorInfo });
 });

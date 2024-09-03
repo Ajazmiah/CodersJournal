@@ -16,6 +16,7 @@ import Box from "@mui/material/Box";
 
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { toast } from "react-toastify";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -34,7 +35,7 @@ const LoginScreen = () => {
       dispatch(setCredentials({ ...res }));
       navigate("/");
     } catch (err) {
-      alert("WRONG CREDENTIAL");
+     toast.error(err.data.message)
     }
   };
 
