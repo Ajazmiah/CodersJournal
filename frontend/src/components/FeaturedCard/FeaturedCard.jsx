@@ -17,7 +17,7 @@ function FeaturedCard({ post }) {
     >
       <div className={Styles.coverImage}>
         <img
-          src={post?.coverImage}
+          src={post?.coverImageName || post.coverImage}
           alt={post?.alt || "cover photo of the post"}
           loading="eager"
         />

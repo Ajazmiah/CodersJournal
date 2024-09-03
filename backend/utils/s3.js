@@ -21,11 +21,15 @@ const s3 = new S3Client({
   region: bucketRegion,
 });
 
-export const uploadToS3 = async (file, customFileName = null) => {
+export const uploadToS3 = async (
+  file,
+  customFileName = null,
+  folderName = "postCoverImage"
+) => {
   try {
     const params = {
       Bucket: bucketName,
-      Key: "postCoverImage/" + customFileName,
+      key: `${folderName}/` + customFileName,
       Body: file.buffer,
       ContentType: file.mimetype,
     };
@@ -34,14 +38,17 @@ export const uploadToS3 = async (file, customFileName = null) => {
     await s3.send(command);
   } catch (error) {
     console.error("Error uploading to S3:", error);
-    throw new Error("Posting to S3 bucket failed at uploadToS3 function");
+    throw new Error("Something went wrong - server error");
   }
 };
 
-export const getFileFromS3 = async (fileName) => {
+export const getFileFromS3 = async (
+  fileName,
+  folderName = "postCoverImage"
+) => {
   const command = new GetObjectCommand({
     Bucket: bucketName,
-    Key: "postCoverImage/" + fileName,
+    Key: `${folderName}/` + fileName,
   });
 
   const presigned = getSignedUrl(s3, command, { expiresIn: 3600 });

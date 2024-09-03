@@ -8,9 +8,10 @@ import {
 } from "../../slices/postsApiSlice";
 import Border from "../Atoms/Border/Border";
 import Styles from "./FeaturedArticles.module.css";
+import { toast } from "react-toastify";
 function FeaturedArticles() {
   const { userInfo } = useSelector((state) => state.auth);
-  console.log("USER INFOR", userInfo)
+  console.log("USER INFOR", userInfo);
   const [getPosts] = useGetUserPostsMutation();
   const [getExludedUserPosts] = useExpludeUserPostsMutation();
 
@@ -23,19 +24,14 @@ function FeaturedArticles() {
           ? await getExludedUserPosts().unwrap()
           : await getPosts().unwrap();
 
-
-
         setPosts(allPost);
-        console.log("HOME", allPost);
       } catch (error) {
-        console.log("ERROR", error);
+        toast.error(error.data.message);
       }
     };
 
     getAllPosts();
   }, []);
-
-  console.log("___POST___", posts)
 
   if (!posts) return;
 

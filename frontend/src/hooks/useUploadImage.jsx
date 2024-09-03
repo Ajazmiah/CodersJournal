@@ -1,35 +1,44 @@
 import { useState, useRef } from "react";
+import UploadFileButton from "../components/UploadButton/UploadFileButton";
+import { toast } from "react-toastify";
 
 function useUploadImage() {
-  const [image, setImage] = useState({ myFile: null });
-  const fileInputRef = useRef(null);
+  const VALID_FILE_TYPES = [
+    "image/jpg",
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+  ];
+
+  const [image, setImageFile] = useState(null);
+  const [previewImage, setPreviewCoverImage] = useState(null);
 
   const clearFileName = () => {
-    setImage({ myFile: null });
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
+    console.log("CLICKED");
+    setImageFile(null);
+    setPreviewCoverImage(null);
   };
 
-  const handleImage = async (event) => {
+  const handleImage = async (e) => {
     event.preventDefault();
-    const file = event.target.files[0];
-    if (file && file.type.startsWith("image/")) {
-      await handleImageUpload(file);
+
+    const file = e.target.files[0];
+
+    if (!VALID_FILE_TYPES.includes(file.type)) {
+      toast.error("Please choose an image file");
+      return;
     }
+
+    setPreviewCoverImage(URL.createObjectURL(file));
+    setImageFile(file);
   };
 
   const INPUT = (
     <>
-      <input
-        type="file"
-        ref={fileInputRef}
-        accept="image/*"
-        onChange={handleImage}
+      <UploadFileButton
+        handleChange={handleImage}
+        handleClear={clearFileName}
       />
-      <span onClick={clearFileName} style={{ cursor: "pointer" }}>
-        X
-      </span>
     </>
   );
 
@@ -42,13 +51,7 @@ function useUploadImage() {
     });
   }
 
-  const handleImageUpload = async (file) => {
-    const base64Img = await convertToBase64(file);
-    setImage({ myFile: base64Img });
-    return base64Img;
-  };
-
-  return [handleImageUpload, image, handleImage, INPUT];
+  return [previewImage, image, INPUT];
 }
 
 export default useUploadImage;

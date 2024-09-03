@@ -82,6 +82,7 @@
 .navLink {
   color: inherit;
   text-decoration: none;
+  font-size: .8em;
 }
 
 .listItemContent {

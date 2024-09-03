@@ -5,6 +5,7 @@ import { verifytoken } from "../utils/verifyToken.js";
 import { validationResult } from "express-validator";
 import { getFileFromS3, uploadToS3 } from "../utils/s3.js";
 import { getRandomHex } from "../utils/randomHex.js";
+import { attachPresignedURLs } from "../utils/attachedSignedURL.js";
 
 // Public - All Posts that shows up on HomeScreen
 const allPost = asyncHandler(async (req, res, next) => {
@@ -14,9 +15,11 @@ const allPost = asyncHandler(async (req, res, next) => {
       select: "-password",
     });
 
-    res.status(200).json(blogPosts);
+    const SignedPosts = await attachPresignedURLs(blogPosts);
+
+    res.status(200).json(SignedPosts);
   } catch (error) {
-    next(error);
+    throw new Error("Posts could not be loaded")
   }
 });
 
@@ -66,17 +69,9 @@ const getAllUserPosts = asyncHandler(async (req, res, next) => {
     select: "-password -confirmPassword",
   });
 
-  let presignedURL = null;
+  const SignedPosts = await attachPresignedURLs(blogs);
 
-  for (const blog of blogs) {
-    if (blog.coverImageName) {
-      presignedURL = await getFileFromS3(blog.coverImageName);
-      blog.coverImageName = presignedURL;
-    }
-    delete blog.coverImage;
-  }
-
-  res.status(200).json(blogs);
+  res.status(200).json(SignedPosts);
 });
 
 //
@@ -92,7 +87,8 @@ const getUserPosts = asyncHandler(async (req, res, next) => {
     });
 
   if (blogPosts) {
-    res.status(200).json(blogPosts);
+    const SignedPosts = await attachPresignedURLs(blogPosts);
+    res.status(200).json(SignedPosts);
   } else {
     res.status(400);
     throw new Error("The post could not be fetched at this time");
@@ -111,18 +107,10 @@ const getPost = asyncHandler(async (req, res, next) => {
     "-password -confirmPassword"
   );
 
-  let presignedURL = null;
-
-  if (post.coverImageName) {
-    presignedURL = await getFileFromS3(post.coverImageName);
-  }
-  if (presignedURL) {
-    post.coverImageName = presignedURL;
-  }
-  delete post?.coverImage;
+  const SignedPosts = await attachPresignedURLs(post);
 
   const POST = {
-    ...post,
+    ...SignedPosts,
     author: user,
   };
   res.status(200).json(POST);

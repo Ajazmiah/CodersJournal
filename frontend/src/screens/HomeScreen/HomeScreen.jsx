@@ -7,7 +7,7 @@ const HomeScreen = () => {
   return (
     <>
       <Hero />
-      <div className={classNames("mainContentContainer space-top-9 container")}>
+      <div className={classNames("space-top-9 container")}>
         <FeaturedArticles />
       </div>
     </>

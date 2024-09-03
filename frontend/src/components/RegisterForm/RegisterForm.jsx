@@ -14,6 +14,7 @@ import {
   Grid,
   Link,
 } from "@mui/material";
+import UploadFileButton from "../UploadButton/UploadFileButton";
 
 const RegisterForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -21,10 +22,8 @@ const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [profilePicture, setProfilePicture] = useState({ myFile: "" });
-  const fileInputRef = useRef(null);
 
-  const [handleImageUpload, image, handleImage, INPUT] = useUploadImage();
+  const [previewImage, image, INPUT] = useUploadImage();
 
   const [signup, { isLoading }] = useSignupMutation();
   const { userInfo } = useSelector((state) => state.auth);
@@ -37,18 +36,19 @@ const RegisterForm = () => {
     if (password !== confirmPassword) {
       alert("Password don't match");
     } else {
+      const form = new FormData();
+
+      form.append("profilePicture", image);
+      form.append("firstName", firstName);
+      form.append("lastName", lastName);
+      form.append("email", email);
+      form.append("password", password);
+      form.append("confirmPassword", confirmPassword);
+
       try {
-        const res = await signup({
-          firstName,
-          lastName,
-          email,
-          password,
-          confirmPassword,
-          profilePicture: image.myFile,
-        }).unwrap();
+        const res = await signup(form).unwrap();
         dispatch(setCredentials({ ...res }));
-        // fileInputRef.current.value = "";
-        setProfilePicture("");
+
         navigate("/");
       } catch (err) {
         toast.error(err.data.message);
@@ -64,8 +64,8 @@ const RegisterForm = () => {
 
   const PROFILE_IMAGE = (
     <ProfileImage
-      imageURL={image.myFile || null}
-      empty={!image.myFile}
+      imageURL={previewImage || image}
+      empty={!image && !previewImage}
       customClasses="profileImage"
     />
   );
@@ -84,6 +84,9 @@ const RegisterForm = () => {
       <br />
       <form onSubmit={submitHandler}>
         <Grid container spacing={2}>
+          <Grid item xs={12} spacing={2}>
+            {INPUT}
+          </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -131,9 +134,6 @@ const RegisterForm = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-          </Grid>
-          <Grid item xs={12}>
-            {INPUT}
           </Grid>
         </Grid>
         <Button
