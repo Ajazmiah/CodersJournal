@@ -29,7 +29,7 @@ export const uploadToS3 = async (
   try {
     const params = {
       Bucket: bucketName,
-      key: `${folderName}/` + customFileName,
+      Key: `${folderName}/` + customFileName,
       Body: file.buffer,
       ContentType: file.mimetype,
     };
