@@ -16,6 +16,8 @@ import { useBackdrop } from "../../components/Backdrop/Backdrop";
 import BlogEdit from "../../components/BlogEdit/BlogEdit";
 import Border from "../../components/Atoms/Border/Border";
 import Button from "../../components/Atoms/Button/Button";
+import Sidebar from "../../components/SideBar/SideBar";
+import classNames from "classnames";
 
 function SingleBlogScreen() {
   const { id } = useParams();
@@ -35,7 +37,7 @@ function SingleBlogScreen() {
     const fetchPost = async () => {
       try {
         const fetchedPost = await getPost({ id }).unwrap();
-        console.log("___FETCHED___", fetchedPost)
+        console.log("___FETCHED___", fetchedPost);
         setPost(fetchedPost);
       } catch (err) {
         if (err.status === 404) {
@@ -46,7 +48,7 @@ function SingleBlogScreen() {
       }
     };
 
-    console.log("POST-SINGLE", post)
+    console.log("POST-SINGLE", post);
 
     fetchPost();
   }, [getPost, id, postUpdated]);
@@ -91,44 +93,61 @@ function SingleBlogScreen() {
   );
 
   return (
-    <div className="space-top-5 container">
-      {/* {error && <div>PAGE IS NOT FOUND</div>} */}
-      {backdrop ? (
-        <ModalRectangular
-          handleBackdrop={() => setBackdrop((prev) => !prev)}
-          backdrop={backdrop}
-        >
-          {modalContent}
-          {EDIT_BLOG}
-        </ModalRectangular>
-      ) : null}
+    <div className={classNames(" main-2-column space-top-9 Container")}>
+      <div className={Styles.SingleBlogScreen}>
+        {/* {error && <div>PAGE IS NOT FOUND</div>} */}
+        {backdrop ? (
+          <ModalRectangular
+            handleBackdrop={() => setBackdrop((prev) => !prev)}
+            backdrop={backdrop}
+          >
+            {modalContent}
+            {EDIT_BLOG}
+          </ModalRectangular>
+        ) : null}
 
-      {post && (
-        <>
-          <div>
-            <div className={'space-bottom-3 '}>
-              <PageHeader title={post._doc.title} summary={post._doc.summary} />
-            </div>
-
+        {post && (
+          <>
             <div>
-              <img src={post?._doc.coverImageName || post?._doc.coverImage} />
-              <div className={Styles.blogDetails}>
-                <AuthorBylineCard author={post.author} />
-                <p>{formatDate(post?.createdAt)}</p>
+              <div className={"space-bottom-3 "}>
+                <PageHeader
+                  title={post._doc.title}
+                  summary={post._doc.summary}
+                />
               </div>
-              {post?._doc.authorId === userInfo?._id && (
-                <div className={Styles.btns}>
-                  <Button backgroundColor='#ff5252' onClick={() => handleModal("delete")}>Delete</Button>
-                  <Button backgroundColor='#286f6a' onClick={() => handleModal("edit")}>Edit Post</Button>
-                </div>
-              )}
 
-              <Border />
+              <div>
+                <img src={post?._doc.coverImageName || post?._doc.coverImage} />
+                <div className={Styles.blogDetails}>
+                  <AuthorBylineCard author={post.author} />
+                  <p>{formatDate(post?.createdAt)}</p>
+                </div>
+                {post?._doc.authorId === userInfo?._id && (
+                  <div className={Styles.btns}>
+                    <Button
+                      backgroundColor="#ff5252"
+                      onClick={() => handleModal("delete")}
+                    >
+                      Delete
+                    </Button>
+                    <Button
+                      backgroundColor="#286f6a"
+                      onClick={() => handleModal("edit")}
+                    >
+                      Edit Post
+                    </Button>
+                  </div>
+                )}
+
+                <Border />
+              </div>
+              <div className="merriweather-light space-top-5">{POST}</div>
             </div>
-            <div className="merriweather-light space-top-5">{POST}</div>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
+
+      <Sidebar />
     </div>
   );
 }

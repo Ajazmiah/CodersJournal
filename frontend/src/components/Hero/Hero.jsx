@@ -15,13 +15,13 @@ const Hero = () => {
 
   const content = (
     
-      <div className={"container"}>
-        <p className={Styles.tagLines}>
-          <span className={Styles.mainTagLine}>
-            {" "}
+      <div className={"Container"}>
+        <p>
+          <span className={classNames('heading-1', Styles.mainTagLine)}>
             Spread The Knowledge of Coding
           </span>
-          <span className={Styles.subTagLine}>Learn. Share. Inspire.</span>
+          <br/>
+          <span className={classNames('heading-4', Styles.subTagLine)}>Learn. Share. Inspire.</span>
         </p>
 
         <div className={Styles.btns}>

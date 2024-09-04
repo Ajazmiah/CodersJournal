@@ -7,7 +7,7 @@
   --breakpoint-xlarge: 1280px;
 }
 /* Default container width for small screens (mobile-first) */
-.container {
+.Container {
   width: 90%; /* Default width for very small screens */
   padding-inline: 1em;
   margin-inline: auto;
@@ -17,8 +17,8 @@
 
 /* Small Devices (Landscape Phones) */
 @media (min-width: 480px) {
-  .container {
-    width: 90%;
+  .Container {
+   /* // width: 90%; */
     padding-inline: 3em;
   }
 }
@@ -32,8 +32,8 @@
 
 /* Large Devices (Desktops) */
 @media (min-width: 1160px) {
-  .container {
-    width: 960px;
+  .Container {
+    width: 1160px;
   }
 }
 
@@ -135,7 +135,7 @@
 
 @media (min-width: 769px) {
   .heading-1 {
-    font-size: 5em; /* Font size for screens above 640px */
+    font-size: 4em; /* Font size for screens above 640px */
   }
 }
 
@@ -157,4 +157,16 @@
 
 .heading-4 {
   font-family: "Playfair Display", serif;
+}
+
+/* LEFT-> CONTENT , RIFHT => ASIDE ( Ads anf Reommanded ) */
+.main-2-column {
+  display: flex;
+  gap: 4em;
+  padding: 0;
+}
+@media (max-width: 860px) {
+  .main-2-column {
+    display: block;
+  }
 }

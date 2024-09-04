@@ -1,4 +1,8 @@
 .home {
-    padding-top: var(--space-10);
-    background-color: red;
+  padding-top: var(--space-10);
+  background-color: red;
+}
+
+.featuredArticles {
+  flex: 1;
 }

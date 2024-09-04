@@ -36,13 +36,15 @@
 .tagLines {
 }
 .mainTagLine {
-  font-size: 5em;
-  font-family: "Playfair Display";
   font-weight: 900;
-  line-height: 80px;
+
+}
+@media (min-width: 460px) {
+  .mainTagLine {
+    line-height: 65px;
+  }
 }
 .subTagLine {
-  font-size: 1.8em;
   letter-spacing: 2px;
   display: block;
 }
