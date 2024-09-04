@@ -42,6 +42,8 @@ function FeaturedArticles() {
         <Border />
       </div>
 
+
+
       <div className={Styles.RecentArticles}>
         {posts.slice(-3).map((post) => (
           <FeaturedCard key={post._id} post={post} />

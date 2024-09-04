@@ -1,0 +1,18 @@
+.adsSection {
+  margin-bottom: 20px;
+}
+
+.adsSection h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.ad {
+  margin-bottom: 15px;
+}
+
+.ad img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}

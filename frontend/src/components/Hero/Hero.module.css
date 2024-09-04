@@ -33,11 +33,8 @@
   background: #ffffff;
 }
 
-.tagLines {
-}
 .mainTagLine {
   font-weight: 900;
-
 }
 @media (min-width: 460px) {
   .mainTagLine {

@@ -1,40 +1,41 @@
-import React from 'react';
-import styles from './Sidebar.module.css'; // Assuming you use CSS modules
+import React from "react";
+import styles from "./Sidebar.module.css"; // Assuming you use CSS modules
+import Ad from "../Ad/Ad";
 
 const Sidebar = () => {
   const ads = [
     {
-      image: 'https://via.placeholder.com/300x250?text=Ad+1',
-      link: 'https://example.com/ad1',
-      title: 'Ad 1',
+      image: "https://via.placeholder.com/300x250?text=Ad+1",
+      link: "https://example.com/ad1",
+      title: "Ad 1",
     },
     {
-      image: 'https://via.placeholder.com/300x250?text=Ad+2',
-      link: 'https://example.com/ad2',
-      title: 'Ad 2',
+      image: "https://via.placeholder.com/300x250?text=Ad+2",
+      link: "https://example.com/ad2",
+      title: "Ad 2",
     },
     {
-      image: 'https://via.placeholder.com/300x250?text=Ad+3',
-      link: 'https://example.com/ad3',
-      title: 'Ad 3',
+      image: "https://via.placeholder.com/300x250?text=Ad+3",
+      link: "https://example.com/ad3",
+      title: "Ad 3",
     },
   ];
 
   const relatedPosts = [
     {
-      link: '/post/1',
-      title: 'How to Optimize Your React App',
-      excerpt: 'Learn how to make your React app faster and more efficient.',
+      link: "/post/1",
+      title: "How to Optimize Your React App",
+      excerpt: "Learn how to make your React app faster and more efficient.",
     },
     {
-      link: '/post/2',
-      title: 'Understanding Redux Toolkit',
-      excerpt: 'A deep dive into the Redux Toolkit and its benefits.',
+      link: "/post/2",
+      title: "Understanding Redux Toolkit",
+      excerpt: "A deep dive into the Redux Toolkit and its benefits.",
     },
     {
-      link: '/post/3',
-      title: 'CSS Modules in React',
-      excerpt: 'Why and how to use CSS Modules for scoped styling in React.',
+      link: "/post/3",
+      title: "CSS Modules in React",
+      excerpt: "Why and how to use CSS Modules for scoped styling in React.",
     },
   ];
 
@@ -42,13 +43,7 @@ const Sidebar = () => {
     <aside className={styles.sidebar}>
       <div className={styles.adsSection}>
         <h3>Sponsored</h3>
-        {ads.map((ad, index) => (
-          <div key={index} className={styles.ad}>
-            <a href={ad.link} target="_blank" rel="noopener noreferrer">
-              <img src={ad.image} alt={ad.title} />
-            </a>
-          </div>
-        ))}
+        {ads.map((ad, index) =>  <Ad key={index} link={ad.link} title={ad.title} image={ad.image}/>)}
       </div>
 
       <div className={styles.relatedPostsSection}>
