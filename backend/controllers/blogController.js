@@ -19,7 +19,7 @@ const allPost = asyncHandler(async (req, res, next) => {
 
     res.status(200).json(SignedPosts);
   } catch (error) {
-    throw new Error("Posts could not be loaded")
+    throw new Error("Posts could not be loaded");
   }
 });
 
@@ -36,7 +36,7 @@ const createPost = asyncHandler(async (req, res, next) => {
   const title = richText.title;
   const body = richText.QuillValue;
   const summary = richText.summary;
-  const coverImage = richText.image;
+  // const coverImage = richText.image;
 
   const decoded = verifytoken(req);
   const user = await User.findById(decoded.userId).select("-password");
@@ -49,7 +49,6 @@ const createPost = asyncHandler(async (req, res, next) => {
     title,
     body,
     summary,
-    coverImage,
     authorId: user._id,
     coverImageName: customFileName,
   });
@@ -124,15 +123,30 @@ const deletePost = asyncHandler(async (req, res, next) => {
 });
 
 const editPost = asyncHandler(async (req, res, next) => {
-  const { id, title, summary, body, coverImage } = req.body;
+  // const { id, title, summary, body, coverImage } = req.body;
+
+
+  const richText = req.body;
+
+  const title = richText.title;
+  const body = richText.QuillValue;
+  const summary = richText.summary;
+  const id = richText.id
 
   const post = await blogModel.findById(id);
 
+  //if Cover image is being updated
+  let customFileName = null;
+  if (req?.file) {
+    customFileName = getRandomHex();
+    await uploadToS3(req.file, customFileName);
+  }
+
   if (post) {
-    post.title = title;
-    post.summary = summary;
+    post.title = title || post.title
+    post.summary = summary || post.summary;
     post.body = body;
-    post.coverImage = coverImage || post?.coverImage;
+    post.coverImageName = customFileName || post?.coverImageName;
 
     const updatedPost = await post.save();
 

@@ -51,7 +51,7 @@ export const getFileFromS3 = async (
     Key: `${folderName}/` + fileName,
   });
 
-  const presigned = getSignedUrl(s3, command, { expiresIn: 3600 });
+  const presigned = getSignedUrl(s3, command, {});
 
   return presigned;
 };

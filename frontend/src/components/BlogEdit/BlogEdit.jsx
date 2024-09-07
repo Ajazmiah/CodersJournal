@@ -27,16 +27,35 @@ function BlogEdit({
     }
   };
 
-  const handleSubmit = (title, summary, QuillValue, coverImage, s3Image=null) => {
-    let data = {
-      title,
-      summary,
-      body: QuillValue,
-      coverImage,
-      id,
-    };
+  const handleSubmit = (title, summary, QuillValue, coverImage, s3Image) => {
+    // let data = {
+    //   title,
+    //   summary,
+    //   body: QuillValue,
+    //   id,
+    // };
 
-    postSubmitHandler(data);
+    // if (s3Image) {
+    //   data = {
+    //     title,
+    //     summary,
+    //     body: QuillValue,
+    //     coverImageName: s3Image,
+    //     id,
+    //   };
+    // }
+
+    const form = new FormData();
+
+    if (s3Image) {
+      form.append("coverImage", s3Image); //muter file
+    }
+    form.append("title", title);
+    form.append("summary", summary);
+    form.append("QuillValue", QuillValue);
+    form.append("id", id);
+
+    postSubmitHandler(form);
   };
 
   return (

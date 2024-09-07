@@ -25,7 +25,7 @@ function BlogCreationScreen() {
     form.append("title", title);
     form.append("summary", summary);
     form.append("QuillValue", QuillValue);
-    form.append("image", image);
+    // form.append("image", image);
 
     postSubmitHandler(form);
   };

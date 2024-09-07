@@ -85,7 +85,7 @@ function SingleBlogScreen() {
       handlePostUpdated={handlePostUpdated}
       editSummary={post._doc.summary}
       quillValue={post?._doc?.body}
-      coverImage={post?._doc?.coverImage}
+      coverImage={post?._doc?.coverImageName}
       id={post._doc._id}
       handleBackdrop={() => setBackdrop((prev) => !prev)}
       backdrop={backdrop}

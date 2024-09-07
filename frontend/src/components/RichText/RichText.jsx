@@ -66,6 +66,8 @@ function QuillRichText({
   const [summary, setSummary] = useState(editSummary || "");
   const [QuillValue, setQuillValue] = React.useState(editQuillValue || null);
   const coverImage = previewCoverImage || editCoverImage;
+
+
   const [error, setError] = useState([]);
 
   const validateInputs = (titleInput, summaryInput, quillInput, image) => {
@@ -128,7 +130,7 @@ function QuillRichText({
   return (
     <>
       <div className={classnames("container pageContainer", Styles.richText)}>
-        {<img src={previewCoverImage} />}
+        {<img src={previewCoverImage || editCoverImage }/>}
         <div>
           <input
             required={true}

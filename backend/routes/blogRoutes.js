@@ -24,7 +24,7 @@ router.route("/create").post(protect, upload.single('coverImage'),[
   check('QuillValue', 'Body is required').notEmpty(),
 ],createPost).get(protect, getAllUserPosts);
 router.route('/getUserPosts').get(getUserPosts)
-router.post('/edit', editPost)
+router.post('/edit',upload.single('coverImage'), editPost)
 router.get("/post/:id" , getPost);
 router.post("/deletepost" , deletePost)
 

@@ -41,6 +41,8 @@ function ResponsiveAppBar() {
 
   const device = useScreenSize();
 
+  console.log("__INFO___", userInfo)
+
   const handleShowMenu = () => {
     setShowMenu((prev) => !prev);
   };
