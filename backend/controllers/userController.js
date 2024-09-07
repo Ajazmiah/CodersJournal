@@ -7,6 +7,7 @@ import User from "../models/userModel.js";
 import { getRandomHex } from "../utils/randomHex.js";
 import { getFileFromS3, uploadToS3 } from "../utils/s3.js";
 
+
 const signup = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
 

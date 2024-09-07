@@ -25,6 +25,7 @@ const allPost = asyncHandler(async (req, res, next) => {
 
 const createPost = asyncHandler(async (req, res, next) => {
   // Check validation results
+  
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -36,7 +37,6 @@ const createPost = asyncHandler(async (req, res, next) => {
   const title = richText.title;
   const body = richText.QuillValue;
   const summary = richText.summary;
-  // const coverImage = richText.image;
 
   const decoded = verifytoken(req);
   const user = await User.findById(decoded.userId).select("-password");
