@@ -1,54 +1,56 @@
 .ql-toolbar > div:nth-child(1) {
-    background-color: #ff8c57;
-    border: none;
-    padding: var(--space-2);
+  background-color: #786e6a12;
+  border: none;
+  padding: var(--space-2);
 }
 
-
 .ql-toolbar > div:nth-child(2) {
-    resize: vertical;
-    max-width: 100%;
-    min-height: 300px;
-    max-height: 70vh;
-    overflow-y: scroll;
-    border: none;
-    box-shadow:  1px 20px 20px #0000000d;
-    /* background-color: #323237;
+  resize: vertical;
+  max-width: 100%;
+  min-height: 300px;
+  max-height: 70vh;
+  overflow-y: scroll;
+  border: none;
+  box-shadow: 1px 20px 20px #0000000d;
+  /* background-color: #323237;
     color: #fff; */
 }
 
-
-.ql-toolbar > div:nth-child(2) .ql-editor  {
-    background-color: red;
+.ql-toolbar > div:nth-child(2) .ql-editor {
+  background-color: #786e6a12;
 }
 
-
-
 .richText {
-   
+  width: 90%;
+  margin: 0 auto;
+  padding: 4em;
+  max-width: 1260px;
+  min-width: 400px;
 }
 
 .input {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 2rem;
-    border: none;
-    font-size: 3rem;
-    padding-left: 1rem;
-    font-weight: 200;
-   
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 2rem;
+  border: none;
+  font-size: 3rem;
+  padding-left: 1rem;
+  font-weight: 200;
 }
 .input:focus {
-    border: none;
-    outline: none;
+  border: none;
+  outline: none;
 }
 
 input::placeholder {
-    font-size: 3rem;
-    font-weight: 200;
-    letter-spacing: 5px;
-    padding-left: 10px;
+  font-size: 3rem;
+  font-weight: 200;
+  letter-spacing: 5px;
+  padding-left: 10px;
 }
-.ql-toolbar.ql-snow  {
-    background-color: red !important;
+.ql-toolbar.ql-snow {
+  background-color: red !important;
+}
+.uploadFile {
+  margin-block: 1em;
 }

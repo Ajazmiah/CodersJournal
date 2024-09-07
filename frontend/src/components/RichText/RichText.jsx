@@ -3,9 +3,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Styles from "./RichText.module.css";
 import classnames from "classnames";
-import { useBackdrop } from "../Backdrop/Backdrop";
 import { sanitizeContent } from "../../utils";
-import useUploadImage from "../../hooks/useUploadImage";
 import { toast } from "react-toastify";
 import UploadFileButton from "../UploadButton/UploadFileButton";
 
@@ -20,7 +18,7 @@ function QuillRichText({
   handleBackdrop = () => {},
   ...rest
 }) {
-  const [handleImageUpload, image] = useUploadImage();
+
 
   const modules = {
     toolbar: [
@@ -129,7 +127,7 @@ function QuillRichText({
 
   return (
     <>
-      <div className={classnames("container pageContainer", Styles.richText)}>
+      <div className={classnames("pageContainer", Styles.richText)}>
         {<img src={previewCoverImage || editCoverImage }/>}
         <div>
           <input
@@ -158,7 +156,7 @@ function QuillRichText({
             autoComplete="shipping address-line1"
           />
         </div>
-        <div>
+        <div className={Styles.uploadFile}>
           <UploadFileButton type="file" handleChange={handleFileChange} />
         </div>
         <ReactQuill
