@@ -37,7 +37,6 @@ function SingleBlogScreen() {
     const fetchPost = async () => {
       try {
         const fetchedPost = await getPost({ id }).unwrap();
-        console.log("___FETCHED___", fetchedPost);
         setPost(fetchedPost);
       } catch (err) {
         if (err.status === 404) {
@@ -48,13 +47,10 @@ function SingleBlogScreen() {
       }
     };
 
-    console.log("POST-SINGLE", post);
-
     fetchPost();
   }, [getPost, id, postUpdated]);
 
   const handleApproveDeletion = async () => {
-    console.log("HI Approved:", id);
     try {
       await deletePost({ id }).unwrap();
       toast.success("Post is deleted");

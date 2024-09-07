@@ -3,7 +3,7 @@ import blogModel from "../models/blogModels.js";
 import User from "../models/userModel.js";
 import { verifytoken } from "../utils/verifyToken.js";
 import { validationResult } from "express-validator";
-import { getFileFromS3, uploadToS3 } from "../utils/s3.js";
+import { deleteFromS3, getFileFromS3, uploadToS3 } from "../utils/s3.js";
 import { getRandomHex } from "../utils/randomHex.js";
 import { attachPresignedURLs } from "../utils/attachedSignedURL.js";
 
@@ -25,7 +25,7 @@ const allPost = asyncHandler(async (req, res, next) => {
 
 const createPost = asyncHandler(async (req, res, next) => {
   // Check validation results
-  
+
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -116,9 +116,12 @@ const getPost = asyncHandler(async (req, res, next) => {
 });
 
 const deletePost = asyncHandler(async (req, res, next) => {
-  console.log("HIIIIII FROM DELETE");
   const _id = req.body.id;
   const post = await blogModel.findByIdAndDelete(_id);
+
+  const fileName = post.coverImageName;
+
+  await deleteFromS3(fileName, "postCoverImage");
   res.status(200).json(post);
 });
 
