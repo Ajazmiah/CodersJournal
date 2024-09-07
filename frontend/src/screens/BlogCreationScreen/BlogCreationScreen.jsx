@@ -17,7 +17,7 @@ function BlogCreationScreen() {
     }
   };
 
-  const handleSubmit = (title, summary, QuillValue, image, s3Image) => {
+  const handleSubmit = (title, summary, QuillValue, s3Image) => {
 
     const form = new FormData();
 
@@ -25,7 +25,7 @@ function BlogCreationScreen() {
     form.append("title", title);
     form.append("summary", summary);
     form.append("QuillValue", QuillValue);
-    // form.append("image", image);
+  
 
     postSubmitHandler(form);
   };

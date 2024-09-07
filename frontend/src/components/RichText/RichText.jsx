@@ -120,10 +120,10 @@ function QuillRichText({
   useEffect(() => titleRef.current.focus(), []);
 
   const handleClick = () => {
-    if (validateInputs(title, summary, QuillValue, coverImage)) {
+    if (validateInputs(title, summary, QuillValue, s3Image)) {
       handleBackdrop();
 
-      handleSubmit(title, summary, QuillValue, coverImage, s3Image);
+      handleSubmit(title, summary, QuillValue, s3Image);
     } else return;
   };
 

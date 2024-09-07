@@ -27,24 +27,7 @@ function BlogEdit({
     }
   };
 
-  const handleSubmit = (title, summary, QuillValue, coverImage, s3Image) => {
-    // let data = {
-    //   title,
-    //   summary,
-    //   body: QuillValue,
-    //   id,
-    // };
-
-    // if (s3Image) {
-    //   data = {
-    //     title,
-    //     summary,
-    //     body: QuillValue,
-    //     coverImageName: s3Image,
-    //     id,
-    //   };
-    // }
-
+  const handleSubmit = (title, summary, QuillValue, s3Image) => {
     const form = new FormData();
 
     if (s3Image) {

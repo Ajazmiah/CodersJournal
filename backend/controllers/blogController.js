@@ -123,15 +123,12 @@ const deletePost = asyncHandler(async (req, res, next) => {
 });
 
 const editPost = asyncHandler(async (req, res, next) => {
-  // const { id, title, summary, body, coverImage } = req.body;
-
-
   const richText = req.body;
 
   const title = richText.title;
   const body = richText.QuillValue;
   const summary = richText.summary;
-  const id = richText.id
+  const id = richText.id;
 
   const post = await blogModel.findById(id);
 
@@ -143,7 +140,7 @@ const editPost = asyncHandler(async (req, res, next) => {
   }
 
   if (post) {
-    post.title = title || post.title
+    post.title = title || post.title;
     post.summary = summary || post.summary;
     post.body = body;
     post.coverImageName = customFileName || post?.coverImageName;
