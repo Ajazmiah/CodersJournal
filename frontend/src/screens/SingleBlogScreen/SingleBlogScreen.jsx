@@ -65,7 +65,6 @@ function SingleBlogScreen() {
   };
 
   const handleModal = (handleType) => {
-    console.log("CLICKE CLICKED CLIKED");
     setBackdrop((prev) => !prev);
     setModalContentType(handleType);
   };
