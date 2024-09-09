@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import Styles from "./UserProfileInfo.module.css";
 import { getIcon } from "../Icon";
 import Button from "../Atoms/Button/Button";
+import classNames from "classnames";
 
 function UserProfileInfo({ userInfo }) {
   return (
     <div className={Styles.userProfileInfo}>
-      <div className="container">
-        <div>
-          <div>
+      <div className={classNames('container', Styles.profileInfo)}>
+        <div className={Styles.profileLeft}>
+          <div className={Styles.profilePicture}>
             <img src={userInfo.profilePicture} alt="" />
           </div>
 
@@ -27,7 +28,7 @@ function UserProfileInfo({ userInfo }) {
           </div>
         </div>
 
-        <div>
+        <div className={Styles.profileRight}>
           <AuthorBio authorInfo={userInfo} />
         </div>
       </div>

@@ -7,12 +7,12 @@
 }
 .authorInfo {
     flex-grow: 1;
+    color: #fff;
 }
 .authorBioText {
     position: relative;
     padding: 2px;
     padding-left: 15px;
-    color: #fff;
 }
 .authorImage {
     flex-basis: 30%;

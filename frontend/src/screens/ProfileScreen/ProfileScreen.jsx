@@ -8,6 +8,8 @@ import ProfileImage from "../../components/ProfileImage/ProfileImage";
 import Image from "../../components/Image/Image";
 import Styles from "./ProfileScreen.module.css";
 import UserProfileInfo from "../../components/UserProfileInfo/UserProfileInfo";
+import FeaturedCard from "../../components/FeaturedCard/FeaturedCard";
+import Border from "../../components/Atoms/Border/Border";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -38,7 +40,13 @@ const ProfileScreen = () => {
     <div>
       <UserProfileInfo userInfo={userInfo} />
       <div className="container">
-        <PostCard posts={posts} />
+      {posts?.map((post) => (
+          <>
+            <FeaturedCard post={post} />
+            <Border />
+      
+          </>
+        ))}
       </div>
     </div>
   );

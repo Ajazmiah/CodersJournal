@@ -20,7 +20,7 @@ function UserPublicProfile() {
       try {
         const fetchedPost = await gerUserProfile({ userId }).unwrap();
         const { authorInfo, SignedPosts } = fetchedPost;
-        console.log('FECTED',SignedPosts)
+        console.log("FECTED", SignedPosts);
         setPosts(SignedPosts);
         setAuthor(authorInfo);
       } catch (err) {
@@ -36,8 +36,6 @@ function UserPublicProfile() {
   }, [gerUserProfile, userId]);
 
   if (!posts) return;
-
-  console.log("PUBLIC", posts)
 
   return (
     <div>

@@ -1,9 +1,23 @@
 .userProfileInfo {
-    background-color: red;
+    background-color: var(--color-dark);
+    padding-top: 3em;
+}
+.profileInfo {
+    display: flex;
+    gap: 20px;
+}
+.profilePicture img {
+    border-radius: 20px;
 }
 .socials {
     display: flex;
     gap: 1.5em;
     margin-top: 10px;
     font-size: 2em;
+}
+.profileLeft {
+
+}
+.profileRight {
+
 }

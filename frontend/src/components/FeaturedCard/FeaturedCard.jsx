@@ -30,7 +30,7 @@ function FeaturedCard({ post }) {
           {post.summary ? post.summary : "Summary is not available"}
         </p>
       </div>
-      <Date date={post.createdAt} />
+
     </div>
   );
 }

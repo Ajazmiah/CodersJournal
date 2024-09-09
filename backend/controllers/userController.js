@@ -167,7 +167,6 @@ const userPublicProfile = asyncHandler(async (req, res, next) => {
 
   const SignedPosts = await attachPresignedURLs(blogs);
 
-
   res.status(200).json({ SignedPosts, authorInfo });
 });
 
