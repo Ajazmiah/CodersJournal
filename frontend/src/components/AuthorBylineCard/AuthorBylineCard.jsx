@@ -14,7 +14,6 @@ function AuthorBylineCard({ author }) {
   const profilePicture = author?.profilePicture;
 
   const handleClick = (event) => {
-    console.log(author, "--------author");
     const path = `/author/${authorName}-${author?._id}`;
     event.stopPropagation();
     handleNavigateToPost("d", path);

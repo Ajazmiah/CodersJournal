@@ -87,6 +87,9 @@ function SingleBlogScreen() {
     />
   );
 
+  
+  console.log('SINGLE_______', post)
+
   return (
     <div className={classNames(" main-2-column space-top-9 Container")}>
       <div className={Styles.SingleBlogScreen}>

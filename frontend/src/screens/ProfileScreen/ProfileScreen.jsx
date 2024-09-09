@@ -15,7 +15,7 @@ const ProfileScreen = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const { posts } = useSelector((state) => state.posts);
 
-  console.log("POSTS PROFILE", posts);
+  console.log("POSTS PROFILE", userInfo);
 
   const [getPosts] = useAllUserPostsMutation();
 
@@ -37,6 +37,7 @@ const ProfileScreen = () => {
   return (
     <div>
       <UserProfileInfo userInfo={userInfo} />
+      <h1>HELLO </h1>
       <div className="container">
         <PostCard posts={posts} />
       </div>
