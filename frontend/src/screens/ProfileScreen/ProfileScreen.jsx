@@ -37,7 +37,6 @@ const ProfileScreen = () => {
   return (
     <div>
       <UserProfileInfo userInfo={userInfo} />
-      <h1>HELLO </h1>
       <div className="container">
         <PostCard posts={posts} />
       </div>

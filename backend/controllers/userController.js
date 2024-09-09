@@ -6,7 +6,7 @@ import blogModel from "../models/blogModels.js";
 import User from "../models/userModel.js";
 import { getRandomHex } from "../utils/randomHex.js";
 import { getFileFromS3, uploadToS3 } from "../utils/s3.js";
-
+import { attachPresignedURLs } from "../utils/attachedSignedURL.js";
 
 const signup = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
@@ -57,15 +57,13 @@ const signup = asyncHandler(async (req, res, next) => {
 
     presignedURL = await getFileFromS3(user.profilePicture, "profilePic");
 
-    // user.profilePicture = presignedURL;
-
     generateToken(res, user._id);
     res.status(201).json({
       _id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      profilePicture:presignedURL
+      profilePicture: presignedURL,
     });
   } else {
     res.status(400);
@@ -167,7 +165,10 @@ const userPublicProfile = asyncHandler(async (req, res, next) => {
     throw new Error("This user profile is unavailable");
   }
 
-  res.status(200).json({ blogs, authorInfo });
+  const SignedPosts = await attachPresignedURLs(blogs);
+
+
+  res.status(200).json({ SignedPosts, authorInfo });
 });
 
 export {

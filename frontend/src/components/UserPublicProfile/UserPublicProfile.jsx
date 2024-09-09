@@ -19,8 +19,9 @@ function UserPublicProfile() {
     const fetchPost = async () => {
       try {
         const fetchedPost = await gerUserProfile({ userId }).unwrap();
-        const { authorInfo, blogs } = fetchedPost;
-        setPosts(blogs);
+        const { authorInfo, SignedPosts } = fetchedPost;
+        console.log('FECTED',SignedPosts)
+        setPosts(SignedPosts);
         setAuthor(authorInfo);
       } catch (err) {
         if (err.status === 404) {
@@ -35,6 +36,8 @@ function UserPublicProfile() {
   }, [gerUserProfile, userId]);
 
   if (!posts) return;
+
+  console.log("PUBLIC", posts)
 
   return (
     <div>
