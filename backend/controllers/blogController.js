@@ -110,7 +110,7 @@ const getPost = asyncHandler(async (req, res, next) => {
 
   const presignedProfilePicURL = await getFileFromS3(
     user.profilePicture,
-    "profilePicutre"
+    "profilePic"
   );
 
   user.profilePicture = presignedProfilePicURL;

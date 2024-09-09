@@ -10,7 +10,8 @@ import Date from "../Date/Date";
 
 const LeadArticle = ({ post }) => {
   const { handleNavigateToPost } = useLink();
-  console.log("LEAD", post);
+  if(!post) return 
+  
 
   return (
     <div

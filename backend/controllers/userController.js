@@ -35,7 +35,7 @@ const signup = asyncHandler(async (req, res, next) => {
 
   const customFileName = getRandomHex();
 
-  await uploadToS3(req.file, customFileName, "profilePicutre");
+  await uploadToS3(req.file, customFileName, "profilePic");
 
   const user = await userModel.create({
     firstName,
@@ -55,9 +55,9 @@ const signup = asyncHandler(async (req, res, next) => {
   if (user) {
     let presignedURL = null;
 
-    presignedURL = await getFileFromS3(user.profilePicture, "profilePicutre");
+    presignedURL = await getFileFromS3(user.profilePicture, "profilePic");
 
-    user.profilePicture = presignedURL;
+    // user.profilePicture = presignedURL;
 
     generateToken(res, user._id);
     res.status(201).json({
@@ -65,7 +65,7 @@ const signup = asyncHandler(async (req, res, next) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      profilePicture: presignedURL,
+      profilePicture:presignedURL
     });
   } else {
     res.status(400);
@@ -83,7 +83,7 @@ const singin = asyncHandler(async (req, res, next) => {
 
     let presignedURL = null;
 
-    presignedURL = await getFileFromS3(user.profilePicture, "profilePicutre");
+    presignedURL = await getFileFromS3(user.profilePicture, "profilePic");
     user.profilePicture = presignedURL;
 
     res.status(201).json({
