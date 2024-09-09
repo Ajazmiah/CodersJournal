@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../slices/usersApiSlice.js";
@@ -20,6 +20,8 @@ import { useBackdrop } from "../Backdrop/Backdrop.jsx";
 
 /*==============================================================*/
 function ResponsiveAppBar() {
+  const TOKEN_EXPIRY_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+
   const [showMenu, setShowMenu] = useState(false);
   const [logoutApiCall] = useLogoutMutation();
   const dispatch = useDispatch();
@@ -39,9 +41,33 @@ function ResponsiveAppBar() {
     }
   };
 
-  const device = useScreenSize();
+  const timerRef = useRef(null);
 
-  console.log("__INFO___", userInfo)
+  useEffect(() => {
+    if (!userInfo) {
+      // If userInfo is not set, clear any existing timeout
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+      return;
+    }
+
+    // Set a new timeout if userInfo is available
+    timerRef.current = setTimeout(() => {
+      logoutHandler();
+    }, TOKEN_EXPIRY_DURATION);
+
+    // Cleanup function to clear the timeout if the component unmounts or userInfo is unset
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, [userInfo]); // Only re-run if userInfo changes
+
+  const device = useScreenSize();
 
   const handleShowMenu = () => {
     setShowMenu((prev) => !prev);

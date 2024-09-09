@@ -3,7 +3,7 @@ import {
   PutObjectCommand,
   S3Client,
   GetObjectCommand,
-  DeleteObjectCommand
+  DeleteObjectCommand,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
@@ -52,18 +52,18 @@ export const getFileFromS3 = async (
     Key: `${folderName}/` + fileName,
   });
 
-  const presigned = getSignedUrl(s3, command, {});
+  const expiresIn = 7 * 24 * 60 * 60; // 7 days
+
+  const presigned = getSignedUrl(s3, command, { expiresIn });
 
   return presigned;
 };
 
 export const deleteFromS3 = async (fileName, folderName) => {
-
   const command = new DeleteObjectCommand({
     Bucket: bucketName,
-    Key: `${folderName}/` + fileName
-  })
+    Key: `${folderName}/` + fileName,
+  });
 
   await s3.send(command);
-
-}
+};
