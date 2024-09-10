@@ -6,6 +6,7 @@ import { validationResult } from "express-validator";
 import { deleteFromS3, getFileFromS3, uploadToS3 } from "../utils/s3.js";
 import { getRandomHex } from "../utils/randomHex.js";
 import { attachPresignedURLs } from "../utils/attachedSignedURL.js";
+import { optimizeImage } from "../utils/imageOptimize.js";
 
 // Public - All Posts that shows up on HomeScreen
 const allPost = asyncHandler(async (req, res, next) => {
@@ -43,7 +44,9 @@ const createPost = asyncHandler(async (req, res, next) => {
 
   const customFileName = getRandomHex();
 
-  await uploadToS3(req.file, customFileName);
+  const optimizedBuffer = await optimizeImage(req.file.buffer, "coverImage");
+
+  await uploadToS3(optimizedBuffer, customFileName);
 
   const blog = await blogModel.create({
     title,

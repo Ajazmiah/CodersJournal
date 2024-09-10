@@ -7,6 +7,7 @@ import User from "../models/userModel.js";
 import { getRandomHex } from "../utils/randomHex.js";
 import { getFileFromS3, uploadToS3 } from "../utils/s3.js";
 import { attachPresignedURLs } from "../utils/attachedSignedURL.js";
+import { optimizeImage } from "../utils/imageOptimize.js";
 
 const signup = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
@@ -35,7 +36,12 @@ const signup = asyncHandler(async (req, res, next) => {
 
   const customFileName = getRandomHex();
 
-  await uploadToS3(req.file, customFileName, "profilePic");
+  const optimizedBuffer = await optimizeImage(
+    req.file.buffer,
+    "profilePicture"
+  );
+
+  await uploadToS3(optimizedBuffer, customFileName, "profilePic");
 
   const user = await userModel.create({
     firstName,
