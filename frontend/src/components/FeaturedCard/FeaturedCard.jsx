@@ -30,7 +30,6 @@ function FeaturedCard({ post }) {
           {post.summary ? post.summary : "Summary is not available"}
         </p>
       </div>
-
     </div>
   );
 }

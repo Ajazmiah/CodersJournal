@@ -18,6 +18,7 @@ import Border from "../../components/Atoms/Border/Border";
 import Button from "../../components/Atoms/Button/Button";
 import Sidebar from "../../components/SideBar/SideBar";
 import classNames from "classnames";
+import Image from "../../components/Image/Image";
 
 function SingleBlogScreen() {
   const { id } = useParams();
@@ -87,9 +88,6 @@ function SingleBlogScreen() {
     />
   );
 
-  
-  console.log('SINGLE_______', post)
-
   return (
     <div className={classNames(" main-2-column space-top-9 Container")}>
       <div className={Styles.SingleBlogScreen}>
@@ -115,7 +113,11 @@ function SingleBlogScreen() {
               </div>
 
               <div>
-                <img src={post?._doc.coverImageName || post?._doc.coverImage} />
+                <Image
+                  src={post?._doc.coverImageName || post?._doc.coverImage}
+                  loading="eager"
+                  width='780px'
+                />
                 <div className={Styles.blogDetails}>
                   <AuthorBylineCard author={post.author} />
                   <p>{formatDate(post?.createdAt)}</p>
