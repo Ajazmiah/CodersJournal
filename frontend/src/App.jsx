@@ -12,7 +12,7 @@ function App() {
       <Header />
       <ToastContainer />
 
-      <main>
+      <main className="main">
         <Outlet />
       </main>
       <Footer/>
