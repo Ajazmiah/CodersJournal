@@ -3,7 +3,7 @@
 @import url("./styles/utilities.css");
 
 :root {
-  --primary-color: #000;
+  --color-black: #000;
   --color-blue: #1D3557;
   --secondary-color:#ff2020;
   --color-dark: #212529;
