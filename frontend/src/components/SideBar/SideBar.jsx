@@ -42,7 +42,6 @@ const Sidebar = () => {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.adsSection}>
-        <h3>Sponsored</h3>
         {ads.map((ad, index) =>  <Ad key={index} link={ad.link} title={ad.title} image={ad.image}/>)}
       </div>
 

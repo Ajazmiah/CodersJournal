@@ -136,7 +136,7 @@ function SingleBlogScreen() {
                 </div>
                 <Border />
               </div>
-              <div className="merriweather-light space-top-5">{POST}</div>
+              <div className={classNames('space-top-5', Styles.post)}>{POST}</div>
             </div>
           </>
         )}
