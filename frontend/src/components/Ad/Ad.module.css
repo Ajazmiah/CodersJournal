@@ -16,3 +16,7 @@
   height: auto;
   border-radius: 4px;
 }
+.sponsored {
+  color: var(--light-gray);
+  font-size: 14px;
+}

@@ -119,38 +119,52 @@ const logout = asyncHandler(async (req, res, next) => {
   res.status(200).json({ message: " Logged out" });
 });
 
-const getUserProfile = asyncHandler(async (req, res, next) => {
-  const user = {
-    _id: req.user._id,
-    name: req.user.firstName + " " + req.user.lastName,
-    email: req.user.email,
-    profilePicture: req.user.profilePicture,
-  };
-
-  res.status(200).json(user);
-});
-
 const updateUser = asyncHandler(async (req, res, next) => {
-  const userId = req.user._id;
+  const updateForm = req.body;
+  const userId = updateForm._id;
+
+  const firstName = updateForm.firstName;
+  const lastName = updateForm.lastName;
+  const email = updateForm.email;
+  const password = updateForm.password;
+  const confirmPassword = updateForm.confirmPassword;
+
   const user = await userModel.findById(userId);
 
   if (user) {
-    user.firstName = req.body.firstName || user.firstName;
-    user.lastName = req.body.lastName || user.lastName;
-    user.email = req.body.email || user.email;
-    user.profilePicture = req.body.profilePicture || user.profilePicture;
+    user.firstName = firstName || user.firstName;
+    user.lastName = lastName || user.lastName;
+    user.email = email || user.email;
+    // user.profilePicture = req.body.profilePicture || user.profilePicture;
+    let uploaded = null;
 
-    if (req.body.password) {
-      user.password = req.body.password;
+    if (req?.file) {
+      const optimizedBuffer = await optimizeImage(
+        req.file.buffer,
+        "profilePicture"
+      );
+
+      await uploadToS3(optimizedBuffer, user.profilePicture, "profilePic");
+    }
+    if (password) {
+      user.password = password;
+      user.confirmPassword = confirmPassword;
     }
 
     const updatedUser = await user.save();
-    res.status(200).json({
-      _id: updatedUser._id,
-      firstName: updatedUser.firstName,
-      lastName: updatedUser.lastName,
-      profilePicture: updatedUser.profilePicture,
-    });
+
+    if (updateUser) {
+      let presignedURL = null;
+
+      presignedURL = await getFileFromS3(user.profilePicture, "profilePic");
+
+      res.status(200).json({
+        _id: updatedUser._id,
+        firstName: updatedUser.firstName,
+        lastName: updatedUser.lastName,
+        profilePicture: presignedURL,
+      });
+    }
   } else {
     res.status(404);
     throw new Error("USER NOT FOUND!");
@@ -170,17 +184,17 @@ const userPublicProfile = asyncHandler(async (req, res, next) => {
   if (!authorInfo) {
     throw new Error("This user profile is unavailable");
   }
+  let presignedURL = null;
+  let SignedPosts = null;
 
-  const SignedPosts = await attachPresignedURLs(blogs);
+  if (blogs && authorInfo) {
+    presignedURL = await getFileFromS3(authorInfo.profilePicture, "profilePic");
+    SignedPosts = await attachPresignedURLs(blogs);
+  }
+
+  authorInfo.profilePicture = presignedURL;
 
   res.status(200).json({ SignedPosts, authorInfo });
 });
 
-export {
-  signup,
-  singin,
-  logout,
-  getUserProfile,
-  updateUser,
-  userPublicProfile,
-};
+export { signup, singin, logout, updateUser, userPublicProfile };

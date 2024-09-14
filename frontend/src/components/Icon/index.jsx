@@ -10,6 +10,7 @@ import {
   FaYoutube,
   FaTwitter,
   FaGithub,
+  FaTrash, 
 } from "react-icons/fa";
 
 export const icons = {
@@ -23,7 +24,9 @@ export const icons = {
   Fb: <FaFacebook />,
   github: <FaGithub/>,
   youtube: <FaYoutube/>,
-  twitter: <FaTwitter />
+  twitter: <FaTwitter />,
+  delete: <FaTrash/>,
+  update: <FaEdit/>
 
 };
 

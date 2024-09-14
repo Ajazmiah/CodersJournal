@@ -36,10 +36,12 @@ function UserPublicProfile() {
   }, [gerUserProfile, userId]);
 
   if (!posts) return;
+  console.log("AUTHOR", author)
 
   return (
     <div>
       <UserProfileInfo userInfo={author} />
+      
 
       <div className="container">
         {posts.map((post) => (

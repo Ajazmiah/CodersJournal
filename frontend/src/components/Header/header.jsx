@@ -43,29 +43,29 @@ function ResponsiveAppBar() {
 
   const timerRef = useRef(null);
 
-  useEffect(() => {
-    if (!userInfo) {
-      // If userInfo is not set, clear any existing timeout
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-        timerRef.current = null;
-      }
-      return;
-    }
+  // useEffect(() => {
+  //   if (!userInfo) {
+  //     // If userInfo is not set, clear any existing timeout
+  //     if (timerRef.current) {
+  //       clearTimeout(timerRef.current);
+  //       timerRef.current = null;
+  //     }
+  //     return;
+  //   }
 
-    // Set a new timeout if userInfo is available
-    timerRef.current = setTimeout(() => {
-      logoutHandler();
-    }, TOKEN_EXPIRY_DURATION);
+  //   // Set a new timeout if userInfo is available
+  //   timerRef.current = setTimeout(() => {
+  //     logoutHandler();
+  //   }, TOKEN_EXPIRY_DURATION);
 
-    // Cleanup function to clear the timeout if the component unmounts or userInfo is unset
-    return () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-        timerRef.current = null;
-      }
-    };
-  }, [userInfo]); // Only re-run if userInfo changes
+  //   // Cleanup function to clear the timeout if the component unmounts or userInfo is unset
+  //   return () => {
+  //     if (timerRef.current) {
+  //       clearTimeout(timerRef.current);
+  //       timerRef.current = null;
+  //     }
+  //   };
+  // }, [userInfo]); // Only re-run if userInfo changes
 
   const device = useScreenSize();
 

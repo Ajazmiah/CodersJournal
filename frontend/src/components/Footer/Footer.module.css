@@ -1,0 +1,33 @@
+.footer {
+    background-color: var(--color-dark);
+    padding-block: 5em;
+    color: var(--color-white);
+
+
+
+}
+.footerContent {
+    max-width: 1380px;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    gap: 3em;
+    align-items: start;
+}
+
+.footer-items {
+    display: flex;
+    gap: 2em;
+    gap: 4em;
+    line-height: 3em;
+    cursor: pointer;
+}
+
+.footer-items li:hover {
+    color: var(--secondary-color);
+
+}
+.footer-rights {
+    margin-top: 5em;
+    text-align: center;
+} 

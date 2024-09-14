@@ -19,6 +19,7 @@ import Button from "../../components/Atoms/Button/Button";
 import Sidebar from "../../components/SideBar/SideBar";
 import classNames from "classnames";
 import Image from "../../components/Image/Image";
+import { getIcon } from "../../components/Icon";
 
 function SingleBlogScreen() {
   const { id } = useParams();
@@ -113,35 +114,29 @@ function SingleBlogScreen() {
               </div>
 
               <div>
+                {post?._doc.authorId === userInfo?._id && (
+                  <div className={Styles.btns}>
+                    <span onClick={() => handleModal("delete")}>
+                      {getIcon("delete")}
+                    </span>
+
+                    <span onClick={() => handleModal("edit")}>
+                      {getIcon("update")}
+                    </span>
+                  </div>
+                )}
                 <Image
                   src={post?._doc.coverImageName || post?._doc.coverImage}
                   loading="eager"
-                  width='780px'
+                  width="780px"
                 />
                 <div className={Styles.blogDetails}>
                   <AuthorBylineCard author={post.author} />
                   <p>{formatDate(post?.createdAt)}</p>
                 </div>
-                {post?._doc.authorId === userInfo?._id && (
-                  <div className={Styles.btns}>
-                    <Button
-                      backgroundColor="#ff5252"
-                      onClick={() => handleModal("delete")}
-                    >
-                      Delete
-                    </Button>
-                    <Button
-                      backgroundColor="#286f6a"
-                      onClick={() => handleModal("edit")}
-                    >
-                      Edit Post
-                    </Button>
-                  </div>
-                )}
-
                 <Border />
               </div>
-              <div className="merriweather-light space-top-5">{POST}</div>
+              <div className={classNames('space-top-5', Styles.post)}>{POST}</div>
             </div>
           </>
         )}

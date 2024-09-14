@@ -11,13 +11,13 @@ import useUploadImage from "../../hooks/useUploadImage";
 import { toast } from "react-toastify";
 import ProfileImage from "../../components/ProfileImage/ProfileImage";
 
-import Input from "@mui/material/Input";
+
 function UpdateAccountScreen() {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [password, setPassword] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -26,20 +26,8 @@ function UpdateAccountScreen() {
 
   const [updateProfile, { isLoading }] = useUpdateProfileMutation();
 
-  const [profilePicture, setProfilePicture] = useState(null);
-
   // CUSTOM USEHOOK
-  const [handleImageUpload, image] = useUploadImage();
-
-  const handleFileChange = async (event) => {
-    event.preventDefault();
-    const file = event.target.files[0];
-
-    const img = await handleImageUpload(file);
-    if (img) {
-      setProfilePicture(img);
-    }
-  };
+  const [previewImage, image, INPUT] = useUploadImage();
 
   useEffect(() => {
     setFirstName(userInfo.firstName);
@@ -52,18 +40,22 @@ function UpdateAccountScreen() {
     if (password !== confirmPassword) {
       alert("Password do not match");
     } else {
+      const form = new FormData();
+
+      form.append("profilePicture", image);
+      form.append("firstName", firstName);
+      form.append("lastName", lastName);
+      form.append("email", email);
+      form.append("password", password);
+      form.append("confirmPassword", confirmPassword);
+      form.append("_id", userInfo._id);
       try {
-        const res = await updateProfile({
-          _id: userInfo._id,
-          firstName,
-          lastName,
-          email,
-          profilePicture: image.myFile,
-        }).unwrap();
+        const res = await updateProfile(form).unwrap();
         dispatch(setCredentials(res));
         toast.success("Your profile is updated");
         if (res) navigate("/profile");
       } catch (err) {
+        toast.error(err.data.message);
         console.log("ERR", err);
       }
     }
@@ -72,25 +64,11 @@ function UpdateAccountScreen() {
     <div>
       <Container>
         <ProfileImage
-          imageURL={profilePicture || userInfo?.profilePicture}
+          imageURL={previewImage || userInfo.profilePicture}
           customClasses="profileImage"
-          htmlFor="contained-button-file"
         />
         <form onSubmit={submitHandler}>
-          <div>
-            <Input
-              accept="image/*" // Accept only image files, modify as needed
-              style={{ display: "none" }}
-              id="contained-button-file"
-              type="file"
-              onChange={handleFileChange}
-            />
-            <label htmlFor="contained-button-file">
-              <Button variant="contained" component="span">
-                Update Profile Image
-              </Button>
-            </label>
-          </div>
+          <div>{INPUT}</div>
           <TextField
             fullWidth
             label="First Name"
