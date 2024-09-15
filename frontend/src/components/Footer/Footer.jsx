@@ -9,26 +9,7 @@ function Footer() {
         <Logo />
 
         <div className={Styles["footer-items"]}>
-          <ul class="footer-column">
-            <li>About Us</li>
-            <li>Careers</li>
-            <li>Press</li>
-            <li>Contact</li>
-          </ul>
-
-          <ul class="footer-column">
-            <li>Terms of Service</li>
-            <li>Privacy Policy</li>
-            <li>Cookie Policy</li>
-            <li>Security</li>
-          </ul>
-
-          <ul className={Styles["footer-column"]}>
-            <li>Help Center</li>
-            <li>FAQs</li>
-            <li>Community Guidelines</li>
-            <li>Support</li>
-          </ul>
+          Developed by: <a href="https://ajazmiah.info/">Ajaz Miah</a>
         </div>
       </div>
       <div className={Styles["footer-rights"]}>

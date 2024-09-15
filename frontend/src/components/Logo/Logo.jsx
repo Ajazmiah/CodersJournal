@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Styles from './Logo.module.css';
+import classNames from 'classnames';
 
 function Logo() {
     return (
@@ -21,7 +22,7 @@ function Logo() {
                     textDecoration: "none",
                 }}
             >
-                <Link className={Styles.logo} to="/">
+                <Link className={classNames(Styles.logo)} to="/">
                     Coders<span>Journal</span>
                 </Link>
             </Typography>

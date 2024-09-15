@@ -17,6 +17,7 @@ import useScreenSize from "../../hooks/useScreenSize.jsx";
 import HeaderMobileNav from "./HeaderMobileNav.jsx";
 import ResponsiveComponent from "../ResponsiveComponent/ResponsiveComponent.jsx";
 import { useBackdrop } from "../Backdrop/Backdrop.jsx";
+import { getIcon } from "../Icon/index.jsx";
 
 /*==============================================================*/
 function ResponsiveAppBar() {
@@ -111,6 +112,7 @@ function ResponsiveAppBar() {
                   customClasses="headerImage"
                   imageURL={userInfo?.profilePicture}
                 />
+                 {getIcon('arrowDown')}
               </button>
               {showMenu && (
                 <div className={Styles.userMenu}>

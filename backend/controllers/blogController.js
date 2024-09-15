@@ -149,7 +149,11 @@ const editPost = asyncHandler(async (req, res, next) => {
   let customFileName = null;
   if (req?.file) {
     customFileName = getRandomHex();
-    await uploadToS3(req.file, customFileName);
+    // await uploadToS3(req.file.buffer, customFileName);
+
+    const optimizedBuffer = await optimizeImage(req.file.buffer, "coverImage");
+
+    await uploadToS3(optimizedBuffer, customFileName);
   }
 
   if (post) {

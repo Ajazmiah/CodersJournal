@@ -128,7 +128,7 @@ function QuillRichText({
   return (
     <>
       <div className={classnames("pageContainer", Styles.richText)}>
-        {<img src={previewCoverImage || editCoverImage }/>}
+        {<img src={coverImage}/>}
         <div>
           <input
             required={true}
