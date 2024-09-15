@@ -1,6 +1,5 @@
 .SingleBlogScreen {
   flex: 1;
-  /* max-width: 780px; */
 }
 
 
@@ -11,6 +10,8 @@
   justify-content: space-between;
   font-weight: 600;
   color: var(--color-black);
+  padding-inline: 15px;
+  padding-right: 2em;
 }
 
 .btns {
@@ -19,6 +20,7 @@
   color: var(--color-dark);
   font-size: 1.3em;
   padding-bottom: 10px;
+  padding-left: 5px;
 }
 .btns span:hover{
   cursor: pointer;

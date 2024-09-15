@@ -257,4 +257,5 @@ pre {
   background: #000000de;
   color: #77f8bc;
   padding: 1em;
+  max-width: max-content;
 }

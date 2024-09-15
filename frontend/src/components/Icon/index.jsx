@@ -11,6 +11,7 @@ import {
   FaTwitter,
   FaGithub,
   FaTrash, 
+  FaCaretDown
 } from "react-icons/fa";
 
 export const icons = {
@@ -26,7 +27,8 @@ export const icons = {
   youtube: <FaYoutube/>,
   twitter: <FaTwitter />,
   delete: <FaTrash/>,
-  update: <FaEdit/>
+  update: <FaEdit/>,
+  arrowDown: <FaCaretDown/>
 
 };
 

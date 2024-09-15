@@ -12,8 +12,6 @@
   overflow-y: scroll;
   border: none;
   box-shadow: 1px 20px 20px #0000000d;
-  /* background-color: #323237;
-    color: #fff; */
 }
 
 .ql-toolbar > div:nth-child(2) .ql-editor {
@@ -21,7 +19,6 @@
 }
 
 .richText {
-  width: 90%;
   margin: 0 auto;
   padding: 4em;
   max-width: 1260px;

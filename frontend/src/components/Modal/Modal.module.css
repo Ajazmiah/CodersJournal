@@ -2,7 +2,7 @@
 .rectangularModal {
   background: var(--color-white);
   border-radius: 8px;
-
+  width: max-content;
   padding: 10px;
   max-width: 100%;
   overflow-y: auto;
