@@ -1,5 +1,6 @@
 .SingleBlogScreen {
   flex: 1;
+  /* max-width: 780px; */
 }
 
 
@@ -24,7 +25,5 @@
   color: var(--color-black);
 }
 .post {
-  font-size: .9em;
   line-height: 2em;
-  max-width: 620px;
 }

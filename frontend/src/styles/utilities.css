@@ -22,7 +22,7 @@
 /* Small Devices (Landscape Phones) */
 @media (min-width: 480px) {
   .Container {
-   /* // width: 90%; */
+    /* // width: 90%; */
     padding-inline: 3em;
   }
 }
@@ -175,7 +175,6 @@
   }
 }
 
-
 /* ROBOTO*/
 .roboto-thin {
   font-family: "Roboto", sans-serif;
@@ -247,4 +246,15 @@
   font-family: "Roboto", sans-serif;
   font-weight: 900;
   font-style: italic;
+}
+
+pre {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  overflow: auto;
+  font-size: 0.875em;
+  background: #000000de;
+  color: #77f8bc;
+  padding: 1em;
 }
