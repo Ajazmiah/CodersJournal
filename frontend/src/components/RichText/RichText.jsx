@@ -6,6 +6,7 @@ import classnames from "classnames";
 import { sanitizeContent } from "../../utils";
 import { toast } from "react-toastify";
 import UploadFileButton from "../UploadButton/UploadFileButton";
+import Button from "../Atoms/Button/Button";
 
 const VALID_FILE_TYPES = ["image/jpg", "image/jpeg", "image/png", "image/webp"];
 
@@ -18,8 +19,6 @@ function QuillRichText({
   handleBackdrop = () => {},
   ...rest
 }) {
-
-
   const modules = {
     toolbar: [
       [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -65,7 +64,6 @@ function QuillRichText({
   const [QuillValue, setQuillValue] = React.useState(editQuillValue || null);
   const coverImage = previewCoverImage || editCoverImage;
 
-
   const [error, setError] = useState([]);
 
   const validateInputs = (titleInput, summaryInput, quillInput, image) => {
@@ -94,9 +92,9 @@ function QuillRichText({
     return true;
   };
 
-
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
+    console.log("FILE", file);
 
     if (!VALID_FILE_TYPES.includes(file.type)) {
       toast.error("Please choose an image file");
@@ -106,7 +104,6 @@ function QuillRichText({
     setPreviewCoverImage(URL.createObjectURL(file));
     setS3Image(file);
   };
-
 
   useEffect(() => {
     if (error.length > 0) {
@@ -128,7 +125,7 @@ function QuillRichText({
   return (
     <>
       <div className={classnames("pageContainer", Styles.richText)}>
-        {<img src={coverImage}/>}
+        {<img src={coverImage} />}
         <div>
           <input
             required={true}
@@ -158,7 +155,20 @@ function QuillRichText({
         </div>
         <div className={Styles.uploadFile}>
           <UploadFileButton type="file" handleChange={handleFileChange} />
+          {s3Image ? (
+            <>
+              {s3Image.name}{" "}
+              <span
+                className={Styles.unselectFile}
+                onClick={() => setS3Image(null)}
+              >
+                {" "}
+                X{" "}
+              </span>{" "}
+            </>
+          ) : null}
         </div>
+
         <ReactQuill
           className={classnames(Styles["ql-toolbar"], Styles["ql-editor"])}
           theme="snow"
@@ -169,13 +179,9 @@ function QuillRichText({
           placeholder="Start Writing.."
         ></ReactQuill>
 
-        <button
-          variant="contained"
-          sx={{ marginTop: "50px" }}
-          onClick={handleClick}
-        >
+        <Button onClick={handleClick} classes="buttonPost">
           Post
-        </button>
+        </Button>
       </div>
     </>
   );

@@ -1,19 +1,13 @@
-import { RDS } from "aws-sdk";
 import React from "react";
+import Styles from './Button.module.css'
+import classNames from "classnames";
 
-function Button({ children,  backgroundColor, onClick, classes, ...rest }) {
-  const buttonStyle = {
-    border: "none",
-    marginBottom: "10px",
-    fontSize: ".8em",
-    background: backgroundColor,
-    color: "white",
-    padding: ".5em",
-  };
+function Button({ children, color, onClick,classes, ...rest }) {
+
   
 
   return (
-    <button style={buttonStyle} {...rest} className={classes}onClick={onClick}>
+    <button {...rest} className={classNames(Styles[classes], Styles['button'])} onClick={onClick}>
       {children}
     </button>
   );

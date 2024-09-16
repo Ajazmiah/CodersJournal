@@ -51,3 +51,6 @@ input::placeholder {
 .uploadFile {
   margin-block: 1em;
 }
+.unselectFile{
+  cursor: pointer;
+}
