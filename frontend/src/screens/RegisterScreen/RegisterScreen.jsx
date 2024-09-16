@@ -13,6 +13,12 @@ import {
 } from "@mui/material";
 import RegisterForm from "../../components/RegisterForm/RegisterForm";
 
-const RegisterScreen = () => <RegisterForm className='container' />;
+const RegisterScreen = () => {
+  return (
+    <div className="Container">
+      <RegisterForm className="container" />
+    </div>
+  );
+};
 
 export default RegisterScreen;
