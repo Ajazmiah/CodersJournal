@@ -94,7 +94,6 @@ function QuillRichText({
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
-    console.log("FILE", file);
 
     if (!VALID_FILE_TYPES.includes(file.type)) {
       toast.error("Please choose an image file");
@@ -125,7 +124,7 @@ function QuillRichText({
   return (
     <>
       <div className={classnames("pageContainer", Styles.richText)}>
-        {<img src={coverImage} />}
+        <img src={coverImage} />
         <div>
           <input
             required={true}

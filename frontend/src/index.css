@@ -3,7 +3,6 @@
 @import url("./styles/utilities.css");
 
 :root {
-  --color-black: #000;
   --color-blue: #1D3557;
   --secondary-color:#ff2020;
   --color-dark: #212529;
@@ -11,13 +10,13 @@
   --color-red: rgb(238, 0, 0);
   --color-white: #fff;
   --dark-gray: #59595e;
-  --dark-green: #088e48;
 
+
+/*----------------------*/
+  --color-black: #000;
+  --color-green: #4f97a3;
   --color-white: #fff;
-
   --color-black-light: #000000c1;
-
-
   --color-golden: #ffc54e;
  
 

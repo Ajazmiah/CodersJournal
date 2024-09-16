@@ -1,7 +1,7 @@
 .footer {
-    background-color: var(--color-dark);
+    background-color: var(--color-golden);
     padding-block: 5em;
-    color: var(--color-white);
+    color: var(--color-black-light);
 
 
 
@@ -16,11 +16,7 @@
 }
 
 .footer-items {
-    display: flex;
-    gap: 2em;
-    gap: 4em;
-    line-height: 3em;
-    cursor: pointer;
+  
 }
 
 .footer-items li:hover {

@@ -23,7 +23,7 @@ function UserProfileInfo({ userInfo }) {
               <li>{getIcon("twitter")}</li>
             </ul>
             <Link to="/profile/update">
-              <Button className="color-dark ">Update Account</Button>
+              <Button classes="update">Update Account</Button>
             </Link>
           </div>
         </div>

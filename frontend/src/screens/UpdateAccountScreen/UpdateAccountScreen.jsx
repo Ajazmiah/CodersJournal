@@ -6,7 +6,7 @@ import { setCredentials } from "../../slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import Button from "../../components/Atoms/Button/Button";
 import useUploadImage from "../../hooks/useUploadImage";
 import { toast } from "react-toastify";
 import ProfileImage from "../../components/ProfileImage/ProfileImage";
@@ -117,13 +117,17 @@ function UpdateAccountScreen() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
-          <Button
+          {/* <Button
             type="submit"
             variant="contained"
             color="primary"
             fullWidth
             style={{ marginTop: "1rem" }}
           >
+            Update
+          </Button> */}
+
+          <Button type='submit'>
             Update
           </Button>
         </form>

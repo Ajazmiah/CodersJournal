@@ -1,17 +1,23 @@
 .button {
-    outline: none;
-    border:none;
-    width: 150px;
-    padding: .5em;
-    margin-top: 1em;
-
+  outline: none;
+  border: none;
+  width: 150px;
+  padding: 0.5em;
+  margin-top: 1em;
+  transition: .4s;
+}
+.button:hover {
+    opacity: .8;
 }
 
 .buttonPost {
-    background-color: #4f97a3;
-    color: var(--color-white);
-
+  background-color: var(--color-green);
+  color: var(--color-white);
 }
-.buttonUpload {
-
+.update {
+  background: black;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 0.9em;
+  font-family: "Playfair Display";
 }
