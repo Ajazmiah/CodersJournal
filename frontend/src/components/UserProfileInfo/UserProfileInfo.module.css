@@ -15,7 +15,7 @@
     font-size: 2em;
 }
 .profileLeft {
-
+ flex: 1;
 }
 .profileRight {
 

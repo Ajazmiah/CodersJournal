@@ -16,7 +16,7 @@ function AuthorBio({ authorInfo }) {
 
         <p className={classNames(Styles.authorBioText, 'heading-4 fontSize09em')}>
           <Border borderLocation="left" />
-          Hey Guys , my name is Ajaz. I make educational videos on youtube and I use this platform to write article and explain the video tutorial more in depth and giving you guys links and study materisls.
+          {authorInfo.bio ? authorInfo.bio : `The user ${fullName} does not have a bio`}
         </p>
       </div>
     </div>
