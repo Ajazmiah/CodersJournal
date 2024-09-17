@@ -4,6 +4,7 @@ import FeaturedArticles from "../../components/FeaturedArticles/FeaturedArticles
 import classNames from "classnames";
 import Sidebar from "../../components/SideBar/SideBar";
 import Styles from './HomeScreen.module.css'
+import Button from "../../components/Atoms/Button/Button";
 
 const HomeScreen = () => {
   return (
@@ -12,6 +13,9 @@ const HomeScreen = () => {
       <div className={classNames(" main-2-column space-top-9 Container")}>
         <div className={Styles.featuredArticles}>
           <FeaturedArticles />
+         <div style={{textAlign: 'center'}}>
+         <Button classes={'update'}>Load More ..</Button>
+         </div>
          </div>
           <Sidebar />
       </div>

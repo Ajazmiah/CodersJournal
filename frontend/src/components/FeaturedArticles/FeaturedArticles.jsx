@@ -11,7 +11,6 @@ import Styles from "./FeaturedArticles.module.css";
 import { toast } from "react-toastify";
 function FeaturedArticles() {
   const { userInfo } = useSelector((state) => state.auth);
-  console.log("USER INFOR", userInfo);
   const [getPosts] = useGetUserPostsMutation();
   const [getExludedUserPosts] = useExpludeUserPostsMutation();
 

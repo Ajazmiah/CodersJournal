@@ -7,10 +7,6 @@ function AuthorBio({ authorInfo }) {
   const fullName = `${firstName} ${lastName}`;
   return (
     <div className={Styles.authorBio}>
-      {/* <div className={Styles.authorImage}>
-        <img src={authorInfo.profilePicture} alt="" />
-      </div> */}
-
       <div className={Styles.authorInfo}>
         <p className="heading-2">{fullName}</p>
 
