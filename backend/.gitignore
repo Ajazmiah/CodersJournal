@@ -8,8 +8,8 @@ node_modules
 /frontend/node_modules
 
 # Ignore environment-specific files
-/backend/.env
-/frontend/.env
+.env
+.../frontend/.env
 .env
 
 # Ignore macOS system files
