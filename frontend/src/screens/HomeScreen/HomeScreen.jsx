@@ -13,9 +13,6 @@ const HomeScreen = () => {
       <div className={classNames(" main-2-column space-top-9 Container")}>
         <div className={Styles.featuredArticles}>
           <FeaturedArticles />
-         <div style={{textAlign: 'center'}}>
-         <Button classes={'update'}>Load More ..</Button>
-         </div>
          </div>
           <Sidebar />
       </div>

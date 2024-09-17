@@ -9,6 +9,7 @@ import {
 import Border from "../Atoms/Border/Border";
 import Styles from "./FeaturedArticles.module.css";
 import { toast } from "react-toastify";
+import Button from "../Atoms/Button/Button";
 function FeaturedArticles() {
   const { userInfo } = useSelector((state) => state.auth);
   const [getPosts] = useGetUserPostsMutation();
@@ -32,6 +33,8 @@ function FeaturedArticles() {
     getAllPosts();
   }, []);
 
+  const handleClick = () => {};
+
   if (!posts) return;
 
   return (
@@ -45,6 +48,11 @@ function FeaturedArticles() {
         {posts.slice(-3).map((post) => (
           <FeaturedCard key={post._id} post={post} />
         ))}
+      </div>
+      <div style={{ textAlign: "center" }}>
+        <Button onClick={handleClick} classes={"update"}>
+          Load More ..
+        </Button>
       </div>
     </div>
   );
