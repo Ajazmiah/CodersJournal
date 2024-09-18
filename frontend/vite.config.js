@@ -20,6 +20,11 @@ export default defineConfig({
     },
     historyApiFallback: true,
   },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    }
+  },
   define: {
     global: {},
   },

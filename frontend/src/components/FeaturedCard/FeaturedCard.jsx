@@ -2,10 +2,7 @@ import React from "react";
 import Styles from "./FeaturedCard.module.css";
 import classNames from "classnames";
 import Image from "../Image/Image";
-import { formatDate } from "../../utils";
-import AuthorBylineCard from "../AuthorBylineCard/AuthorBylineCard";
-import Date from "../Date/Date";
-import { useLink } from "../../hooks/useLink/useLink.jsx";
+import { useLink } from "../../hooks/useLink/useLink";
 
 function FeaturedCard({ post }) {
   const { handleNavigateToPost } = useLink();

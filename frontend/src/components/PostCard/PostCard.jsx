@@ -7,7 +7,7 @@ import classNames from "classnames";
 import Border from "../Atoms/Border/Border";
 import { getIcon } from "../Icon";
 import Date from "../Date/Date";
-import { useLink } from "../../hooks/useLink/useLink.jsx";
+import { useLink } from "../../hooks/useLink/useLink";
 
 function PostCard({ posts }) {
   const { handleNavigateToPost } = useLink();
