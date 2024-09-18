@@ -2,7 +2,7 @@ import React from "react";
 import Styles from "./FeaturedCard.module.css";
 import classNames from "classnames";
 import Image from "../Image/Image";
-import { useLink } from "../../hooks/useLink/useLink";
+import { useLink } from "@hooks/useLink/useLink";
 
 function FeaturedCard({ post }) {
   const { handleNavigateToPost } = useLink();
