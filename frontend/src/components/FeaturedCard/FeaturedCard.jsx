@@ -5,7 +5,7 @@ import Image from "../Image/Image";
 import { formatDate } from "../../utils";
 import AuthorBylineCard from "../AuthorBylineCard/AuthorBylineCard";
 import Date from "../Date/Date";
-import { useLink } from "../../hooks/useLink/useLink";
+import { useLink } from "../../hooks/useLink/useLink.jsx";
 
 function FeaturedCard({ post }) {
   const { handleNavigateToPost } = useLink();
