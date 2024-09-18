@@ -21,6 +21,7 @@ import { getIcon } from "../Icon/index.jsx";
 
 /*==============================================================*/
 function ResponsiveAppBar() {
+  
   const TOKEN_EXPIRY_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
 
   const [showMenu, setShowMenu] = useState(false);
