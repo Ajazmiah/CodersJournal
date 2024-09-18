@@ -12,7 +12,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/api": {
-        target: "https://coderjournal-backend.onrender.com",
+        target: process.env.NODE_ENV !== 'development' ? process.env.REACT_APP_API_URL : 'http://localhost:5000/',
         changeOrigin: true,
       },
     },
