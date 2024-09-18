@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Sidebar.module.css"; // Assuming you use CSS modules
+import styles from "./SideBar.module.css"; // Assuming you use CSS modules
 import Ad from "../Ad/Ad";
 
 const Sidebar = () => {
