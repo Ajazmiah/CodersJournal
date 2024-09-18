@@ -16,5 +16,13 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'import/no-unresolved': 'error',
+    'import/no-named-as-default': 0,
+    'import/extensions': ['error', 'ignorePackages', {
+      js: 'never',
+      jsx: 'never',
+      ts: 'never',
+      tsx: 'never',
+    }],
   },
 }
