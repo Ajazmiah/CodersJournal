@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Styles from "./AuthorBylineCard.module.css";
 import classNames from "classnames";
 
-import { useLink } from "../../hooks/useLInk/useLink";
+import { useLink } from "../../hooks/useLink/useLink";
 function AuthorBylineCard({ author }) {
   const { userInfo } = useSelector((state) => state.auth);
 
