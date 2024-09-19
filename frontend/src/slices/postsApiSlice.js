@@ -1,6 +1,6 @@
 import { apiSlice } from "./apiSlice";
 
-const POSTS_URL = "https://coderjournal-backend.onrender.com/api/blog"
+const POSTS_URL = "/api/blog";
 
 const postsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
