@@ -4,9 +4,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const USERS_URL =
-  process.env.NODE_ENV === " development"
+  process.env.NODE_ENV === "development"
     ? "/api/users"
-    : process.env.REACT_APP_API_URL + "/api/users";
+    : "https://coderjournal-backend.onrender.com/api/users";
+
+console.log("ENV",  USERS_URL);
 
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

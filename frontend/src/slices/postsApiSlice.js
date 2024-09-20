@@ -3,9 +3,12 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const POSTS_URL ="https://coderjournal-backend.onrender.com/api/blog";
+const POSTS_URL =
+  process.env.NODE_ENV === "development"
+    ? "/api/blog"
+    : "https://coderjournal-backend.onrender.com/api/blog";
 
-console.log("URL", POSTS_URL)
+console.log("URL", POSTS_URL);
 
 const postsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
