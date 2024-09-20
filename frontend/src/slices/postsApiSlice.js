@@ -1,6 +1,11 @@
 import { apiSlice } from "./apiSlice";
+import dotenv from "dotenv";
 
-const POSTS_URL = "/api/blog";
+dotenv.config();
+
+const POSTS_URL ="https://coderjournal-backend.onrender.com/api/blog";
+
+console.log("URL", POSTS_URL)
 
 const postsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,7 +23,7 @@ const postsApi = apiSlice.injectEndpoints({
       }),
     }),
 
-    //single Post 
+    //single Post
     getPost: builder.mutation({
       query: (data) => ({
         url: `${POSTS_URL}/post/${data.id}`,
@@ -55,7 +60,6 @@ const postsApi = apiSlice.injectEndpoints({
   }),
 });
 
-
 export const {
   useAllUserPostsMutation,
   useSubmitPostMutation,
@@ -63,5 +67,5 @@ export const {
   useDeletePostMutation,
   useEditPostMutation,
   useGetUserPostsMutation,
-  useExpludeUserPostsMutation
+  useExpludeUserPostsMutation,
 } = postsApi;

@@ -1,30 +1,27 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import dotenv from "dotenv";
-
-dotenv.config();
+import { nodePolyfills } from "vite-plugin-node-polyfills";
+import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), nodePolyfills()],
   server: {
     port: 3000,
-    proxy: {
-      "/api": {
-        target:
-          process.env.NODE_ENV === "development"
-            ? "http://localhost:5000"
-            : "https://coderjournal-backend.onrender.com",
-        changeOrigin: true,
-      },
-    },
+    // proxy: {
+    //   "/api": {
+    //     target: "http://localhost:5000",
+
+    //     changeOrigin: true,
+    //   },
+    // },
     historyApiFallback: true,
   },
   resolve: {
     alias: {
-      '@hooks': path.resolve(__dirname, './src/hooks'),
-      '@components': path.resolve(__dirname, './src/components'),
-    }
+      "@hooks": path.resolve(__dirname, "./src/hooks"),
+      "@components": path.resolve(__dirname, "./src/components"),
+    },
   },
   define: {
     global: {},

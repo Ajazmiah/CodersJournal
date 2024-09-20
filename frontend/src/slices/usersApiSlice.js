@@ -1,6 +1,12 @@
 import { apiSlice } from "./apiSlice";
+import dotenv from "dotenv";
 
-const USERS_URL = "/api/users";
+dotenv.config();
+
+const USERS_URL =
+  process.env.NODE_ENV === " development"
+    ? "/api/users"
+    : process.env.REACT_APP_API_URL + "/api/users";
 
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -48,5 +54,5 @@ export const {
   useLogoutMutation,
   useSignupMutation,
   useUpdateProfileMutation,
-  useUserPublicProfileMutation
+  useUserPublicProfileMutation,
 } = usersApiSlice;
