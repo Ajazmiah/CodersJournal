@@ -6,6 +6,9 @@ import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), nodePolyfills()],
+  build: {
+    outDir: 'dist',  // Specify your output directory if it's different
+  },
   server: {
     port: 3000,
     proxy: {
