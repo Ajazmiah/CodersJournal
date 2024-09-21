@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const POSTS_URL =
-  process.env.NODE_ENV !== "production"
+  process.env.NODE_ENV === "development"
     ? "/api/blog"
     : "https://coderjournal-backend.onrender.com/api/blog";
 
