@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const USERS_URL =
-  process.env.NODE_ENV === "development"
+  process.env.NODE_ENV !== "production"
     ? "/api/users"
     : "https://coderjournal-backend.onrender.com/api/users";
 
