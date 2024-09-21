@@ -7,17 +7,17 @@ import path from "path";
 export default defineConfig({
   plugins: [react(), nodePolyfills()],
   build: {
-    outDir: './dist',  // Specify your output directory if it's different
+    outDir: 'dist',  // Specify your output directory if it's different
   },
   server: {
     port: 3000,
-    // proxy: {
-    //   "/api": {
-    //     target: "http://localhost:5000",
+    proxy: {
+      "/api": {
+        target: "http://localhost:5000",
 
-    //     changeOrigin: true,
-    //   },
-    // },
+        changeOrigin: true,
+      },
+    },
     historyApiFallback: true,
   },
   resolve: {
