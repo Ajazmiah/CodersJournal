@@ -1,4 +1,10 @@
 import jwt from "jsonwebtoken";
+import dotenv from 'dotenv'
+
+
+
+dotenv.config();
+
 /*
   When httpOnly is set to true, it means that the cookie is only accessible on the server side 
   and cannot be accessed via JavaScript running in the browser. 
