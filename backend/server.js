@@ -14,16 +14,6 @@ dotenv.config();
 const port = process.env.PORT || 5000;
 const app = express();
 
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://coderjournal-frontend.onrender.com",
-];
-
-const corsOptions = {
-  origin: allowedOrigins,
-  credentials: true,
-};
-
 app.use(cors());
 
 connectDb();
