@@ -16,7 +16,7 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://coderjournal-frontend.onrender.com/",
+  "https://coderjournal-frontend.onrender.com",
 ];
 
 const corsOptions = {
