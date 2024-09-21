@@ -11,7 +11,9 @@ import {
   FaTwitter,
   FaGithub,
   FaTrash, 
-  FaCaretDown
+  FaCaretDown,
+  FaSignInAlt,
+  FaUserCheck
 } from "react-icons/fa";
 
 export const icons = {
@@ -28,7 +30,9 @@ export const icons = {
   twitter: <FaTwitter />,
   delete: <FaTrash/>,
   update: <FaEdit/>,
-  arrowDown: <FaCaretDown/>
+  arrowDown: <FaCaretDown/>,
+  SignIn: <FaSignInAlt/>,
+  SignUp: <FaUserCheck/>
 
 };
 

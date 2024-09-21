@@ -132,6 +132,7 @@ function ResponsiveAppBar() {
           ) : null}
         </ResponsiveComponent>
 
+        {/* TABLET & MOBILE */}
         <ResponsiveComponent renderOn={["tablet", "mobile"]}>
           <div className={Styles.navRight}>
             <FaBars onClick={() => setBackdrop((prev) => !prev)} />

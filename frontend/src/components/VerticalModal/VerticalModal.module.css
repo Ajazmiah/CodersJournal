@@ -1,16 +1,14 @@
 .navModal {
-    width: 300px;
-    height: 100vh;
-    background: #fff;
-    position: absolute;
-    top: 0;
-    left: -100%;
-    z-index: 100;
-    transition: 1s;
-
-
-   
+  width: 300px;
+  height: 100vh;
+  background: #010101;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  z-index: 100;
+  transition: 1s;
+  color: #fff;
 }
 .active {
-    left: 0;
+  left: 0;
 }

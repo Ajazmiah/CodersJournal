@@ -1,16 +1,17 @@
 .mobileList {
     padding-inline: 2em;
     padding-block: 2em;
+    padding-top: 4em;
     display: flex;
     flex-direction: column;
-    gap: .7em;
+    gap: 1em;
 }
 .listItem {
     justify-content: space-between;
     cursor: pointer;
 }
 .listItem a {
-    color: #000;
+    color: var(--color-white);
     gap: .7em;
 }
 

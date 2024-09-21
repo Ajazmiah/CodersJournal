@@ -1,6 +1,7 @@
 .hero {
  padding-left: 0;
  padding-top: 5em;
+ background-color: var(--color-golden)
 }
 
 .btns {
@@ -19,8 +20,9 @@
   box-sizing: border-box;
 }
 .btnTransparent {
-  background: var(--color-golden);
+  background: var(--color-white);
   border: 1px solid #ffffff;
+  color: var(--color-black);
 }
 .btnNonTransparent {
   background: var(--color-black);
