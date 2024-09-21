@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import AuthorBio from "../AuthorBio/AuthorBio";
 import { Link } from "react-router-dom";
 import Styles from "./UserProfileInfo.module.css";
@@ -6,10 +6,18 @@ import { getIcon } from "../Icon";
 import Button from "../Atoms/Button/Button";
 import classNames from "classnames";
 
-function UserProfileInfo({ userInfo }) {
+const UpdateAccount = () => {
+  return (
+    <Link to="/profile/update">
+      <Button classes="update">Update Account</Button>
+    </Link>
+  );
+};
+
+function UserProfileInfo({ userInfo, children }) {
   return (
     <div className={Styles.userProfileInfo}>
-      <div className={classNames('container', Styles.profileInfo)}>
+      <div className={classNames("container", Styles.profileInfo)}>
         <div className={Styles.profileLeft}>
           <div className={Styles.profilePicture}>
             <img src={userInfo.profilePicture} alt="" />
@@ -22,9 +30,7 @@ function UserProfileInfo({ userInfo }) {
               <li>{getIcon("github")}</li>
               <li>{getIcon("twitter")}</li>
             </ul>
-            <Link to="/profile/update">
-              <Button classes="update">Update Account</Button>
-            </Link>
+            {children}
           </div>
         </div>
 
@@ -35,5 +41,7 @@ function UserProfileInfo({ userInfo }) {
     </div>
   );
 }
+
+UserProfileInfo.UpdateAccount = UpdateAccount
 
 export default UserProfileInfo;
