@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Styles from "./LeadArticle.module.css";
 import Image from "../Image/Image";
 import classNames from "classnames";
-import { useLink } from "../../hooks/useLInk/useLink";
+import { useLink } from "@hooks/useLink/useLink";
 import { formatDate } from "../../utils";
 import AuthorBylineCard from "../AuthorBylineCard/AuthorBylineCard";
 import Date from "../Date/Date";

@@ -1,11 +1,8 @@
 import React from "react";
 import Styles from "./FeaturedCard.module.css";
 import classNames from "classnames";
-import { useLink } from "../../hooks/useLInk/useLink";
 import Image from "../Image/Image";
-import { formatDate } from "../../utils";
-import AuthorBylineCard from "../AuthorBylineCard/AuthorBylineCard";
-import Date from "../Date/Date";
+import { useLink } from "@hooks/useLink/useLink";
 
 function FeaturedCard({ post }) {
   const { handleNavigateToPost } = useLink();

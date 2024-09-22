@@ -112,7 +112,7 @@ const getPost = asyncHandler(async (req, res, next) => {
   const SignedPosts = await attachPresignedURLs(post);
 
   const presignedProfilePicURL = await getFileFromS3(
-    user.profilePicture,
+    user?.profilePicture,
     "profilePic"
   );
 

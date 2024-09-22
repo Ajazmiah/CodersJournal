@@ -1,6 +1,14 @@
 import { apiSlice } from "./apiSlice";
+import dotenv from "dotenv";
 
-const USERS_URL = "/api/users";
+dotenv.config();
+
+const USERS_URL =
+  process.env.NODE_ENV === "development"
+    ? "/api/users"
+    : "https://coderjournal-backend.onrender.com/api/users";
+
+console.log("ENV",  USERS_URL);
 
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -8,7 +16,6 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       query: (data) => ({
         url: `${USERS_URL}/signin`,
         method: "POST",
-        credentials: "include",
         body: data,
       }),
     }),
@@ -48,5 +55,5 @@ export const {
   useLogoutMutation,
   useSignupMutation,
   useUpdateProfileMutation,
-  useUserPublicProfileMutation
+  useUserPublicProfileMutation,
 } = usersApiSlice;

@@ -12,7 +12,8 @@ import {
   FaGithub,
   FaTrash, 
   FaCaretDown,
-  FaSignInAlt
+  FaSignInAlt,
+  FaUserCheck
 } from "react-icons/fa";
 
 export const icons = {
@@ -30,7 +31,9 @@ export const icons = {
   delete: <FaTrash/>,
   update: <FaEdit/>,
   arrowDown: <FaCaretDown/>,
-  signin: <FaSignInAlt/>
+  SignIn: <FaSignInAlt/>,
+  SignUp: <FaUserCheck/>
+
 };
 
 export const getIcon = (iconName) => {

@@ -17,7 +17,6 @@ const ProfileScreen = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const { posts } = useSelector((state) => state.posts);
 
-
   const [getPosts] = useAllUserPostsMutation();
 
   useEffect(() => {
@@ -30,13 +29,14 @@ const ProfileScreen = () => {
       }
     };
 
-
     getAllPosts();
   }, []);
 
   return (
     <div>
-      <UserProfileInfo userInfo={userInfo} />
+      <UserProfileInfo userInfo={userInfo}>
+        <UserProfileInfo.UpdateAccount />
+      </UserProfileInfo>
       <div className="container">
         {posts?.map((post) => (
           <>

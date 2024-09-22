@@ -1,6 +1,7 @@
 .hero {
-  background-color: var(--color-green);
-  color: var(--color-white);
+ padding-left: 0;
+ padding-top: 5em;
+ background-color: var(--color-golden)
 }
 
 .btns {
@@ -14,31 +15,46 @@
   color: white;
   padding: 0.5em;
   width: 150px;
-  transition: 0.7s;
+  transition: 0.5s;
   text-align: center;
   box-sizing: border-box;
 }
 .btnTransparent {
-  background: transparent;
+  background: var(--color-white);
   border: 1px solid #ffffff;
+  color: var(--color-black);
 }
 .btnNonTransparent {
-  background: var(--color-white);
-  color: var(--color-dark);
+  background: var(--color-black);
+  color: var(--color-white);
   border: none;
 }
 
-.btnTransparent:hover {
-  color: #000;
-  background: #ffffff;
+.btn:hover {
+  opacity: .8;
 }
 
 .mainTagLine {
   font-weight: 900;
 }
+
+@media  (min-width: 960px ) {
+  .mainTagLine {
+    font-size: 6em;
+    line-height: 108px;
+  }
+}
+
 @media (min-width: 460px) {
   .mainTagLine {
-    line-height: 65px;
+    /* line-height: 65px; */
+  }
+}
+
+@media (max-width: 500px) {
+  .hero {
+    padding-top: 3em;
+    padding-bottom: 1em;
   }
 }
 .subTagLine {

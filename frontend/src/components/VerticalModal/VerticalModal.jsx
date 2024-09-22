@@ -21,7 +21,7 @@ import Backdrop from "../Backdrop/Backdrop.jsx";
 import Styles from "./VerticalModal.module.css";
 import classNames from "classnames";
 
-export default function VerticalModal({ pagesNavigation, classes, children }) {
+export default function VerticalModal({ children }) {
   
 
   return (

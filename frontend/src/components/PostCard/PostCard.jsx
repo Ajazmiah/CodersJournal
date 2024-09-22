@@ -1,12 +1,13 @@
 import * as React from "react";
 import { formatDate } from "../../utils";
-import { useLink } from "../../hooks/useLink/useLink";
+
 import AuthorBylineCard from "../AuthorBylineCard/AuthorBylineCard";
 import Styles from "./PostCard.module.css";
 import classNames from "classnames";
 import Border from "../Atoms/Border/Border";
 import { getIcon } from "../Icon";
 import Date from "../Date/Date";
+import { useLink } from "../../hooks/useLink/useLink";
 
 function PostCard({ posts }) {
   const { handleNavigateToPost } = useLink();

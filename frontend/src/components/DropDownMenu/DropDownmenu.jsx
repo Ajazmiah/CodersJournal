@@ -14,6 +14,8 @@ function DropDownMenu({
   handleShow = null,
 }) {
   if (!showMenu) return;
+
+  console.log("DROPDOWN", dropDownItems)
   return dropDownItems.map(({ Element, text, to }) => (
     <>
       <li className={classNames(Styles?.listItem, "flex")} key={text}>

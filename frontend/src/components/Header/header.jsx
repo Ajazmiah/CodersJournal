@@ -9,7 +9,7 @@ import DropDownMenu from "../DropDownMenu/DropDownmenu.jsx";
 import ProfileImage from "../ProfileImage/ProfileImage.jsx";
 import Logo from "../Logo/Logo.jsx";
 import useNavigationItem from "../../hooks/useNavigationItem.jsx";
-import VerticalModal from "../VerticalModal/verticalModal.jsx";
+import VerticalModal from "../VerticalModal/VerticalModal.jsx";
 import Backdrop from "../Backdrop/Backdrop.jsx";
 import classNames from "classnames";
 import { FaBars } from "react-icons/fa";
@@ -27,6 +27,7 @@ import { Menu } from "@mui/material";
 
 /*==============================================================*/
 function ResponsiveAppBar() {
+
   const TOKEN_EXPIRY_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
 
   const [showMenu, setShowMenu] = useState(false);
@@ -152,6 +153,7 @@ function ResponsiveAppBar() {
           ) : null}
         </ResponsiveComponent>
 
+        {/* TABLET & MOBILE */}
         <ResponsiveComponent renderOn={["tablet", "mobile"]}>
           <div className={classNames(Styles.navRight, "flex")}>
           {/* <div className={Styles.navRight}> */}

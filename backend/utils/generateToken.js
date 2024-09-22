@@ -1,4 +1,8 @@
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 /*
   When httpOnly is set to true, it means that the cookie is only accessible on the server side 
   and cannot be accessed via JavaScript running in the browser. 
@@ -15,7 +19,7 @@ const generateToken = (res, userId) => {
   res.cookie("jwt", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV !== "development",
-    sameSite: "strict", // Prevent CSRF attacks
+    sameSite: process.env.NODE_ENV !== "development" ? "None" : "Strict", // Prevent CSRF attacks
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 };

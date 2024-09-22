@@ -1,9 +1,14 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
+import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), nodePolyfills()],
+  build: {
+    outDir: 'dist',  // Specify your output directory if it's different
+  },
   server: {
     port: 3000,
     proxy: {
@@ -12,7 +17,13 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
-    historyApiFallback: true
+    historyApiFallback: true,
+  },
+  resolve: {
+    alias: {
+      "@hooks": path.resolve(__dirname, "./src/hooks"),
+      "@components": path.resolve(__dirname, "./src/components"),
+    },
   },
   define: {
     global: {},

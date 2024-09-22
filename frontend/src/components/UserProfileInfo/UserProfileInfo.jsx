@@ -1,5 +1,4 @@
-import React from "react";
-import { useSelector } from 'react-redux';
+import React, { Children } from "react";
 import AuthorBio from "../AuthorBio/AuthorBio";
 import { Link } from "react-router-dom";
 import Styles from "./UserProfileInfo.module.css";
@@ -7,14 +6,18 @@ import { getIcon } from "../Icon";
 import Button from "../Atoms/Button/Button";
 import classNames from "classnames";
 
-function UserProfileInfo(props) {
+const UpdateAccount = () => {
+  return (
+    <Link to="/profile/update">
+      <Button classes="update">Update Account</Button>
+    </Link>
+  );
+};
 
-  const {userInfo} = useSelector((state)=>state.auth)
-  console.log("user info",userInfo)
-  console.log("user props info",props.userInfo)
+function UserProfileInfo({ userInfo, children }) {
   return (
     <div className={Styles.userProfileInfo}>
-      <div className={classNames('container', Styles.profileInfo)}>
+      <div className={classNames("container", Styles.profileInfo)}>
         <div className={Styles.profileLeft}>
           <div className={Styles.profilePicture}>
             <img src={props.userInfo.profilePicture} alt="" />
@@ -27,9 +30,7 @@ function UserProfileInfo(props) {
               <li>{getIcon("github")}</li>
               <li>{getIcon("twitter")}</li>
             </ul>
-            {props.userInfo._id==userInfo._id ? <Link to="/profile/update">
-              <Button classes="update">Update Account</Button>
-            </Link>:null}
+            {children}
           </div>
         </div>
 
@@ -40,5 +41,7 @@ function UserProfileInfo(props) {
     </div>
   );
 }
+
+UserProfileInfo.UpdateAccount = UpdateAccount
 
 export default UserProfileInfo;

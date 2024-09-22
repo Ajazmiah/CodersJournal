@@ -14,26 +14,33 @@ const Hero = () => {
   if (userInfo) return;
 
   const content = (
-    
-      <div className={"Container"}>
-        <p>
-          <span className={classNames('heading-1', Styles.mainTagLine)}>
-            Spread The Knowledge of Coding
-          </span>
-          <br/>
-          <span className={classNames('heading-4', Styles.subTagLine)}>Learn. Share. Inspire.</span>
-        </p>
+    <div className={classNames("Container", Styles.hero)}>
+      <p>
+        <span className={classNames("heading-1", Styles.mainTagLine)}>
+          Spread The Knowledge of Coding
+        </span>
+        <br />
+        <span className={classNames("heading-4", Styles.subTagLine)}>
+          Learn. Share. Inspire.
+        </span>
+      </p>
 
-        <div className={Styles.btns}>
-          <a href='#leadArticle'className={classNames(Styles.btn, Styles.btnNonTransparent)}>
-            Read
-          </a>
-          <Link to='/create' className={classNames(Styles.btn, Styles.btnTransparent)}>
-            Start Writing
-          </Link>
-        </div>
+      <div className={Styles.btns}>
+        <a
+          href="#leadArticle"
+          className={classNames(Styles.btn, Styles.btnNonTransparent)}
+        >
+          Read
+        </a>
+
+        <Link
+          to="/create"
+          className={classNames(Styles.btn, Styles.btnTransparent)}
+        >
+          Start Writing
+        </Link>
       </div>
-
+    </div>
   );
   return <div className={Styles.hero}>{content}</div>;
 };

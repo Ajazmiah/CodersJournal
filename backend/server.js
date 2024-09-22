@@ -5,6 +5,7 @@ import connectDb from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import blogRoutes from "./routes/blogRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
+import cors from "cors";
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
@@ -12,6 +13,18 @@ dotenv.config();
 
 const port = process.env.PORT || 5000;
 const app = express();
+
+const allowedOrigins = [
+  "http://localhost:5000",
+  "https://coderjournal-frontend.onrender.com",
+];
+
+const corsOptions = {
+  origin: allowedOrigins,
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 connectDb();
 

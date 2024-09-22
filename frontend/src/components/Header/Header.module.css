@@ -1,6 +1,6 @@
 .header {
   margin-inline: auto;
-  background: var(--color-golden)
+  /* background: var(--color-golden) */
 }
 .header svg {
   font-size: 20px;
@@ -13,13 +13,13 @@
   margin: 0 auto;
 }
 .navLeft {
-  margin-left: 2em;
+  margin-left: 5em;
 }
 .leftMenuList {
-  gap: 1.3em;
+  gap: 1.6em;
 }
 .leftMenuList li:hover {
-  border-bottom: 2px solid var(--color-white);
+  border-bottom: 2px solid var(--color-black);
   box-sizing: border-box;
   padding-top: 2px;
 }
