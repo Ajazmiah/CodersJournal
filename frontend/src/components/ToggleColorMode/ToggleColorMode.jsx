@@ -48,8 +48,8 @@ export default function ToggleColorMode({ children }) {
         paper: '#1E1E1E',
       },
       text: {
-        primary: '#E0E0E0',
-        secondary: '#B0B0B0',
+        default: '#C0C0C0',
+        secondary: '#A0A0A0',
       },
     },
   };
