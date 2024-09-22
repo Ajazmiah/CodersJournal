@@ -1,6 +1,6 @@
 .label {
   display: flex;
-  padding: 0.5em;
+  padding: 0.3em;
   border-radius: 5px;
   width: 190px;
   align-items: center;
@@ -10,9 +10,11 @@
   transition: 0.4s linear;
 }
 .label:hover {
-  color: var(--color-black-light);
+  /* color: var(--color-black-light); */
+  color: rebeccapurple;
 }
 .upload {
+  padding: 10px;
   display: flex;
   align-items: center;
   gap: 10px;
