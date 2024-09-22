@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Styles from "./HeaderMobileNav.module.css";
 import classNames from "classnames";
 import Border from "../Atoms/Border/Border";
-import { FaHome } from "react-icons/fa";
+import { FaSignInAlt } from "react-icons/fa";
 import { getIcon } from "../Icon";
 
 
@@ -15,7 +15,7 @@ const renderListItem = ({ Element, handleClick, text, to }) => {
       {text}
       <span> {getIcon(text.split(" ").join(""))}</span>
     </Link>
-  );
+  )
 };
 
 
