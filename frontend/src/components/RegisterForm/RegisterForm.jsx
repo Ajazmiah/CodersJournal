@@ -4,8 +4,9 @@ import { useSignupMutation } from "../../slices/usersApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../../slices/authSlice";
 import { toast } from "react-toastify";
-import useUploadImage from "../../hooks/useUploadImage";
-import ProfileImage from "../../components/ProfileImage/ProfileImage";
+// import useUploadImage from "../../hooks/useUploadImage";
+// import ProfileImage from "../../components/ProfileImage/ProfileImage";
+
 import {
   TextField,
   Button,
@@ -14,7 +15,7 @@ import {
   Grid,
   Link,
 } from "@mui/material";
-import UploadFileButton from "../UploadButton/UploadFileButton";
+// import UploadFileButton from "../UploadButton/UploadFileButton";
 
 const RegisterForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -23,7 +24,7 @@ const RegisterForm = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [previewImage, image, INPUT] = useUploadImage();
+  // const [previewImage, image, INPUT] = useUploadImage();
 
   const [signup, { isLoading }] = useSignupMutation();
   const { userInfo } = useSelector((state) => state.auth);
@@ -38,7 +39,7 @@ const RegisterForm = () => {
     } else {
       const form = new FormData();
 
-      form.append("profilePicture", image);
+      // form.append("profilePicture", image);
       form.append("firstName", firstName);
       form.append("lastName", lastName);
       form.append("email", email);
@@ -62,13 +63,13 @@ const RegisterForm = () => {
     }
   }, [navigate, userInfo]);
 
-  const PROFILE_IMAGE = (
+  /* const PROFILE_IMAGE = (
     <ProfileImage
       imageURL={previewImage || image}
       empty={!image && !previewImage}
       customClasses="profileImage"
     />
-  );
+  ); */
 
   return (
     <Container
@@ -76,16 +77,16 @@ const RegisterForm = () => {
       maxWidth="xs"
       style={{ paddingTop: "var(--space-78)" }}
     >
-      <Typography component="h1" variant="h4">
+      <Typography component="h1" variant="h5">
         Register
       </Typography>
-      <br />
-      {PROFILE_IMAGE}
+      {/* <br /> */}
+      {/* {PROFILE_IMAGE} */}
       <br />
       <form onSubmit={submitHandler}>
         <Grid container spacing={2}>
           <Grid item xs={12} spacing={2}>
-            {INPUT}
+            {/* {INPUT} - don't uncomment */}
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
