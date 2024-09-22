@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../slices/usersApiSlice.js";
@@ -18,6 +18,12 @@ import HeaderMobileNav from "./HeaderMobileNav.jsx";
 import ResponsiveComponent from "../ResponsiveComponent/ResponsiveComponent.jsx";
 import { useBackdrop } from "../Backdrop/Backdrop.jsx";
 import { getIcon } from "../Icon/index.jsx";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import { ThemeModeContext } from "../ToggleColorMode/ToggleColorMode.jsx";
+import toggleStyle from "../ToggleColorMode/ToggleColorMode.module.css";
+import { Menu } from "@mui/material";
+
 
 /*==============================================================*/
 function ResponsiveAppBar() {
@@ -74,6 +80,9 @@ function ResponsiveAppBar() {
     setShowMenu((prev) => !prev);
   };
 
+  
+  const { mode, setMode } = useContext(ThemeModeContext);
+
   return (
     <header className={classNames(Styles.header)}>
       {/* Left Menu Medium to Large screen */}
@@ -94,6 +103,18 @@ function ResponsiveAppBar() {
                       </Link>
                     </li>
                   ))}
+                  <li>
+                    <Select
+                      value={mode}
+                      onChange={(event) => setMode(event.target.value)}
+                      style={{ marginLeft: 'auto' }}
+                    >
+                      <MenuItem value="light">Light</MenuItem>
+                      <MenuItem value="dark">Dark</MenuItem>
+                      <MenuItem value="system">System</MenuItem>
+                      <MenuItem value="night">Night Mode</MenuItem>
+                    </Select>
+                  </li>
                 </ul>
               )}
             </div>
@@ -132,7 +153,8 @@ function ResponsiveAppBar() {
         </ResponsiveComponent>
 
         <ResponsiveComponent renderOn={["tablet", "mobile"]}>
-          <div className={Styles.navRight}>
+          <div className={classNames(Styles.navRight, "flex")}>
+          {/* <div className={Styles.navRight}> */}
             <FaBars onClick={() => setBackdrop((prev) => !prev)} />
           </div>
           {backdrop ? (
