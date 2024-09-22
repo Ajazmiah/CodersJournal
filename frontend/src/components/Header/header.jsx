@@ -88,13 +88,15 @@ function ResponsiveAppBar() {
             <div className={classNames(Styles.navLeft, "flex")}>
               {device !== "mobile" && device !== "tablet" && (
                 <ul className={classNames(Styles.leftMenuList, "flex")}>
-                  {pagesNavigation.map((page) => (
-                    <li key={page.to}>
-                      <Link to={page.to} className={Styles.navLink}>
-                        {page.text}
-                      </Link>
-                    </li>
-                  ))}
+                  {pagesNavigation.map((page) => {
+                   return  (
+                      <li key={page.to}>
+                        <Link to={page.to} className={Styles.navLink}>
+                          {page.text}
+                        </Link>
+                      </li>
+                    )
+                  })}
                 </ul>
               )}
             </div>

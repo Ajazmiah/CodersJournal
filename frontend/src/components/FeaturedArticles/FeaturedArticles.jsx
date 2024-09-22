@@ -15,7 +15,7 @@ function FeaturedArticles() {
   const [getPosts] = useGetUserPostsMutation();
   const [getExludedUserPosts] = useExpludeUserPostsMutation();
 
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const getAllPosts = async () => {
@@ -35,7 +35,13 @@ function FeaturedArticles() {
 
   const handleClick = () => {};
 
-  if (!posts) return;
+  if (posts?.length < 1)
+    return (
+      <>
+        <h1 className="header4">No Feed..</h1>
+        <p>Public feed will show up here when avaiable..</p>
+      </>
+    );
 
   return (
     <div className={Styles.FeaturedArticles}>

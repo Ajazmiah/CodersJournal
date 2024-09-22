@@ -7,7 +7,7 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* Reset margins */
@@ -22,27 +22,27 @@ p,
 ul,
 figure,
 picture {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 /* set up the body */
 body {
-    line-height: 1.5;
-    min-height: 100vh;
- font-family: "Playfair Display", serif;;
+  line-height: 1.5;
+  min-height: 100vh;
+  font-family: "Playfair Display", sans-serif;
 }
 
 /* make images easier to work with */
 img,
 picutre {
-    max-width: 100%;
-    display: block;
+  max-width: 100%;
+  display: block;
 }
 
 a {
-    text-decoration: none;
-    cursor: pointer;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* make form elements easier to work with - font property is not inherited for form elements  */
@@ -50,11 +50,11 @@ input,
 button,
 textarea,
 select {
-    font: inherit; 
+  font: inherit;
 }
 
 /* remove animations for people who've turned them off */
-@media (prefers-reduced-motion: reduce) {  
+@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
