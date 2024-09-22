@@ -38,8 +38,8 @@ function FeaturedArticles() {
   if (posts?.length < 1)
     return (
       <>
-        <h1 className="header4">No Feed..</h1>
-        <p>Public feed will show up here when avaiable..</p>
+        <h1 className="header4">No Feed ...</h1>
+        <p>Public feed will show up here when available</p>
       </>
     );
 
