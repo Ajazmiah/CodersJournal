@@ -6,7 +6,7 @@ function UploadFileButton({ type, name, handleChange, handleClear }) {
     <div className={Styles.upload}>
       <label htmlFor="file" className={Styles.label}>
         <FaUpload />
-        <span>Upload File </span>
+        <span>Upload Picture </span>
       </label>
       <input type="file" id="file" hidden onChange={handleChange} />
     </div>
