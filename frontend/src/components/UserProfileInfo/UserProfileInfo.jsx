@@ -20,7 +20,7 @@ function UserProfileInfo({ userInfo, children }) {
       <div className={classNames("container", Styles.profileInfo)}>
         <div className={Styles.profileLeft}>
           <div className={Styles.profilePicture}>
-            <img src={props.userInfo.profilePicture} alt="" />
+            <img src={userInfo.profilePicture} alt="" />
           </div>
 
           <div>
@@ -35,7 +35,7 @@ function UserProfileInfo({ userInfo, children }) {
         </div>
 
         <div className={Styles.profileRight}>
-          <AuthorBio authorInfo={props.userInfo} />
+          <AuthorBio authorInfo={userInfo} />
         </div>
       </div>
     </div>
