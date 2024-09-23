@@ -11,29 +11,21 @@ import useUploadImage from "../../hooks/useUploadImage";
 import { toast } from "react-toastify";
 import ProfileImage from "../../components/ProfileImage/ProfileImage";
 
-
 function UpdateAccountScreen() {
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [password, setPassword] = useState(null);
-  const [confirmPassword, setConfirmPassword] = useState(null);
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { userInfo } = useSelector((state) => state.auth);
-  const navigate = useNavigate();
+  const [email, setEmail] = useState(userInfo.email);
+  const [firstName, setFirstName] = useState(userInfo.firstName);
+  const [lastName, setLastName] = useState(userInfo.lastName);
+  const [password, setPassword] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState(null);
 
   const [updateProfile, { isLoading }] = useUpdateProfileMutation();
 
   // CUSTOM USEHOOK
   const [previewImage, image, INPUT] = useUploadImage();
-
-  useEffect(() => {
-    setFirstName(userInfo.firstName);
-    setLastName(userInfo.lastName);
-    setEmail(userInfo.email);
-  }, [userInfo.email, userInfo.firstName, userInfo.lastName]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -46,9 +38,14 @@ function UpdateAccountScreen() {
       form.append("firstName", firstName);
       form.append("lastName", lastName);
       form.append("email", email);
-      form.append("password", password);
-      form.append("confirmPassword", confirmPassword);
+
       form.append("_id", userInfo._id);
+
+      if (password && confirmPassword) {
+        form.append("password", password);
+        form.append("confirmPassword", confirmPassword);
+      }
+
       try {
         const res = await updateProfile(form).unwrap();
         dispatch(setCredentials(res));
@@ -127,9 +124,7 @@ function UpdateAccountScreen() {
             Update
           </Button> */}
 
-          <Button type='submit'>
-            Update
-          </Button>
+          <Button type="submit">Update</Button>
         </form>
       </Container>
     </div>

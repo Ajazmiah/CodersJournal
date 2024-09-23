@@ -162,6 +162,7 @@ const updateUser = asyncHandler(async (req, res, next) => {
         _id: updatedUser._id,
         firstName: updatedUser.firstName,
         lastName: updatedUser.lastName,
+        email: updatedUser.email,
         profilePicture: presignedURL,
       });
     }
