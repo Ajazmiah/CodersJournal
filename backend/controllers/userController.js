@@ -132,10 +132,11 @@ const updateUser = asyncHandler(async (req, res, next) => {
 
 
 
-    if(req.body.profilePicture ){
-      user.profilePicture = req.body.profilePicture
+
+
 
       if (req?.file) {
+        user.profilePicture = req?.file
         const optimizedBuffer = await optimizeImage(
           req.file.buffer,
           "profilePicture"
@@ -143,7 +144,7 @@ const updateUser = asyncHandler(async (req, res, next) => {
   
         await uploadToS3(optimizedBuffer, user.profilePicture, "profilePic");
       }
-    }
+    
 
     if (password) {
       user.password = password;
