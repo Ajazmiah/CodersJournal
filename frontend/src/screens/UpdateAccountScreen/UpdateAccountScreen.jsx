@@ -13,9 +13,9 @@ import ProfileImage from "../../components/ProfileImage/ProfileImage";
 
 
 function UpdateAccountScreen() {
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState(null);
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
 
@@ -116,17 +116,6 @@ function UpdateAccountScreen() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-
-          {/* <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            style={{ marginTop: "1rem" }}
-          >
-            Update
-          </Button> */}
-
           <Button type='submit'>
             Update
           </Button>

@@ -1,14 +1,18 @@
 import React from "react";
 import Styles from "./ProfileImage.module.css";
 import Image from "../Image/Image";
+import { getIcon } from "@components/Icon";
+import classNames from "classnames";
 
 function ProfileImage({ empty, imageURL, customClasses }) {
   const classes = [Styles[customClasses], Styles.defaultStyles];
 
-  if (empty) {
-    return <div className={Styles['empty']}>
-      <span className={Styles['noImage']}> No Profile Image</span>
-    </div>;
+  if (imageURL === undefined || imageURL === null) {
+    return (
+      <div className={classNames(Styles[customClasses], Styles["avatar"])}>
+        {getIcon("user")}
+      </div>
+    );
   }
 
   return (

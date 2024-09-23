@@ -5,6 +5,7 @@ import Styles from "./UserProfileInfo.module.css";
 import { getIcon } from "../Icon";
 import Button from "../Atoms/Button/Button";
 import classNames from "classnames";
+import ProfileImage from "../ProfileImage/ProfileImage";
 
 const UpdateAccount = () => {
   return (
@@ -20,7 +21,11 @@ function UserProfileInfo({ userInfo, children }) {
       <div className={classNames("container", Styles.profileInfo)}>
         <div className={Styles.profileLeft}>
           <div className={Styles.profilePicture}>
-            <img src={userInfo.profilePicture} alt="" />
+            <ProfileImage
+              customClasses="profileImage"
+              empty
+              imageURL={userInfo.profilePicture}
+            />
           </div>
 
           <div>
@@ -42,6 +47,6 @@ function UserProfileInfo({ userInfo, children }) {
   );
 }
 
-UserProfileInfo.UpdateAccount = UpdateAccount
+UserProfileInfo.UpdateAccount = UpdateAccount;
 
 export default UserProfileInfo;

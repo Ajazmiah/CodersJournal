@@ -31,27 +31,57 @@ const RegisterForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const validateInputs = () => {
+    const inputs = [firstName, lastName, email, password, confirmPassword];
+
+    let errors = "";
+
+    inputs.forEach((input) => {
+      if (input === "" || input === null) {
+        errors = `everything must be filled\n`;
+      }
+    });
+
+    if (errors.length > 0) {
+      toast.error(errors);
+      return false;
+    }
+
+    return true;
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Password don't match");
-    } else {
-      const form = new FormData();
 
-      form.append("profilePicture", image);
-      form.append("firstName", firstName);
-      form.append("lastName", lastName);
-      form.append("email", email);
-      form.append("password", password);
-      form.append("confirmPassword", confirmPassword);
+    if (validateInputs()) {
+      if (password !== confirmPassword) {
+        alert("Password don't match");
+      } else {
+        const form = new FormData();
 
-      try {
-        const res = await signup(form).unwrap();
-        dispatch(setCredentials({ ...res }));
+        // form.append("profilePicture", image);
+        // form.append("firstName", firstName);
+        // form.append("lastName", lastName);
+        // form.append("email", email);
+        // form.append("password", password);
+        // form.append("confirmPassword", confirmPassword);
 
-        navigate("/");
-      } catch (err) {
-        toast.error(err.data.message);
+        const data = {
+          firstName,
+          lastName,
+          email,
+          password,
+          confirmPassword,
+        };
+
+        try {
+          const res = await signup(data).unwrap();
+          dispatch(setCredentials({ ...res }));
+
+          navigate("/");
+        } catch (err) {
+          toast.error(err.data.message);
+        }
       }
     }
   };
@@ -76,16 +106,14 @@ const RegisterForm = () => {
       maxWidth="xs"
       style={{ paddingTop: "var(--space-78)" }}
     >
-      <Typography component="h1" variant="h4">
-        Register
-      </Typography>
+      <h1 className="header4">Register</h1>
       <br />
-      {PROFILE_IMAGE}
+
       <br />
       <form onSubmit={submitHandler}>
         <Grid container spacing={2}>
           <Grid item xs={12} spacing={2}>
-            {INPUT}
+            {/* {INPUT} */}
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField

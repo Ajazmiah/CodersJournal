@@ -13,7 +13,8 @@ import {
   FaTrash, 
   FaCaretDown,
   FaSignInAlt,
-  FaUserCheck
+  FaUserCheck,
+  FaUser
 } from "react-icons/fa";
 
 export const icons = {
@@ -32,7 +33,8 @@ export const icons = {
   update: <FaEdit/>,
   arrowDown: <FaCaretDown/>,
   SignIn: <FaSignInAlt/>,
-  SignUp: <FaUserCheck/>
+  SignUp: <FaUserCheck/>,
+  user: <FaUser/>
 
 };
 

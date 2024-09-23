@@ -23,7 +23,6 @@ const signup = asyncHandler(async (req, res, next) => {
   const lastName = registerForm.lastName;
   const email = registerForm.email;
   const password = registerForm.password;
-  const confirmPassword = registerForm.confirmPassword;
 
   const userExist = await userModel.findOne({ email });
 
@@ -34,22 +33,11 @@ const signup = asyncHandler(async (req, res, next) => {
     );
   }
 
-  const customFileName = getRandomHex();
-
-  const optimizedBuffer = await optimizeImage(
-    req.file.buffer,
-    "profilePicture"
-  );
-
-  await uploadToS3(optimizedBuffer, customFileName, "profilePic");
-
   const user = await userModel.create({
     firstName,
     lastName,
     email,
     password,
-    confirmPassword,
-    profilePicture: customFileName,
   });
   // Create a new user instance
   // - Another way of creating it
@@ -59,17 +47,12 @@ const signup = asyncHandler(async (req, res, next) => {
   // });
 
   if (user) {
-    let presignedURL = null;
-
-    presignedURL = await getFileFromS3(user.profilePicture, "profilePic");
-
     generateToken(res, user._id);
     res.status(201).json({
       _id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      profilePicture: presignedURL,
     });
   } else {
     res.status(400);
@@ -85,17 +68,25 @@ const singin = asyncHandler(async (req, res, next) => {
   if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id);
 
-    let presignedURL = null;
+    if (user.profilePicture) {
+      let presignedURL = null;
 
-    presignedURL = await getFileFromS3(user.profilePicture, "profilePic");
-    user.profilePicture = presignedURL;
+      presignedURL = await getFileFromS3(user.profilePicture, "profilePic");
+      user.profilePicture = presignedURL;
+      res.status(201).json({
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        profilePicture: presignedURL,
+      });
+    }
 
     res.status(201).json({
       _id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      profilePicture: presignedURL,
     });
   } else {
     res.status(401);
@@ -123,10 +114,13 @@ const updateUser = asyncHandler(async (req, res, next) => {
   const updateForm = req.body;
   const userId = updateForm._id;
 
+  console.log("REQ BODY", req.body)
+  console.log(req?.file, 'FILE')
+
   const firstName = updateForm.firstName;
   const lastName = updateForm.lastName;
   const email = updateForm.email;
-  const password = updateForm.password;
+  const password = updateForm.password === 'null' ? null : updateForm.password;
   const confirmPassword = updateForm.confirmPassword;
 
   const user = await userModel.findById(userId);
@@ -135,17 +129,22 @@ const updateUser = asyncHandler(async (req, res, next) => {
     user.firstName = firstName || user.firstName;
     user.lastName = lastName || user.lastName;
     user.email = email || user.email;
-    // user.profilePicture = req.body.profilePicture || user.profilePicture;
-    let uploaded = null;
 
-    if (req?.file) {
-      const optimizedBuffer = await optimizeImage(
-        req.file.buffer,
-        "profilePicture"
-      );
 
-      await uploadToS3(optimizedBuffer, user.profilePicture, "profilePic");
+
+    if(req.body.profilePicture ){
+      user.profilePicture = req.body.profilePicture
+
+      if (req?.file) {
+        const optimizedBuffer = await optimizeImage(
+          req.file.buffer,
+          "profilePicture"
+        );
+  
+        await uploadToS3(optimizedBuffer, user.profilePicture, "profilePic");
+      }
     }
+
     if (password) {
       user.password = password;
       user.confirmPassword = confirmPassword;

@@ -19,7 +19,6 @@ const upload = multer({ storage: storage });
 // router.get("/", home);
 router.post(
   "/signup",
-  upload.single("profilePicture"),
   [
     check("email").isEmail().normalizeEmail(),
     body(
