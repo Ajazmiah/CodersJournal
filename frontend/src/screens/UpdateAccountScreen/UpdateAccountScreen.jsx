@@ -113,11 +113,6 @@ function UpdateAccountScreen() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-<<<<<<< HEAD
-          <Button type='submit'>
-            Update
-          </Button>
-=======
 
           {/* <Button
             type="submit"
@@ -130,7 +125,6 @@ function UpdateAccountScreen() {
           </Button> */}
 
           <Button type="submit">Update</Button>
->>>>>>> deployBranch
         </form>
       </Container>
     </div>
