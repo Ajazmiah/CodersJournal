@@ -28,7 +28,7 @@ function UserProfileInfo({ userInfo, children }) {
             />
           </div>
 
-          <div>
+           <div>
             <ul className={Styles.socials}>
               <li>{getIcon("youtube")}</li>
               <li>{getIcon("Fb")}</li>
@@ -36,7 +36,7 @@ function UserProfileInfo({ userInfo, children }) {
               <li>{getIcon("twitter")}</li>
             </ul>
             {children}
-          </div>
+          </div> 
         </div>
 
         <div className={Styles.profileRight}>

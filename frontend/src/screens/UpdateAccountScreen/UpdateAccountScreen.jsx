@@ -120,7 +120,7 @@ function UpdateAccountScreen() {
               borderRadius: "4px", // Optional: Slight rounding of corners
             }}
           >
-            Account Update
+            Account
           </Typography>
 
           <TextField

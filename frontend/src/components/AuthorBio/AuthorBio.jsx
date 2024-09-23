@@ -8,7 +8,7 @@ function AuthorBio({ authorInfo }) {
   return (
     <div className={Styles.authorBio}>
       <div className={Styles.authorInfo}>
-        <p className="heading-2">{fullName}</p>
+        <p className={classNames(Styles.authorName, 'heading-2')}>{fullName}</p>
 
         <p className={classNames(Styles.authorBioText, 'heading-4 fontSize09em')}>
           <Border borderLocation="left" />
