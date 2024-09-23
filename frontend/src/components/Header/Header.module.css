@@ -39,11 +39,11 @@
 .userMenu {
   padding: 1em;
   position: absolute;
-  top: 76px;
-  padding-top: 10px;
+  top: 48px;
   right: 0px;
   width: 200px;
   background: var(--color-golden);
+  padding-top: 2em;
 }
 .listItem {
   margin-top: 1em;
