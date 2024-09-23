@@ -23,3 +23,7 @@
 .title {
   font-size: 3em;
 }
+.summary {
+  margin-top: 1em;
+  font-size: .8em;
+}

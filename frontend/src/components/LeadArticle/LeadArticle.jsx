@@ -29,10 +29,9 @@ const LeadArticle = ({ post }) => {
           <h1 className={classNames("heading heading-2 truncate")}>
             {post.title}
           </h1>
-          <span variant="subtitle2" className="truncate">
+          <span  className={classNames('truncate', Styles.summary)}>
             {post.summary}
           </span>
-          <Date date={post?.createdAt} />
         </div>
       </div>
     </div>

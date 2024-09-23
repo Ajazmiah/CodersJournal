@@ -29,12 +29,12 @@ function UserProfileInfo({ userInfo, children }) {
           </div>
 
            <div>
-            <ul className={Styles.socials}>
+            {/* <ul className={Styles.socials}>
               <li>{getIcon("youtube")}</li>
               <li>{getIcon("Fb")}</li>
               <li>{getIcon("github")}</li>
               <li>{getIcon("twitter")}</li>
-            </ul>
+            </ul> */}
             {children}
           </div> 
         </div>

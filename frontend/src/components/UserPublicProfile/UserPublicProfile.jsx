@@ -42,7 +42,7 @@ function UserPublicProfile() {
     <div>
       <UserProfileInfo userInfo={author} />
 
-      <div className="container">
+      <div className="container" style={{marginTop:'7em'}}>
         {posts.map((post) => (
           <>
             <FeaturedCard post={post} />
