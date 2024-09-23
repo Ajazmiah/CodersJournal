@@ -6,12 +6,18 @@
 .blogDetails {
   margin-block: 1em;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
   font-weight: 600;
   color: var(--color-black);
   padding-inline: 15px;
   padding-right: 2em;
+  font-size: .7em;
+  flex-direction: column;
+}
+.date {
+  margin-left: 4.5em;
+  margin-top: -1.5em;
 }
 
 .btns {

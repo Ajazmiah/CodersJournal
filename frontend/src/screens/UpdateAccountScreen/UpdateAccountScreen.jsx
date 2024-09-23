@@ -59,7 +59,7 @@ function UpdateAccountScreen() {
   };
   return (
     <div>
-      <Container>
+      <Container className="Container">
         <ProfileImage
           imageURL={previewImage || userInfo.profilePicture}
           customClasses="profileImage"

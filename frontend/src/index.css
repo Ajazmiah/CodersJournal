@@ -80,7 +80,7 @@ p {
 }
 
 .space-top-9 {
-  margin-top: 10rem;
+  margin-top: 3rem;
   /* 50px to 10rem */
 }
 
@@ -203,4 +203,13 @@ p {
 
 .color-dark {
   background-color: var(--color-dark);
+}
+
+
+
+@media (min-width: 700px) {
+  .space-top-9 {
+    margin-top: 10rem;
+    /* 50px to 10rem */
+  }
 }

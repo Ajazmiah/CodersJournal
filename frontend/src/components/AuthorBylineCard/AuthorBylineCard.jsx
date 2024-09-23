@@ -29,7 +29,7 @@ function AuthorBylineCard({ author }) {
           <ProfileImage customClasses="ByLineImage" imageURL={profilePicture} />
         </div>
         <div>
-          <p>{authorName}</p>
+          <p className={Styles.author}>{authorName}</p>
         </div>
       </div>
     )

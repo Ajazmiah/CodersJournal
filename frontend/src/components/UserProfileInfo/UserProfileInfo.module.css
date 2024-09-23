@@ -1,22 +1,24 @@
 .userProfileInfo {
-    padding-top: 3em;
+  padding-top: 3em;
 }
-.profileInfo {
-    display: flex;
-    gap: 20px;
-}
+
 .profilePicture img {
-    border-radius: 20px;
+  border-radius: 20px;
 }
 .socials {
+  display: flex;
+  gap: 1.5em;
+  margin-top: 10px;
+  font-size: 2em;
+}
+@media (min-width: 700px) {
+  .profileInfo {
     display: flex;
-    gap: 1.5em;
-    margin-top: 10px;
-    font-size: 2em;
+    gap: 20px;
+  }
 }
 .profileLeft {
- flex: 1;
+  flex: 1;
 }
 .profileRight {
-
 }

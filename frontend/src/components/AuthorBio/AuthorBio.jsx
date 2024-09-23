@@ -12,7 +12,7 @@ function AuthorBio({ authorInfo }) {
 
         <p className={classNames(Styles.authorBioText, 'heading-4 fontSize09em')}>
           <Border borderLocation="left" />
-          {authorInfo.bio ? authorInfo.bio : `The user ${fullName} does not have a bio`}
+          {authorInfo.bio ? authorInfo.bio : `${fullName} does not have a bio`}
         </p>
       </div>
     </div>

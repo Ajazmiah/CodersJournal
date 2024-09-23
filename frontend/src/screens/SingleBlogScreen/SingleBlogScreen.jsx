@@ -132,7 +132,7 @@ function SingleBlogScreen() {
                 />
                 <div className={Styles.blogDetails}>
                   <AuthorBylineCard author={post.author} />
-                  <p>{formatDate(post?.createdAt)}</p>
+                  <p className={Styles.date}>{formatDate(post?.createdAt)}</p>
                 </div>
                 <Border />
               </div>
