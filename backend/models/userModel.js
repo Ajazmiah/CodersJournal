@@ -29,7 +29,7 @@ const userSchema = mongoose.Schema(
       required: false,
     },
     profilePicture: {
-      type: "string",
+      type: Object,
       required: false,
     },
   },

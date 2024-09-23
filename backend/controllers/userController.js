@@ -114,13 +114,13 @@ const updateUser = asyncHandler(async (req, res, next) => {
   const updateForm = req.body;
   const userId = updateForm._id;
 
-  console.log("REQ BODY", req.body)
-  console.log(req?.file, 'FILE')
+  console.log("REQ BODY", req.body);
+  console.log(req?.file, "FILE");
 
   const firstName = updateForm.firstName;
   const lastName = updateForm.lastName;
   const email = updateForm.email;
-  const password = updateForm.password === 'null' ? null : updateForm.password;
+  const password = updateForm.password
   const confirmPassword = updateForm.confirmPassword;
 
   const user = await userModel.findById(userId);
@@ -130,21 +130,15 @@ const updateUser = asyncHandler(async (req, res, next) => {
     user.lastName = lastName || user.lastName;
     user.email = email || user.email;
 
+    if (req?.file) {
+      user.profilePicture = req?.file;
+      const optimizedBuffer = await optimizeImage(
+        req.file.buffer,
+        "profilePicture"
+      );
 
-
-
-
-
-      if (req?.file) {
-        user.profilePicture = req?.file
-        const optimizedBuffer = await optimizeImage(
-          req.file.buffer,
-          "profilePicture"
-        );
-  
-        await uploadToS3(optimizedBuffer, user.profilePicture, "profilePic");
-      }
-    
+      await uploadToS3(optimizedBuffer, user.profilePicture, "profilePic");
+    }
 
     if (password) {
       user.password = password;
