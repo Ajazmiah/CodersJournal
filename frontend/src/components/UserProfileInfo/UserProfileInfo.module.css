@@ -16,9 +16,11 @@
     display: flex;
     gap: 20px;
   }
+  .profileRight {
+    margin-top: 3em;
+}
+
 }
 .profileLeft {
   flex: 1;
-}
-.profileRight {
 }

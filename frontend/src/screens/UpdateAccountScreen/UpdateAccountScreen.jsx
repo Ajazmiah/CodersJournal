@@ -6,6 +6,7 @@ import { setCredentials } from "../../slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
+import { Typography } from "@mui/material";
 import Button from "../../components/Atoms/Button/Button";
 import useUploadImage from "../../hooks/useUploadImage";
 import { toast } from "react-toastify";
@@ -15,10 +16,13 @@ function UpdateAccountScreen() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const MAX_BIO_CH = 200;
+
   const { userInfo } = useSelector((state) => state.auth);
   const [email, setEmail] = useState(userInfo.email);
   const [firstName, setFirstName] = useState(userInfo.firstName);
   const [lastName, setLastName] = useState(userInfo.lastName);
+  const [bio, setBio] = useState(userInfo.bio);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
 
@@ -44,6 +48,9 @@ function UpdateAccountScreen() {
       if (password && confirmPassword) {
         form.append("password", password);
         form.append("confirmPassword", confirmPassword);
+      }
+      if (bio) {
+        form.append("bio", bio);
       }
 
       try {
@@ -85,6 +92,38 @@ function UpdateAccountScreen() {
           />
 
           <TextField
+            label="Your Bio"
+            multiline
+            value={bio}
+            rows={4} // Number of rows (lines) visible by default
+            variant="outlined" // Can be 'filled' or 'standard'
+            fullWidth
+            onChange={(e) => setBio(e.target.value)}
+            inputProps={{
+              maxLength: MAX_BIO_CH,
+            }}
+          />
+          <p style={bio?.length === MAX_BIO_CH ? { color: "red" } : null}>
+            {bio?.length}/{MAX_BIO_CH} characters
+          </p>
+
+          <Typography
+            variant="subtitle1"
+            component="h1"
+            sx={{
+              mb: 2,
+              marginTop: '3em',
+              backgroundColor: "black", // Black background
+              color: "white", // White text for contrast
+              display: "inline-block", // Ensures background wraps around text
+              padding: "4px 8px", // Padding inside the label
+              borderRadius: "4px", // Optional: Slight rounding of corners
+            }}
+          >
+            Account Update
+          </Typography>
+
+          <TextField
             fullWidth
             label="Email Address"
             variant="outlined"
@@ -113,17 +152,6 @@ function UpdateAccountScreen() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-
-          {/* <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            style={{ marginTop: "1rem" }}
-          >
-            Update
-          </Button> */}
-
           <Button type="submit">Update</Button>
         </form>
       </Container>

@@ -10,6 +10,7 @@ import Styles from "./ProfileScreen.module.css";
 import UserProfileInfo from "../../components/UserProfileInfo/UserProfileInfo";
 import FeaturedCard from "../../components/FeaturedCard/FeaturedCard";
 import Border from "../../components/Atoms/Border/Border";
+import classNames from "classnames";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const ProfileScreen = () => {
       <UserProfileInfo userInfo={userInfo}>
         <UserProfileInfo.UpdateAccount />
       </UserProfileInfo>
-      <div className="container">
+      <div className={classNames("container", Styles.featured)}>
         {posts?.map((post) => (
           <>
             <FeaturedCard post={post} />

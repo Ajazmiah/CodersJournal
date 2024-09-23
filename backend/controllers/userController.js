@@ -79,6 +79,7 @@ const singin = asyncHandler(async (req, res, next) => {
         lastName: user.lastName,
         email: user.email,
         profilePicture: presignedURL,
+        bio: user.bio
       });
     }
 
@@ -87,6 +88,7 @@ const singin = asyncHandler(async (req, res, next) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      bio: user.bio
     });
   } else {
     res.status(401);
@@ -120,6 +122,7 @@ const updateUser = asyncHandler(async (req, res, next) => {
   const firstName = updateForm.firstName;
   const lastName = updateForm.lastName;
   const email = updateForm.email;
+  const bio = updateForm.bio
   const password = updateForm.password
   const confirmPassword = updateForm.confirmPassword;
 
@@ -129,6 +132,7 @@ const updateUser = asyncHandler(async (req, res, next) => {
     user.firstName = firstName || user.firstName;
     user.lastName = lastName || user.lastName;
     user.email = email || user.email;
+    user.bio = bio || user.bio;
 
     if (req?.file) {
       user.profilePicture = req?.file;
@@ -158,6 +162,7 @@ const updateUser = asyncHandler(async (req, res, next) => {
         lastName: updatedUser.lastName,
         email: updatedUser.email,
         profilePicture: presignedURL,
+        bio: updateUser.bio
       });
     }
   } else {
@@ -175,6 +180,8 @@ const userPublicProfile = asyncHandler(async (req, res, next) => {
   const authorInfo = await userModel
     .findById(id)
     .select("-password -confirmPassword");
+
+    console.log("AUTHORIF", authorInfo)
 
   if (!authorInfo) {
     throw new Error("This user profile is unavailable");
