@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Styles from "./AuthorBylineCard.module.css";
 import classNames from "classnames";
 import { useLink } from "@hooks/useLink/useLink";
+import { redirect } from "react-router-dom";
 
 function AuthorBylineCard({ author }) {
   const { userInfo } = useSelector((state) => state.auth);
@@ -14,7 +15,11 @@ function AuthorBylineCard({ author }) {
   const profilePicture = author?.profilePicture;
 
   const handleClick = (event) => {
-    const path = `/author/${authorName}-${author?._id}`;
+    let path = `/author/${authorName}-${author?._id}`;
+
+    if (userInfo?._id === author?._id) {
+      path = "/profile";
+    }
     event.stopPropagation();
     handleNavigateToPost("d", path);
   };
