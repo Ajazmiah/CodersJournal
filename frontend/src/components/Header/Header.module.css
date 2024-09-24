@@ -12,6 +12,12 @@
   max-width: 1260px;
   margin: 0 auto;
 }
+@media (max-width: 760px) {
+  .nav {
+    padding-inline: 6%;
+ 
+  }
+}
 
 .navLeft {
   margin-left: 5em;
