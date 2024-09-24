@@ -115,10 +115,12 @@ function ResponsiveAppBar() {
                   customClasses="headerImage"
                   imageURL={userInfo?.profilePicture}
                 />
+                {/* <span>{userInfo?.firstName[0] + userInfo.lastName[0]}</span> */}
                  {getIcon('arrowDown')}
               </button>
               {showMenu && (
                 <div className={Styles.userMenu}>
+                  <span style={{marginLeft: '84%', }} onClick={handleShowMenu}>{getIcon('close')}</span>
                   <ul>
                     <DropDownMenu
                       dropDownItems={userSettingMenu}

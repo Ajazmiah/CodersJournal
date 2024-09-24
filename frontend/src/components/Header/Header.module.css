@@ -41,12 +41,12 @@
   position: absolute;
   top: 48px;
   right: 0px;
-  width: 200px;
+  width: 250px;
   background: var(--color-golden);
   padding-top: 2em;
 }
 .listItem {
-  margin-top: 1em;
+  margin-top: 1.5em;
   padding-inline: 0.5em;
   justify-content: space-between;
   cursor: pointer;

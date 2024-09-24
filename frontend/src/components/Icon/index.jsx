@@ -14,7 +14,8 @@ import {
   FaCaretDown,
   FaSignInAlt,
   FaUserCheck,
-  FaUser
+  FaUser,
+  FaTimes
 } from "react-icons/fa";
 
 export const icons = {
@@ -34,7 +35,8 @@ export const icons = {
   arrowDown: <FaCaretDown/>,
   SignIn: <FaSignInAlt/>,
   SignUp: <FaUserCheck/>,
-  user: <FaUser/>
+  user: <FaUser/>,
+  close: <FaTimes size={35}/>
 
 };
 
