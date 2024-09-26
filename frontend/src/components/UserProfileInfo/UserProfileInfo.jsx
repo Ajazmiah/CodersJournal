@@ -22,7 +22,7 @@ function UserProfileInfo({ userInfo, children }) {
       <div className={classNames("container", Styles.profileInfo)}>
         <div className={Styles.profileLeft}>
           <div className={Styles.profilePicture}>
-            {userInfo.profileInfo ? (
+            {userInfo.profilePicture ? (
               <ProfileImage
                 customClasses="profileImage"
                 empty
