@@ -7,6 +7,8 @@ import classNames from "classnames";
 function ProfileImage({ empty, imageURL, customClasses }) {
   const classes = [Styles[customClasses], Styles.defaultStyles];
 
+  console.log("imageURL", imageURL)
+
   if (imageURL === undefined || imageURL === null) {
     return (
       <div className={classNames(Styles[customClasses], Styles["avatar"])}>

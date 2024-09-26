@@ -79,7 +79,7 @@ const singin = asyncHandler(async (req, res, next) => {
         lastName: user.lastName,
         email: user.email,
         profilePicture: presignedURL,
-        bio: user.bio
+        bio: user.bio,
       });
     }
 
@@ -88,7 +88,7 @@ const singin = asyncHandler(async (req, res, next) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      bio: user.bio
+      bio: user.bio,
     });
   } else {
     res.status(401);
@@ -122,8 +122,8 @@ const updateUser = asyncHandler(async (req, res, next) => {
   const firstName = updateForm.firstName;
   const lastName = updateForm.lastName;
   const email = updateForm.email;
-  const bio = updateForm.bio
-  const password = updateForm.password
+  const bio = updateForm.bio;
+  const password = updateForm.password;
   const confirmPassword = updateForm.confirmPassword;
 
   const user = await userModel.findById(userId);
@@ -162,7 +162,7 @@ const updateUser = asyncHandler(async (req, res, next) => {
         lastName: updatedUser.lastName,
         email: updatedUser.email,
         profilePicture: presignedURL,
-        bio: updateUser.bio
+        bio: updateUser.bio,
       });
     }
   } else {
@@ -181,8 +181,6 @@ const userPublicProfile = asyncHandler(async (req, res, next) => {
     .findById(id)
     .select("-password -confirmPassword");
 
-    console.log("AUTHORIF", authorInfo)
-
   if (!authorInfo) {
     throw new Error("This user profile is unavailable");
   }
@@ -190,7 +188,9 @@ const userPublicProfile = asyncHandler(async (req, res, next) => {
   let SignedPosts = null;
 
   if (blogs && authorInfo) {
+   if(authorInfo.profilePicture) {
     presignedURL = await getFileFromS3(authorInfo.profilePicture, "profilePic");
+   }
     SignedPosts = await attachPresignedURLs(blogs);
   }
 

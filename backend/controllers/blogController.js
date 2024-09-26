@@ -116,7 +116,7 @@ const getPost = asyncHandler(async (req, res, next) => {
     "profilePic"
   );
 
-  user.profilePicture = presignedProfilePicURL;
+  if (user.profilePicture) user.profilePicture = presignedProfilePicURL;
 
   const POST = {
     ...SignedPosts,
