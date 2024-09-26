@@ -5,6 +5,7 @@ import Styles from "./AuthorBylineCard.module.css";
 import classNames from "classnames";
 import { useLink } from "@hooks/useLink/useLink";
 import { redirect } from "react-router-dom";
+import Initials from "../Initials/Initials";
 
 function AuthorBylineCard({ author }) {
   const { userInfo } = useSelector((state) => state.auth);
@@ -31,7 +32,14 @@ function AuthorBylineCard({ author }) {
         onClick={handleClick}
       >
         <div>
-          <ProfileImage customClasses="ByLineImage" imageURL={profilePicture} />
+          {profilePicture ? (
+            <ProfileImage
+              customClasses="ByLineImage"
+              imageURL={profilePicture}
+            />
+          ) : (
+            <Initials author={author} type='byline' />
+          )}
         </div>
         <div>
           <p className={Styles.author}>{authorName}</p>

@@ -6,6 +6,7 @@ import { getIcon } from "../Icon";
 import Button from "../Atoms/Button/Button";
 import classNames from "classnames";
 import ProfileImage from "../ProfileImage/ProfileImage";
+import Initials from "../Initials/Initials";
 
 const UpdateAccount = () => {
   return (
@@ -21,14 +22,18 @@ function UserProfileInfo({ userInfo, children }) {
       <div className={classNames("container", Styles.profileInfo)}>
         <div className={Styles.profileLeft}>
           <div className={Styles.profilePicture}>
-            <ProfileImage
-              customClasses="profileImage"
-              empty
-              imageURL={userInfo.profilePicture}
-            />
+            {userInfo.profileInfo ? (
+              <ProfileImage
+                customClasses="profileImage"
+                empty
+                imageURL={userInfo.profilePicture}
+              />
+            ) : (
+              <Initials author={userInfo} type="profileScreen" />
+            )}
           </div>
 
-           <div>
+          <div>
             {/* <ul className={Styles.socials}>
               <li>{getIcon("youtube")}</li>
               <li>{getIcon("Fb")}</li>
@@ -36,7 +41,7 @@ function UserProfileInfo({ userInfo, children }) {
               <li>{getIcon("twitter")}</li>
             </ul> */}
             {children}
-          </div> 
+          </div>
         </div>
 
         <div className={Styles.profileRight}>
