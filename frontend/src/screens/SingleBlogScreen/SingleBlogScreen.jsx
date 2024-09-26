@@ -142,7 +142,9 @@ function SingleBlogScreen() {
         )}
       </div>
 
-      <Sidebar />
+      <Sidebar>
+        <Sidebar.RelatedPost/>
+      </Sidebar>
     </div>
   );
 }
