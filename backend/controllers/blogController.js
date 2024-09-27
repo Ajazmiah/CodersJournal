@@ -10,6 +10,7 @@ import { optimizeImage } from "../utils/imageOptimize.js";
 
 // Public - All Posts that shows up on HomeScreen
 const allPost = asyncHandler(async (req, res, next) => {
+  console.log("ITS BEING CACHED--")
   try {
     const blogPosts = await blogModel.find().populate({
       path: "authorId",
@@ -18,6 +19,7 @@ const allPost = asyncHandler(async (req, res, next) => {
 
     const SignedPosts = await attachPresignedURLs(blogPosts);
 
+    res.setHeader('Cache-Control', 'max-age=3600');
     res.status(200).json(SignedPosts);
   } catch (error) {
     throw new Error("Posts could not be loaded");
