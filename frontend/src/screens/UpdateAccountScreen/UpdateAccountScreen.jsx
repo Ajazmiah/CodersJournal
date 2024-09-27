@@ -55,9 +55,14 @@ function UpdateAccountScreen() {
 
       try {
         const res = await updateProfile(form).unwrap();
-        dispatch(setCredentials(res));
+
+        console.log("RES", res)
+
         toast.success("Your profile is updated");
-        if (res) navigate("/profile");
+        if (res) {
+          dispatch(setCredentials(res));
+          navigate("/profile");
+        }
       } catch (err) {
         toast.error(err.data.message);
         console.log("ERR", err);
@@ -112,7 +117,7 @@ function UpdateAccountScreen() {
             component="h1"
             sx={{
               mb: 2,
-              marginTop: '3em',
+              marginTop: "3em",
               backgroundColor: "black", // Black background
               color: "white", // White text for contrast
               display: "inline-block", // Ensures background wraps around text

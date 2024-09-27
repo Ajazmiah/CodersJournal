@@ -151,7 +151,7 @@ const updateUser = asyncHandler(async (req, res, next) => {
 
     const updatedUser = await user.save();
 
-    if (updateUser) {
+    if (updatedUser) {
       let presignedURL = null;
 
       presignedURL = await getFileFromS3(user.profilePicture, "profilePic");
@@ -162,7 +162,7 @@ const updateUser = asyncHandler(async (req, res, next) => {
         lastName: updatedUser.lastName,
         email: updatedUser.email,
         profilePicture: presignedURL,
-        bio: updateUser.bio,
+        bio: updatedUser.bio,
       });
     }
   } else {
@@ -188,9 +188,12 @@ const userPublicProfile = asyncHandler(async (req, res, next) => {
   let SignedPosts = null;
 
   if (blogs && authorInfo) {
-   if(authorInfo.profilePicture) {
-    presignedURL = await getFileFromS3(authorInfo.profilePicture, "profilePic");
-   }
+    if (authorInfo.profilePicture) {
+      presignedURL = await getFileFromS3(
+        authorInfo.profilePicture,
+        "profilePic"
+      );
+    }
     SignedPosts = await attachPresignedURLs(blogs);
   }
 
