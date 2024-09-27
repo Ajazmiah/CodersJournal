@@ -20,6 +20,7 @@ import UpdateAccountScreen from "./screens/UpdateAccountScreen/UpdateAccountScre
 import SingleBlogScreen from "./screens/SingleBlogScreen/SingleBlogScreen.jsx";
 import NotFoundPage from "./components/PageNotFound/PageNotFound.jsx";
 import UserPublicProfile from "./components/UserPublicProfile/UserPublicProfile.jsx";
+import EmailSignUp from "./components/EmailSignUp/EmailSignUp.jsx";
 
 const BlogCreationScreen = lazy(() =>
   import("./screens/BlogCreationScreen/BlogCreationScreen.jsx")
@@ -46,6 +47,8 @@ const router = createBrowserRouter(
       <Route path="/post/:id" element={<SingleBlogScreen />} />
       <Route path="/author/:id" element={<UserPublicProfile />} />
       <Route path="*" element={<NotFoundPage />} />
+      <Route path="email" element={<EmailSignUp/>} />
+
     </Route>
   )
 );
