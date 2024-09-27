@@ -41,8 +41,8 @@ const postsApi = apiSlice.injectEndpoints({
       }),
     }),
     getUserPosts: builder.mutation({
-      query: () => ({
-        url: `${POSTS_URL}/allPost`,
+      query: (limit) => ({
+        url: `${POSTS_URL}/allPost?limit=${limit}`,
         method: "GET",
       }),
     }),

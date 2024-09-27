@@ -10,15 +10,21 @@ import { optimizeImage } from "../utils/imageOptimize.js";
 
 // Public - All Posts that shows up on HomeScreen
 const allPost = asyncHandler(async (req, res, next) => {
+  console.log("QUERY___", req.query);
   try {
-    const blogPosts = await blogModel.find().populate({
-      path: "authorId",
-      select: "-password",
-    });
+    const blogPosts = await blogModel
+      .find()
+      .populate({
+        path: "authorId",
+        select: "-password",
+      })
+      .limit(req.query.limit);
 
     const SignedPosts = await attachPresignedURLs(blogPosts);
 
-    res.status(200).json(SignedPosts);
+    const totalPosts = await blogModel.countDocuments();
+
+    res.status(200).json({ SignedPosts, totalPosts });
   } catch (error) {
     throw new Error("Posts could not be loaded");
   }
@@ -63,7 +69,7 @@ const createPost = asyncHandler(async (req, res, next) => {
   }
 });
 
-//profile POSTS -
+// Logged in profile POSTS -
 const getAllUserPosts = asyncHandler(async (req, res, next) => {
   const decoded = verifytoken(req);
   const blogs = await blogModel.find({ authorId: decoded.userId }).populate({
@@ -76,10 +82,9 @@ const getAllUserPosts = asyncHandler(async (req, res, next) => {
   res.status(200).json(SignedPosts);
 });
 
-//
+// public Profile post
 const getUserPosts = asyncHandler(async (req, res, next) => {
   const decoded = verifytoken(req);
-
   const blogPosts = await blogModel
     .find({ authorId: { $ne: decoded.userId } })
     .find()
