@@ -19,8 +19,8 @@ const allPost = asyncHandler(async (req, res, next) => {
         path: "authorId",
         select: "-password",
       })
-      .skip(limit - 3)
-      .limit(limit);
+      .limit(limit)
+      .sort({ createdAt: -1 });
 
     limitCount += limit;
 

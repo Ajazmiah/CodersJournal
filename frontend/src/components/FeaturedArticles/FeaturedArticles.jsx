@@ -28,11 +28,7 @@ function FeaturedArticles() {
           ? await getExludedUserPosts().unwrap()
           : await getPosts(limit).unwrap();
 
-
-        const POSTS = [...allPost.SignedPosts, ...posts]
-        console.log("POST___", POSTS)
-
-        setPosts((prev) => POSTS);
+        setPosts(allPost.SignedPosts);
         setLeadPost(allPost.SignedPosts[0]);
 
         if (posts.length === allPost.totalPosts) {
