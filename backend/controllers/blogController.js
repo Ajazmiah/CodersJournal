@@ -10,8 +10,6 @@ import { optimizeImage } from "../utils/imageOptimize.js";
 
 // Public - All Posts that shows up on HomeScreen
 const allPost = asyncHandler(async (req, res, next) => {
-  console.log("IS IT CACHED");
-
   let limitCount = 0;
   const limit = req.query.limit;
   try {
@@ -21,7 +19,7 @@ const allPost = asyncHandler(async (req, res, next) => {
         path: "authorId",
         select: "-password",
       })
-      .skip(limit-3)
+      .skip(limit - 3)
       .limit(limit);
 
     limitCount += limit;
