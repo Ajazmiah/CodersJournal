@@ -12,16 +12,19 @@ import { useBackdrop } from "../Backdrop/Backdrop";
 import Styles from "./EmailSignUp.module.css";
 import { useState, useRef } from "react";
 
-const ConfirmationCode = ({email}) => {
+const ConfirmationCode = ({ email }) => {
   return (
     <div className={Styles.confirmation}>
-        <p>an Email has been sent to {email} with 5 digit confirmation! please enter below</p>
+      <p>
+        an Email has been sent to {email} with 5 digit confirmation! please
+        enter below
+      </p>
       <form>
         <input className={Styles.confirmationInput} placeholder="#" />
         <input className={Styles.confirmationInput} placeholder="#" />
         <input className={Styles.confirmationInput} placeholder="#" />
-        <input className={Styles.confirmationInput} placeholder="#"/>
-        <input className={Styles.confirmationInput} placeholder="#"/>
+        <input className={Styles.confirmationInput} placeholder="#" />
+        <input className={Styles.confirmationInput} placeholder="#" />
       </form>
     </div>
   );
@@ -33,10 +36,10 @@ function EmailSignUp() {
 
   const inputRef = useRef();
 
-  console.log('EMAIL', email)
+  console.log("EMAIL", email);
 
   const handleClick = () => {
-   setEmail(inputRef.current.value)
+    setEmail(inputRef.current.value);
   };
 
   return (
@@ -53,7 +56,7 @@ function EmailSignUp() {
         }}
       >
         {email?.length > 0 ? (
-          <ConfirmationCode email = {email}/>
+          <ConfirmationCode email={email} />
         ) : (
           <>
             <p
@@ -71,7 +74,7 @@ function EmailSignUp() {
                     fullWidth
                     label="email"
                     variant="outlined"
-                    inputRef={inputRef} 
+                    inputRef={inputRef}
                   />
                 </Grid>
               </Grid>
