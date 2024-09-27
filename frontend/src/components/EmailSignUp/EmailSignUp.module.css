@@ -1,9 +1,20 @@
 .confirmationInput {
-    width: 80px;
-    padding: .5em;
-    outline: none;
-    border: none;
-    border: 1px solid black;
-    margin-inline: 5px;
-    border-radius: 10px;
+  width: 80px;
+  padding: 0.5em;
+  outline: none;
+  border: none;
+  border-bottom: 3px solid black;
+  margin-inline: 5px;
+  /* border-radius: 10px; */
+  font-size: 1.4em;
+  /* display: flex; */
+  /* background: beige; */
+  text-align: center;
+}
+.confirmation p {
+  margin-block: 1em;
+  font-size: 0.9em;
+  width: 250px;
+  margin-inline: auto;
+  text-align: left;
 }

@@ -12,15 +12,16 @@ import { useBackdrop } from "../Backdrop/Backdrop";
 import Styles from "./EmailSignUp.module.css";
 import { useState, useRef } from "react";
 
-const ConfirmationCode = () => {
+const ConfirmationCode = ({email}) => {
   return (
     <div className={Styles.confirmation}>
+        <p>an Email has been sent to {email} with 5 digit confirmation! please enter below</p>
       <form>
-        <input className={Styles.confirmationInput} />
-        <input className={Styles.confirmationInput} />
-        <input className={Styles.confirmationInput} />
-        <input className={Styles.confirmationInput} />
-        <input className={Styles.confirmationInput} />
+        <input className={Styles.confirmationInput} placeholder="#" />
+        <input className={Styles.confirmationInput} placeholder="#" />
+        <input className={Styles.confirmationInput} placeholder="#" />
+        <input className={Styles.confirmationInput} placeholder="#"/>
+        <input className={Styles.confirmationInput} placeholder="#"/>
       </form>
     </div>
   );
@@ -30,14 +31,12 @@ function EmailSignUp() {
   const [next, setNext] = useState(null);
   const [email, setEmail] = useState(null);
 
-  const emailRef = useRef();
+  const inputRef = useRef();
+
+  console.log('EMAIL', email)
 
   const handleClick = () => {
-    if (email) setNext(true);
-    else {
-      alert("Enter Email");
-      setNext(false);
-    }
+   setEmail(inputRef.current.value)
   };
 
   return (
@@ -53,8 +52,8 @@ function EmailSignUp() {
           borderRadius: "10px",
         }}
       >
-        {email ? (
-          <ConfirmationCode />
+        {email?.length > 0 ? (
+          <ConfirmationCode email = {email}/>
         ) : (
           <>
             <p
@@ -68,8 +67,12 @@ function EmailSignUp() {
             <form>
               <Grid container>
                 <Grid item xs={12}>
-                  <TextField fullWidth label="email" variant="outlined" ref={emailRef}/>
-                  
+                  <TextField
+                    fullWidth
+                    label="email"
+                    variant="outlined"
+                    inputRef={inputRef} 
+                  />
                 </Grid>
               </Grid>
 
