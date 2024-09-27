@@ -10,7 +10,10 @@ import { optimizeImage } from "../utils/imageOptimize.js";
 
 // Public - All Posts that shows up on HomeScreen
 const allPost = asyncHandler(async (req, res, next) => {
-  console.log("QUERY___", req.query);
+  console.log("IS IT CACHED");
+
+  let limitCount = 0;
+  const limit = req.query.limit;
   try {
     const blogPosts = await blogModel
       .find()
@@ -18,7 +21,10 @@ const allPost = asyncHandler(async (req, res, next) => {
         path: "authorId",
         select: "-password",
       })
-      .limit(req.query.limit);
+      .skip(limit-3)
+      .limit(limit);
+
+    limitCount += limit;
 
     const SignedPosts = await attachPresignedURLs(blogPosts);
 

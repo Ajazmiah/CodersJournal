@@ -43,7 +43,7 @@ function FeaturedArticles() {
     getAllPosts();
   }, [limit]);
 
-  const handleClick = () => {};
+  console.log(posts);
 
   if (posts?.length < 1)
     return (
