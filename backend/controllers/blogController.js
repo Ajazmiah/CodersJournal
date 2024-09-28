@@ -10,8 +10,8 @@ import { optimizeImage } from "../utils/imageOptimize.js";
 
 // Public - All Posts that shows up on HomeScreen
 const allPost = asyncHandler(async (req, res, next) => {
-  let limitCount = 0;
   const limit = req.query.limit;
+
   try {
     const blogPosts = await blogModel
       .find()
@@ -22,13 +22,11 @@ const allPost = asyncHandler(async (req, res, next) => {
       .limit(limit)
       .sort({ createdAt: -1 });
 
-    limitCount += limit;
-
     const SignedPosts = await attachPresignedURLs(blogPosts);
 
     const totalPosts = await blogModel.countDocuments();
 
-    res.header('Cache-Control', 'public, max-age=3600'); // Cache for 1 hour
+    res.header("Cache-Control", "public, max-age=3600"); // Cache for 1 hour
 
     res.status(200).json({ SignedPosts, totalPosts });
   } catch (error) {
@@ -90,7 +88,7 @@ const getAllUserPosts = asyncHandler(async (req, res, next) => {
 
 // Homepage post without post from logged in user
 const getUserPosts = asyncHandler(async (req, res, next) => {
-  console.log("LOGGED IN HOMEPAGE", req.query.limit)
+  console.log("LOGGED IN HOMEPAGE", req.query.limit);
   const decoded = verifytoken(req);
   const blogPosts = await blogModel
     .find({ authorId: { $ne: decoded.userId } })
@@ -102,11 +100,13 @@ const getUserPosts = asyncHandler(async (req, res, next) => {
     .limit(req.query.limit)
     .sort({ createdAt: -1 });
 
-    const totalPosts = await blogModel.countDocuments({authorId: {$ne: decoded.userId}});
+  const totalPosts = await blogModel.countDocuments({
+    authorId: { $ne: decoded.userId },
+  });
 
   if (blogPosts) {
     const SignedPosts = await attachPresignedURLs(blogPosts);
-    res.status(200).json({SignedPosts, totalPosts});
+    res.status(200).json({ SignedPosts, totalPosts });
   } else {
     res.status(400);
     throw new Error("The post could not be fetched at this time");
