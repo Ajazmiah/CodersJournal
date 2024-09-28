@@ -28,6 +28,8 @@ const allPost = asyncHandler(async (req, res, next) => {
 
     const totalPosts = await blogModel.countDocuments();
 
+    res.header('Cache-Control', 'public, max-age=3600'); // Cache for 1 hour
+
     res.status(200).json({ SignedPosts, totalPosts });
   } catch (error) {
     throw new Error("Posts could not be loaded");
@@ -86,8 +88,9 @@ const getAllUserPosts = asyncHandler(async (req, res, next) => {
   res.status(200).json(SignedPosts);
 });
 
-// public Profile post
+// Homepage post without post from logged in user
 const getUserPosts = asyncHandler(async (req, res, next) => {
+  console.log("LOGGED IN HOMEPAGE", req.query.limit)
   const decoded = verifytoken(req);
   const blogPosts = await blogModel
     .find({ authorId: { $ne: decoded.userId } })
@@ -95,11 +98,15 @@ const getUserPosts = asyncHandler(async (req, res, next) => {
     .populate({
       path: "authorId",
       select: ["-password"],
-    });
+    })
+    .limit(req.query.limit)
+    .sort({ createdAt: -1 });
+
+    const totalPosts = await blogModel.countDocuments({authorId: {$ne: decoded.userId}});
 
   if (blogPosts) {
     const SignedPosts = await attachPresignedURLs(blogPosts);
-    res.status(200).json(SignedPosts);
+    res.status(200).json({SignedPosts, totalPosts});
   } else {
     res.status(400);
     throw new Error("The post could not be fetched at this time");

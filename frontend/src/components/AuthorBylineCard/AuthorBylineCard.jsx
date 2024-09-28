@@ -15,6 +15,8 @@ function AuthorBylineCard({ author }) {
   const authorName = `${author?.firstName} ${author?.lastName}`;
   const profilePicture = author?.profilePicture;
 
+  console.log("PROFILEPICTURE", profilePicture);
+
   const handleClick = (event) => {
     let path = `/author/${authorName}-${author?._id}`;
 
@@ -38,7 +40,7 @@ function AuthorBylineCard({ author }) {
               imageURL={profilePicture}
             />
           ) : (
-            <Initials author={author} type='byline' />
+            <Initials author={author} type="byline" />
           )}
         </div>
         <div>

@@ -25,7 +25,7 @@ function FeaturedArticles() {
     const getAllPosts = async () => {
       try {
         const allPost = userInfo
-          ? await getExludedUserPosts().unwrap()
+          ? await getExludedUserPosts(limit).unwrap()
           : await getPosts(limit).unwrap();
 
         setPosts(allPost.SignedPosts);
