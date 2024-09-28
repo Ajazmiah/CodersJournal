@@ -20,11 +20,10 @@ function UserProfileInfo({ userInfo, children }) {
   return (
     <div className={Styles.userProfileInfo}>
       <div className={classNames("container", Styles.profileInfo)}>
-        <div className={Styles.profileLeft}>
+       
           <div className={Styles.profilePicture}>
             {userInfo.profilePicture ? (
               <ProfileImage
-                customClasses="profileImage"
                 empty
                 imageURL={userInfo.profilePicture}
               />
@@ -32,7 +31,10 @@ function UserProfileInfo({ userInfo, children }) {
               <Initials author={userInfo} type="profileScreen" />
             )}
           </div>
+     
 
+        <div className={Styles.profileRight}>
+          <AuthorBio authorInfo={userInfo} />
           <div>
             {/* <ul className={Styles.socials}>
               <li>{getIcon("youtube")}</li>
@@ -42,10 +44,6 @@ function UserProfileInfo({ userInfo, children }) {
             </ul> */}
             {children}
           </div>
-        </div>
-
-        <div className={Styles.profileRight}>
-          <AuthorBio authorInfo={userInfo} />
         </div>
       </div>
     </div>
