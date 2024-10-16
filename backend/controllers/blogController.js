@@ -7,6 +7,7 @@ import { deleteFromS3, getFileFromS3, uploadToS3 } from "../utils/s3.js";
 import { getRandomHex } from "../utils/randomHex.js";
 import { attachPresignedURLs } from "../utils/attachedSignedURL.js";
 import { optimizeImage } from "../utils/imageOptimize.js";
+import { SitemapStream, streamToPromise } from "sitemap";
 
 // Public - All Posts that shows up on HomeScreen
 const allPost = asyncHandler(async (req, res, next) => {
@@ -171,6 +172,36 @@ const editPost = asyncHandler(async (req, res, next) => {
   }
 });
 
+const getSiteMaps = asyncHandler(async (req, res, next) => {
+  const sitemap = new SitemapStream({ hostname: "http://localhost:3000/" });
+
+  // Add URLs for single posts
+  const blogPosts = await blogModel.find().populate({
+    path: "authorId",
+    select: "-password",
+  });
+
+  blogPosts.forEach((post) => {
+    sitemap.write({
+      url: `/post/${post.id}`,
+      changefreq: "monthly",
+      priority: 0.8,
+      lastmod: post.updatedAt,
+    });
+  });
+
+  sitemap.end();
+  const sitemapOutput = await streamToPromise(sitemap).then((data) =>
+    data.toString()
+  );
+
+  res.header("Content-Type", "application/xml");
+  res.send(sitemapOutput);
+
+  res.header("Content-Type", "application/xml");
+  res.send(sitemapOutput);
+});
+
 export {
   createPost,
   getAllUserPosts,
@@ -179,4 +210,5 @@ export {
   deletePost,
   editPost,
   getUserPosts,
+  getSiteMaps,
 };

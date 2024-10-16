@@ -8,6 +8,7 @@ import {
   deletePost,
   editPost,
   getUserPosts,
+  getSiteMaps
 } from "../controllers/blogController.js";
 import { protect } from "../middleware/authMIddleware.js";
 import multer from "multer";
@@ -22,6 +23,7 @@ const upload = multer({
 });
 
 router.route("/allPost").get(allPost);
+router.get('/sitemap.xml', getSiteMaps)
 router
   .route("/create")
   .post(
