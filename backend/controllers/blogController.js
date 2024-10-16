@@ -193,7 +193,7 @@ const getSiteMaps = asyncHandler(async (req, res, next) => {
     process.env.NODE_ENV == "development"
       ? "http://localhost:3000/"
       : "https://coderjournal-frontend.onrender.com/";
-  const sitemap = new SitemapStream({ hostname: HOST });
+  const sitemap = new SitemapStream({ hostname: "https://coderjournal-frontend.onrender.com/"});
 
   console.log("____SITE____", process.env.PORT);
 
