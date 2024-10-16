@@ -220,8 +220,6 @@ const getSiteMaps = asyncHandler(async (req, res, next) => {
   res.header("Content-Type", "application/xml");
   res.send(sitemapOutput);
 
-  res.header("Content-Type", "application/xml");
-  res.send(sitemapOutput);
 });
 
 export {

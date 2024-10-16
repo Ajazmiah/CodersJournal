@@ -60,6 +60,12 @@ const postsApi = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    sitemap: builder.mutation({
+      query:() => ({
+        url: `${POSTS_URL}/sitemap.xml`,
+        method: 'GET'
+      })
+    })
   }),
 });
 
