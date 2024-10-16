@@ -1,15 +1,33 @@
-import React from "react";
-import Styles from "./Ad.module.css";
+import React, { useEffect } from 'react';
 
-function Ad({ link, title, image }) {
-  return (
-    <div  className={Styles.ad}>
-        <span className={Styles.advertisement}> Advertisement</span>
-      <a href={link} target="_blank" rel="noopener noreferrer">
-        <img src={image} alt={title} />
-      </a>
-    </div>
-  );
-}
+const AdComponent = () => {
+    useEffect(() => {
+        try {
+            // Push the ad to Google Ads when the component mounts
+            if (window.adsbygoogle) {
+                window.adsbygoogle.push({});
+            }
+        } catch (error) {
+            console.error('Error loading Google Ads:', error);
+            // You can add any additional error handling logic here if needed
+        }
+    }, []); // Run once on mount
 
-export default Ad;
+    return (
+       <div style={{width: '100%'}}>
+         <ins
+            className="adsbygoogle"
+            style={{
+                display: 'block',
+               
+            }}
+            data-ad-client="ca-pub-4339219773762700"
+            data-ad-slot="3008558947"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+        ></ins>
+       </div>
+    );
+};
+
+export default AdComponent;
