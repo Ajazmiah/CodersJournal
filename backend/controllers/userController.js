@@ -8,6 +8,7 @@ import { getRandomHex } from "../utils/randomHex.js";
 import { getFileFromS3, uploadToS3 } from "../utils/s3.js";
 import { attachPresignedURLs } from "../utils/attachedSignedURL.js";
 import { optimizeImage } from "../utils/imageOptimize.js";
+import { sendMail, transporter } from "../utils/nodemailer.js";
 
 const signup = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
@@ -33,11 +34,17 @@ const signup = asyncHandler(async (req, res, next) => {
     );
   }
 
+  const verificationToken = Math.floor(100000 + Math.random() * 900000).toString()
+
   const user = await userModel.create({
     firstName,
     lastName,
     email,
     password,
+    verificationToken,
+    verificationTokenExpiresAt: Date.now() + 10 * 60 * 1000, // 10 minutes
+
+
   });
   // Create a new user instance
   // - Another way of creating it
@@ -46,6 +53,16 @@ const signup = asyncHandler(async (req, res, next) => {
   //   email: "john@example.com",
   // });
 
+  const mailOptions = {
+    from: "miahajaz@gmail.com", // sender address
+    to: "miahajaz@gmail.com ", // list of receivers
+    subject: "Hello ✔", // Subject line
+    text: "Hi welcoome , below the the 6 digit verification code. Enter it when prompt?", // plain text body
+    html: `<b>This is the verification code ${verificationToken}</b>`, // html body
+  };
+
+  sendMail(transporter,mailOptions)
+
   if (user) {
     generateToken(res, user._id);
     res.status(201).json({
@@ -53,12 +70,18 @@ const signup = asyncHandler(async (req, res, next) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      
     });
   } else {
     res.status(400);
     throw new Error("Could not create an account - please try again later..");
   }
 });
+
+//Confirm Email with Code sent 
+const confirmEmail = asyncHandler(async (req,res,next) => {
+
+})
 
 const singin = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
@@ -199,4 +222,4 @@ const userPublicProfile = asyncHandler(async (req, res, next) => {
   res.status(200).json({ SignedPosts, authorInfo });
 });
 
-export { signup, singin, logout, updateUser, userPublicProfile };
+export { signup, singin, logout, updateUser, userPublicProfile, confirmEmail };
