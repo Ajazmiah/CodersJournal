@@ -10,11 +10,18 @@
   /* display: flex; */
   /* background: beige; */
   text-align: center;
+  border: 2px solid;
+  border-radius: 10px;
+  background: #242424;
+  color: #fff;
+  text-align: center;
 }
-.confirmation p {
-  margin-block: 1em;
-  font-size: 0.9em;
-  width: 250px;
-  margin-inline: auto;
-  text-align: left;
+.confirmation form {
+  margin-top: 1em;
+}
+.codePrompt h3 {
+  margin-bottom: 10px;
+}
+.codePrompt {
+  font-size: 13px;
 }

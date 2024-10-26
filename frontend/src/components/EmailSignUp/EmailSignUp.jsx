@@ -15,17 +15,29 @@ import { useState, useRef } from "react";
 const ConfirmationCode = ({ email }) => {
   return (
     <div className={Styles.confirmation}>
-      <p>
-        an Email has been sent to {email} with 5 digit confirmation! please
-        enter below
-      </p>
+      <div className={Styles.codePrompt}>
+        <h3>Verify Your Email</h3>
+        <p>Enter the 5 digit code sent to</p>
+        <p>{email}</p>
+      </div>
       <form>
-        <input className={Styles.confirmationInput} placeholder="#" />
-        <input className={Styles.confirmationInput} placeholder="#" />
-        <input className={Styles.confirmationInput} placeholder="#" />
-        <input className={Styles.confirmationInput} placeholder="#" />
-        <input className={Styles.confirmationInput} placeholder="#" />
+        <input className={Styles.confirmationInput} maxlength="1" />
+        <input className={Styles.confirmationInput} maxlength="1" />
+        <input className={Styles.confirmationInput} maxlength="1" />
+        <input className={Styles.confirmationInput} maxlength="1" />
+        <input className={Styles.confirmationInput} maxlength="1" />
       </form>
+
+      <Button
+        sx={{
+          backgroundColor: "#ffe262", //269c78 greeish
+          color: "#000",
+          width: "200px",
+          marginTop: "1em",
+        }}
+      >
+        Verify
+      </Button>
     </div>
   );
 };
