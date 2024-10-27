@@ -11,8 +11,8 @@ const PrivateRoute = () => {
     return <Navigate to="/signin" replace />;
   }
 
-  if (!userInfo.isVerified) {
-    return <Verification email={userInfo.email} />;
+  if (!userInfo?.isVerified) {
+    return <Verification email={userInfo?.email} />;
   }
 
   return <Outlet />;

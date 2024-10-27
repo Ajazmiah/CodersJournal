@@ -55,7 +55,7 @@ const signup = asyncHandler(async (req, res, next) => {
 
   const mailOptions = {
     from: "miahajaz@gmail.com", // sender address
-    to: "miahajaz@gmail.com ", // list of receivers
+    to: email, // list of receivers
     subject: "Hello ✔", // Subject line
     text: "Hi welcoome , below the the 6 digit verification code. Enter it when prompt?", // plain text body
     html: `<b>This is the verification code ${verificationToken}</b>`, // html body
