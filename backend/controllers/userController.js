@@ -56,9 +56,9 @@ const signup = asyncHandler(async (req, res, next) => {
   const mailOptions = {
     from: "miahajaz@gmail.com", // sender address
     to: email, // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hi welcoome , below the the 6 digit verification code. Enter it when prompt?", // plain text body
-    html: `<b>This is the verification code ${verificationToken}</b>`, // html body
+    subject: "Verification code sent by CodersJournal", // Subject line
+    html: `<h3> hi ${firstName}</h3>
+    <b>Please enter this verification code ${verificationToken}</b>`,
   };
 
   sendMail(transporter, mailOptions);
@@ -86,14 +86,15 @@ const verifyEmail = asyncHandler(async (req, res, next) => {
 
   if (user.verificationToken === verificationCode) {
     user.isVerified = true;
+    const updatedUser = await user.save();
 
     res.status(200).json({
       _id: user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      bio: user.bio,
-      isVerified: user.isVerified,
+      firstName: updatedUser.firstName,
+      lastName: updatedUser.lastName,
+      email: updatedUser.email,
+      bio: updatedUser.bio,
+      isVerified: updatedUser.isVerified,
     });
   } else {
     res.status(401);
@@ -109,6 +110,8 @@ const singin = asyncHandler(async (req, res, next) => {
   if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id);
 
+
+
     if (user.profilePicture) {
       let presignedURL = null;
 
@@ -121,6 +124,7 @@ const singin = asyncHandler(async (req, res, next) => {
         email: user.email,
         profilePicture: presignedURL,
         bio: user.bio,
+        isVerified: user.isVerified === false ? user.isVerified: true 
       });
     }
 
@@ -130,6 +134,7 @@ const singin = asyncHandler(async (req, res, next) => {
       lastName: user.lastName,
       email: user.email,
       bio: user.bio,
+      isVerified: user.isVerified === false ? user.isVerified: true 
     });
   } else {
     res.status(401);
