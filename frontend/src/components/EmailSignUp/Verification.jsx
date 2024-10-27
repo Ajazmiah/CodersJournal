@@ -42,7 +42,7 @@ const ConfirmationCode = ({ email }) => {
   );
 };
 
-function EmailSignUp() {
+function Verification() {
   const [next, setNext] = useState(null);
   const [email, setEmail] = useState(null);
 
@@ -67,47 +67,10 @@ function EmailSignUp() {
           borderRadius: "10px",
         }}
       >
-        {email?.length > 0 ? (
-          <ConfirmationCode email={email} />
-        ) : (
-          <>
-            <p
-              style={{
-                fontSize: "1.2em",
-                marginBlock: "2em",
-              }}
-            >
-              Sign Up With Your Email
-            </p>
-            <form>
-              <Grid container>
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    label="email"
-                    variant="outlined"
-                    inputRef={inputRef}
-                  />
-                </Grid>
-              </Grid>
-
-              <Button
-                sx={{
-                  backgroundColor: "#ffe262",
-                  color: "black",
-                  width: "200px",
-                  marginTop: "1em",
-                }}
-                onClick={handleClick}
-              >
-                Next
-              </Button>
-            </form>
-          </>
-        )}
+        <ConfirmationCode />
       </Paper>
     </div>
   );
 }
 
-export default EmailSignUp;
+export default Verification;

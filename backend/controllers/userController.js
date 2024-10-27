@@ -70,6 +70,7 @@ const signup = asyncHandler(async (req, res, next) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      isVerified: user.isVerified
       
     });
   } else {
