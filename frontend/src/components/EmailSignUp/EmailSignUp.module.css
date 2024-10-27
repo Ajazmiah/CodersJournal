@@ -25,3 +25,12 @@
 .codePrompt {
   font-size: 13px;
 }
+.email {
+  background: var(--color-golden);
+    padding: 5px;
+    width: max-content;
+    margin: auto;
+    margin-top: 10px;
+    padding-inline: 20px;
+    border-radius: 10px;
+}

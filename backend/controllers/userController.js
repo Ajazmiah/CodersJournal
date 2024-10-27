@@ -34,7 +34,9 @@ const signup = asyncHandler(async (req, res, next) => {
     );
   }
 
-  const verificationToken = Math.floor(100000 + Math.random() * 900000).toString()
+  const verificationToken = Math.floor(
+    10000 + Math.random() * 90000
+  ).toString();
 
   const user = await userModel.create({
     firstName,
@@ -43,8 +45,6 @@ const signup = asyncHandler(async (req, res, next) => {
     password,
     verificationToken,
     verificationTokenExpiresAt: Date.now() + 10 * 60 * 1000, // 10 minutes
-
-
   });
   // Create a new user instance
   // - Another way of creating it
@@ -61,7 +61,7 @@ const signup = asyncHandler(async (req, res, next) => {
     html: `<b>This is the verification code ${verificationToken}</b>`, // html body
   };
 
-  sendMail(transporter,mailOptions)
+  sendMail(transporter, mailOptions);
 
   if (user) {
     generateToken(res, user._id);
@@ -70,8 +70,7 @@ const signup = asyncHandler(async (req, res, next) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      isVerified: user.isVerified
-      
+      isVerified: user.isVerified,
     });
   } else {
     res.status(400);
@@ -79,10 +78,28 @@ const signup = asyncHandler(async (req, res, next) => {
   }
 });
 
-//Confirm Email with Code sent 
-const confirmEmail = asyncHandler(async (req,res,next) => {
+//Confirm Email with Code sent
+const verifyEmail = asyncHandler(async (req, res, next) => {
+  const { verificationCode, id } = req.body;
 
-})
+  const user = await userModel.findById(id);
+
+  if (user.verificationToken === verificationCode) {
+    user.isVerified = true;
+
+    res.status(200).json({
+      _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      bio: user.bio,
+      isVerified: user.isVerified,
+    });
+  } else {
+    res.status(401);
+    throw new Error("Verification Code is wrong");
+  }
+});
 
 const singin = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
@@ -212,9 +229,12 @@ const userPublicProfile = asyncHandler(async (req, res, next) => {
   let SignedPosts = null;
 
   if (blogs && authorInfo) {
-   if(authorInfo.profilePicture) {
-    presignedURL = await getFileFromS3(authorInfo.profilePicture, "profilePic");
-   }
+    if (authorInfo.profilePicture) {
+      presignedURL = await getFileFromS3(
+        authorInfo.profilePicture,
+        "profilePic"
+      );
+    }
     SignedPosts = await attachPresignedURLs(blogs);
   }
 
@@ -223,4 +243,4 @@ const userPublicProfile = asyncHandler(async (req, res, next) => {
   res.status(200).json({ SignedPosts, authorInfo });
 });
 
-export { signup, singin, logout, updateUser, userPublicProfile, confirmEmail };
+export { signup, singin, logout, updateUser, userPublicProfile, verifyEmail };
