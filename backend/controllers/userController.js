@@ -24,8 +24,6 @@ const signup = asyncHandler(async (req, res, next) => {
   const email = registerForm.email;
   const password = registerForm.password;
 
-  
-
   const userExist = await userModel.findOne({ email });
 
   if (userExist) {
@@ -48,6 +46,16 @@ const signup = asyncHandler(async (req, res, next) => {
   //   email: "john@example.com",
   // });
 
+  const mailOptions = {
+    from: "miahajaz@gmail.com", // sender address
+    to: email, // list of receivers
+    subject: "Verification code sent by CodersJournal", // Subject line
+    html: `<h3> hi ${firstName}</h3>
+    <b>Please enter this verification code ${verificationToken}</b>`,
+  };
+
+  sendMail(transporter, mailOptions);
+
   if (user) {
     generateToken(res, user._id);
     res.status(201).json({
@@ -59,6 +67,30 @@ const signup = asyncHandler(async (req, res, next) => {
   } else {
     res.status(400);
     throw new Error("Could not create an account - please try again later..");
+  }
+});
+
+//Confirm Email with Code sent
+const verifyEmail = asyncHandler(async (req, res, next) => {
+  const { verificationCode, id } = req.body;
+
+  const user = await userModel.findById(id);
+
+  if (user.verificationToken === verificationCode) {
+    user.isVerified = true;
+    const updatedUser = await user.save();
+
+    res.status(200).json({
+      _id: user._id,
+      firstName: updatedUser.firstName,
+      lastName: updatedUser.lastName,
+      email: updatedUser.email,
+      bio: updatedUser.bio,
+      isVerified: updatedUser.isVerified,
+    });
+  } else {
+    res.status(401);
+    throw new Error("Verification Code is wrong");
   }
 });
 
@@ -82,6 +114,7 @@ const singin = asyncHandler(async (req, res, next) => {
         email: user.email,
         profilePicture: presignedURL,
         bio: user.bio,
+        isVerified: user.isVerified === false ? user.isVerified : true,
       });
     }
 
@@ -91,6 +124,7 @@ const singin = asyncHandler(async (req, res, next) => {
       lastName: user.lastName,
       email: user.email,
       bio: user.bio,
+      isVerified: user.isVerified === false ? user.isVerified : true,
     });
   } else {
     res.status(401);
@@ -136,18 +170,17 @@ const updateUser = asyncHandler(async (req, res, next) => {
     user.email = email || user.email;
     user.bio = bio || user.bio;
 
-
-    console.log("USER_FILE", req?.file)
+    console.log("USER_FILE", req?.file);
 
     if (req?.file) {
-      const customFileName = user.profilePicture ? user.profilePicture : getRandomHex();
-      user.profilePicture = customFileName
+      const customFileName = user.profilePicture
+        ? user.profilePicture
+        : getRandomHex();
+      user.profilePicture = customFileName;
       const optimizedBuffer = await optimizeImage(
         req.file.buffer,
         "profilePicture"
       );
-
-    
 
       await uploadToS3(optimizedBuffer, customFileName, "profilePic");
     }
@@ -196,9 +229,12 @@ const userPublicProfile = asyncHandler(async (req, res, next) => {
   let SignedPosts = null;
 
   if (blogs && authorInfo) {
-   if(authorInfo.profilePicture) {
-    presignedURL = await getFileFromS3(authorInfo.profilePicture, "profilePic");
-   }
+    if (authorInfo.profilePicture) {
+      presignedURL = await getFileFromS3(
+        authorInfo.profilePicture,
+        "profilePic"
+      );
+    }
     SignedPosts = await attachPresignedURLs(blogs);
   }
 
