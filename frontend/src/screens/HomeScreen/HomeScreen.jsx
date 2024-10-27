@@ -5,8 +5,17 @@ import classNames from "classnames";
 import Sidebar from "../../components/SideBar/SideBar";
 import Styles from './HomeScreen.module.css'
 import Button from "../../components/Atoms/Button/Button";
+import { Navigate } from "react-router-dom";
+import {useSelector} from 'react-redux'
+
 
 const HomeScreen = () => {
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  if(!userInfo.isVerified) {
+    return <Navigate to="/profile" replace />;
+  }
   return (
     <>
       <Hero />
