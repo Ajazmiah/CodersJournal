@@ -37,9 +37,8 @@ function VerifyEmailPage() {
           if (response.ok) {
             const data = await response.json();
             dispatch(setCredentials({ ...data }));
-
-            navigate("/profile");
             toast.success("Your email is verified");
+            navigate('/profile')
           } else {
             toast.error("Verification failed. Please request a new link.");
           }
@@ -47,15 +46,13 @@ function VerifyEmailPage() {
           console.log("Verification error:", error);
           alert("An error occurred. Please try again.");
         }
-      } else {
-        alert("No token provided.");
-      }
+      } 
     };
 
     verifyEmail();
   }, []);
 
-  return <div>Verifying email, please wait...</div>;
+  return <div>Check the email address you used to sign up and verify it</div>;
 }
 
 export default VerifyEmailPage;

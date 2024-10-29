@@ -46,6 +46,7 @@ const signup = asyncHandler(async (req, res, next) => {
     email,
     password,
     verificationToken,
+    isVerified: false ,
     verificationTokenExpiresAt: Date.now() + 10 * 60 * 1000, // 10 minutes
   });
   // Create a new user instance
@@ -93,6 +94,7 @@ const verifyEmail = asyncHandler(async (req, res, next) => {
   if (user.verificationToken === token) {
     user.isVerified = true;
     const updatedUser = await user.save();
+    console.log("__THIZZZ RAN ___", updateUser)
 
     res.status(200).json({
       _id: user._id,
@@ -128,7 +130,7 @@ const singin = asyncHandler(async (req, res, next) => {
         email: user.email,
         profilePicture: presignedURL,
         bio: user.bio,
-        isVerified: user.isVerified === false ? user.isVerified : true,
+        isVerified: user.isVerified
       });
     }
 
@@ -138,7 +140,7 @@ const singin = asyncHandler(async (req, res, next) => {
       lastName: user.lastName,
       email: user.email,
       bio: user.bio,
-      isVerified: user.isVerified === false ? user.isVerified : true,
+      isVerified: user.isVerified
     });
   } else {
     res.status(401);
