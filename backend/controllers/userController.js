@@ -18,6 +18,8 @@ const signup = asyncHandler(async (req, res, next) => {
     throw new Error(errors.errors[0].msg);
   }
 
+  const URL = process.env.BASE_URL;
+
   const registerForm = req.body;
 
   const firstName = registerForm.firstName;
@@ -53,16 +55,6 @@ const signup = asyncHandler(async (req, res, next) => {
   //   email: "john@example.com",
   // });
 
-  const mailOptions = {
-    from: "miahajaz@gmail.com", // sender address
-    to: email, // list of receivers
-    subject: "Verification code sent by CodersJournal", // Subject line
-    html: `<h3> hi ${firstName}</h3>
-    <b>Please enter this verification code ${verificationToken}</b>`,
-  };
-
-  sendMail(transporter, mailOptions);
-
   if (user) {
     generateToken(res, user._id);
     res.status(201).json({
@@ -72,6 +64,18 @@ const signup = asyncHandler(async (req, res, next) => {
       email: user.email,
       isVerified: user.isVerified,
     });
+    const verificationLink = `<a href=${URL}/verify-email?token=${verificationToken}>Click here to verify your email</a>`;
+
+    const mailOptions = {
+      from: "miahajaz@gmail.com", // sender address
+      to: email, // list of receivers
+      subject: "Verification code sent by CodersJournal", // Subject line
+      html: `<h3> hi ${firstName}</h3>
+      <b>Click on this link to verify your email</b>
+      ${verificationLink}`,
+    };
+
+    sendMail(transporter, mailOptions);
   } else {
     res.status(400);
     throw new Error("Could not create an account - please try again later..");
@@ -80,11 +84,13 @@ const signup = asyncHandler(async (req, res, next) => {
 
 //Confirm Email with Code sent
 const verifyEmail = asyncHandler(async (req, res, next) => {
-  const { verificationCode, id } = req.body;
+  const { token, id } = req.body;
+
+  console.log("REQ BOYD", req.body);
 
   const user = await userModel.findById(id);
 
-  if (user.verificationToken === verificationCode) {
+  if (user.verificationToken === token) {
     user.isVerified = true;
     const updatedUser = await user.save();
 
@@ -110,8 +116,6 @@ const singin = asyncHandler(async (req, res, next) => {
   if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id);
 
-
-
     if (user.profilePicture) {
       let presignedURL = null;
 
@@ -124,7 +128,7 @@ const singin = asyncHandler(async (req, res, next) => {
         email: user.email,
         profilePicture: presignedURL,
         bio: user.bio,
-        isVerified: user.isVerified === false ? user.isVerified: true 
+        isVerified: user.isVerified === false ? user.isVerified : true,
       });
     }
 
@@ -134,7 +138,7 @@ const singin = asyncHandler(async (req, res, next) => {
       lastName: user.lastName,
       email: user.email,
       bio: user.bio,
-      isVerified: user.isVerified === false ? user.isVerified: true 
+      isVerified: user.isVerified === false ? user.isVerified : true,
     });
   } else {
     res.status(401);

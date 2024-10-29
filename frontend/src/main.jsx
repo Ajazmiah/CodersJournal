@@ -34,7 +34,7 @@ const router = createBrowserRouter(
       <Route path="/signup" element={<RegisterScreen />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<ProfileScreen />} />
-        <Route path="email" element={<EmailSignUp />} />
+        <Route path="verify-email" element={<EmailSignUp />} />
         <Route path="/profile/update" element={<UpdateAccountScreen />} />
         <Route
           path="/create"
