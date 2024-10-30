@@ -46,7 +46,7 @@ const signup = asyncHandler(async (req, res, next) => {
     email,
     password,
     verificationToken,
-    isVerified: false ,
+    isVerified: false,
     verificationTokenExpiresAt: Date.now() + 10 * 60 * 1000, // 10 minutes
   });
   // Create a new user instance
@@ -87,14 +87,11 @@ const signup = asyncHandler(async (req, res, next) => {
 const verifyEmail = asyncHandler(async (req, res, next) => {
   const { token, id } = req.body;
 
-  console.log("REQ BOYD", req.body);
-
   const user = await userModel.findById(id);
 
   if (user.verificationToken === token) {
     user.isVerified = true;
     const updatedUser = await user.save();
-    console.log("__THIZZZ RAN ___", updateUser)
 
     res.status(200).json({
       _id: user._id,
@@ -130,7 +127,7 @@ const singin = asyncHandler(async (req, res, next) => {
         email: user.email,
         profilePicture: presignedURL,
         bio: user.bio,
-        isVerified: user.isVerified
+        isVerified: user.isVerified,
       });
     }
 
@@ -140,7 +137,7 @@ const singin = asyncHandler(async (req, res, next) => {
       lastName: user.lastName,
       email: user.email,
       bio: user.bio,
-      isVerified: user.isVerified
+      isVerified: user.isVerified,
     });
   } else {
     res.status(401);
@@ -254,4 +251,25 @@ const userPublicProfile = asyncHandler(async (req, res, next) => {
   res.status(200).json({ SignedPosts, authorInfo });
 });
 
-export { signup, singin, logout, updateUser, userPublicProfile, verifyEmail };
+const verifyCheck = asyncHandler(async (req, res, next) => {
+  const { id } = req.body;
+
+  const user = await userModel.findById(id);
+
+  if (user) {
+    res.status(200).json({
+      email: user.email,
+      isVerified: user.isVerified,
+    });
+  }
+});
+
+export {
+  signup,
+  singin,
+  logout,
+  updateUser,
+  userPublicProfile,
+  verifyEmail,
+  verifyCheck,
+};
