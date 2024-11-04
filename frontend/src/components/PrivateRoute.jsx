@@ -1,71 +1,11 @@
-import { useNavigate, Outlet, Navigate, useLocation } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Verification from "./EmailSignUp/Verification";
-import { useDispatch } from "react-redux";
+
 import React from "react";
 
 const PrivateRoute = () => {
-  const dispatch = useDispatch();
-
   const { userInfo } = useSelector((state) => state.auth);
-  const [verified, setVerified] = React.useState(false);
-  const [email, setEmail] = React.useState(null);
-  const navigate = useNavigate();
-
-  const location = useLocation();
-
-  console.log("LOCATION", location);
-
-  React.useEffect(() => {
-    const verifyEmail = async () => {
-      try {
-        const id = userInfo._id;
-        const response = await fetch("/api/users/verify-Check", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id }),
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          // dispatch(setCredentials({ ...data }));
-          console.log(data);
-
-          if (data.isVerified) {
-            setVerified(true);
-            setEmail(data.email);
-          }
-        } else {
-          console.error("Verification failed. Please request a new link.");
-        }
-      } catch (error) {
-        console.log("Verification error:", error);
-        alert("An error occurred. Please try again.");
-      }
-    };
-
-    if (userInfo) {
-      verifyEmail();
-    }
-  }, []);
-
-  if (!userInfo) {
-    return <Navigate to="/signin" replace />;
-  }
-
-  if (location.pathname === "/verify-email") {
-    return <Outlet />;
-  }
-
-  if (!verified) {
-    return (
-      <h1>
-        Please verify your email by clicking the link sent to {userInfo.email}
-      </h1>
-    );
-  }
-
-  return <Outlet />;
+  return userInfo ? <Outlet /> : <Navigate to="/signin" replace />;
 };
 
 export default PrivateRoute;
