@@ -25,17 +25,15 @@ const LoginScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
- 
-
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
-  
+
       dispatch(setCredentials({ ...res }));
       navigate("/");
     } catch (err) {
-     toast.error(err.data.message)
+      toast.error(err.data.message);
     }
   };
 
@@ -111,6 +109,11 @@ const LoginScreen = () => {
             <Grid container>
               <Grid item>
                 <Link to="/signup">{"Don't have an account ? Sign Up"}</Link>
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item>
+                <Link to="/forgot-password">{"Forgot Password?"}</Link>
               </Grid>
             </Grid>
           </Box>
