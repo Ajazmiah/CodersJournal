@@ -35,6 +35,12 @@ const userSchema = mongoose.Schema(
     bio: {
       type: String,
       required:false
+    },
+    verificationToken: String,
+    verificationTokenExpiresAt:Date,
+    isVerified: {
+      type: Boolean,
+      default: false 
     }
   },
   {
