@@ -8,6 +8,7 @@ import { getRandomHex } from "../utils/randomHex.js";
 import { getFileFromS3, uploadToS3 } from "../utils/s3.js";
 import { attachPresignedURLs } from "../utils/attachedSignedURL.js";
 import { optimizeImage } from "../utils/imageOptimize.js";
+import { sendMail, transporter } from "../utils/nodemailer.js";
 
 const signup = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
@@ -17,12 +18,16 @@ const signup = asyncHandler(async (req, res, next) => {
     throw new Error(errors.errors[0].msg);
   }
 
+  const URL = process.env.BASE_URL;
+
   const registerForm = req.body;
 
   const firstName = registerForm.firstName;
   const lastName = registerForm.lastName;
   const email = registerForm.email;
   const password = registerForm.password;
+
+  
 
   const userExist = await userModel.findOne({ email });
 
@@ -33,11 +38,18 @@ const signup = asyncHandler(async (req, res, next) => {
     );
   }
 
+  const verificationToken = Math.floor(
+    10000 + Math.random() * 90000
+  ).toString();
+
   const user = await userModel.create({
     firstName,
     lastName,
     email,
     password,
+    verificationToken,
+    isVerified: false,
+    verificationTokenExpiresAt: Date.now() + 10 * 60 * 1000, // 10 minutes
   });
   // Create a new user instance
   // - Another way of creating it
@@ -46,16 +58,6 @@ const signup = asyncHandler(async (req, res, next) => {
   //   email: "john@example.com",
   // });
 
-  const mailOptions = {
-    from: "miahajaz@gmail.com", // sender address
-    to: email, // list of receivers
-    subject: "Verification code sent by CodersJournal", // Subject line
-    html: `<h3> hi ${firstName}</h3>
-    <b>Please enter this verification code ${verificationToken}</b>`,
-  };
-
-  sendMail(transporter, mailOptions);
-
   if (user) {
     generateToken(res, user._id);
     res.status(201).json({
@@ -63,7 +65,20 @@ const signup = asyncHandler(async (req, res, next) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      isVerified: user.isVerified,
     });
+    const verificationLink = `<a href=${URL}/verify-email?token=${verificationToken}>Click here to verify your email</a>`;
+
+    const mailOptions = {
+      from: "miahajaz@gmail.com", // sender address
+      to: email, // list of receivers
+      subject: "Verification code sent by CodersJournal", // Subject line
+      html: `<h3> hi ${firstName}</h3>
+      <b>Click on this link to verify your email</b>
+      ${verificationLink}`,
+    };
+
+    sendMail(transporter, mailOptions);
   } else {
     res.status(400);
     throw new Error("Could not create an account - please try again later..");
@@ -72,11 +87,11 @@ const signup = asyncHandler(async (req, res, next) => {
 
 //Confirm Email with Code sent
 const verifyEmail = asyncHandler(async (req, res, next) => {
-  const { verificationCode, id } = req.body;
+  const { token, id } = req.body;
 
   const user = await userModel.findById(id);
 
-  if (user.verificationToken === verificationCode) {
+  if (user.verificationToken === token) {
     user.isVerified = true;
     const updatedUser = await user.save();
 
@@ -114,7 +129,7 @@ const singin = asyncHandler(async (req, res, next) => {
         email: user.email,
         profilePicture: presignedURL,
         bio: user.bio,
-        isVerified: user.isVerified === false ? user.isVerified : true,
+        isVerified: user.isVerified,
       });
     }
 
@@ -124,7 +139,7 @@ const singin = asyncHandler(async (req, res, next) => {
       lastName: user.lastName,
       email: user.email,
       bio: user.bio,
-      isVerified: user.isVerified === false ? user.isVerified : true,
+      isVerified: user.isVerified,
     });
   } else {
     res.status(401);
@@ -170,19 +185,14 @@ const updateUser = asyncHandler(async (req, res, next) => {
     user.email = email || user.email;
     user.bio = bio || user.bio;
 
-    console.log("USER_FILE", req?.file);
-
     if (req?.file) {
-      const customFileName = user.profilePicture
-        ? user.profilePicture
-        : getRandomHex();
-      user.profilePicture = customFileName;
+      user.profilePicture = req?.file;
       const optimizedBuffer = await optimizeImage(
         req.file.buffer,
         "profilePicture"
       );
 
-      await uploadToS3(optimizedBuffer, customFileName, "profilePic");
+      await uploadToS3(optimizedBuffer, user.profilePicture, "profilePic");
     }
 
     if (password) {
@@ -192,7 +202,7 @@ const updateUser = asyncHandler(async (req, res, next) => {
 
     const updatedUser = await user.save();
 
-    if (updatedUser.profilePicture) {
+    if (updateUser) {
       let presignedURL = null;
 
       presignedURL = await getFileFromS3(user.profilePicture, "profilePic");
@@ -203,7 +213,7 @@ const updateUser = asyncHandler(async (req, res, next) => {
         lastName: updatedUser.lastName,
         email: updatedUser.email,
         profilePicture: presignedURL,
-        bio: updatedUser.bio,
+        bio: updateUser.bio,
       });
     }
   } else {
@@ -243,4 +253,25 @@ const userPublicProfile = asyncHandler(async (req, res, next) => {
   res.status(200).json({ SignedPosts, authorInfo });
 });
 
-export { signup, singin, logout, updateUser, userPublicProfile };
+const verifyCheck = asyncHandler(async (req, res, next) => {
+  const { id } = req.body;
+
+  const user = await userModel.findById(id);
+
+  if (user) {
+    res.status(200).json({
+      email: user.email,
+      isVerified: user.isVerified,
+    });
+  }
+});
+
+export {
+  signup,
+  singin,
+  logout,
+  updateUser,
+  userPublicProfile,
+  verifyEmail,
+  verifyCheck,
+};
