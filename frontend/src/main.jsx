@@ -20,6 +20,7 @@ import UpdateAccountScreen from "./screens/UpdateAccountScreen/UpdateAccountScre
 import SingleBlogScreen from "./screens/SingleBlogScreen/SingleBlogScreen.jsx";
 import NotFoundPage from "./components/PageNotFound/PageNotFound.jsx";
 import UserPublicProfile from "./components/UserPublicProfile/UserPublicProfile.jsx";
+import EmailSignUp from "./components/EmailSignUp/Verification.jsx";
 
 const BlogCreationScreen = lazy(() =>
   import("./screens/BlogCreationScreen/BlogCreationScreen.jsx")
