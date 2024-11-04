@@ -14,6 +14,10 @@ dotenv.config();
 const port = process.env.PORT || 5000;
 const app = express();
 
+// Set EJS as the templating engine
+app.set('view engine', 'ejs');
+
+
 const allowedOrigins = [
   "http://localhost:5000",
   "https://coderjournal-frontend.onrender.com",
