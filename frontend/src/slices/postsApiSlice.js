@@ -41,8 +41,8 @@ const postsApi = apiSlice.injectEndpoints({
       }),
     }),
     getUserPosts: builder.mutation({
-      query: (limit) => ({
-        url: `${POSTS_URL}/allPost?limit=${limit}`,
+      query: () => ({
+        url: `${POSTS_URL}/allPost`,
         method: "GET",
       }),
     }),
@@ -55,17 +55,11 @@ const postsApi = apiSlice.injectEndpoints({
     }),
 
     expludeUserPosts: builder.mutation({
-      query: (limit) => ({
-        url: `${POSTS_URL}/getUserPosts?limit=${limit}`,
+      query: () => ({
+        url: `${POSTS_URL}/getUserPosts`,
         method: "GET",
       }),
     }),
-    sitemap: builder.mutation({
-      query:() => ({
-        url: `${POSTS_URL}/sitemap.xml`,
-        method: 'GET'
-      })
-    })
   }),
 });
 
@@ -77,5 +71,4 @@ export const {
   useEditPostMutation,
   useGetUserPostsMutation,
   useExpludeUserPostsMutation,
-  
 } = postsApi;
