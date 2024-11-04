@@ -18,6 +18,11 @@
   }
   .profileRight {
     margin-top: 3em;
+    flex: 1;
 }
 
+}
+
+.profilePicture {
+  flex: 1;
 }

@@ -18,10 +18,10 @@ import HeaderMobileNav from "./HeaderMobileNav.jsx";
 import ResponsiveComponent from "../ResponsiveComponent/ResponsiveComponent.jsx";
 import { useBackdrop } from "../Backdrop/Backdrop.jsx";
 import { getIcon } from "../Icon/index.jsx";
+import Initials from "../Initials/Initials.jsx";
 
 /*==============================================================*/
 function ResponsiveAppBar() {
-
   const TOKEN_EXPIRY_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
 
   const [showMenu, setShowMenu] = useState(false);
@@ -89,13 +89,13 @@ function ResponsiveAppBar() {
               {device !== "mobile" && device !== "tablet" && (
                 <ul className={classNames(Styles.leftMenuList, "flex")}>
                   {pagesNavigation.map((page) => {
-                   return  (
+                    return (
                       <li key={page.to}>
                         <Link to={page.to} className={Styles.navLink}>
                           {page.text}
                         </Link>
                       </li>
-                    )
+                    );
                   })}
                 </ul>
               )}
@@ -111,16 +111,22 @@ function ResponsiveAppBar() {
                 className={Styles.profileButton}
                 onClick={() => setShowMenu((prev) => !prev)}
               >
-                <ProfileImage
-                  customClasses="headerImage"
-                  imageURL={userInfo?.profilePicture}
-                />
-                {/* <span>{userInfo?.firstName[0] + userInfo.lastName[0]}</span> */}
-                 {getIcon('arrowDown')}
+                {userInfo.profilePicture ? (
+                  <ProfileImage
+                    customClasses="headerImage"
+                    imageURL={userInfo?.profilePicture}
+                  />
+                ) : (
+                  <Initials author={userInfo} type={'headerInitials'}/>
+                )}
+
+                {getIcon("arrowDown")}
               </button>
               {showMenu && (
                 <div className={Styles.userMenu}>
-                  <span style={{marginLeft: '84%', }} onClick={handleShowMenu}>{getIcon('close')}</span>
+                  <span style={{ marginLeft: "84%" }} onClick={handleShowMenu}>
+                    {getIcon("close")}
+                  </span>
                   <ul>
                     <DropDownMenu
                       dropDownItems={userSettingMenu}
