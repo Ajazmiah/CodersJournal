@@ -43,24 +43,22 @@ const Sidebar = ({ children }) => {
       link: "https://example.com/ad1",
       title: "Ad 1",
     },
-    {
-      image: "https://via.placeholder.com/300x250?text=Ad+2",
-      link: "https://example.com/ad2",
-      title: "Ad 2",
-    },
-    {
-      image: "https://via.placeholder.com/300x250?text=Ad+3",
-      link: "https://example.com/ad3",
-      title: "Ad 3",
-    },
+    // {
+    //   image: "https://via.placeholder.com/300x250?text=Ad+2",
+    //   link: "https://example.com/ad2",
+    //   title: "Ad 2",
+    // },
+    // {
+    //   image: "https://via.placeholder.com/300x250?text=Ad+3",
+    //   link: "https://example.com/ad3",
+    //   title: "Ad 3",
+    // },
   ];
 
   return (
     <aside className={styles.sidebar}>
       <div className={styles.adsSection}>
-        {ads.map((ad, index) => (
-          <Ad key={index} link={ad.link} title={ad.title} image={ad.image} />
-        ))}
+       <Ad/>
       </div>
       {children}
     </aside>

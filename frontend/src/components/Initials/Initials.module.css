@@ -17,3 +17,15 @@
   height: 300px;
   font-size: 3em;
 }
+.headerInitials {
+  padding: .4em;
+  display: inline-block;
+  /* display: flex; */
+  font-size: .9em;
+  /* padding: .8em; */
+  width: 40px;
+  height: 40px;
+  padding-top: .8em;
+  color: #fff;
+  background-color: var(--color-black);
+}

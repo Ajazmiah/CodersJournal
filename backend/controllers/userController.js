@@ -185,14 +185,20 @@ const updateUser = asyncHandler(async (req, res, next) => {
     user.email = email || user.email;
     user.bio = bio || user.bio;
 
+
+    console.log("USER_FILE", req?.file)
+
     if (req?.file) {
-      user.profilePicture = req?.file;
+      const customFileName = user.profilePicture ? user.profilePicture : getRandomHex();
+      user.profilePicture = customFileName
       const optimizedBuffer = await optimizeImage(
         req.file.buffer,
         "profilePicture"
       );
 
-      await uploadToS3(optimizedBuffer, user.profilePicture, "profilePic");
+    
+
+      await uploadToS3(optimizedBuffer, customFileName, "profilePic");
     }
 
     if (password) {
@@ -202,7 +208,7 @@ const updateUser = asyncHandler(async (req, res, next) => {
 
     const updatedUser = await user.save();
 
-    if (updateUser) {
+    if (updatedUser.profilePicture) {
       let presignedURL = null;
 
       presignedURL = await getFileFromS3(user.profilePicture, "profilePic");
@@ -213,7 +219,7 @@ const updateUser = asyncHandler(async (req, res, next) => {
         lastName: updatedUser.lastName,
         email: updatedUser.email,
         profilePicture: presignedURL,
-        bio: updateUser.bio,
+        bio: updatedUser.bio,
       });
     }
   } else {

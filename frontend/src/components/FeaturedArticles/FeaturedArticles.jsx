@@ -17,25 +17,33 @@ function FeaturedArticles() {
 
   const [posts, setPosts] = useState([]);
   const [leadPost, setLeadPost] = useState(null);
+  const [noMore, setNoMore] = useState(false);
+
+  const [limit, setLimit] = useState(3);
 
   useEffect(() => {
     const getAllPosts = async () => {
       try {
         const allPost = userInfo
-          ? await getExludedUserPosts().unwrap()
-          : await getPosts().unwrap();
+          ? await getExludedUserPosts(limit).unwrap()
+          : await getPosts(limit).unwrap();
 
-        setPosts(allPost);
-        setLeadPost(allPost[allPost.length - 1]);
+        setPosts(allPost.SignedPosts);
+        setLeadPost(allPost.SignedPosts[0]);
+
+        if (posts.length === allPost.totalPosts) {
+          setNoMore(true);
+        }
       } catch (error) {
+        setNoMore(true);
         toast.error(error.data.message);
       }
     };
 
     getAllPosts();
-  }, []);
+  }, [limit]);
 
-  const handleClick = () => {};
+  console.log(posts);
 
   if (posts?.length < 1)
     return (
@@ -59,9 +67,16 @@ function FeaturedArticles() {
         })}
       </div>
       <div style={{ textAlign: "center" }}>
-        <Button onClick={handleClick}  classes={"update"}>
-          Load More ..
-        </Button>
+        {noMore ? (
+          <span>No More</span>
+        ) : (
+          <Button
+            onClick={() => setLimit((prev) => prev + 3)}
+            classes={"update"}
+          >
+            Load More ..
+          </Button>
+        )}
       </div>
     </div>
   );
