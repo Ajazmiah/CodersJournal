@@ -7,7 +7,7 @@ import { deleteFromS3, getFileFromS3, uploadToS3 } from "../utils/s3.js";
 import { getRandomHex } from "../utils/randomHex.js";
 import { attachPresignedURLs } from "../utils/attachedSignedURL.js";
 import { optimizeImage } from "../utils/imageOptimize.js";
-import { SitemapStream, streamToPromise } from "sitemap";
+
 
 // Public - All Posts that shows up on HomeScreen
 const allPost = asyncHandler(async (req, res, next) => {
