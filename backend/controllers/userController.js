@@ -24,6 +24,8 @@ const signup = asyncHandler(async (req, res, next) => {
   const email = registerForm.email;
   const password = registerForm.password;
 
+  
+
   const userExist = await userModel.findOne({ email });
 
   if (userExist) {
