@@ -1,25 +1,28 @@
-import { Link, useNavigate } from "react-router-dom";
-
 import Button from "@mui/material/Button";
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLoginMutation } from "../../slices/usersApiSlice";
-import { setCredentials } from "../../slices/authSlice";
 import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
-import Checkbox from "@mui/material/Checkbox";
-import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-
 import Box from "@mui/material/Box";
-
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { toast } from "react-toastify";
+import { useForgotPasswordMutation } from "../../slices/usersApiSlice";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
+  const [reset] = useForgotPasswordMutation();
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await reset({ email }).unwrap();
+      console.log("Response:", res); // Log the entire response
+
+      toast.success("email sent");
+    } catch (err) {
+      console.log("Error:", err); // Log the error if it occurs
+      toast.error(err.data.message);
+    }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -37,7 +40,7 @@ function ForgotPassword() {
         </Typography>
         <Box
           component="form"
-          //   onSubmit={submitHandler}
+          onSubmit={submitHandler}
           noValidate
           sx={{ mt: 1 }}
         >

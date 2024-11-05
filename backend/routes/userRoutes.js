@@ -9,7 +9,8 @@ import {
   updateUser,
   userPublicProfile,
   verifyEmail,
-  verifyCheck
+  verifyCheck,
+  resetPassword
 } from "../controllers/userController.js";
 import multer from "multer";
 
@@ -39,6 +40,8 @@ router.post(
   }),
   signup
 );
+
+router.post('/resetpassword', resetPassword)
 
 router.post('/verifyemail', protect , verifyEmail)
 

@@ -1,6 +1,7 @@
 import { apiSlice } from "./apiSlice";
 import dotenv from "dotenv";
 
+
 dotenv.config();
 
 const USERS_URL =
@@ -51,6 +52,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data
       })
+    }),
+    forgotPassword: builder.mutation({
+      query:(data) => ({
+        url: `${USERS_URL}/resetpassword`,
+        method: "POST",
+        body: data
+      })
     })
   }),
 });
@@ -63,5 +71,6 @@ export const {
   useSignupMutation,
   useUpdateProfileMutation,
   useUserPublicProfileMutation,
-  useConfirmEmailMutation
+  useConfirmEmailMutation,
+  useForgotPasswordMutation
 } = usersApiSlice;

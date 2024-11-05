@@ -1,7 +1,7 @@
 import userModel from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 import asyncHandler from "express-async-handler"; // This eliminates the need to use try and catch in Controller function
-import { validationResult } from "express-validator";
+import { body, validationResult } from "express-validator";
 import blogModel from "../models/blogModels.js";
 import User from "../models/userModel.js";
 import { getRandomHex } from "../utils/randomHex.js";
@@ -9,6 +9,7 @@ import { getFileFromS3, uploadToS3 } from "../utils/s3.js";
 import { attachPresignedURLs } from "../utils/attachedSignedURL.js";
 import { optimizeImage } from "../utils/imageOptimize.js";
 import { sendMail, transporter } from "../utils/nodemailer.js";
+import { verificationToken } from "../utils/verificationCodeGenerator.js";
 
 const signup = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
@@ -26,8 +27,6 @@ const signup = asyncHandler(async (req, res, next) => {
   const lastName = registerForm.lastName;
   const email = registerForm.email;
   const password = registerForm.password;
-
-  
 
   const userExist = await userModel.findOne({ email });
 
@@ -185,18 +184,15 @@ const updateUser = asyncHandler(async (req, res, next) => {
     user.email = email || user.email;
     user.bio = bio || user.bio;
 
-
-    console.log("USER_FILE", req?.file)
-
     if (req?.file) {
-      const customFileName = user.profilePicture ? user.profilePicture : getRandomHex();
-      user.profilePicture = customFileName
+      const customFileName = user.profilePicture
+        ? user.profilePicture
+        : getRandomHex();
+      user.profilePicture = customFileName;
       const optimizedBuffer = await optimizeImage(
         req.file.buffer,
         "profilePicture"
       );
-
-    
 
       await uploadToS3(optimizedBuffer, customFileName, "profilePic");
     }
@@ -272,6 +268,33 @@ const verifyCheck = asyncHandler(async (req, res, next) => {
   }
 });
 
+//send email with reset link
+const resetPassword = asyncHandler(async (req, res, next) => {
+  const { email } = req.body;
+
+  const user = await userModel.findOne({ email });
+  const URL = process.env.BASE_URL;
+
+  if (user) {
+    const token = verificationToken();
+    const verificationLink = `<a href=${URL}/verify-email?token=${token}>Click here to verify your email</a>`;
+    const mailOptions = {
+      from: "miahajaz@gmail.com", // sender address
+      to: user.email, // list of receivers
+      subject: "Verification code sent by CodersJournal", // Subject line
+      html: `<h3> hi ${user.firstName}</h3>
+      <b>Click on this link to verify your email</b>
+      ${verificationLink}`,
+    };
+
+    sendMail(transporter, mailOptions);
+    res.status(200).json({ message: 'Email Sent' });
+  } else {
+    res.status(401);
+    throw new Error("No user found with the email you provided");
+  }
+});
+
 export {
   signup,
   singin,
@@ -280,4 +303,5 @@ export {
   userPublicProfile,
   verifyEmail,
   verifyCheck,
+  resetPassword,
 };
