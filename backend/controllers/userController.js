@@ -269,7 +269,7 @@ const verifyCheck = asyncHandler(async (req, res, next) => {
 });
 
 //send email with reset link
-const resetPassword = asyncHandler(async (req, res, next) => {
+const resetPasswordLink = asyncHandler(async (req, res, next) => {
   const { email } = req.body;
 
   const user = await userModel.findOne({ email });
@@ -277,7 +277,7 @@ const resetPassword = asyncHandler(async (req, res, next) => {
 
   if (user) {
     const token = verificationToken();
-    const verificationLink = `<a href=${URL}/verify-email?token=${token}>Click here to verify your email</a>`;
+    const verificationLink = `<a href=${URL}/reset-password?token=${token}>Click here to verify your email</a>`;
     const mailOptions = {
       from: "miahajaz@gmail.com", // sender address
       to: user.email, // list of receivers
@@ -295,6 +295,14 @@ const resetPassword = asyncHandler(async (req, res, next) => {
   }
 });
 
+
+const confirmResetPasswordToken = asyncHandler (async(req,res,next) => {
+
+  res.status(200).send("HOLA")
+})
+
+
+
 export {
   signup,
   singin,
@@ -303,5 +311,6 @@ export {
   userPublicProfile,
   verifyEmail,
   verifyCheck,
-  resetPassword,
+  resetPasswordLink,
+  confirmResetPasswordToken
 };

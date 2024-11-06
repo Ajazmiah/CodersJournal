@@ -10,7 +10,8 @@ import {
   userPublicProfile,
   verifyEmail,
   verifyCheck,
-  resetPassword
+  resetPasswordLink,
+  confirmResetPasswordToken
 } from "../controllers/userController.js";
 import multer from "multer";
 
@@ -41,7 +42,8 @@ router.post(
   signup
 );
 
-router.post('/resetpassword', resetPassword)
+router.post('/resetpassword', resetPasswordLink)
+router.post('/confirm-reset-password-token', confirmResetPasswordToken)
 
 router.post('/verifyemail', protect , verifyEmail)
 
