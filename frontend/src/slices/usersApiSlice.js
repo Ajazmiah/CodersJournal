@@ -59,6 +59,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data
       })
+    }),
+    confirmResetPasswordToken: builder.mutation({
+      query:(data) => ({
+        url: `${USERS_URL}/confirm-reset-password-token`,
+        method: "POST",
+        body: data
+      })
     })
   }),
 });
@@ -72,5 +79,6 @@ export const {
   useUpdateProfileMutation,
   useUserPublicProfileMutation,
   useConfirmEmailMutation,
-  useForgotPasswordMutation
+  useForgotPasswordMutation,
+  useConfirmResetPasswordTokenMutation
 } = usersApiSlice;

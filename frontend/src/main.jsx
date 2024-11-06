@@ -22,6 +22,7 @@ import NotFoundPage from "./components/PageNotFound/PageNotFound.jsx";
 import UserPublicProfile from "./components/UserPublicProfile/UserPublicProfile.jsx";
 import EmailSignUp from "./components/EmailSignUp/Verification.jsx";
 import ForgotPassword from "./screens/ForgotPasswordScreen/ForgotPassword.jsx";
+import ResetPassword from "./screens/ResetPassword/ResetPassword.jsx";
 
 const BlogCreationScreen = lazy(() =>
   import("./screens/BlogCreationScreen/BlogCreationScreen.jsx")
@@ -31,10 +32,11 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/signin" element={<LoginScreen />} />
       <Route path="/signup" element={<RegisterScreen />} />
-      <Route path="/sitemap" element={<h1>SITTMAP</h1>}/>
-      <Route path="/forgot-password" element={<ForgotPassword/>} />
+      <Route path="/sitemap" element={<h1>SITTMAP</h1>} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="verify-email" element={<EmailSignUp />} />
