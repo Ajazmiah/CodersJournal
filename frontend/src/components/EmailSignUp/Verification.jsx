@@ -26,7 +26,7 @@ function VerifyEmailPage() {
 
   useEffect(() => {
     const verifyEmail = async () => {
-      if (token) {
+      if (token && id) {
         try {
           const response = await fetch("/api/users/verifyemail", {
             method: "POST",
@@ -38,7 +38,7 @@ function VerifyEmailPage() {
             const data = await response.json();
             dispatch(setCredentials({ ...data }));
             toast.success("Your email is verified");
-            navigate('/profile')
+            navigate("/profile");
           } else {
             toast.error("Verification failed. Please request a new link.");
           }
@@ -46,7 +46,7 @@ function VerifyEmailPage() {
           console.log("Verification error:", error);
           alert("An error occurred. Please try again.");
         }
-      } 
+      } else navigate("/");
     };
 
     verifyEmail();
