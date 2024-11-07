@@ -58,8 +58,19 @@ const PrivateRoute = () => {
   }
 
   if (!verified) {
+    const styles = {
+      height: '400px',
+      fontSize: '1.3em', // Latest value for font-size takes precedence
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: '#61605e',
+      fontWeight: 200,
+      padding:'10px'
+    };
+    
     return (
-      <h1>
+      <h1 style={styles}>
         Please verify your email by clicking the link sent to {userInfo.email}
       </h1>
     );
