@@ -11,7 +11,7 @@ import {
   verifyEmail,
   verifyCheck,
   resetPasswordLink,
-  confirmResetPasswordToken
+  confirmResetPasswordToken,setNewPassword
 } from "../controllers/userController.js";
 import multer from "multer";
 
@@ -44,6 +44,7 @@ router.post(
 
 router.post('/resetpassword', resetPasswordLink)
 router.post('/confirm-reset-password-token', confirmResetPasswordToken)
+router.post('/set-new-password', setNewPassword)
 
 router.post('/verifyemail', protect , verifyEmail)
 

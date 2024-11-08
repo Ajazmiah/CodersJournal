@@ -309,6 +309,10 @@ const confirmResetPasswordToken = asyncHandler(async (req, res, next) => {
   }
 });
 
+const setNewPassword = asyncHandler(async(req,res,next) => {
+
+})
+
 export {
   signup,
   singin,
@@ -319,4 +323,5 @@ export {
   verifyCheck,
   resetPasswordLink,
   confirmResetPasswordToken,
+  setNewPassword
 };

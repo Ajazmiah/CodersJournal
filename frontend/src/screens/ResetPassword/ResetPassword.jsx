@@ -10,7 +10,7 @@ import {
   Link,
 } from "@mui/material";
 
-import { useConfirmResetPasswordTokenMutation } from "../../slices/usersApiSlice";
+import { useResetPasswordMutation } from "../../slices/usersApiSlice";
 import { toast } from "react-toastify";
 
 
@@ -18,17 +18,16 @@ function ResetPassword() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [password, setPassword] = useState("");
 
-
-  // const queryParams = new URLSearchParams(location.search);
-  // const token = queryParams.get("token");
+  const [reset] = useResetPasswordMutation();
 
 
 
-  // const [reset] = useConfirmResetPasswordTokenMutation();
-  const navigate = useNavigate();
 
 
-  // if(!token) return navigate('/')
+ 
+
+
+
 
 
 
@@ -36,24 +35,24 @@ function ResetPassword() {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    // if (validateInputs()) {
-    //   if (password !== confirmPassword) {
-    //     alert("Password don't match");
-    //   } else {
-    //     const data = {
-    //       password,
-    //       confirmPassword,
-    //     };
+    if (validateInputs()) {
+      if (password !== confirmPassword) {
+        alert("Password don't match");
+      } else {
+        const data = {
+          password,
+          confirmPassword,
+        };
 
-    //     try {
-    //       const res = await reset(data).unwrap();
-    //       navigate("/login");
-    //       toast.success("Sign in with your new password")
-    //     } catch (err) {
-    //       toast.error(err.data.message);
-    //     }
-    //   }
-    // }
+        try {
+          const res = await reset(data).unwrap();
+          navigate("/login");
+          toast.success("Sign in with your new password")
+        } catch (err) {
+          toast.error(err.data.message);
+        }
+      }
+    }
   };
 
   useEffect(() => {
