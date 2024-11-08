@@ -166,9 +166,6 @@ const updateUser = asyncHandler(async (req, res, next) => {
   const updateForm = req.body;
   const userId = updateForm._id;
 
-  console.log("REQ BODY", req.body);
-  console.log(req?.file, "FILE");
-
   const firstName = updateForm.firstName;
   const lastName = updateForm.lastName;
   const email = updateForm.email;
@@ -268,7 +265,7 @@ const verifyCheck = asyncHandler(async (req, res, next) => {
   }
 });
 
-//send email with reset link
+//send email with password reset link
 const resetPasswordLink = asyncHandler(async (req, res, next) => {
   const { email } = req.body;
 
@@ -277,31 +274,40 @@ const resetPasswordLink = asyncHandler(async (req, res, next) => {
 
   if (user) {
     const token = verificationToken();
-    const verificationLink = `<a href=${URL}/reset-password?token=${token}>Click here to verify your email</a>`;
+    const verificationLink = `<a href=${URL}/forgot-password?token=${token}>Click here to verify your email</a>`;
+    user.verificationToken = token;
+    await user.save();
     const mailOptions = {
       from: "miahajaz@gmail.com", // sender address
       to: user.email, // list of receivers
       subject: "Verification code sent by CodersJournal", // Subject line
       html: `<h3> hi ${user.firstName}</h3>
-      <b>Click on this link to verify your email</b>
+      <b>Click on this link to reset your password</b>
       ${verificationLink}`,
     };
 
     sendMail(transporter, mailOptions);
-    res.status(200).json({ message: 'Email Sent' });
+
+    res.status(200).json({ message: "Email Sent" });
   } else {
     res.status(401);
     throw new Error("No user found with the email you provided");
   }
 });
 
+// checks if the token matches
+const confirmResetPasswordToken = asyncHandler(async (req, res, next) => {
+  const verificationToken = req.body.token;
 
-const confirmResetPasswordToken = asyncHandler (async(req,res,next) => {
+  const user = await userModel.findOne({ verificationToken });
 
-  res.status(200).send("HOLA")
-})
-
-
+  if (user.verificationToken === verificationToken) {
+    res.status(200).json({ message: "Token matches" });
+  } else {
+    res.status(401);
+    throw new Error("Token does not match");
+  }
+});
 
 export {
   signup,
@@ -312,5 +318,5 @@ export {
   verifyEmail,
   verifyCheck,
   resetPasswordLink,
-  confirmResetPasswordToken
+  confirmResetPasswordToken,
 };

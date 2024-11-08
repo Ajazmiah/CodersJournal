@@ -5,11 +5,23 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { toast } from "react-toastify";
-import { useForgotPasswordMutation } from "../../slices/usersApiSlice";
+import {
+  useForgotPasswordMutation,
+  useConfirmResetPasswordTokenMutation,
+} from "../../slices/usersApiSlice";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [reset] = useForgotPasswordMutation();
+
+  //Token
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const token = queryParams.get("token");
+
+  const [confirmToken] = useConfirmResetPasswordTokenMutation();
+  const navigate = useNavigate();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -23,6 +35,20 @@ function ForgotPassword() {
       toast.error(err.data.message);
     }
   };
+
+  useEffect(() => {
+    const confirmTokenMatch = async () => {
+      try {
+        const res = await confirmToken({ token }).unwrap();
+        console.log("___RES___", res);
+        navigate("/reset-password");
+      } catch (err) {
+        toast.error(err.data.message);
+      }
+    };
+
+    if (token) confirmTokenMatch();
+  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
