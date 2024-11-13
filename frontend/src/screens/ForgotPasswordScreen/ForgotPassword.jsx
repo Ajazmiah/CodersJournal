@@ -41,7 +41,7 @@ function ForgotPassword() {
       try {
         const res = await confirmToken({ token }).unwrap();
         console.log("___RES___", res);
-        navigate("/reset-password");
+        navigate("/reset-password?token="+token);
       } catch (err) {
         toast.error(err.data.message);
       }

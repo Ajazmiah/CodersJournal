@@ -13,24 +13,15 @@ import {
 import { useResetPasswordMutation } from "../../slices/usersApiSlice";
 import { toast } from "react-toastify";
 
-
 function ResetPassword() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [password, setPassword] = useState("");
 
   const [reset] = useResetPasswordMutation();
 
-
-
-
-
- 
-
-
-
-
-
-
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const token = queryParams.get("token");
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -40,6 +31,7 @@ function ResetPassword() {
         alert("Password don't match");
       } else {
         const data = {
+          token,
           password,
           confirmPassword,
         };
@@ -47,7 +39,7 @@ function ResetPassword() {
         try {
           const res = await reset(data).unwrap();
           navigate("/login");
-          toast.success("Sign in with your new password")
+          toast.success("Sign in with your new password");
         } catch (err) {
           toast.error(err.data.message);
         }
@@ -59,11 +51,14 @@ function ResetPassword() {
     const verifyEmail = async () => {
       if (token) {
         try {
-          const response = await fetch("/api/users/confirm-reset-password-token", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ token, id }),
-          });
+          const response = await fetch(
+            "/api/users/confirm-reset-password-token",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ token, id }),
+            }
+          );
 
           if (response.ok) {
             const data = await response.json();
@@ -76,13 +71,11 @@ function ResetPassword() {
           console.log("Verification error:", error);
           alert("An error occurred. Please try again.");
         }
-      } 
+      }
     };
 
     verifyEmail();
   }, []);
-
-
 
   return (
     <Container

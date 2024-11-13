@@ -310,6 +310,10 @@ const confirmResetPasswordToken = asyncHandler(async (req, res, next) => {
 });
 
 const setNewPassword = asyncHandler(async(req,res,next) => {
+  const user = await userModel.findOne({ verificationToken:req.body.token });
+
+  if(user) console.log(user)
+  res.status(200)
 
 })
 
