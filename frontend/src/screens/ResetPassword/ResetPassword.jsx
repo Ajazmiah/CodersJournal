@@ -19,6 +19,7 @@ function ResetPassword() {
   const [password, setPassword] = useState("");
 
   const [reset] = useResetPasswordMutation();
+   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -38,13 +39,16 @@ function ResetPassword() {
           password,
           confirmPassword,
         };
+        console.log("___HOOOOLOLOLO___")
 
         try {
           const res = await reset(data).unwrap();
+       
           navigate("/login");
           toast.success("Sign in with your new password");
         } catch (err) {
-          toast.error(err.data.message);
+          toast.error(err);
+
         }
       }
     }
@@ -65,14 +69,14 @@ function ResetPassword() {
 
           if (response.ok) {
             const data = await response.json();
-            dispatch(setCredentials({ ...data }));
+            // dispatch(setCredentials({ ...data }));
             toast.success("reset your password");
           } else {
             toast.error("Verification failed. Please request a new link.");
           }
         } catch (error) {
           console.log("Verification error:", error);
-          alert("An error occurred. Please try again.");
+          alert("An error occurred mannnnn. Please try again.");
         }
       }
     };

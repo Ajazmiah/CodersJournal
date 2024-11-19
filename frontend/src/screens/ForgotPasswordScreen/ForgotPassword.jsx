@@ -40,7 +40,6 @@ function ForgotPassword() {
     const confirmTokenMatch = async () => {
       try {
         const res = await confirmToken({ token }).unwrap();
-        console.log("___RES___", res);
         navigate("/reset-password?token="+token);
       } catch (err) {
         toast.error(err.data.message);

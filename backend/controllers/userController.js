@@ -313,12 +313,16 @@ const setNewPassword = asyncHandler(async (req, res, next) => {
   const verificationToken = req.body.token;
   const user = await userModel.findOne({ verificationToken });
 
+
+
   if (user) {
+    console.log("___2222", user)
     user.password = req.body.password;
     await user.save();
-    res.status(200).json({ message: "password updated" });
+    res.status(200)
   } else {
-    res.status(401).json({ message: "No user found with that token" });
+    res.status(401)
+    throw new Error('Password could not be updated')
   }
 });
 
