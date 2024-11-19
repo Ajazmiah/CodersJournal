@@ -309,13 +309,18 @@ const confirmResetPasswordToken = asyncHandler(async (req, res, next) => {
   }
 });
 
-const setNewPassword = asyncHandler(async(req,res,next) => {
-  const user = await userModel.findOne({ verificationToken:req.body.token });
+const setNewPassword = asyncHandler(async (req, res, next) => {
+  const verificationToken = req.body.token;
+  const user = await userModel.findOne({ verificationToken });
 
-  if(user) console.log(user)
-  res.status(200)
-
-})
+  if (user) {
+    user.password = req.body.password;
+    await user.save();
+    res.status(200).json({ message: "password updated" });
+  } else {
+    res.status(401).json({ message: "No user found with that token" });
+  }
+});
 
 export {
   signup,
@@ -327,5 +332,5 @@ export {
   verifyCheck,
   resetPasswordLink,
   confirmResetPasswordToken,
-  setNewPassword
+  setNewPassword,
 };

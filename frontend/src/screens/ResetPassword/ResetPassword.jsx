@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   TextField,
   Button,
@@ -12,12 +12,15 @@ import {
 
 import { useResetPasswordMutation } from "../../slices/usersApiSlice";
 import { toast } from "react-toastify";
+import { validateInputs } from "../../utils";
 
 function ResetPassword() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [password, setPassword] = useState("");
 
   const [reset] = useResetPasswordMutation();
+
+  const dispatch = useDispatch();
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -26,7 +29,7 @@ function ResetPassword() {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (validateInputs()) {
+    if (validateInputs(password, confirmPassword)) {
       if (password !== confirmPassword) {
         alert("Password don't match");
       } else {
@@ -56,7 +59,7 @@ function ResetPassword() {
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ token, id }),
+              body: JSON.stringify({ token }),
             }
           );
 
