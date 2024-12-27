@@ -319,7 +319,7 @@ const setNewPassword = asyncHandler(async (req, res, next) => {
     console.log("___2222", user)
     user.password = req.body.password;
     await user.save();
-    res.status(200)
+    res.status(200).json({message: 'password reset'})
   } else {
     res.status(401)
     throw new Error('Password could not be updated')

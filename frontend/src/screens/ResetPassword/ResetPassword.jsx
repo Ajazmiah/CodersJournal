@@ -19,9 +19,7 @@ function ResetPassword() {
   const [password, setPassword] = useState("");
 
   const [reset] = useResetPasswordMutation();
-   const navigate = useNavigate();
-
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -29,7 +27,7 @@ function ResetPassword() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
+    console.log("HELOOO10101001100");
     if (validateInputs(password, confirmPassword)) {
       if (password !== confirmPassword) {
         alert("Password don't match");
@@ -39,16 +37,13 @@ function ResetPassword() {
           password,
           confirmPassword,
         };
-        console.log("___HOOOOLOLOLO___")
 
         try {
           const res = await reset(data).unwrap();
-       
-          navigate("/login");
+          navigate("/signin");
           toast.success("Sign in with your new password");
         } catch (err) {
           toast.error(err);
-
         }
       }
     }
