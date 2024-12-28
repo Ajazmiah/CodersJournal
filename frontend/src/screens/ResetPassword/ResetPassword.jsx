@@ -27,7 +27,6 @@ function ResetPassword() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log("HELOOO10101001100");
     if (validateInputs(password, confirmPassword)) {
       if (password !== confirmPassword) {
         alert("Password don't match");
