@@ -8,7 +8,6 @@ import { getRandomHex } from "../utils/randomHex.js";
 import { attachPresignedURLs } from "../utils/attachedSignedURL.js";
 import { optimizeImage } from "../utils/imageOptimize.js";
 
-
 // Public - All Posts that shows up on HomeScreen
 const allPost = asyncHandler(async (req, res, next) => {
   const limit = req.query.limit;
@@ -193,7 +192,9 @@ const getSiteMaps = asyncHandler(async (req, res, next) => {
     process.env.NODE_ENV == "development"
       ? "http://localhost:3000/"
       : "https://coderjournal-frontend.onrender.com/";
-  const sitemap = new SitemapStream({ hostname: "https://coderjournal-frontend.onrender.com/"});
+  const sitemap = new SitemapStream({
+    hostname: "https://coderjournal-frontend.onrender.com/",
+  });
 
   console.log("____SITE____", process.env.PORT);
 
@@ -219,7 +220,6 @@ const getSiteMaps = asyncHandler(async (req, res, next) => {
 
   res.header("Content-Type", "application/xml");
   res.send(sitemapOutput);
-
 });
 
 export {
