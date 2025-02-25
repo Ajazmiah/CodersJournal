@@ -23,6 +23,8 @@ function VerifyEmailPage() {
 
   const queryParams = new URLSearchParams(location.search);
   const token = queryParams.get("token");
+  console.log("TOKEN", token)
+  console.log("id", id)
 
   useEffect(() => {
     const verifyEmail = async () => {
