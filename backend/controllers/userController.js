@@ -19,7 +19,7 @@ const signup = asyncHandler(async (req, res, next) => {
     throw new Error(errors.errors[0].msg);
   }
 
-  const URL = process.env.BASE_URL;
+  const URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : process.env.BASE_URL;
 
   const registerForm = req.body;
 
