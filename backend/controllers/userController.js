@@ -72,7 +72,7 @@ const signup = asyncHandler(async (req, res, next) => {
       from: "miahajaz@gmail.com", // sender address
       to: email, // list of receivers
       subject: "Verification code sent by CodersJournal", // Subject line
-      html: `<h3> hi ${firstName}</h3>
+      html: `<h3> hello ${firstName}</h3>
       <b>Click on this link to verify your email</b>
       ${verificationLink}`,
     };
