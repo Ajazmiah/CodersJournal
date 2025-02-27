@@ -88,6 +88,8 @@ const signup = asyncHandler(async (req, res, next) => {
 const verifyEmail = asyncHandler(async (req, res, next) => {
   const { token, id } = req.body;
 
+  console.log("__BODY__", req.body)
+
   const user = await userModel.findById(id);
 
   if (user.verificationToken === token) {

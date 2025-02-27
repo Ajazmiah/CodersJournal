@@ -23,27 +23,19 @@ function VerifyEmailPage() {
 
   const queryParams = new URLSearchParams(location.search);
   const token = queryParams.get("token");
-  console.log("TOKEN", token)
-  console.log("id", id)
+  console.log("TOKEN", token);
+  console.log("id", id);
+
+  const [confirm] = useConfirmEmailMutation();
 
   useEffect(() => {
     const verifyEmail = async () => {
       if (token && id) {
         try {
-          const response = await fetch("/api/users/verifyemail", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ token, id }),
-          });
+          const response = await confirm({ token, id }).unwrap();
 
-          if (response.ok) {
-            const data = await response.json();
-            dispatch(setCredentials({ ...data }));
-            toast.success("Your email is verified");
-            navigate("/profile");
-          } else {
-            toast.error("Verification failed. Please request a new link.");
-          }
+          navigate("/profile");
+          toast.success("Your email is verified");
         } catch (error) {
           console.log("Verification error:", error);
           alert("An error occurred. Please try again.");
