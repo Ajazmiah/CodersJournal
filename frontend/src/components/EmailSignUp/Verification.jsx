@@ -28,13 +28,14 @@ function VerifyEmailPage() {
 
   const [confirm] = useConfirmEmailMutation();
 
+
   useEffect(() => {
     const verifyEmail = async () => {
       if (token && id) {
         try {
           const response = await confirm({ token, id }).unwrap();
-
-          navigate("/profile");
+          dispatch(setCredentials({ ...response }));
+          navigate("/");
           toast.success("Your email is verified");
         } catch (error) {
           console.log("Verification error:", error);
@@ -44,6 +45,7 @@ function VerifyEmailPage() {
     };
 
     verifyEmail();
+
   }, []);
 
   return <div>Check the email address you used to sign up and verify it</div>;
